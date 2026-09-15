@@ -136,6 +136,7 @@ h1 {
     display: none;
 }
 
+
 video,
 #fotoTirada {
 
@@ -327,6 +328,8 @@ button:active {
 
     color: #a99d8c;
 }
+
+
 .desenvolvido {
 
     margin-top: 10px;
@@ -342,6 +345,7 @@ button:active {
     opacity: .75;
 
 }
+
 
 iframe {
 
@@ -368,26 +372,28 @@ iframe {
 
     <!-- TÍTULO -->
 
-   <h1 id="tituloEvento">
+    <h1 id="tituloEvento">
 
-    Compartilhe<br>
+        Compartilhe<br>
 
-    esse momento
+        esse momento
 
-</h1>
+    </h1>
+
 
     <div class="linha"></div>
 
 
     <!-- SUBTÍTULO -->
 
-   <p class="subtitulo" id="mensagemEvento">
+    <p class="subtitulo" id="mensagemEvento">
 
-    Registre um momento especial e<br>
+        Registre um momento especial e<br>
 
-    faça parte das nossas memórias. ❤️
+        faça parte das nossas memórias. ❤️
 
-</p>
+    </p>
+
 
     <!-- =========================
          CÂMERA
@@ -476,17 +482,17 @@ iframe {
 
     <!-- RODAPÉ -->
 
-   <div class="rodape">
+    <div class="rodape">
 
-    Feito para guardar momentos.
+        Feito para guardar momentos.
 
-    <div class="desenvolvido">
-        Desenvolvido por Gustavo M.
+        <div class="desenvolvido">
+
+            Desenvolvido por Gustavo M.
+
+        </div>
+
     </div>
-
-</div>
-
-</div>
 
 
 </div>
@@ -526,12 +532,26 @@ iframe {
         id="nomeArquivo">
 
 
+    <!-- NOVO: EVENTO -->
+
+    <input
+
+        type="hidden"
+
+        name="evento"
+
+        id="evento">
+
+
 </form>
 
 
 <iframe
+
     name="resposta"
+
     id="resposta">
+
 </iframe>
 
 
@@ -548,7 +568,30 @@ let stream = null;
 let cameraAtual = "environment";
 
 
-/* ELEMENTOS */
+/* =====================================================
+   CONFIGURAÇÃO DO EVENTO
+===================================================== */
+
+const API_EVENTOS =
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+
+
+/* PEGA O EVENTO DA URL */
+
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const evento =
+    parametros.get("evento") ||
+    "teste";
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
 
 const abrir =
     document.getElementById("abrir");
@@ -590,7 +633,9 @@ const status =
     document.getElementById("status");
 
 
-/* FORMULÁRIO */
+/* =====================================================
+   FORMULÁRIO
+===================================================== */
 
 const formulario =
     document.getElementById("formulario");
@@ -603,6 +648,17 @@ const campoFoto =
 const campoNome =
     document.getElementById("nomeArquivo");
 
+
+const campoEvento =
+    document.getElementById("evento");
+
+
+/* =====================================================
+   COLOCA O EVENTO NO FORMULÁRIO
+===================================================== */
+
+campoEvento.value =
+    evento;
 
 
 /* =====================================================
@@ -677,8 +733,10 @@ async function abrirCamera() {
         trocar.style.display =
             "block";
 
+
         document.querySelector(".camera-box").style.display =
-    "block";
+            "block";
+
 
         /* STATUS */
 
@@ -913,6 +971,12 @@ enviar.addEventListener(
             ".jpg";
 
 
+        /* GARANTE O EVENTO */
+
+        campoEvento.value =
+            evento;
+
+
         /* MENSAGEM PREMIUM */
 
         status.innerHTML = `
@@ -1073,35 +1137,21 @@ album.addEventListener(
     () => {
 
 
+        /* MANTÉM O EVENTO NO ÁLBUM */
+
         window.location.href =
-            "album.html";
+            "album.html?evento=" +
+            encodeURIComponent(evento);
 
 
     }
 );
 
+
+
 /* =====================================================
-   CONFIGURAÇÃO DO EVENTO
+   BUSCA CONFIGURAÇÃO DO EVENTO
 ===================================================== */
-
-const API_EVENTOS =
-"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
-
-
-/* PEGA O EVENTO DA URL */
-
-const parametros =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const evento =
-    parametros.get("evento") ||
-    "teste";
-
-
-/* BUSCA CONFIGURAÇÃO */
 
 function carregarEvento() {
 
@@ -1200,10 +1250,13 @@ function carregarEvento() {
 }
 
 
-/* CARREGA EVENTO */
+/* =====================================================
+   CARREGA EVENTO
+===================================================== */
 
 carregarEvento();
-    
+
+
 </script>
 
 </body>
