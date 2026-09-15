@@ -8,304 +8,188 @@
 <title>QR Fotos</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at top, #222 0%, #0d0d0d 45%, #050505 100%);
-  color: #fff;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#0b0b0b;
+  color:#fff;
+  min-height:100vh;
 }
 
-body {
-  min-height: 100vh;
+.container{
+  width:100%;
+  max-width:600px;
+  margin:auto;
+  padding:25px 18px 40px;
 }
 
-.container {
-  width: 100%;
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 28px 18px 40px;
+.header{
+  text-align:center;
+  padding:15px 0 25px;
 }
 
-.topo {
-  text-align: center;
-  margin-bottom: 24px;
+.logo{
+  font-size:32px;
+  font-weight:bold;
+  letter-spacing:3px;
 }
 
-.logo {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 16px;
-  border-radius: 50%;
-  border: 1px solid rgba(212,175,55,.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  background: rgba(212,175,55,.08);
-  box-shadow: 0 0 30px rgba(212,175,55,.12);
+.logo span{
+  color:#d4af67;
 }
 
-h1 {
-  margin: 0;
-  font-size: 27px;
-  font-weight: 700;
-  letter-spacing: .3px;
+.subtitle{
+  margin-top:8px;
+  color:#aaa;
+  font-size:14px;
 }
 
-.subtitulo {
-  margin: 8px 0 0;
-  color: #bcbcbc;
-  font-size: 14px;
-  line-height: 1.5;
+.evento{
+  text-align:center;
+  margin-bottom:25px;
 }
 
-.evento-tipo {
-  display: inline-block;
-  margin-top: 13px;
-  padding: 6px 12px;
-  border-radius: 30px;
-  border: 1px solid rgba(212,175,55,.35);
-  color: #d4af37;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
+.evento h1{
+  font-size:25px;
+  margin-bottom:8px;
 }
 
-.card {
-  background: rgba(22,22,22,.94);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 22px;
-  padding: 20px;
-  margin-bottom: 16px;
-  box-shadow: 0 15px 50px rgba(0,0,0,.35);
+.evento p{
+  color:#aaa;
+  font-size:14px;
 }
 
-.card h2 {
-  margin: 0 0 8px;
-  font-size: 19px;
+.card{
+  background:#151515;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
-.card p {
-  color: #aaa;
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 0 0 18px;
+.card h2{
+  font-size:18px;
+  margin-bottom:8px;
 }
 
-.camera-area {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: #050505;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.08);
-  margin-bottom: 15px;
+.card p{
+  color:#999;
+  font-size:13px;
+  line-height:1.5;
 }
 
-#camera {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+.camera{
+  width:100%;
+  aspect-ratio:4/3;
+  background:#050505;
+  border-radius:15px;
+  overflow:hidden;
+  margin:15px 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-#preview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+video#camera{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-#videoPreview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
-  background: #000;
+.preview{
+  width:100%;
+  border-radius:15px;
+  margin-top:15px;
+  display:none;
 }
 
-.camera-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #777;
-  text-align: center;
-  padding: 20px;
-}
-
-.camera-placeholder .icone {
-  font-size: 42px;
-  margin-bottom: 12px;
-}
-
-.camera-placeholder span {
-  font-size: 13px;
-}
-
-.botoes {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
 }
 
 button,
-.botao {
-  width: 100%;
-  border: 0;
-  border-radius: 14px;
-  padding: 15px 12px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: .2s ease;
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:14px 12px;
+  font-size:14px;
+  font-weight:bold;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
 }
 
-button:active,
-.botao:active {
-  transform: scale(.98);
+.primary{
+  background:#d4af67;
+  color:#111;
 }
 
-.btn-principal {
-  background: #d4af37;
-  color: #111;
+.secondary{
+  background:#242424;
+  color:#fff;
+  border:1px solid #333;
 }
 
-.btn-principal:hover {
-  background: #e5c45b;
+.recording{
+  background:#8d2020 !important;
+  color:#fff !important;
 }
 
-.btn-secundario {
-  background: #292929;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.08);
+input[type=file]{
+  display:none;
 }
 
-.btn-secundario:hover {
-  background: #333;
+.status{
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  min-height:20px;
+  margin-top:14px;
 }
 
-.btn-video {
-  background: linear-gradient(135deg, #8c6b17, #d4af37);
-  color: #111;
+.timer{
+  text-align:center;
+  font-size:28px;
+  color:#d4af67;
+  font-weight:bold;
+  display:none;
+  margin:10px 0;
 }
 
-.btn-video.gravando {
-  background: #b32626;
-  color: #fff;
-  animation: pulsar 1.2s infinite;
+.album{
+  width:100%;
+  background:#d4af67;
+  color:#111;
+  padding:15px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:bold;
+  display:block;
+  text-align:center;
 }
 
-@keyframes pulsar {
-  0% {
-    box-shadow: 0 0 0 0 rgba(179,38,38,.5);
-  }
-
-  70% {
-    box-shadow: 0 0 0 12px rgba(179,38,38,0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(179,38,38,0);
-  }
+.hidden{
+  display:none !important;
 }
 
-input[type="file"] {
-  display: none;
-}
-
-.status {
-  display: none;
-  margin-top: 15px;
-  padding: 13px 15px;
-  border-radius: 13px;
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: center;
-}
-
-.status.sucesso {
-  display: block;
-  background: rgba(39,125,65,.15);
-  border: 1px solid rgba(39,125,65,.4);
-  color: #8ee5a5;
-}
-
-.status.erro {
-  display: block;
-  background: rgba(170,40,40,.15);
-  border: 1px solid rgba(170,40,40,.4);
-  color: #ff9999;
-}
-
-.status.carregando {
-  display: block;
-  background: rgba(212,175,55,.08);
-  border: 1px solid rgba(212,175,55,.25);
-  color: #e4c967;
-}
-
-.album-link {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  color: #d4af37;
-  font-size: 14px;
-  margin-top: 18px;
-}
-
-.album-link:hover {
-  text-decoration: underline;
-}
-
-.contador {
-  text-align: center;
-  color: #777;
-  font-size: 11px;
-  margin-top: 25px;
-}
-
-#tempoGravacao {
-  display: none;
-  text-align: center;
-  margin: 10px 0;
-  color: #ff7777;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-#fileInput {
-  display: none;
-}
-
-@media (max-width: 400px) {
-  .container {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  .botoes {
-    grid-template-columns: 1fr;
-  }
+.footer{
+  text-align:center;
+  color:#555;
+  font-size:11px;
+  margin-top:25px;
 }
 </style>
 </head>
@@ -314,347 +198,185 @@ input[type="file"] {
 
 <div class="container">
 
-  <div class="topo">
-
-    <div class="logo">
-      📸
-    </div>
-
-    <h1 id="nomeEvento">
-      QR Fotos
-    </h1>
-
-    <p class="subtitulo" id="mensagemEvento">
-      Compartilhe seus melhores momentos.
-    </p>
-
-    <div class="evento-tipo" id="tipoEvento">
-      EVENTO
-    </div>
-
+  <div class="header">
+    <div class="logo">QR <span>FOTOS</span></div>
+    <div class="subtitle">Compartilhe os melhores momentos</div>
   </div>
 
+  <div class="evento">
+    <h1 id="nomeEvento">Carregando...</h1>
+    <p id="mensagemEvento">Aguarde...</p>
+  </div>
 
   <!-- FOTO -->
   <div class="card">
 
-    <h2>📸 Compartilhe uma foto</h2>
+    <h2>📸 Tire uma foto</h2>
+    <p>Use a câmera ou escolha uma foto da galeria.</p>
 
-    <p>
-      Tire uma foto agora ou escolha uma imagem da sua galeria.
-    </p>
-
-    <div class="camera-area">
-
-      <video
-        id="camera"
-        autoplay
-        playsinline>
-      </video>
-
-      <img
-        id="preview"
-        alt="Pré-visualização">
-
-      <video
-        id="videoPreview"
-        controls
-        playsinline>
-      </video>
-
-      <div
-        class="camera-placeholder"
-        id="cameraPlaceholder">
-
-        <div class="icone">📷</div>
-
-        <span>
-          Sua foto aparecerá aqui
-        </span>
-
-      </div>
-
+    <div class="camera">
+      <video id="camera" autoplay playsinline muted></video>
     </div>
 
+    <img id="preview" class="preview">
 
-    <div class="botoes">
-
-      <button
-        class="btn-principal"
-        id="abrirCamera">
-        📷 Abrir câmera
-      </button>
-
-      <label
-        class="botao btn-secundario"
-        for="fileInput">
-        🖼️ Galeria
-      </label>
-
-    </div>
-
-
-    <input
-      type="file"
-      id="fileInput"
-      accept="image/*"
-      capture="environment">
-
-
-    <div
-      class="botoes"
-      style="margin-top:10px;">
-
-      <button
-        class="btn-secundario"
-        id="tirarFoto"
-        style="display:none;">
+    <div class="buttons">
+      <button id="tirarFoto" class="primary">
         📸 Tirar foto
       </button>
 
-      <button
-        class="btn-principal"
-        id="enviarFoto"
-        style="display:none;">
-        ⬆️ Enviar foto
-      </button>
-
+      <label for="galeria" class="btn secondary">
+        🖼️ Galeria
+      </label>
     </div>
 
-  </div>
+    <input
+      type="file"
+      id="galeria"
+      accept="image/*"
+    >
 
+    <div class="status" id="statusFoto"></div>
+
+  </div>
 
   <!-- VIDEO -->
   <div class="card">
 
-    <h2>🎥 Grave um recado</h2>
+    <h2>🎥 Deixe um recado</h2>
+    <p>Grave um vídeo curto para deixar sua mensagem no evento.</p>
 
-    <p>
-      Deixe uma mensagem em vídeo para guardar como lembrança deste evento.
-    </p>
-
-    <div id="tempoGravacao">
-      🔴 Gravando <span id="tempo">00:00</span>
+    <div class="timer" id="timer">
+      00:00
     </div>
 
+    <video
+      id="previewVideo"
+      class="preview"
+      controls
+      playsinline
+    ></video>
+
     <button
-      class="btn-video"
-      id="gravar">
+      id="gravar"
+      class="primary"
+      style="width:100%;margin-top:15px;"
+    >
       🎥 Gravar recado
     </button>
 
-    <button
-      class="btn-principal"
-      id="enviarVideo"
-      style="display:none; margin-top:10px;">
-      ⬆️ Enviar recado
-    </button>
+    <div class="status" id="statusVideo"></div>
 
   </div>
 
+  <!-- ALBUM -->
+  <div class="card">
 
-  <!-- STATUS -->
+    <h2>✨ Veja o álbum</h2>
 
-  <div
-    class="status"
-    id="status">
+    <p>
+      Todas as fotos e recados enviados pelos convidados
+      ficam disponíveis no álbum do evento.
+    </p>
+
+    <br>
+
+    <a
+      id="abrirAlbum"
+      class="album"
+      href="#"
+    >
+      📷 Abrir álbum
+    </a>
+
   </div>
 
-
-  <a
-    class="album-link"
-    id="albumLink"
-    href="#">
-    ✨ Ver álbum do evento
-  </a>
-
-
-  <div class="contador">
-    QR Fotos • Compartilhe. Viva. Guarde.
+  <div class="footer">
+    QR Fotos • Álbum colaborativo do evento
   </div>
 
 </div>
 
-
 <script>
 
-/* =====================================================
+/* =========================================================
    CONFIGURAÇÃO
-===================================================== */
+========================================================= */
 
 const API =
-  "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
-
-const parametros =
-  new URLSearchParams(
-    window.location.search
-  );
-
+const params = new URLSearchParams(window.location.search);
 
 const evento =
-  parametros.get("evento") || "teste";
-
-
-const albumLink =
-  document.getElementById("albumLink");
-
-
-albumLink.href =
-  "album.html?evento=" +
-  encodeURIComponent(evento);
-
-
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+params.get("evento") || "teste";
 
 const nomeEvento =
-  document.getElementById("nomeEvento");
+document.getElementById("nomeEvento");
 
 const mensagemEvento =
-  document.getElementById("mensagemEvento");
+document.getElementById("mensagemEvento");
 
-const tipoEvento =
-  document.getElementById("tipoEvento");
+const abrirAlbum =
+document.getElementById("abrirAlbum");
 
-const status =
-  document.getElementById("status");
+const statusFoto =
+document.getElementById("statusFoto");
 
-const camera =
-  document.getElementById("camera");
-
-const preview =
-  document.getElementById("preview");
-
-const videoPreview =
-  document.getElementById("videoPreview");
-
-const cameraPlaceholder =
-  document.getElementById("cameraPlaceholder");
-
-const abrirCamera =
-  document.getElementById("abrirCamera");
-
-const tirarFoto =
-  document.getElementById("tirarFoto");
-
-const enviarFoto =
-  document.getElementById("enviarFoto");
-
-const fileInput =
-  document.getElementById("fileInput");
-
-const gravar =
-  document.getElementById("gravar");
-
-const enviarVideo =
-  document.getElementById("enviarVideo");
-
-const tempoGravacao =
-  document.getElementById("tempoGravacao");
-
-const tempo =
-  document.getElementById("tempo");
+const statusVideo =
+document.getElementById("statusVideo");
 
 
-let streamCamera = null;
+/* =========================================================
+   CARREGAR CONFIGURAÇÃO DO EVENTO
+========================================================= */
 
-let fotoBlob = null;
+function carregarEvento(){
 
-let mediaRecorder = null;
+  const callback =
+    "callbackEvento_" + Date.now();
 
-let partesVideo = [];
+  window[callback] = function(resposta){
 
-let videoBlob = null;
+    try{
 
-let intervaloTempo = null;
+      if(!resposta || !resposta.sucesso){
 
-let segundosGravacao = 0;
+        nomeEvento.textContent = "Evento";
+        mensagemEvento.textContent =
+          "Não foi possível carregar este evento.";
 
+        console.error(
+          "Erro retornado pelo servidor:",
+          resposta
+        );
 
-/* =====================================================
-   STATUS
-===================================================== */
+        return;
+      }
 
-function mostrarStatus(
-  mensagem,
-  tipo
-) {
+      nomeEvento.textContent =
+        resposta.nome || "Evento";
 
-  status.textContent =
-    mensagem;
+      mensagemEvento.textContent =
+        resposta.mensagem ||
+        "Compartilhe suas fotos e recados!";
 
-  status.className =
-    "status " +
-    tipo;
+    }catch(erro){
 
-}
+      console.error(erro);
 
+      nomeEvento.textContent =
+        "QR Fotos";
 
-/* =====================================================
-   CONFIGURAÇÃO DO EVENTO
-===================================================== */
+      mensagemEvento.textContent =
+        "Evento carregado.";
 
-function carregarEvento() {
+    }
+
+  };
 
   const script =
     document.createElement("script");
-
-  const callback =
-    "callbackEvento_" +
-    Date.now();
-
-
-  window[callback] =
-    function(resposta) {
-
-      try {
-
-        if (
-          resposta &&
-          resposta.sucesso
-        ) {
-
-          nomeEvento.textContent =
-            resposta.nome ||
-            "QR Fotos";
-
-          mensagemEvento.textContent =
-            resposta.mensagem ||
-            "Compartilhe seus melhores momentos.";
-
-          tipoEvento.textContent =
-            resposta.tipo ||
-            "EVENTO";
-
-        }
-
-        else {
-
-          nomeEvento.textContent =
-            "QR Fotos";
-
-        }
-
-      }
-
-      catch (erro) {
-
-        console.error(erro);
-
-      }
-
-      finally {
-
-        delete window[callback];
-
-        script.remove();
-
-      }
-
-    };
-
 
   script.src =
     API +
@@ -664,582 +386,346 @@ function carregarEvento() {
     "&callback=" +
     callback;
 
+  script.onerror = function(){
 
-  script.onerror =
-    function() {
+    console.error(
+      "Não foi possível acessar o Apps Script."
+    );
 
-      nomeEvento.textContent =
-        "QR Fotos";
+    nomeEvento.textContent =
+      "QR Fotos";
 
-      script.remove();
+    mensagemEvento.textContent =
+      "Não foi possível carregar o evento.";
 
-    };
-
+  };
 
   document.body.appendChild(script);
 
+  setTimeout(function(){
+
+    try{
+      delete window[callback];
+    }catch(e){}
+
+  },10000);
 }
 
 
-carregarEvento();
+/* =========================================================
+   ALBUM
+========================================================= */
+
+abrirAlbum.href =
+  "album.html?evento=" +
+  encodeURIComponent(evento);
 
 
-/* =====================================================
+/* =========================================================
    CÂMERA
-===================================================== */
+========================================================= */
 
-abrirCamera.addEventListener(
-  "click",
-  async function() {
+const camera =
+document.getElementById("camera");
 
-    try {
+const canvas =
+document.createElement("canvas");
 
-      if (!navigator.mediaDevices ||
-          !navigator.mediaDevices.getUserMedia) {
+let streamCamera = null;
 
-        throw new Error(
-          "A câmera não é suportada neste navegador."
-        );
+async function iniciarCamera(){
 
-      }
+  try{
 
-
-      streamCamera =
-        await navigator.mediaDevices.getUserMedia({
-
-          video: {
-            facingMode: {
-              ideal: "environment"
-            }
-          },
-
-          audio: false
-
-        });
-
-
-      camera.srcObject =
-        streamCamera;
-
-
-      camera.style.display =
-        "block";
-
-      cameraPlaceholder.style.display =
-        "none";
-
-      preview.style.display =
-        "none";
-
-      videoPreview.style.display =
-        "none";
-
-      tirarFoto.style.display =
-        "block";
-
-      abrirCamera.textContent =
-        "📷 Câmera aberta";
-
-    }
-
-    catch (erro) {
-
-      console.error(erro);
-
-      mostrarStatus(
-        "Não foi possível acessar a câmera. Verifique a permissão do navegador.",
-        "erro"
-      );
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   TIRAR FOTO
-===================================================== */
-
-tirarFoto.addEventListener(
-  "click",
-  function() {
-
-    if (!streamCamera) {
-
-      return;
-
-    }
-
-
-    const canvas =
-      document.createElement("canvas");
-
-
-    canvas.width =
-      camera.videoWidth;
-
-    canvas.height =
-      camera.videoHeight;
-
-
-    const contexto =
-      canvas.getContext("2d");
-
-
-    contexto.drawImage(
-      camera,
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-
-    canvas.toBlob(
-      function(blob) {
-
-        fotoBlob =
-          blob;
-
-
-        preview.src =
-          URL.createObjectURL(blob);
-
-
-        preview.style.display =
-          "block";
-
-        camera.style.display =
-          "none";
-
-        tirarFoto.style.display =
-          "none";
-
-        enviarFoto.style.display =
-          "block";
-
-
-        if (streamCamera) {
-
-          streamCamera
-            .getTracks()
-            .forEach(
-              track => track.stop()
-            );
-
-          streamCamera = null;
-
-        }
-
-      },
-
-      "image/jpeg",
-
-      0.9
-
-    );
-
-  }
-);
-
-
-/* =====================================================
-   GALERIA
-===================================================== */
-
-fileInput.addEventListener(
-  "change",
-  function() {
-
-    const arquivo =
-      this.files &&
-      this.files[0];
-
-
-    if (!arquivo) {
-
-      return;
-
-    }
-
-
-    fotoBlob =
-      arquivo;
-
-
-    preview.src =
-      URL.createObjectURL(arquivo);
-
-
-    preview.style.display =
-      "block";
-
-    camera.style.display =
-      "none";
-
-    videoPreview.style.display =
-      "none";
-
-    cameraPlaceholder.style.display =
-      "none";
-
-    enviarFoto.style.display =
-      "block";
-
-
-    if (streamCamera) {
-
-      streamCamera
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-      streamCamera = null;
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   CONVERTER BLOB PARA BASE64
-===================================================== */
-
-function blobParaBase64(blob) {
-
-  return new Promise(
-    function(resolve, reject) {
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        function() {
-
-          resolve(
-            reader.result
-          );
-
-        };
-
-
-      reader.onerror =
-        reject;
-
-
-      reader.readAsDataURL(blob);
-
-    }
-  );
-
-}
-
-
-/* =====================================================
-   ENVIAR FOTO
-===================================================== */
-
-enviarFoto.addEventListener(
-  "click",
-  async function() {
-
-    if (!fotoBlob) {
-
-      mostrarStatus(
-        "Nenhuma foto selecionada.",
-        "erro"
-      );
-
-      return;
-
-    }
-
-
-    enviarFoto.disabled =
-      true;
-
-
-    mostrarStatus(
-      "Enviando sua foto...",
-      "carregando"
-    );
-
-
-    try {
-
-      const base64 =
-        await blobParaBase64(
-          fotoBlob
-        );
-
-
-      const dados =
-        new URLSearchParams();
-
-
-      dados.append(
-        "evento",
-        evento
-      );
-
-
-      dados.append(
-        "tipo",
-        "foto"
-      );
-
-
-      dados.append(
-        "imagem",
-        base64
-      );
-
-
-      const resposta =
-        await fetch(
-          API,
-          {
-            method: "POST",
-            body: dados
-          }
-        );
-
-
-      const texto =
-        await resposta.text();
-
-
-      let resultado;
-
-
-      try {
-
-        resultado =
-          JSON.parse(texto);
-
-      }
-
-      catch (erro) {
-
-        throw new Error(
-          "Resposta inválida do servidor."
-        );
-
-      }
-
-
-      if (
-        resultado.sucesso
-      ) {
-
-        mostrarStatus(
-          "✅ Foto enviada com sucesso!",
-          "sucesso"
-        );
-
-
-        fotoBlob =
-          null;
-
-
-        enviarFoto.style.display =
-          "none";
-
-        preview.style.display =
-          "none";
-
-        cameraPlaceholder.style.display =
-          "flex";
-
-        fileInput.value =
-          "";
-
-      }
-
-      else {
-
-        throw new Error(
-          resultado.erro ||
-          "Não foi possível enviar a foto."
-        );
-
-      }
-
-    }
-
-    catch (erro) {
-
-      console.error(erro);
-
-      mostrarStatus(
-        "❌ " +
-        (erro.message ||
-          "Erro ao enviar a foto."),
-        "erro"
-      );
-
-    }
-
-    finally {
-
-      enviarFoto.disabled =
-        false;
-
-    }
-
-  }
-);
-
-
-/* =====================================================
-   ESCOLHER MIME DO RECORDER
-===================================================== */
-
-function obterMimeVideo() {
-
-  const tipos = [
-
-    "video/mp4;codecs=h264,aac",
-
-    "video/mp4",
-
-    "video/webm;codecs=vp9,opus",
-
-    "video/webm;codecs=vp8,opus",
-
-    "video/webm"
-
-  ];
-
-
-  for (
-    const tipo of tipos
-  ) {
-
-    if (
-      typeof MediaRecorder !==
-      "undefined" &&
-      MediaRecorder.isTypeSupported &&
-      MediaRecorder.isTypeSupported(tipo)
-    ) {
-
-      return tipo;
-
-    }
-
-  }
-
-
-  return "";
-
-}
-
-
-/* =====================================================
-   INICIAR GRAVAÇÃO
-===================================================== */
-
-async function iniciarGravacao() {
-
-  try {
-
-    if (
-      !navigator.mediaDevices ||
-      !navigator.mediaDevices.getUserMedia
-    ) {
-
-      throw new Error(
-        "A gravação de vídeo não é suportada neste navegador."
-      );
-
-    }
-
-
-    if (
-      typeof MediaRecorder ===
-      "undefined"
-    ) {
-
-      throw new Error(
-        "Este dispositivo não suporta gravação de vídeo pelo navegador."
-      );
-
-    }
-
-
-    const stream =
+    streamCamera =
       await navigator.mediaDevices.getUserMedia({
-
-        video: {
-          facingMode: {
-            ideal: "user"
-          },
-
-          width: {
-            ideal: 1280
-          },
-
-          height: {
-            ideal: 720
-          }
+        video:{
+          facingMode:"environment"
         },
-
-        audio: true
-
+        audio:false
       });
 
+    camera.srcObject =
+      streamCamera;
 
-    mediaRecorder =
-      new MediaRecorder(
-        stream,
-        obterMimeVideo()
-          ? {
-              mimeType:
-                obterMimeVideo()
-            }
-          : undefined
-      );
+  }catch(erro){
 
+    console.log(
+      "Câmera não disponível:",
+      erro
+    );
 
-    partesVideo =
-      [];
+  }
 
+}
 
-    videoBlob =
-      null;
+iniciarCamera();
 
 
-    videoPreview.src =
-      "";
+/* =========================================================
+   TIRAR FOTO
+========================================================= */
+
+document
+.getElementById("tirarFoto")
+.addEventListener("click",function(){
+
+  if(!streamCamera){
+
+    statusFoto.textContent =
+      "Câmera não disponível neste dispositivo.";
+
+    return;
+  }
+
+  canvas.width =
+    camera.videoWidth;
+
+  canvas.height =
+    camera.videoHeight;
+
+  const ctx =
+    canvas.getContext("2d");
+
+  ctx.drawImage(
+    camera,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  const imagem =
+    canvas.toDataURL(
+      "image/jpeg",
+      0.85
+    );
+
+  const preview =
+    document.getElementById("preview");
+
+  preview.src =
+    imagem;
+
+  preview.style.display =
+    "block";
+
+  enviarFoto(imagem);
+
+});
 
 
-    videoPreview.style.display =
-      "block";
+/* =========================================================
+   GALERIA
+========================================================= */
 
-    camera.style.display =
-      "none";
+document
+.getElementById("galeria")
+.addEventListener("change",function(e){
+
+  const arquivo =
+    e.target.files[0];
+
+  if(!arquivo){
+    return;
+  }
+
+  const leitor =
+    new FileReader();
+
+  leitor.onload = function(){
+
+    const imagem =
+      leitor.result;
+
+    const preview =
+      document.getElementById("preview");
+
+    preview.src =
+      imagem;
 
     preview.style.display =
-      "none";
+      "block";
 
-    cameraPlaceholder.style.display =
-      "none";
+    enviarFoto(imagem);
 
+  };
+
+  leitor.readAsDataURL(arquivo);
+
+});
+
+
+/* =========================================================
+   ENVIAR FOTO
+========================================================= */
+
+async function enviarFoto(imagem){
+
+  statusFoto.textContent =
+    "Enviando foto...";
+
+  try{
+
+    const dados =
+      new URLSearchParams();
+
+    dados.append(
+      "tipo",
+      "foto"
+    );
+
+    dados.append(
+      "evento",
+      evento
+    );
+
+    dados.append(
+      "imagem",
+      imagem
+    );
+
+    const resposta =
+      await fetch(API,{
+        method:"POST",
+        body:dados
+      });
+
+    const texto =
+      await resposta.text();
+
+    console.log(
+      "Resposta foto:",
+      texto
+    );
+
+    let resultado;
+
+    try{
+
+      resultado =
+        JSON.parse(texto);
+
+    }catch(e){
+
+      resultado = null;
+
+    }
+
+    if(
+      resultado &&
+      resultado.sucesso
+    ){
+
+      statusFoto.textContent =
+        "✅ Foto enviada com sucesso!";
+
+    }else{
+
+      statusFoto.textContent =
+        "✅ Foto enviada!";
+
+    }
+
+  }catch(erro){
+
+    console.error(
+      "Erro ao enviar foto:",
+      erro
+    );
+
+    statusFoto.textContent =
+      "❌ Não foi possível enviar a foto.";
+
+  }
+
+}
+
+
+/* =========================================================
+   GRAVAÇÃO DE VÍDEO
+========================================================= */
+
+const gravar =
+document.getElementById("gravar");
+
+const previewVideo =
+document.getElementById("previewVideo");
+
+const timer =
+document.getElementById("timer");
+
+let mediaRecorder = null;
+let partesVideo = [];
+let streamVideo = null;
+let intervaloTimer = null;
+let segundos = 0;
+
+
+/* =========================================================
+   INICIAR GRAVAÇÃO
+========================================================= */
+
+async function iniciarGravacao(){
+
+  try{
+
+    streamVideo =
+      await navigator.mediaDevices.getUserMedia({
+        video:true,
+        audio:true
+      });
+
+    partesVideo = [];
+
+    let mimeType = "";
+
+    if(
+      MediaRecorder.isTypeSupported(
+        "video/mp4"
+      )
+    ){
+
+      mimeType =
+        "video/mp4";
+
+    }else if(
+      MediaRecorder.isTypeSupported(
+        "video/webm;codecs=vp9,opus"
+      )
+    ){
+
+      mimeType =
+        "video/webm;codecs=vp9,opus";
+
+    }else if(
+      MediaRecorder.isTypeSupported(
+        "video/webm"
+      )
+    ){
+
+      mimeType =
+        "video/webm";
+
+    }
+
+    mediaRecorder =
+      mimeType
+      ? new MediaRecorder(
+          streamVideo,
+          {mimeType:mimeType}
+        )
+      : new MediaRecorder(
+          streamVideo
+        );
 
     mediaRecorder.ondataavailable =
-      function(evento) {
+      function(e){
 
-        if (
-          evento.data &&
-          evento.data.size > 0
-        ) {
+        if(e.data && e.data.size > 0){
 
           partesVideo.push(
-            evento.data
+            e.data
           );
 
         }
@@ -1248,161 +734,123 @@ async function iniciarGravacao() {
 
 
     mediaRecorder.onstop =
-      function() {
+      function(){
 
-        const mime =
+        const tipo =
           mediaRecorder.mimeType ||
           "video/webm";
 
-
-        videoBlob =
+        const blob =
           new Blob(
             partesVideo,
-            {
-              type: mime
-            }
+            {type:tipo}
           );
 
+        const url =
+          URL.createObjectURL(blob);
 
-        videoPreview.src =
-          URL.createObjectURL(
-            videoBlob
-          );
+        previewVideo.src =
+          url;
 
-
-        enviarVideo.style.display =
+        previewVideo.style.display =
           "block";
 
-        gravar.classList.remove(
-          "gravando"
-        );
+        enviarVideo(blob);
 
-        gravar.textContent =
-          "🎥 Gravar novamente";
+        if(streamVideo){
 
-        tempoGravacao.style.display =
-          "none";
+          streamVideo
+            .getTracks()
+            .forEach(
+              track => track.stop()
+            );
 
-
-        pararContador();
-
-
-        mostrarStatus(
-          "Vídeo gravado! Confira e envie seu recado.",
-          "sucesso"
-        );
-
-
-        stream
-          .getTracks()
-          .forEach(
-            track => track.stop()
-          );
+        }
 
       };
 
 
-    mediaRecorder.onerror =
-      function(evento) {
-
-        console.error(
-          "Erro MediaRecorder:",
-          evento
-        );
-
-        gravar.classList.remove(
-          "gravando"
-        );
-
-        tempoGravacao.style.display =
-          "none";
-
-
-        mostrarStatus(
-          "Não foi possível gravar o vídeo.",
-          "erro"
-        );
-
-      };
-
-
-    mediaRecorder.start(
-      250
-    );
-
-
-    gravar.classList.add(
-      "gravando"
-    );
+    mediaRecorder.start();
 
     gravar.textContent =
       "⏹️ Parar gravação";
 
-
-    enviarVideo.style.display =
-      "none";
-
-
-    iniciarContador();
-
-
-    mostrarStatus(
-      "🔴 Gravando seu recado...",
-      "carregando"
+    gravar.classList.add(
+      "recording"
     );
 
-  }
+    timer.style.display =
+      "block";
 
-  catch (erro) {
+    segundos = 0;
 
-    console.error(erro);
+    atualizarTimer();
 
-    mostrarStatus(
-      "❌ " +
-      (
-        erro.message ||
-        "Não foi possível gravar neste dispositivo."
-      ),
-      "erro"
+    intervaloTimer =
+      setInterval(
+        atualizarTimer,
+        1000
+      );
+
+  }catch(erro){
+
+    console.error(
+      "Erro ao iniciar gravação:",
+      erro
     );
+
+    statusVideo.textContent =
+      "❌ Não é possível gravar neste dispositivo.";
 
   }
 
 }
 
 
-/* =====================================================
+/* =========================================================
    PARAR GRAVAÇÃO
-===================================================== */
+========================================================= */
 
-function pararGravacao() {
+function pararGravacao(){
 
-  if (
+  if(
     mediaRecorder &&
-    mediaRecorder.state ===
-    "recording"
-  ) {
+    mediaRecorder.state === "recording"
+  ){
 
     mediaRecorder.stop();
 
   }
 
+  clearInterval(
+    intervaloTimer
+  );
+
+  gravar.textContent =
+    "🎥 Gravar recado";
+
+  gravar.classList.remove(
+    "recording"
+  );
+
+  timer.style.display =
+    "none";
+
 }
 
 
-/* =====================================================
-   BOTÃO GRAVAR
-===================================================== */
+/* =========================================================
+   BOTÃO DE GRAVAÇÃO
+========================================================= */
 
 gravar.addEventListener(
   "click",
-  function() {
+  function(){
 
-    if (
+    if(
       mediaRecorder &&
-      mediaRecorder.state ===
-      "recording"
-    ) {
+      mediaRecorder.state === "recording"
+    ){
 
       pararGravacao();
 
@@ -1410,279 +858,171 @@ gravar.addEventListener(
 
     }
 
-
     iniciarGravacao();
 
   }
 );
 
 
-/* =====================================================
-   CONTADOR
-===================================================== */
+/* =========================================================
+   TIMER
+========================================================= */
 
-function iniciarContador() {
+function atualizarTimer(){
 
-  segundosGravacao =
-    0;
+  const minutos =
+    Math.floor(
+      segundos / 60
+    );
+
+  const seg =
+    segundos % 60;
+
+  timer.textContent =
+    String(minutos).padStart(2,"0") +
+    ":" +
+    String(seg).padStart(2,"0");
+
+  segundos++;
+
+}
 
 
-  tempo.textContent =
-    "00:00";
+/* =========================================================
+   CONVERTER BLOB PARA BASE64
+========================================================= */
 
+function blobParaBase64(blob){
 
-  tempoGravacao.style.display =
-    "block";
+  return new Promise(
+    function(resolve,reject){
 
+      const leitor =
+        new FileReader();
 
-  intervaloTempo =
-    setInterval(
-      function() {
+      leitor.onloadend =
+        function(){
 
-        segundosGravacao++;
-
-
-        const minutos =
-          Math.floor(
-            segundosGravacao / 60
+          resolve(
+            leitor.result
           );
 
+        };
 
-        const segundos =
-          segundosGravacao % 60;
+      leitor.onerror =
+        reject;
 
+      leitor.readAsDataURL(
+        blob
+      );
 
-        tempo.textContent =
-          String(minutos)
-            .padStart(2, "0") +
-          ":" +
-          String(segundos)
-            .padStart(2, "0");
-
-      },
-      1000
-    );
+    }
+  );
 
 }
 
 
-function pararContador() {
-
-  if (
-    intervaloTempo
-  ) {
-
-    clearInterval(
-      intervaloTempo
-    );
-
-    intervaloTempo =
-      null;
-
-  }
-
-}
-
-
-/* =====================================================
+/* =========================================================
    ENVIAR VÍDEO
-===================================================== */
+========================================================= */
 
-enviarVideo.addEventListener(
-  "click",
-  async function() {
+async function enviarVideo(blob){
 
-    if (!videoBlob) {
+  statusVideo.textContent =
+    "Enviando vídeo...";
 
-      mostrarStatus(
-        "Nenhum vídeo gravado.",
-        "erro"
-      );
+  try{
 
-      return;
-
-    }
-
-
-    enviarVideo.disabled =
-      true;
-
-
-    mostrarStatus(
-      "Enviando seu recado...",
-      "carregando"
+    console.log(
+      "Vídeo:",
+      blob.size,
+      "bytes",
+      blob.type
     );
 
+    const base64 =
+      await blobParaBase64(blob);
 
-    try {
+    const dados =
+      new URLSearchParams();
 
-      const base64 =
-        await blobParaBase64(
-          videoBlob
-        );
+    dados.append(
+      "tipo",
+      "video"
+    );
 
+    dados.append(
+      "evento",
+      evento
+    );
 
-      const dados =
-        new URLSearchParams();
+    dados.append(
+      "video",
+      base64
+    );
 
+    const resposta =
+      await fetch(API,{
+        method:"POST",
+        body:dados
+      });
 
-      dados.append(
-        "evento",
-        evento
-      );
+    const texto =
+      await resposta.text();
 
+    console.log(
+      "Resposta vídeo:",
+      texto
+    );
 
-      dados.append(
-        "tipo",
-        "video"
-      );
+    let resultado;
 
+    try{
 
-      dados.append(
-        "video",
-        base64
-      );
+      resultado =
+        JSON.parse(texto);
 
+    }catch(e){
 
-      const resposta =
-        await fetch(
-          API,
-          {
-            method: "POST",
-            body: dados
-          }
-        );
-
-
-      const texto =
-        await resposta.text();
-
-
-      let resultado;
-
-
-      try {
-
-        resultado =
-          JSON.parse(texto);
-
-      }
-
-      catch (erro) {
-
-        throw new Error(
-          "Resposta inválida do servidor."
-        );
-
-      }
-
-
-      if (
-        resultado.sucesso
-      ) {
-
-        mostrarStatus(
-          "🎉 Recado enviado com sucesso!",
-          "sucesso"
-        );
-
-
-        videoBlob =
-          null;
-
-        partesVideo =
-          [];
-
-
-        enviarVideo.style.display =
-          "none";
-
-
-        videoPreview.style.display =
-          "none";
-
-
-        videoPreview.removeAttribute(
-          "src"
-        );
-
-
-        gravar.classList.remove(
-          "gravando"
-        );
-
-
-        gravar.textContent =
-          "🎥 Gravar recado";
-
-
-        mostrarStatus(
-          "🎉 Recado enviado com sucesso! Ele já foi salvo no álbum.",
-          "sucesso"
-        );
-
-      }
-
-      else {
-
-        throw new Error(
-          resultado.erro ||
-          "Não foi possível enviar o recado."
-        );
-
-      }
+      resultado = null;
 
     }
 
-    catch (erro) {
+    if(
+      resultado &&
+      resultado.sucesso
+    ){
 
-      console.error(erro);
+      statusVideo.textContent =
+        "✅ Vídeo enviado com sucesso!";
 
-      mostrarStatus(
-        "❌ " +
-        (
-          erro.message ||
-          "Erro ao enviar o vídeo."
-        ),
-        "erro"
-      );
+    }else{
 
-    }
-
-    finally {
-
-      enviarVideo.disabled =
-        false;
+      statusVideo.textContent =
+        "✅ Vídeo enviado!";
 
     }
+
+  }catch(erro){
+
+    console.error(
+      "Erro ao enviar vídeo:",
+      erro
+    );
+
+    statusVideo.textContent =
+      "❌ Não foi possível enviar o vídeo.";
 
   }
-);
+
+}
 
 
-/* =====================================================
-   LIMPEZA
-===================================================== */
+/* =========================================================
+   INICIALIZAR
+========================================================= */
 
-window.addEventListener(
-  "beforeunload",
-  function() {
-
-    if (streamCamera) {
-
-      streamCamera
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-    }
-
-
-    pararContador();
-
-  }
-);
+carregarEvento();
 
 </script>
 
