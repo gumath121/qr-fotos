@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Gerar QR Code — Álbum do Evento</title>
+
+
+  <!-- Google Fonts -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- Biblioteca QR Code -->
+
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+  </script>
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #26221c 0%,
+          #11100e 45%,
+          #080807 100%
+        );
+
+      color: #f4eee3;
+
+      font-family: 'Montserrat', sans-serif;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 30px 20px;
+
+    }
+
+
+    .container {
+
+      width: 100%;
+
+      max-width: 520px;
+
+      text-align: center;
+
+    }
+
+
+    .marca {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 18px;
+
+      letter-spacing: 4px;
+
+      color: #c9a96e;
+
+      margin-bottom: 12px;
+
+      text-transform: uppercase;
+
+    }
+
+
+    h1 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 48px;
+
+      line-height: 1;
+
+      margin: 0 0 12px;
+
+      font-weight: 600;
+
+    }
+
+
+    .descricao {
+
+      color: #aaa39a;
+
+      font-size: 14px;
+
+      line-height: 1.6;
+
+      margin: 0 auto 30px;
+
+      max-width: 400px;
+
+    }
+
+
+    .card {
+
+      background: rgba(255,255,255,0.04);
+
+      border: 1px solid rgba(201,169,110,0.25);
+
+      border-radius: 20px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+      backdrop-filter: blur(10px);
+
+    }
+
+
+    .campo {
+
+      text-align: left;
+
+      margin-bottom: 20px;
+
+    }
+
+
+    label {
+
+      display: block;
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      color: #c9a96e;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    input {
+
+      width: 100%;
+
+      padding: 15px 16px;
+
+      border-radius: 10px;
+
+      border: 1px solid #3d3932;
+
+      background: #151411;
+
+      color: #fff;
+
+      outline: none;
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 14px;
+
+      transition: 0.2s;
+
+    }
+
+
+    input:focus {
+
+      border-color: #c9a96e;
+
+      box-shadow:
+        0 0 0 3px rgba(201,169,110,0.08);
+
+    }
+
+
+    .ajuda {
+
+      font-size: 11px;
+
+      color: #77736d;
+
+      margin-top: 7px;
+
+      line-height: 1.5;
+
+    }
+
+
+    button {
+
+      width: 100%;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      padding: 16px;
+
+      background: #c9a96e;
+
+      color: #111;
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+
+    }
+
+
+    button:hover {
+
+      transform: translateY(-1px);
+
+      filter: brightness(1.08);
+
+    }
+
+
+    button:active {
+
+      transform: translateY(0);
+
+    }
+
+
+    .resultado {
+
+      display: none;
+
+      margin-top: 30px;
+
+    }
+
+
+    .resultado.ativo {
+
+      display: block;
+
+    }
+
+
+    .evento-gerado {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 28px;
+
+      font-weight: 600;
+
+      margin-bottom: 18px;
+
+      color: #f4eee3;
+
+    }
+
+
+    .qr-area {
+
+      background: #fff;
+
+      width: 280px;
+
+      height: 280px;
+
+      margin: 0 auto 20px;
+
+      padding: 15px;
+
+      border-radius: 14px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    #qrcode {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+
+    #qrcode img {
+
+      width: 250px !important;
+
+      height: 250px !important;
+
+    }
+
+
+    .link-preview {
+
+      background: #151411;
+
+      border: 1px solid #302d28;
+
+      border-radius: 9px;
+
+      padding: 12px;
+
+      color: #aaa39a;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+
+      word-break: break-all;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    .btn-secundario {
+
+      background: transparent;
+
+      border: 1px solid #c9a96e;
+
+      color: #c9a96e;
+
+      margin-top: 10px;
+
+    }
+
+
+    .btn-secundario:hover {
+
+      background: rgba(201,169,110,0.08);
+
+    }
+
+
+    .rodape {
+
+      margin-top: 28px;
+
+      color: #55514b;
+
+      font-size: 10px;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      h1 {
+
+        font-size: 40px;
+
+      }
+
+
+      .card {
+
+        padding: 22px;
+
+      }
+
+
+      .qr-area {
+
+        width: 250px;
+
+        height: 250px;
+
+      }
+
+
+      #qrcode img {
+
+        width: 220px !important;
+
+        height: 220px !important;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <main class="container">
+
+
+    <div class="marca">
+      ÁLBUM DIGITAL
+    </div>
+
+
+    <h1>
+      Gerar QR Code
+    </h1>
+
+
+    <p class="descricao">
+      Crie um QR Code exclusivo para o seu evento
+      e permita que os convidados compartilhem
+      fotos diretamente no álbum.
+    </p>
+
+
+    <section class="card">
+
+
+      <div class="campo">
+
+        <label for="nomeEvento">
+          Nome do evento
+        </label>
+
+        <input
+          type="text"
+          id="nomeEvento"
+          placeholder="Ex.: Casamento Gustavo & Ana"
+        >
+
+      </div>
+
+
+      <div class="campo">
+
+        <label for="idEvento">
+          ID do evento
+        </label>
+
+        <input
+          type="text"
+          id="idEvento"
+          placeholder="Ex.: casamento-gustavo"
+          autocomplete="off"
+        >
+
+        <div class="ajuda">
+
+          Use apenas letras minúsculas,
+          números e hífen.
+
+          <br>
+
+          Exemplo:
+          <strong>casamento-gustavo</strong>
+
+        </div>
+
+      </div>
+
+
+      <button onclick="gerarQR()">
+
+        GERAR QR CODE
+
+      </button>
+
+
+      <div
+        class="resultado"
+        id="resultado"
+      >
+
+
+        <div
+          class="evento-gerado"
+          id="eventoGerado"
+        ></div>
+
+
+        <div class="qr-area">
+
+          <div id="qrcode"></div>
+
+        </div>
+
+
+        <div
+          class="link-preview"
+          id="linkPreview"
+        ></div>
+
+
+        <button
+          onclick="baixarQR()"
+        >
+
+          BAIXAR QR CODE
+
+        </button>
+
+
+        <button
+          class="btn-secundario"
+          onclick="abrirEvento()"
+        >
+
+          ABRIR EVENTO
+
+        </button>
+
+
+      </div>
+
+
+    </section>
+
+
+    <div class="rodape">
+
+      ÁLBUM COLABORATIVO E INSTANTÂNEO
+
+    </div>
+
+
+  </main>
+
+
+
+  <script>
+
+
+    let linkEvento = "";
+
+
+    /* =====================================================
+       GERAR QR CODE
+    ===================================================== */
+
+    function gerarQR() {
+
+
+      const nome =
+        document
+          .getElementById("nomeEvento")
+          .value
+          .trim();
+
+
+      let id =
+        document
+          .getElementById("idEvento")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      if (!nome) {
+
+        alert(
+          "Digite o nome do evento."
+        );
+
+        return;
+
+      }
+
+
+      if (!id) {
+
+        alert(
+          "Digite o ID do evento."
+        );
+
+        return;
+
+      }
+
+
+      /* REMOVE CARACTERES INVÁLIDOS */
+
+      id =
+        id
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .replace(
+            /[^a-z0-9-]/g,
+            "-"
+          )
+          .replace(
+            /-+/g,
+            "-"
+          )
+          .replace(
+            /^-|-$/g,
+            ""
+          );
+
+
+      document
+        .getElementById("idEvento")
+        .value = id;
+
+
+      if (!id) {
+
+        alert(
+          "O ID do evento é inválido."
+        );
+
+        return;
+
+      }
+
+
+      /* =====================================================
+         MONTA O LINK
+      ===================================================== */
+
+      linkEvento =
+        window.location.origin +
+        window.location.pathname
+          .replace(
+            "gerar-qr.html",
+            "index.html"
+          ) +
+        "?evento=" +
+        encodeURIComponent(id);
+
+
+      /* =====================================================
+         MOSTRA RESULTADO
+      ===================================================== */
+
+      document
+        .getElementById("eventoGerado")
+        .textContent = nome;
+
+
+      document
+        .getElementById("linkPreview")
+        .textContent = linkEvento;
+
+
+      document
+        .getElementById("qrcode")
+        .innerHTML = "";
+
+
+      /* =====================================================
+         GERA QR
+      ===================================================== */
+
+      new QRCode(
+
+        document.getElementById("qrcode"),
+
+        {
+
+          text: linkEvento,
+
+          width: 250,
+
+          height: 250,
+
+          correctLevel:
+            QRCode.CorrectLevel.H
+
+        }
+
+      );
+
+
+      document
+        .getElementById("resultado")
+        .classList
+        .add("ativo");
+
+
+      document
+        .getElementById("resultado")
+        .scrollIntoView({
+
+          behavior: "smooth",
+
+          block: "start"
+
+        });
+
+    }
+
+
+    /* =====================================================
+       BAIXAR QR
+    ===================================================== */
+
+    function baixarQR() {
+
+
+      const qr =
+        document
+          .getElementById("qrcode")
+          .querySelector("img");
+
+
+      if (!qr) {
+
+        alert(
+          "Gere o QR Code primeiro."
+        );
+
+        return;
+
+      }
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.href =
+        qr.src;
+
+
+      link.download =
+        "qr-code-evento.png";
+
+
+      document
+        .body
+        .appendChild(link);
+
+
+      link.click();
+
+
+      document
+        .body
+        .removeChild(link);
+
+    }
+
+
+    /* =====================================================
+       ABRIR EVENTO
+    ===================================================== */
+
+    function abrirEvento() {
+
+      if (!linkEvento) {
+
+        return;
+
+      }
+
+
+      window.open(
+        linkEvento,
+        "_blank"
+      );
+
+    }
+
+
+    /* =====================================================
+       ENTER NOS CAMPOS
+    ===================================================== */
+
+    document
+      .getElementById("idEvento")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            gerarQR();
+
+          }
+
+        }
+      );
+
+
+    document
+      .getElementById("nomeEvento")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            document
+              .getElementById("idEvento")
+              .focus();
+
+          }
+
+        }
+      );
+
+
+  </script>
+
+
+</body>
+
+</html>
