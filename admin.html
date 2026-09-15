@@ -1,1598 +1,818 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta charset="UTF-8">
+<title>Administração — QR Fotos</title>
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<style>
 
-  <title>Painel Administrativo — Álbum Digital</title>
+* {
+    box-sizing: border-box;
+}
 
+body {
+    margin: 0;
+    background: #0b0b0b;
+    color: #f5f0e8;
+    font-family: Arial, sans-serif;
+}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 35px 20px 60px;
+}
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+h1 {
+    text-align: center;
+    font-family: Georgia, serif;
+    font-size: 42px;
+    margin: 0 0 8px;
+    color: #d8b878;
+}
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+.subtitle {
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 40px;
+}
 
+/* =========================
+   CRIAR EVENTO
+========================= */
 
-  <style>
+.card {
+    background: #121212;
+    border: 1px solid #292929;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+.card h2 {
+    margin-top: 0;
+    color: #d8b878;
+    font-family: Georgia, serif;
+}
 
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    color: #ccc;
+}
 
-    body {
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #090909;
+    color: white;
+    font-size: 15px;
+}
 
-      margin: 0;
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
 
-      min-height: 100vh;
+input[type="color"] {
+    height: 45px;
+    padding: 4px;
+}
 
-      background:
-        radial-gradient(
-          circle at top,
-          #26221c 0%,
-          #11100e 45%,
-          #080807 100%
-        );
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .2s;
+}
 
-      color: #f4eee3;
+button:hover {
+    transform: translateY(-1px);
+    opacity: .9;
+}
 
-      font-family: 'Montserrat', sans-serif;
+.btn-primary {
+    background: #d8b878;
+    color: #111;
+    width: 100%;
+    margin-top: 22px;
+    font-size: 15px;
+}
 
-      padding: 30px 20px 60px;
+/* =========================
+   EVENTOS
+========================= */
 
-    }
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
 
+.event-card {
+    background: #121212;
+    border: 1px solid #292929;
+    border-radius: 16px;
+    padding: 22px;
+    position: relative;
+}
 
-    .container {
+.event-title {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    color: #d8b878;
+    margin-bottom: 5px;
+}
 
-      width: 100%;
+.event-id {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 18px;
+}
 
-      max-width: 1100px;
+.event-type {
+    display: inline-block;
+    background: #242424;
+    color: #ccc;
+    border-radius: 20px;
+    padding: 6px 10px;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
 
-      margin: auto;
+.photo-count {
+    font-size: 16px;
+    margin: 12px 0 20px;
+    color: #ddd;
+}
 
-    }
+.photo-count strong {
+    color: #d8b878;
+    font-size: 22px;
+}
 
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
 
-    .topo {
+.actions button {
+    width: 100%;
+}
 
-      text-align: center;
+.btn-event {
+    background: #d8b878;
+    color: #111;
+}
 
-      margin-bottom: 35px;
+.btn-album {
+    background: #252525;
+    color: #fff;
+    border: 1px solid #444;
+}
 
-    }
+.btn-qr {
+    grid-column: span 2;
+    background: #181818;
+    color: #d8b878;
+    border: 1px solid #d8b878;
+}
 
+.qr-area {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #292929;
+}
 
-    .marca {
+.qr-area img {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 220px;
+}
 
-      font-family: 'Cormorant Garamond', serif;
+.qr-link {
+    word-break: break-all;
+    color: #999;
+    font-size: 12px;
+    margin-top: 12px;
+}
 
-      font-size: 16px;
+.loading {
+    text-align: center;
+    color: #888;
+    padding: 30px;
+}
 
-      letter-spacing: 4px;
+.empty {
+    text-align: center;
+    color: #777;
+    padding: 30px;
+}
 
-      color: #c9a96e;
+/* =========================
+   RESULTADO
+========================= */
 
-      text-transform: uppercase;
+#resultado {
+    display: none;
+    margin-bottom: 30px;
+    background: #151515;
+    border: 1px solid #d8b878;
+    border-radius: 12px;
+    padding: 20px;
+}
 
-      margin-bottom: 10px;
+#resultado h3 {
+    margin-top: 0;
+    color: #d8b878;
+}
 
-    }
+.result-link {
+    word-break: break-all;
+    color: #aaa;
+    margin: 8px 0;
+}
 
+.result-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+@media(max-width:600px) {
 
     h1 {
-
-      font-family: 'Cormorant Garamond', serif;
-
-      font-size: 52px;
-
-      line-height: 1;
-
-      margin: 0 0 12px;
-
-      font-weight: 600;
-
+        font-size: 32px;
     }
 
-
-    .descricao {
-
-      color: #aaa39a;
-
-      font-size: 13px;
-
-      line-height: 1.6;
-
-      margin: auto;
-
-      max-width: 550px;
-
+    .container {
+        padding: 25px 15px;
     }
 
-
-    .grid {
-
-      display: grid;
-
-      grid-template-columns:
-        minmax(300px, 420px)
-        1fr;
-
-      gap: 25px;
-
-      align-items: start;
-
-    }
-
-
-    .card {
-
-      background: rgba(255,255,255,0.04);
-
-      border: 1px solid rgba(201,169,110,0.25);
-
-      border-radius: 20px;
-
-      padding: 28px;
-
-      box-shadow:
-        0 20px 60px rgba(0,0,0,0.35);
-
-      backdrop-filter: blur(10px);
-
-    }
-
-
-    .card h2 {
-
-      font-family: 'Cormorant Garamond', serif;
-
-      font-size: 30px;
-
-      margin: 0 0 22px;
-
-      font-weight: 600;
-
-    }
-
-
-    .campo {
-
-      margin-bottom: 18px;
-
-    }
-
-
-    label {
-
-      display: block;
-
-      font-size: 10px;
-
-      font-weight: 700;
-
-      letter-spacing: 1.5px;
-
-      text-transform: uppercase;
-
-      color: #c9a96e;
-
-      margin-bottom: 8px;
-
-    }
-
-
-    input,
-    select,
-    textarea {
-
-      width: 100%;
-
-      padding: 14px 15px;
-
-      border-radius: 9px;
-
-      border: 1px solid #3d3932;
-
-      background: #151411;
-
-      color: #fff;
-
-      outline: none;
-
-      font-family: 'Montserrat', sans-serif;
-
-      font-size: 13px;
-
-    }
-
-
-    textarea {
-
-      min-height: 90px;
-
-      resize: vertical;
-
-    }
-
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-
-      border-color: #c9a96e;
-
-      box-shadow:
-        0 0 0 3px rgba(201,169,110,0.08);
-
-    }
-
-
-    .linha-cor {
-
-      display: flex;
-
-      gap: 10px;
-
-      align-items: center;
-
-    }
-
-
-    #cor {
-
-      width: 65px;
-
-      height: 48px;
-
-      padding: 4px;
-
-      cursor: pointer;
-
-    }
-
-
-    .valor-cor {
-
-      color: #aaa39a;
-
-      font-size: 12px;
-
-    }
-
-
-    button {
-
-      width: 100%;
-
-      border: 0;
-
-      border-radius: 9px;
-
-      padding: 15px;
-
-      background: #c9a96e;
-
-      color: #111;
-
-      font-family: 'Montserrat', sans-serif;
-
-      font-size: 12px;
-
-      font-weight: 700;
-
-      letter-spacing: 1px;
-
-      cursor: pointer;
-
-      transition: .2s;
-
-    }
-
-
-    button:hover {
-
-      transform: translateY(-1px);
-
-      filter: brightness(1.08);
-
-    }
-
-
-    button:disabled {
-
-      opacity: .5;
-
-      cursor: wait;
-
-      transform: none;
-
-    }
-
-
-    .mensagem {
-
-      display: none;
-
-      margin-top: 18px;
-
-      padding: 13px;
-
-      border-radius: 9px;
-
-      font-size: 12px;
-
-      line-height: 1.5;
-
-    }
-
-
-    .mensagem.ok {
-
-      display: block;
-
-      background: rgba(90,140,90,.12);
-
-      border: 1px solid rgba(90,140,90,.3);
-
-      color: #b9d7b9;
-
-    }
-
-
-    .mensagem.erro {
-
-      display: block;
-
-      background: rgba(180,70,70,.12);
-
-      border: 1px solid rgba(180,70,70,.3);
-
-      color: #e5aaaa;
-
-    }
-
-
-    .evento-criado {
-
-      display: none;
-
-      margin-top: 20px;
-
-      border-top: 1px solid #302d28;
-
-      padding-top: 20px;
-
-    }
-
-
-    .evento-criado.ativo {
-
-      display: block;
-
-    }
-
-
-    .evento-criado h3 {
-
-      font-family: 'Cormorant Garamond', serif;
-
-      font-size: 25px;
-
-      margin: 0 0 15px;
-
-    }
-
-
-    .resultado-link {
-
-      background: #151411;
-
-      border: 1px solid #302d28;
-
-      border-radius: 8px;
-
-      padding: 11px;
-
-      margin-bottom: 10px;
-
-      font-size: 10px;
-
-      color: #aaa39a;
-
-      word-break: break-all;
-
-    }
-
-
-    .btn-link {
-
-      background: transparent;
-
-      border: 1px solid #c9a96e;
-
-      color: #c9a96e;
-
-      margin-bottom: 8px;
-
-    }
-
-
-    .lista {
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 12px;
-
-    }
-
-
-    .evento {
-
-      border: 1px solid #302d28;
-
-      background: rgba(0,0,0,.15);
-
-      border-radius: 12px;
-
-      padding: 17px;
-
-    }
-
-
-    .evento-topo {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 15px;
-
-      align-items: center;
-
-      margin-bottom: 10px;
-
-    }
-
-
-    .evento-nome {
-
-      font-family: 'Cormorant Garamond', serif;
-
-      font-size: 24px;
-
-      font-weight: 600;
-
-    }
-
-
-    .evento-id {
-
-      color: #77736d;
-
-      font-size: 10px;
-
-      word-break: break-all;
-
-    }
-
-
-    .evento-tipo {
-
-      display: inline-block;
-
-      margin-top: 6px;
-
-      color: #c9a96e;
-
-      font-size: 9px;
-
-      letter-spacing: 1px;
-
-      text-transform: uppercase;
-
-    }
-
-
-    .acoes {
-
-      display: flex;
-
-      gap: 8px;
-
-      margin-top: 14px;
-
-    }
-
-
-    .acoes button {
-
-      padding: 11px;
-
-      font-size: 10px;
-
-    }
-
-
-    .vazio {
-
-      color: #77736d;
-
-      font-size: 12px;
-
-      text-align: center;
-
-      padding: 30px 10px;
-
-    }
-
-
-    .carregando {
-
-      color: #aaa39a;
-
-      font-size: 12px;
-
-      text-align: center;
-
-      padding: 30px;
-
-    }
-
-
-    .rodape {
-
-      text-align: center;
-
-      margin-top: 35px;
-
-      color: #55514b;
-
-      font-size: 9px;
-
-      letter-spacing: 1px;
-
-    }
-
-
-    @media (max-width: 800px) {
-
-      .grid {
-
+    .actions {
         grid-template-columns: 1fr;
-
-      }
-
-
-      h1 {
-
-        font-size: 42px;
-
-      }
-
     }
 
-  </style>
+    .btn-qr {
+        grid-column: span 1;
+    }
 
+}
+
+</style>
 </head>
-
 
 <body>
 
+<div class="container">
 
-  <main class="container">
+<h1>QR FOTOS</h1>
 
+<div class="subtitle">
+Painel de administração de eventos
+</div>
 
-    <header class="topo">
 
-      <div class="marca">
-        ÁLBUM DIGITAL
-      </div>
+<!-- =========================
+     CRIAR EVENTO
+========================= -->
 
-      <h1>
-        Painel Administrativo
-      </h1>
+<div class="card">
 
-      <p class="descricao">
-        Crie e gerencie os eventos da sua plataforma
-        de álbum colaborativo.
-      </p>
+<h2>Novo evento</h2>
 
-    </header>
+<label>Nome do evento</label>
+<input
+    type="text"
+    id="nome"
+    placeholder="Ex.: Casamento Gustavo e Ana"
+>
 
+<label>ID do evento</label>
+<input
+    type="text"
+    id="id"
+    placeholder="Ex.: casamento-gustavo"
+>
 
-    <section class="grid">
+<label>Tipo do evento</label>
 
+<select id="tipo">
 
-      <!-- =========================================
-           CRIAR EVENTO
-      ========================================== -->
+<option value="Casamento">Casamento</option>
+<option value="Aniversário">Aniversário</option>
+<option value="Empresa">Evento Corporativo</option>
+<option value="Formatura">Formatura</option>
+<option value="Festa">Festa</option>
+<option value="Outro">Outro</option>
 
-      <div class="card">
+</select>
 
-        <h2>
-          Novo evento
-        </h2>
+<label>Mensagem</label>
 
+<textarea
+    id="mensagem"
+    placeholder="Ex.: Compartilhe as fotos desse momento especial!"
+></textarea>
 
-        <div class="campo">
+<label>Cor do evento</label>
 
-          <label for="nome">
-            Nome do evento
-          </label>
+<input
+    type="color"
+    id="cor"
+    value="#d8b878"
+>
 
-          <input
-            id="nome"
-            type="text"
-            placeholder="Ex.: Casamento Gustavo & Ana"
-          >
+<button
+    class="btn-primary"
+    onclick="criarEvento()"
+>
+CRIAR EVENTO
+</button>
 
-        </div>
+</div>
 
 
-        <div class="campo">
+<!-- =========================
+     RESULTADO
+========================= -->
 
-          <label for="id">
-            ID do evento
-          </label>
+<div id="resultado">
 
-          <input
-            id="id"
-            type="text"
-            placeholder="Será criado automaticamente"
-          >
+<h3>Evento criado com sucesso!</h3>
 
-        </div>
+<div id="resultadoNome"></div>
 
+<div class="result-link" id="resultadoEvento"></div>
 
-        <div class="campo">
+<div class="result-link" id="resultadoAlbum"></div>
 
-          <label for="tipo">
-            Tipo de evento
-          </label>
+<div class="result-buttons">
 
-          <select id="tipo">
+<button
+    class="btn-event"
+    onclick="abrirResultadoEvento()"
+>
+ABRIR EVENTO
+</button>
 
-            <option value="Evento">
-              Evento
-            </option>
+<button
+    class="btn-album"
+    onclick="abrirResultadoAlbum()"
+>
+ABRIR ÁLBUM
+</button>
 
-            <option value="Casamento">
-              Casamento
-            </option>
+<button
+    class="btn-qr"
+    onclick="abrirResultadoQR()"
+>
+GERAR QR CODE
+</button>
 
-            <option value="Aniversário">
-              Aniversário
-            </option>
+</div>
 
-            <option value="Formatura">
-              Formatura
-            </option>
+</div>
 
-            <option value="Evento Corporativo">
-              Evento Corporativo
-            </option>
 
-            <option value="Festa">
-              Festa
-            </option>
+<!-- =========================
+     LISTA
+========================= -->
 
-            <option value="Outro">
-              Outro
-            </option>
+<div class="card">
 
-          </select>
+<h2>Meus eventos</h2>
 
-        </div>
+<div id="eventos" class="event-grid">
 
+<div class="loading">
+Carregando eventos...
+</div>
 
-        <div class="campo">
+</div>
 
-          <label for="mensagem">
-            Mensagem para os convidados
-          </label>
+</div>
 
-          <textarea
-            id="mensagem"
-            placeholder="Compartilhe esse momento com a gente ❤️"
-          >Compartilhe esse momento com a gente ❤️</textarea>
+</div>
 
-        </div>
 
+<script>
 
-        <div class="campo">
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
 
-          <label>
-            Cor principal
-          </label>
+const API =
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
-          <div class="linha-cor">
+const SITE =
+"https://gumath121.github.io/qr-fotos/";
 
-            <input
-              id="cor"
-              type="color"
-              value="#c9a96e"
-            >
 
-            <span
-              class="valor-cor"
-              id="valorCor"
-            >
-              #c9a96e
-            </span>
+let resultadoData = null;
 
-          </div>
 
-        </div>
+/* =====================================================
+   JSONP
+===================================================== */
 
+function jsonp(url, callback) {
 
-        <button
-          id="btnCriar"
-          onclick="criarEvento()"
-        >
+    const script = document.createElement("script");
 
-          CRIAR EVENTO
+    const callbackName =
+        "jsonpCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(Math.random() * 10000);
 
-        </button>
+    window[callbackName] = function(data) {
 
+        callback(data);
 
-        <div
-          id="mensagem"
-          class="mensagem"
-        ></div>
+        delete window[callbackName];
 
+        script.remove();
 
-        <div
-          id="eventoCriado"
-          class="evento-criado"
-        >
+    };
 
-          <h3 id="eventoCriadoNome"></h3>
+    script.src =
+        url +
+        (url.includes("?") ? "&" : "?") +
+        "callback=" +
+        callbackName;
 
+    document.body.appendChild(script);
+}
 
-          <div
-            class="resultado-link"
-            id="linkEvento"
-          ></div>
 
+/* =====================================================
+   CRIAR EVENTO
+===================================================== */
 
-          <button
-            class="btn-link"
-            onclick="abrirLinkEvento()"
-          >
+function criarEvento() {
 
-            ABRIR EVENTO
+    const nome =
+        document.getElementById("nome").value.trim();
 
-          </button>
+    const id =
+        document.getElementById("id").value.trim();
 
+    const tipo =
+        document.getElementById("tipo").value;
 
-          <div
-            class="resultado-link"
-            id="linkAlbum"
-          ></div>
+    const mensagem =
+        document.getElementById("mensagem").value.trim();
 
+    const cor =
+        document.getElementById("cor").value;
 
-          <button
-            class="btn-link"
-            onclick="abrirLinkAlbum()"
-          >
 
-            ABRIR ÁLBUM
+    if (!nome) {
 
-          </button>
-
-
-          <button
-            class="btn-link"
-            onclick="abrirGeradorQR()"
-          >
-
-            GERAR QR CODE
-
-          </button>
-
-        </div>
-
-      </div>
-
-
-
-      <!-- =========================================
-           EVENTOS EXISTENTES
-      ========================================== -->
-
-      <div class="card">
-
-        <h2>
-          Meus eventos
-        </h2>
-
-
-        <div
-          id="listaEventos"
-          class="lista"
-        >
-
-          <div class="carregando">
-            Carregando eventos...
-          </div>
-
-        </div>
-
-      </div>
-
-
-    </section>
-
-
-    <div class="rodape">
-
-      ÁLBUM COLABORATIVO E INSTANTÂNEO
-
-    </div>
-
-
-  </main>
-
-
-
-  <script>
-
-
-    /* =====================================================
-       CONFIGURAÇÃO
-    ===================================================== */
-
-    const API =
-      "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
-
-
-    let ultimoEvento = null;
-
-
-
-    /* =====================================================
-       COR
-    ===================================================== */
-
-    document
-      .getElementById("cor")
-      .addEventListener(
-        "input",
-        function() {
-
-          document
-            .getElementById("valorCor")
-            .textContent =
-            this.value;
-
-        }
-      );
-
-
-
-    /* =====================================================
-       CRIAR EVENTO
-    ===================================================== */
-
-    function criarEvento() {
-
-
-      const nome =
-        document
-          .getElementById("nome")
-          .value
-          .trim();
-
-
-      const id =
-        document
-          .getElementById("id")
-          .value
-          .trim();
-
-
-      const tipo =
-        document
-          .getElementById("tipo")
-          .value;
-
-
-      const mensagem =
-        document
-          .getElementById("mensagem")
-          .value
-          .trim();
-
-
-      const cor =
-        document
-          .getElementById("cor")
-          .value;
-
-
-      if (!nome) {
-
-        mostrarMensagem(
-          "Digite o nome do evento.",
-          "erro"
-        );
+        alert("Digite o nome do evento.");
 
         return;
 
-      }
+    }
 
 
-      const botao =
-        document
-          .getElementById("btnCriar");
+    let url =
+        API +
+        "?acao=criarEvento" +
+        "&nome=" +
+        encodeURIComponent(nome) +
+        "&tipo=" +
+        encodeURIComponent(tipo) +
+        "&mensagem=" +
+        encodeURIComponent(mensagem) +
+        "&cor=" +
+        encodeURIComponent(cor);
 
 
-      botao.disabled = true;
+    if (id) {
 
-      botao.textContent =
-        "CRIANDO...";
+        url +=
+            "&id=" +
+            encodeURIComponent(id);
 
-
-      const callbackName =
-        "criarEventoCallback_" +
-        Date.now();
+    }
 
 
-      window[callbackName] =
-        function(resposta) {
+    jsonp(url, function(data) {
 
+        if (!data || !data.sucesso) {
 
-          delete window[callbackName];
-
-
-          if (
-            script &&
-            script.parentNode
-          ) {
-
-            script.parentNode
-              .removeChild(script);
-
-          }
-
-
-          botao.disabled = false;
-
-          botao.textContent =
-            "CRIAR EVENTO";
-
-
-          if (
-            !resposta ||
-            !resposta.sucesso
-          ) {
-
-            mostrarMensagem(
-
-              resposta &&
-              resposta.erro
-                ? resposta.erro
-                : "Erro ao criar evento.",
-
-              "erro"
-
+            alert(
+                data && data.erro
+                ? data.erro
+                : "Não foi possível criar o evento."
             );
 
             return;
 
-          }
+        }
 
 
-          ultimoEvento =
-            resposta;
+        resultadoData = data;
 
 
-          mostrarMensagem(
+        document.getElementById("resultado")
+            .style.display = "block";
 
-            "Evento criado com sucesso! " +
-            "A pasta foi criada no Google Drive.",
 
-            "ok"
+        document.getElementById("resultadoNome")
+            .innerHTML =
+            "<strong>" +
+            escapeHTML(data.nome) +
+            "</strong>";
 
-          );
 
+        document.getElementById("resultadoEvento")
+            .innerHTML =
+            "Evento: " +
+            escapeHTML(data.link);
 
-          mostrarEventoCriado(
-            resposta
-          );
 
+        document.getElementById("resultadoAlbum")
+            .innerHTML =
+            "Álbum: " +
+            escapeHTML(data.album);
 
-          limparFormulario();
 
+        document.getElementById("nome").value = "";
+        document.getElementById("id").value = "";
+        document.getElementById("mensagem").value = "";
 
-          carregarEventos();
 
-        };
+        carregarEventos();
 
+    });
 
-      const parametros =
-        new URLSearchParams();
+}
 
 
-      parametros.set(
-        "acao",
-        "criarEvento"
-      );
+/* =====================================================
+   CARREGAR EVENTOS
+===================================================== */
 
+function carregarEventos() {
 
-      parametros.set(
-        "nome",
-        nome
-      );
+    const container =
+        document.getElementById("eventos");
 
 
-      if (id) {
+    container.innerHTML =
+        '<div class="loading">Carregando eventos...</div>';
 
-        parametros.set(
-          "id",
-          id
-        );
 
-      }
+    jsonp(
+        API + "?acao=listarEventos",
+        function(data) {
 
+            if (
+                !data ||
+                !data.sucesso ||
+                !Array.isArray(data.eventos)
+            ) {
 
-      parametros.set(
-        "tipo",
-        tipo
-      );
+                container.innerHTML =
+                    '<div class="empty">Não foi possível carregar os eventos.</div>';
 
+                return;
 
-      parametros.set(
-        "mensagem",
-        mensagem
-      );
+            }
 
 
-      parametros.set(
-        "cor",
-        cor
-      );
+            if (data.eventos.length === 0) {
 
+                container.innerHTML =
+                    '<div class="empty">Nenhum evento criado ainda.</div>';
 
-      const script =
-        document.createElement(
-          "script"
-        );
+                return;
 
+            }
 
-      script.src =
-        API +
-        "?" +
-        parametros.toString() +
-        "&callback=" +
-        callbackName +
-        "&t=" +
-        Date.now();
 
+            container.innerHTML = "";
 
-      document
-        .body
-        .appendChild(script);
 
-    }
+            data.eventos.forEach(function(evento, index) {
 
+                const card =
+                    document.createElement("div");
 
+                card.className =
+                    "event-card";
 
-    /* =====================================================
-       MOSTRAR RESULTADO
-    ===================================================== */
 
-    function mostrarEventoCriado(
-      evento
-    ) {
+                const eventUrl =
+                    SITE +
+                    "index.html?evento=" +
+                    encodeURIComponent(evento.id);
 
 
-      document
-        .getElementById(
-          "eventoCriadoNome"
-        )
-        .textContent =
-        evento.nome;
+                const albumUrl =
+                    SITE +
+                    "album.html?evento=" +
+                    encodeURIComponent(evento.id);
 
 
-      document
-        .getElementById(
-          "linkEvento"
-        )
-        .textContent =
-        evento.link;
+                const qrUrl =
+                    "https://quickchart.io/qr?size=500&text=" +
+                    encodeURIComponent(eventUrl);
 
 
-      document
-        .getElementById(
-          "linkAlbum"
-        )
-        .textContent =
-        evento.album;
+                card.innerHTML = `
 
+                    <div class="event-title">
+                        ${escapeHTML(evento.nome)}
+                    </div>
 
-      document
-        .getElementById(
-          "eventoCriado"
-        )
-        .classList
-        .add("ativo");
+                    <div class="event-id">
+                        ID: ${escapeHTML(evento.id)}
+                    </div>
 
-    }
+                    <div class="event-type">
+                        ${escapeHTML(evento.tipo || "Evento")}
+                    </div>
 
+                    <div class="photo-count">
+                        <strong>—</strong>
+                        fotos
+                    </div>
 
+                    <div class="actions">
 
-    /* =====================================================
-       ABRIR EVENTO
-    ===================================================== */
+                        <button
+                            class="btn-event"
+                            onclick="window.open('${eventUrl}', '_blank')"
+                        >
+                            EVENTO
+                        </button>
 
-    function abrirLinkEvento() {
+                        <button
+                            class="btn-album"
+                            onclick="window.open('${albumUrl}', '_blank')"
+                        >
+                            ÁLBUM
+                        </button>
 
-      if (!ultimoEvento) {
+                        <button
+                            class="btn-qr"
+                            onclick="toggleQR(${index})"
+                        >
+                            MOSTRAR QR CODE
+                        </button>
 
-        return;
+                    </div>
 
-      }
+                    <div
+                        class="qr-area"
+                        id="qr-${index}"
+                    >
 
+                        <img
+                            src="${qrUrl}"
+                            alt="QR Code"
+                        >
 
-      window.open(
-        ultimoEvento.link,
-        "_blank"
-      );
+                        <div class="qr-link">
+                            ${escapeHTML(eventUrl)}
+                        </div>
 
-    }
+                        <br>
 
+                        <button
+                            class="btn-event"
+                            onclick="window.open('${qrUrl}', '_blank')"
+                        >
+                            ABRIR QR
+                        </button>
 
+                    </div>
 
-    /* =====================================================
-       ABRIR ÁLBUM
-    ===================================================== */
+                `;
 
-    function abrirLinkAlbum() {
 
-      if (!ultimoEvento) {
+                container.appendChild(card);
 
-        return;
-
-      }
-
-
-      window.open(
-        ultimoEvento.album,
-        "_blank"
-      );
-
-    }
-
-
-
-    /* =====================================================
-       GERADOR QR
-    ===================================================== */
-
-    function abrirGeradorQR() {
-
-      if (!ultimoEvento) {
-
-        return;
-
-      }
-
-
-      const url =
-        "gerar-qr.html" +
-        "?nome=" +
-        encodeURIComponent(
-          ultimoEvento.nome
-        ) +
-        "&id=" +
-        encodeURIComponent(
-          ultimoEvento.id
-        );
-
-
-      window.open(
-        url,
-        "_blank"
-      );
-
-    }
-
-
-
-    /* =====================================================
-       LISTAR EVENTOS
-    ===================================================== */
-
-    function carregarEventos() {
-
-
-      const container =
-        document
-          .getElementById(
-            "listaEventos"
-          );
-
-
-      container.innerHTML =
-        '<div class="carregando">' +
-        'Carregando eventos...' +
-        '</div>';
-
-
-      const callbackName =
-        "listarEventosCallback_" +
-        Date.now();
-
-
-      window[callbackName] =
-        function(resposta) {
-
-
-          delete window[callbackName];
-
-
-          if (
-            script &&
-            script.parentNode
-          ) {
-
-            script.parentNode
-              .removeChild(script);
-
-          }
-
-
-          if (
-            !resposta ||
-            !resposta.sucesso
-          ) {
-
-            container.innerHTML =
-              '<div class="vazio">' +
-              'Não foi possível carregar os eventos.' +
-              '</div>';
-
-            return;
-
-          }
-
-
-          renderizarEventos(
-            resposta.eventos || []
-          );
-
-        };
-
-
-      const script =
-        document.createElement(
-          "script"
-        );
-
-
-      script.src =
-        API +
-        "?acao=listarEventos" +
-        "&callback=" +
-        callbackName +
-        "&t=" +
-        Date.now();
-
-
-      document
-        .body
-        .appendChild(script);
-
-    }
-
-
-
-    /* =====================================================
-       RENDERIZAR EVENTOS
-    ===================================================== */
-
-    function renderizarEventos(
-      eventos
-    ) {
-
-
-      const container =
-        document
-          .getElementById(
-            "listaEventos"
-          );
-
-
-      if (!eventos.length) {
-
-        container.innerHTML =
-          '<div class="vazio">' +
-          'Nenhum evento cadastrado.' +
-          '</div>';
-
-        return;
-
-      }
-
-
-      container.innerHTML = "";
-
-
-      eventos.forEach(
-        function(evento) {
-
-
-          const div =
-            document.createElement(
-              "div"
-            );
-
-
-          div.className =
-            "evento";
-
-
-          div.innerHTML = `
-
-            <div class="evento-topo">
-
-              <div>
-
-                <div
-                  class="evento-nome"
-                >
-                  ${escaparHTML(
-                    evento.nome
-                  )}
-                </div>
-
-                <div
-                  class="evento-id"
-                >
-                  ${escaparHTML(
-                    evento.id
-                  )}
-                </div>
-
-                <span
-                  class="evento-tipo"
-                >
-                  ${escaparHTML(
-                    evento.tipo
-                  )}
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="acoes">
-
-              <button
-                onclick="abrirEventoPorId('${escaparJS(evento.id)}')"
-              >
-                EVENTO
-              </button>
-
-              <button
-                onclick="abrirAlbumPorId('${escaparJS(evento.id)}')"
-              >
-                ÁLBUM
-              </button>
-
-            </div>
-
-          `;
-
-
-          container.appendChild(
-            div
-          );
+            });
 
         }
-      );
+    );
+
+}
+
+
+/* =====================================================
+   QR CODE
+===================================================== */
+
+function toggleQR(index) {
+
+    const area =
+        document.getElementById("qr-" + index);
+
+
+    if (!area) return;
+
+
+    if (
+        area.style.display === "block"
+    ) {
+
+        area.style.display = "none";
+
+    } else {
+
+        area.style.display = "block";
 
     }
 
+}
 
 
-    /* =====================================================
-       ABRIR EVENTO DA LISTA
-    ===================================================== */
+/* =====================================================
+   RESULTADO
+===================================================== */
 
-    function abrirEventoPorId(
-      id
-    ) {
+function abrirResultadoEvento() {
 
-      const url =
-        "index.html?evento=" +
-        encodeURIComponent(id);
+    if (!resultadoData) return;
 
-
-      window.open(
-        url,
+    window.open(
+        resultadoData.link,
         "_blank"
-      );
+    );
 
-    }
-
-
-
-    /* =====================================================
-       ABRIR ÁLBUM DA LISTA
-    ===================================================== */
-
-    function abrirAlbumPorId(
-      id
-    ) {
-
-      const url =
-        "album.html?evento=" +
-        encodeURIComponent(id);
+}
 
 
-      window.open(
-        url,
+function abrirResultadoAlbum() {
+
+    if (!resultadoData) return;
+
+    window.open(
+        resultadoData.album,
         "_blank"
-      );
+    );
 
-    }
-
-
-
-    /* =====================================================
-       LIMPAR FORMULÁRIO
-    ===================================================== */
-
-    function limparFormulario() {
-
-      document
-        .getElementById("nome")
-        .value = "";
+}
 
 
-      document
-        .getElementById("id")
-        .value = "";
+function abrirResultadoQR() {
+
+    if (!resultadoData) return;
 
 
-      document
-        .getElementById("tipo")
-        .value =
-        "Evento";
+    const qr =
+        "https://quickchart.io/qr?size=800&text=" +
+        encodeURIComponent(resultadoData.link);
 
 
-      document
-        .getElementById("mensagem")
-        .value =
-        "Compartilhe esse momento com a gente ❤️";
+    window.open(qr, "_blank");
+
+}
 
 
-      document
-        .getElementById("cor")
-        .value =
-        "#c9a96e";
+/* =====================================================
+   SEGURANÇA HTML
+===================================================== */
+
+function escapeHTML(text) {
+
+    return String(text || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
 
 
-      document
-        .getElementById("valorCor")
-        .textContent =
-        "#c9a96e";
+/* =====================================================
+   INICIAR
+===================================================== */
 
-    }
+carregarEventos();
 
-
-
-    /* =====================================================
-       MENSAGEM
-    ===================================================== */
-
-    function mostrarMensagem(
-      texto,
-      tipo
-    ) {
-
-
-      const elemento =
-        document
-          .getElementById(
-            "mensagem"
-          );
-
-
-      elemento.textContent =
-        texto;
-
-
-      elemento.className =
-        "mensagem " +
-        tipo;
-
-    }
-
-
-
-    /* =====================================================
-       SEGURANÇA HTML
-    ===================================================== */
-
-    function escaparHTML(
-      texto
-    ) {
-
-      return String(texto)
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-
-    /* =====================================================
-       SEGURANÇA JS
-    ===================================================== */
-
-    function escaparJS(
-      texto
-    ) {
-
-      return String(texto)
-        .replace(
-          /\\/g,
-          "\\\\"
-        )
-        .replace(
-          /'/g,
-          "\\'"
-        );
-
-    }
-
-
-
-    /* =====================================================
-       CARREGAR AO ABRIR
-    ===================================================== */
-
-    carregarEventos();
-
-
-  </script>
-
+</script>
 
 </body>
-
 </html>
