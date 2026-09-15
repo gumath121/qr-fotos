@@ -478,7 +478,7 @@ header {
 
 
 /* =========================================================
-   DEMO DO CELULAR
+   CELULAR / ÁLBUM DE DEMONSTRAÇÃO
 ========================================================= */
 
 .phone-area {
@@ -489,10 +489,54 @@ header {
     justify-content:
         center;
 
+    align-items:
+        center;
+
     position:
         relative;
 
+    min-height:
+        600px;
+
 }
+
+
+/* brilho atrás do celular */
+
+.phone-area::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        330px;
+
+    height:
+        600px;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(216,184,120,.14),
+            transparent 68%
+        );
+
+    filter:
+        blur(10px);
+
+    pointer-events:
+        none;
+
+}
+
+
+/* corpo do celular */
 
 .phone {
 
@@ -504,17 +548,18 @@ header {
 
     border:
         7px solid
-        #242424;
+        #252525;
 
     border-radius:
         42px;
 
     background:
-        #0c0c0c;
+        #080808;
 
     box-shadow:
-        0 30px 90px rgba(0,0,0,.7),
-        0 0 60px rgba(216,184,120,.08);
+        0 35px 100px rgba(0,0,0,.75),
+        0 0 70px rgba(216,184,120,.10),
+        inset 0 0 0 1px rgba(255,255,255,.06);
 
     overflow:
         hidden;
@@ -522,7 +567,51 @@ header {
     position:
         relative;
 
+    z-index:
+        2;
+
 }
+
+
+/* reflexo lateral */
+
+.phone::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    top:
+        40px;
+
+    right:
+        3px;
+
+    width:
+        2px;
+
+    height:
+        150px;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255,255,255,.22),
+            transparent
+        );
+
+    border-radius:
+        10px;
+
+    z-index:
+        20;
+
+}
+
+
+/* notch */
 
 .phone-notch {
 
@@ -539,21 +628,24 @@ header {
         translateX(-50%);
 
     width:
-        100px;
+        105px;
 
     height:
-        24px;
+        25px;
 
     background:
-        #242424;
+        #252525;
 
     border-radius:
-        0 0 18px 18px;
+        0 0 17px 17px;
 
     z-index:
-        5;
+        15;
 
 }
+
+
+/* tela */
 
 .phone-screen {
 
@@ -564,24 +656,46 @@ header {
         100%;
 
     padding:
-        58px 20px 20px;
+        43px 13px 12px;
 
     background:
-        linear-gradient(
-            150deg,
-            #111 0%,
-            #0b0b0b 100%
-        );
+        #0d0d0d;
+
+    position:
+        relative;
 
 }
 
-.phone-small {
+
+/* cabeçalho do álbum */
+
+.album-header {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    padding:
+        7px 5px 12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+.album-brand {
 
     color:
         var(--gold);
 
     font-size:
-        8px;
+        7px;
 
     letter-spacing:
         2px;
@@ -589,68 +703,22 @@ header {
     text-transform:
         uppercase;
 
-    text-align:
-        center;
-
-    margin-bottom:
-        12px;
-
 }
 
-.phone-title {
+.album-icon {
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        30px;
-
-    text-align:
-        center;
-
-    margin-bottom:
-        8px;
-
-}
-
-.phone-message {
-
-    color:
-        #888;
-
-    font-size:
-        8px;
-
-    text-align:
-        center;
-
-    line-height:
-        1.6;
-
-    margin-bottom:
-        20px;
-
-}
-
-.fake-camera {
+    width:
+        22px;
 
     height:
-        235px;
-
-    border-radius:
-        20px;
+        22px;
 
     border:
         1px solid
-        #302d28;
+        rgba(216,184,120,.5);
 
-    background:
-        radial-gradient(
-            circle at center,
-            #2c2821,
-            #121212 60%
-        );
+    border-radius:
+        50%;
 
     display:
         flex;
@@ -661,72 +729,343 @@ header {
     justify-content:
         center;
 
-    position:
-        relative;
-
-}
-
-.fake-camera::after {
-
-    content:
-        "⌾";
-
     font-size:
-        46px;
+        9px;
 
     color:
-        rgba(216,184,120,.55);
-
-}
-
-.camera-button {
-
-    position:
-        absolute;
-
-    bottom:
-        18px;
-
-    left:
-        50%;
-
-    transform:
-        translateX(-50%);
-
-    width:
-        55px;
-
-    height:
-        55px;
-
-    border-radius:
-        50%;
-
-    border:
-        4px solid
-        rgba(255,255,255,.7);
-
-    background:
         var(--gold);
 
 }
 
-.phone-bottom {
 
-    margin-top:
-        20px;
+/* nome do evento */
 
-    display:
-        flex;
+.album-title {
 
-    justify-content:
-        space-between;
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        27px;
+
+    line-height:
+        1;
+
+    text-align:
+        center;
+
+    margin:
+        16px 0 4px;
+
+}
+
+.album-subtitle {
+
+    text-align:
+        center;
 
     color:
         #777;
 
     font-size:
-        8px;
+        6.5px;
+
+    letter-spacing:
+        .5px;
+
+    margin-bottom:
+        14px;
+
+}
+
+
+/* contador */
+
+.album-count {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        5px;
+
+    color:
+        #999;
+
+    font-size:
+        7px;
+
+    margin-bottom:
+        12px;
+
+}
+
+.album-count strong {
+
+    color:
+        var(--gold-light);
+
+    font-weight:
+        600;
+
+}
+
+
+/* =========================================================
+   GALERIA DENTRO DO CELULAR
+========================================================= */
+
+.album-gallery {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    grid-auto-rows:
+        88px;
+
+    gap:
+        4px;
+
+    overflow:
+        hidden;
+
+}
+
+
+/* fotos */
+
+.album-photo {
+
+    border-radius:
+        7px;
+
+    overflow:
+        hidden;
+
+    position:
+        relative;
+
+    background:
+        #1a1a1a;
+
+}
+
+.album-photo img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform .5s ease;
+
+}
+
+.album-photo:hover img {
+
+    transform:
+        scale(1.06);
+
+}
+
+
+/* foto grande */
+
+.album-photo.large {
+
+    grid-column:
+        span 2;
+
+    grid-row:
+        span 2;
+
+}
+
+
+/* brilho sutil nas fotos */
+
+.album-photo::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 65%,
+            rgba(0,0,0,.25)
+        );
+
+    pointer-events:
+        none;
+
+}
+
+
+/* =========================================================
+   RODAPÉ DO CELULAR
+========================================================= */
+
+.album-bottom {
+
+    display:
+        flex;
+
+    justify-content:
+        space-around;
+
+    align-items:
+        center;
+
+    margin-top:
+        13px;
+
+    padding:
+        10px 5px 3px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.07);
+
+}
+
+.album-nav {
+
+    color:
+        #666;
+
+    font-size:
+        6.5px;
+
+    text-align:
+        center;
+
+}
+
+.album-nav.active {
+
+    color:
+        var(--gold);
+
+}
+
+.album-nav-icon {
+
+    font-size:
+        13px;
+
+    display:
+        block;
+
+    margin-bottom:
+        3px;
+
+}
+
+
+/* =========================================================
+   ETIQUETA FLUTUANTE
+========================================================= */
+
+.phone-badge {
+
+    position:
+        absolute;
+
+    right:
+        -30px;
+
+    top:
+        145px;
+
+    z-index:
+        10;
+
+    background:
+        rgba(17,17,17,.94);
+
+    border:
+        1px solid
+        rgba(216,184,120,.28);
+
+    border-radius:
+        12px;
+
+    padding:
+        11px 14px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+
+    backdrop-filter:
+        blur(10px);
+
+    animation:
+        floatBadge 4s ease-in-out infinite;
+
+}
+
+.phone-badge strong {
+
+    display:
+        block;
+
+    color:
+        var(--gold);
+
+    font-size:
+        11px;
+
+    margin-bottom:
+        3px;
+
+}
+
+.phone-badge span {
+
+    color:
+        #777;
+
+    font-size:
+        7px;
+
+}
+
+@keyframes floatBadge {
+
+    0%,100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-8px);
+    }
 
 }
 
@@ -1991,7 +2330,7 @@ footer {
     }
 
     .phone-area {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .benefit-grid {
@@ -2073,50 +2412,174 @@ footer {
     }
 
     .hero {
+
         padding:
-            125px 18px 70px;
+            115px 18px 65px;
+
+        min-height:
+            auto;
+
+    }
+
+    .hero-inner {
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        gap:
+            0;
+
     }
 
     .hero h1 {
+
         font-size:
-            56px;
+            54px;
+
+        line-height:
+            .9;
+
+        margin-bottom:
+            20px;
+
     }
 
     .hero-text {
+
         font-size:
             14px;
+
+        line-height:
+            1.7;
+
+        margin-bottom:
+            28px;
+
     }
 
     .hero-buttons {
+
         flex-direction:
             column;
+
+        width:
+            100%;
+
     }
 
     .btn-primary,
     .btn-secondary {
+
         width:
             100%;
+
+    }
+
+
+    /* =====================================================
+       CELULAR NO MOBILE
+       FICA LOGO ABAIXO DO TÍTULO
+    ===================================================== */
+
+    .phone-area {
+
+        order:
+            2;
+
+        width:
+            100%;
+
+        min-height:
+            auto;
+
+        margin:
+            28px 0 35px;
+
     }
 
     .phone {
+
         width:
-            260px;
+            255px;
 
         height:
-            530px;
+            520px;
+
+        border-radius:
+            38px;
+
+    }
+
+    .phone-screen {
+
+        padding:
+            40px 12px 10px;
+
+    }
+
+    .album-title {
+
+        font-size:
+            25px;
+
+        margin-top:
+            14px;
+
+    }
+
+    .album-gallery {
+
+        grid-auto-rows:
+            78px;
+
+    }
+
+    .phone-badge {
+
+        right:
+            -12px;
+
+        top:
+            125px;
+
+        padding:
+            9px 11px;
+
+    }
+
+    .phone-badge strong {
+
+        font-size:
+            9px;
+
+    }
+
+    .phone-badge span {
+
+        font-size:
+            6px;
+
     }
 
     .benefit-grid {
+
         grid-template-columns:
             1fr;
+
     }
 
     .steps {
+
         grid-template-columns:
             1fr;
+
     }
 
     .demo-box {
+
         flex-direction:
             column;
 
@@ -2125,37 +2588,49 @@ footer {
 
         text-align:
             center;
+
     }
 
     .qr {
+
         width:
             170px;
 
         height:
             170px;
+
     }
 
     .section-title {
+
         font-size:
             44px;
+
     }
 
     .plans {
+
         grid-template-columns:
             1fr;
+
     }
 
     .plan {
+
         padding:
             38px 22px 25px;
+
     }
 
     .price {
+
         font-size:
             58px;
+
     }
 
     .custom-plan {
+
         flex-direction:
             column;
 
@@ -2164,19 +2639,24 @@ footer {
 
         padding:
             25px 20px;
+
     }
 
     .custom-plan span {
+
         line-height:
             1.6;
+
     }
 
     .footer-inner {
+
         flex-direction:
             column;
 
         text-align:
             center;
+
     }
 
 }
@@ -2312,6 +2792,189 @@ As fotos do seu evento.
 </h1>
 
 
+<!-- =====================================================
+     CELULAR
+     NO MOBILE ELE APARECE ENTRE O TÍTULO E O TEXTO
+===================================================== -->
+
+<div class="phone-area">
+
+<div class="phone">
+
+<div class="phone-notch"></div>
+
+
+<div class="phone-screen">
+
+
+<div class="album-header">
+
+<div class="album-brand">
+QR FOTOS
+</div>
+
+<div class="album-icon">
+♡
+</div>
+
+</div>
+
+
+<div class="album-title">
+Gustavo & Ana
+</div>
+
+
+<div class="album-subtitle">
+CASAMENTO • 15.09.2026
+</div>
+
+
+<div class="album-count">
+
+<span>●</span>
+
+<strong>128 fotos</strong>
+
+<span>compartilhadas pelos convidados</span>
+
+</div>
+
+
+<div class="album-gallery">
+
+
+<!-- FOTO 1 -->
+
+<div class="album-photo large">
+
+<img
+src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=85"
+alt="Casamento"
+>
+
+</div>
+
+
+<!-- FOTO 2 -->
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=85"
+alt="Casamento"
+>
+
+</div>
+
+
+<!-- FOTO 3 -->
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=85"
+alt="Festa"
+>
+
+</div>
+
+
+<!-- FOTO 4 -->
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=85"
+alt="Evento"
+>
+
+</div>
+
+
+<!-- FOTO 5 -->
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=85"
+alt="Casamento"
+>
+
+</div>
+
+
+<!-- FOTO 6 -->
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=500&q=85"
+alt="Festa"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="album-bottom">
+
+
+<div class="album-nav active">
+
+<span class="album-nav-icon">
+▦
+</span>
+
+ÁLBUM
+
+</div>
+
+
+<div class="album-nav">
+
+<span class="album-nav-icon">
+＋
+</span>
+
+ENVIAR
+
+</div>
+
+
+<div class="album-nav">
+
+<span class="album-nav-icon">
+♡
+</span>
+
+MOMENTOS
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="phone-badge">
+
+<strong>+128 momentos</strong>
+
+<span>adicionados pelos convidados</span>
+
+</div>
+
+
+</div>
+
+
 <p class="hero-text">
 
 Um QR Code transforma seus convidados em
@@ -2341,13 +3004,16 @@ COMO FUNCIONA
 
 </div>
 
+
 </div>
 
 
 
-<!-- CELULAR -->
+<!-- =====================================================
+     CELULAR DESKTOP
+===================================================== -->
 
-<div class="phone-area">
+<div class="phone-area desktop-phone">
 
 <div class="phone">
 
@@ -2356,44 +3022,157 @@ COMO FUNCIONA
 
 <div class="phone-screen">
 
-<div class="phone-small">
+
+<div class="album-header">
+
+<div class="album-brand">
 QR FOTOS
 </div>
 
+<div class="album-icon">
+♡
+</div>
 
-<div class="phone-title">
+</div>
+
+
+<div class="album-title">
 Gustavo & Ana
 </div>
 
 
-<div class="phone-message">
+<div class="album-subtitle">
+CASAMENTO • 15.09.2026
+</div>
 
-Compartilhe seus melhores
-momentos com a gente.
+
+<div class="album-count">
+
+<span>●</span>
+
+<strong>128 fotos</strong>
+
+<span>compartilhadas pelos convidados</span>
 
 </div>
 
 
-<div class="fake-camera">
+<div class="album-gallery">
 
-<div class="camera-button"></div>
+
+<div class="album-photo large">
+
+<img
+src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=85"
+alt="Casamento"
+>
 
 </div>
 
 
-<div class="phone-bottom">
+<div class="album-photo">
 
-<span>
-📷 CÂMERA
+<img
+src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=85"
+alt="Casamento"
+>
+
+</div>
+
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=85"
+alt="Festa"
+>
+
+</div>
+
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=85"
+alt="Evento"
+>
+
+</div>
+
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=85"
+alt="Casamento"
+>
+
+</div>
+
+
+<div class="album-photo">
+
+<img
+src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=500&q=85"
+alt="Festa"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="album-bottom">
+
+<div class="album-nav active">
+
+<span class="album-nav-icon">
+▦
 </span>
 
-<span>
-▦ ÁLBUM
+ÁLBUM
+
+</div>
+
+
+<div class="album-nav">
+
+<span class="album-nav-icon">
+＋
 </span>
 
+ENVIAR
+
+</div>
+
+
+<div class="album-nav">
+
+<span class="album-nav-icon">
+♡
+</span>
+
+MOMENTOS
+
 </div>
 
 </div>
+
+
+</div>
+
+</div>
+
+
+<div class="phone-badge">
+
+<strong>+128 momentos</strong>
+
+<span>adicionados pelos convidados</span>
+
+</div>
+
 
 </div>
 
@@ -2832,10 +3611,6 @@ em fotógrafos do seu evento.
 <div class="plans">
 
 
-<!-- =====================================================
-     ESSENCIAL
-===================================================== -->
-
 <div class="plan">
 
 <div class="plan-name">
@@ -2898,10 +3673,6 @@ QUERO ESTE PLANO
 </div>
 
 
-
-<!-- =====================================================
-     PREMIUM
-===================================================== -->
 
 <div class="plan featured">
 
@@ -2976,10 +3747,6 @@ QUERO ESTE PLANO
 
 
 
-<!-- =====================================================
-     COMPLETO
-===================================================== -->
-
 <div class="plan">
 
 <div class="plan-name">
@@ -3049,10 +3816,6 @@ QUERO ESTE PLANO
 </div>
 
 
-
-<!-- =====================================================
-     PACOTE PERSONALIZADO
-===================================================== -->
 
 <div class="custom-plan">
 
