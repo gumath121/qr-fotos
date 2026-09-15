@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 <title>Compartilhe sua foto</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
@@ -39,10 +41,14 @@ p {
     margin-bottom: 25px;
 }
 
-video {
+video,
+#fotoTirada {
     width: 100%;
     border-radius: 20px;
     background: #000;
+}
+
+#fotoTirada {
     display: none;
 }
 
@@ -72,6 +78,12 @@ button {
     display: none;
 }
 
+#enviar {
+    background: #22c55e;
+    color: white;
+    display: none;
+}
+
 #outra {
     background: #333;
     color: white;
@@ -83,6 +95,11 @@ button {
     font-size: 15px;
     color: #aaa;
 }
+
+iframe {
+    display: none;
+}
+
 </style>
 </head>
 
@@ -102,10 +119,16 @@ button {
 
     <video id="camera" autoplay playsinline></video>
 
+    <img id="fotoTirada">
+
     <canvas id="canvas"></canvas>
 
     <button id="tirar">
         📸 TIRAR FOTO
+    </button>
+
+    <button id="enviar">
+        ❤️ ENVIAR FOTO
     </button>
 
     <button id="outra">
@@ -116,6 +139,24 @@ button {
 
 </div>
 
+
+<!-- FORMULÁRIO INVISÍVEL PARA ENVIAR AO GOOGLE -->
+
+<form
+    id="formulario"
+    action="https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec"
+    method="POST"
+    target="resposta">
+
+    <input type="hidden" name="foto" id="foto">
+
+    <input type="hidden" name="nomeArquivo" id="nomeArquivo">
+
+</form>
+
+<iframe name="resposta" id="resposta"></iframe>
+
+
 <script>
 
 let stream = null;
@@ -123,32 +164,48 @@ let stream = null;
 const abrir = document.getElementById("abrir");
 const camera = document.getElementById("camera");
 const tirar = document.getElementById("tirar");
+const enviar = document.getElementById("enviar");
 const outra = document.getElementById("outra");
+const fotoTirada = document.getElementById("fotoTirada");
 const canvas = document.getElementById("canvas");
 const status = document.getElementById("status");
+
+const formulario = document.getElementById("formulario");
+const campoFoto = document.getElementById("foto");
+const campoNome = document.getElementById("nomeArquivo");
+
+
+// ABRIR CÂMERA
 
 abrir.addEventListener("click", async () => {
 
     try {
 
         stream = await navigator.mediaDevices.getUserMedia({
+
             video: {
                 facingMode: {
                     ideal: "environment"
                 }
             },
+
             audio: false
+
         });
 
         camera.srcObject = stream;
 
         camera.style.display = "block";
-        tirar.style.display = "block";
+
         abrir.style.display = "none";
+
+        tirar.style.display = "block";
 
         status.innerText = "Câmera ativada! 📸";
 
-    } catch (erro) {
+    }
+
+    catch (erro) {
 
         status.innerText =
             "Não conseguimos acessar a câmera. Verifique a permissão do navegador.";
@@ -159,12 +216,15 @@ abrir.addEventListener("click", async () => {
 
 });
 
-tirar.addEventListener("click", () => {
 
-    const larguraMaxima = 1600;
+// TIRAR FOTO
+
+tirar.addEventListener("click", () => {
 
     let largura = camera.videoWidth;
     let altura = camera.videoHeight;
+
+    const larguraMaxima = 1600;
 
     if (largura > larguraMaxima) {
 
@@ -188,21 +248,94 @@ tirar.addEventListener("click", () => {
         altura
     );
 
+
+    // COMPRIME A FOTO
+
+    const fotoBase64 = canvas.toDataURL(
+        "image/jpeg",
+        0.75
+    );
+
+
+    // MOSTRA A FOTO
+
+    fotoTirada.src = fotoBase64;
+
+    fotoTirada.style.display = "block";
+
     camera.style.display = "none";
+
     tirar.style.display = "none";
+
+    enviar.style.display = "block";
+
     outra.style.display = "block";
 
-    status.innerText = "Foto tirada! 🎉";
+    status.innerText = "Foto pronta! ❤️";
 
 });
 
+
+// ENVIAR FOTO
+
+enviar.addEventListener("click", () => {
+
+    const fotoBase64 = canvas.toDataURL(
+        "image/jpeg",
+        0.75
+    );
+
+
+    // Remove o começo "data:image/jpeg;base64,"
+
+    const base64 = fotoBase64.split(",")[1];
+
+
+    campoFoto.value = base64;
+
+    campoNome.value =
+        "foto_" +
+        Date.now() +
+        ".jpg";
+
+
+    status.innerText =
+        "Enviando foto... ⏳";
+
+    enviar.disabled = true;
+
+
+    formulario.submit();
+
+
+    setTimeout(() => {
+
+        status.innerText =
+            "✅ Foto enviada! Obrigado por participar! ❤️";
+
+        enviar.disabled = false;
+
+    }, 2500);
+
+});
+
+
+// TIRAR OUTRA
+
 outra.addEventListener("click", () => {
 
+    fotoTirada.style.display = "none";
+
     camera.style.display = "block";
-    tirar.style.display = "block";
+
+    enviar.style.display = "none";
+
     outra.style.display = "none";
 
-    status.innerText = "Pode tirar outra foto 📸";
+    tirar.style.display = "block";
+
+    status.innerText =
+        "Pode tirar outra foto 📸";
 
 });
 
