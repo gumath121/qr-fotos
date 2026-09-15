@@ -1080,7 +1080,130 @@ album.addEventListener(
     }
 );
 
+/* =====================================================
+   CONFIGURAÇÃO DO EVENTO
+===================================================== */
 
+const API_EVENTOS =
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+
+
+/* PEGA O EVENTO DA URL */
+
+const parametros =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const evento =
+    parametros.get("evento") ||
+    "teste";
+
+
+/* BUSCA CONFIGURAÇÃO */
+
+function carregarEvento() {
+
+
+    const callback =
+        "evento_" + Date.now();
+
+
+    window[callback] =
+        function(config) {
+
+
+            delete window[callback];
+
+
+            if (
+                !config ||
+                config.erro
+            ) {
+
+                console.log(
+                    "Evento não encontrado."
+                );
+
+                return;
+
+            }
+
+
+            /* TÍTULO */
+
+            const titulo =
+                document.getElementById(
+                    "tituloEvento"
+                );
+
+
+            if (titulo) {
+
+                titulo.innerHTML =
+                    config.nome;
+
+            }
+
+
+            /* MENSAGEM */
+
+            const mensagem =
+                document.getElementById(
+                    "mensagemEvento"
+                );
+
+
+            if (mensagem) {
+
+                mensagem.innerHTML =
+                    config.mensagem;
+
+            }
+
+
+            /* COR PRINCIPAL */
+
+            if (config.cor) {
+
+                document.documentElement
+                    .style.setProperty(
+                        "--cor-evento",
+                        config.cor
+                    );
+
+            }
+
+        };
+
+
+    const script =
+        document.createElement(
+            "script"
+        );
+
+
+    script.src =
+        API_EVENTOS +
+        "?evento=" +
+        encodeURIComponent(evento) +
+        "&config=true" +
+        "&callback=" +
+        callback;
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/* CARREGA EVENTO */
+
+carregarEvento();
+    
 </script>
 
 </body>
