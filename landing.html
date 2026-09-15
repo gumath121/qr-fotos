@@ -1,4286 +1,2289 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description"
-content="QR Fotos — As fotos do seu evento. Feitas por todos. Um QR Code. Centenas de momentos. Um álbum completo.">
 
 <title>QR Fotos — As fotos do seu evento. Feitas por todos.</title>
 
-
-<!-- FONTES -->
+<meta name="description" content="QR Fotos: transforme seu evento em um álbum colaborativo. Um QR Code, centenas de momentos e todas as fotos reunidas em um só lugar.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-/* =========================================================
-   RESET
-========================================================= */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    background: #080808;
-    color: #f5f0e8;
-    font-family: "Montserrat", sans-serif;
-    overflow-x: hidden;
+body{
+    background:#090909;
+    color:#f4f0e8;
+    font-family:'Montserrat',sans-serif;
+    overflow-x:hidden;
 }
 
-a {
-    color: inherit;
-    text-decoration: none;
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
-button {
-    font-family: inherit;
+img{
+    max-width:100%;
+    display:block;
 }
 
-img {
-    max-width: 100%;
+:root{
+    --gold:#d4af37;
+    --gold-light:#ead58a;
+    --cream:#f4f0e8;
+    --muted:#a7a29a;
+    --dark:#090909;
+    --dark2:#11110f;
+    --card:#151512;
+    --border:rgba(212,175,55,.22);
 }
 
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-
-:root {
-
-    --gold: #d8b878;
-    --gold-light: #f0d9a1;
-    --cream: #f5f0e8;
-    --muted: #a9a39a;
-
-    --dark: #080808;
-    --dark-2: #101010;
-    --dark-3: #171717;
-
-    --border: rgba(216,184,120,.22);
-
-}
-
-
-/* =========================================================
+/* =========================
    HEADER
-========================================================= */
+========================= */
 
-header {
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-
-    z-index: 1000;
-
-    background: rgba(8,8,8,.82);
-
-    backdrop-filter: blur(16px);
-
-    border-bottom:
-        1px solid
-        rgba(216,184,120,.10);
-
+header{
+    width:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:50;
 }
 
-.nav {
-
-    max-width: 1180px;
-
-    margin: auto;
-
-    height: 78px;
-
-    padding: 0 25px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    padding:28px 30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.logo {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size: 34px;
-
-    font-weight: 600;
-
-    letter-spacing: 3px;
-
-    color: var(--gold);
-
+.logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:32px;
+    font-weight:600;
+    letter-spacing:3px;
+    color:var(--cream);
 }
 
-.nav-links {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 30px;
-
-    font-size: 12px;
-
-    letter-spacing: 1px;
-
-    text-transform: uppercase;
-
+.logo span{
+    color:var(--gold);
 }
 
-.nav-links a {
-
-    color: #c9c4bb;
-
-    transition: .25s;
-
+nav{
+    display:flex;
+    gap:32px;
+    align-items:center;
 }
 
-.nav-links a:hover {
-
-    color: var(--gold);
-
+nav a{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:#bdb8af;
+    transition:.3s;
 }
 
-.nav-cta {
-
-    padding:
-        11px 18px;
-
-    border:
-        1px solid
-        var(--gold);
-
-    color:
-        var(--gold) !important;
-
-    border-radius:
-        30px;
-
+nav a:hover{
+    color:var(--gold);
 }
 
+.nav-cta{
+    padding:12px 20px;
+    border:1px solid var(--gold);
+    color:var(--gold)!important;
+}
 
-/* =========================================================
+/* =========================
    HERO
-========================================================= */
+========================= */
 
-.hero {
-
-    min-height:
-        100vh;
-
-    padding:
-        150px 25px 80px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-}
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 600px;
-    height: 600px;
-
-    border-radius: 50%;
-
+.hero{
+    min-height:800px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
     background:
-        radial-gradient(
-            circle,
-            rgba(216,184,120,.13),
-            transparent 68%
-        );
-
-    top:
-        -180px;
-
-    right:
-        -150px;
-
-    pointer-events:
-        none;
-
+        radial-gradient(circle at 75% 45%,rgba(212,175,55,.10),transparent 30%),
+        radial-gradient(circle at 20% 20%,rgba(255,255,255,.025),transparent 30%),
+        #090909;
 }
 
-.hero::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(216,184,120,.08),
-            transparent 70%
-        );
-
-    bottom:
-        -300px;
-
-    left:
-        -200px;
-
-    pointer-events:
-        none;
-
+.hero:before{
+    content:"";
+    position:absolute;
+    width:650px;
+    height:650px;
+    border:1px solid rgba(212,175,55,.07);
+    border-radius:50%;
+    right:-180px;
+    top:80px;
 }
 
-.hero-inner {
-
-    width:
-        100%;
-
-    max-width:
-        1180px;
-
-    margin:
-        auto;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1.15fr .85fr;
-
-    gap:
-        70px;
-
-    align-items:
-        center;
-
+.hero:after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    border:1px solid rgba(212,175,55,.05);
+    border-radius:50%;
+    right:-80px;
+    top:180px;
 }
 
-.hero-copy {
-
-    position:
-        relative;
-
-    z-index:
-        3;
-
+.hero-inner{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:130px 30px 80px;
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    align-items:center;
+    gap:60px;
+    position:relative;
+    z-index:2;
 }
 
-.eyebrow {
-
-    color:
-        var(--gold);
-
-    font-size:
-        11px;
-
-    letter-spacing:
-        4px;
-
-    text-transform:
-        uppercase;
-
-    margin-bottom:
-        22px;
-
+.hero-copy{
+    max-width:620px;
 }
 
-.hero h1 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(54px, 7vw, 92px);
-
-    line-height:
-        .91;
-
-    font-weight:
-        500;
-
-    letter-spacing:
-        -2px;
-
-    margin-bottom:
-        30px;
-
+.eyebrow{
+    color:var(--gold);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    margin-bottom:22px;
 }
 
-.hero h1 span {
-
-    color:
-        var(--gold);
-
+h1{
+    font-family:'Cormorant Garamond',serif;
+    font-size:76px;
+    line-height:.93;
+    font-weight:500;
+    letter-spacing:-2px;
+    margin-bottom:28px;
 }
 
-.hero-text {
-
-    color:
-        #b4afa7;
-
-    font-size:
-        16px;
-
-    line-height:
-        1.8;
-
-    max-width:
-        580px;
-
-    margin-bottom:
-        35px;
-
+.hero-text{
+    max-width:540px;
+    color:#aaa59d;
+    font-size:15px;
+    line-height:1.9;
+    font-weight:300;
+    margin-bottom:35px;
 }
 
-.hero-buttons {
-
-    display:
-        flex;
-
-    flex-wrap:
-        wrap;
-
-    gap:
-        12px;
-
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
 }
 
-.btn-primary {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        var(--gold);
-
-    color:
-        #111;
-
-    padding:
-        15px 25px;
-
-    border-radius:
-        40px;
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-    transition:
-        .25s;
-
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px 25px;
+    font-size:11px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    transition:.3s;
+    cursor:pointer;
 }
 
-.btn-primary:hover {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        var(--gold-light);
-
+.btn-gold{
+    background:var(--gold);
+    color:#111;
 }
 
-.btn-secondary {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        15px 25px;
-
-    border:
-        1px solid
-        #3c3934;
-
-    border-radius:
-        40px;
-
-    color:
-        #d0cbc3;
-
-    font-size:
-        12px;
-
-    font-weight:
-        600;
-
-    letter-spacing:
-        1px;
-
-    text-transform:
-        uppercase;
-
-    transition:
-        .25s;
-
+.btn-gold:hover{
+    background:var(--gold-light);
+    transform:translateY(-2px);
 }
 
-.btn-secondary:hover {
-
-    border-color:
-        var(--gold);
-
-    color:
-        var(--gold);
-
+.btn-outline{
+    border:1px solid rgba(255,255,255,.25);
+    color:#eee;
 }
 
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-.phone-area {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        center;
-
-    position:
-        relative;
-
-    min-height:
-        600px;
-
-    z-index:
-        2;
-
+.btn-outline:hover{
+    border-color:var(--gold);
+    color:var(--gold);
 }
 
-.phone-area::before {
+/* =========================
+   PHONE MOCKUP
+========================= */
 
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        330px;
-
-    height:
-        600px;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            ellipse,
-            rgba(216,184,120,.14),
-            transparent 68%
-        );
-
-    filter:
-        blur(10px);
-
-    pointer-events:
-        none;
-
+.phone-area{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
 }
 
-.phone {
-
-    width:
-        285px;
-
-    height:
-        575px;
-
-    border:
-        7px solid
-        #252525;
-
-    border-radius:
-        42px;
-
-    background:
-        #080808;
-
+.phone{
+    width:285px;
+    height:580px;
+    background:#050505;
+    border:7px solid #242421;
+    border-radius:42px;
+    padding:10px;
     box-shadow:
-        0 35px 100px rgba(0,0,0,.75),
-        0 0 70px rgba(216,184,120,.10),
-        inset 0 0 0 1px rgba(255,255,255,.06);
-
-    overflow:
-        hidden;
-
-    position:
-        relative;
-
-    z-index:
-        2;
-
+        0 35px 90px rgba(0,0,0,.7),
+        0 0 0 1px rgba(212,175,55,.12);
+    position:relative;
+    overflow:hidden;
+    transform:rotate(2deg);
 }
 
-.phone-notch {
+.phone:before{
+    content:"";
+    position:absolute;
+    width:95px;
+    height:25px;
+    background:#050505;
+    border-radius:20px;
+    top:0;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:10;
+}
 
-    position:
-        absolute;
+.phone-screen{
+    width:100%;
+    height:100%;
+    background:#0e0e0d;
+    border-radius:31px;
+    overflow:hidden;
+}
 
-    top:
-        0;
+.phone-top{
+    padding:38px 16px 12px;
+}
 
-    left:
-        50%;
+.phone-small{
+    font-size:7px;
+    letter-spacing:2px;
+    color:var(--gold);
+    text-transform:uppercase;
+}
 
-    transform:
-        translateX(-50%);
+.phone-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:25px;
+    margin-top:3px;
+}
 
-    width:
-        105px;
+.phone-date{
+    font-size:7px;
+    color:#77736d;
+    margin-top:3px;
+}
 
-    height:
-        25px;
+.phone-count{
+    margin-top:12px;
+    font-size:8px;
+    color:#aaa59d;
+}
 
+.phone-gallery{
+    padding:8px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:5px;
+}
+
+.phone-gallery img{
+    width:100%;
+    height:112px;
+    object-fit:cover;
+    border-radius:7px;
+}
+
+.phone-bottom{
+    position:absolute;
+    bottom:12px;
+    left:15px;
+    right:15px;
+    height:38px;
+    border-radius:12px;
+    background:rgba(20,20,18,.95);
+    border:1px solid rgba(255,255,255,.07);
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    color:#777;
+    font-size:12px;
+}
+
+.phone-bottom .active{
+    color:var(--gold);
+}
+
+.phone-badge{
+    position:absolute;
+    right:-20px;
+    bottom:60px;
+    background:#151512;
+    border:1px solid var(--border);
+    padding:14px 18px;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+.phone-badge strong{
+    display:block;
+    color:var(--gold);
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.phone-badge span{
+    color:#85817b;
+    font-size:8px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* =========================
+   SECTION COMMON
+========================= */
+
+.section{
+    padding:110px 30px;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+.section-label{
+    color:var(--gold);
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    margin-bottom:18px;
+}
+
+.section-title{
+    font-family:'Cormorant Garamond',serif;
+    font-size:55px;
+    line-height:1;
+    font-weight:500;
+    max-width:700px;
+}
+
+.section-subtitle{
+    color:#96918a;
+    font-size:14px;
+    line-height:1.8;
+    max-width:650px;
+    margin-top:22px;
+}
+
+/* =========================
+   ALBUM SHOWCASE
+========================= */
+
+.album-showcase{
+    padding:115px 30px;
+    background:#0d0d0c;
+    border-top:1px solid rgba(255,255,255,.04);
+    border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.album-grid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:80px;
+    align-items:center;
+}
+
+.album-info{
+    max-width:460px;
+}
+
+.album-list{
+    margin-top:32px;
+    display:flex;
+    flex-direction:column;
+    gap:17px;
+}
+
+.album-list-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    color:#b7b2aa;
+    font-size:13px;
+}
+
+.album-list-item span{
+    width:28px;
+    height:28px;
+    border:1px solid rgba(212,175,55,.3);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--gold);
+    font-size:11px;
+    flex-shrink:0;
+}
+
+.album-info .btn{
+    margin-top:34px;
+}
+
+.showcase-gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+
+.showcase-gallery img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:3px;
+    filter:saturate(.85);
+    transition:.4s;
+}
+
+.showcase-gallery img:hover{
+    transform:scale(1.025);
+    filter:saturate(1);
+}
+
+/* =========================
+   HOW GUESTS USE
+========================= */
+
+.guest-flow{
+    padding:120px 30px;
+    background:#090909;
+    position:relative;
+    overflow:hidden;
+}
+
+.guest-flow:before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    border:1px solid rgba(212,175,55,.04);
+    border-radius:50%;
+    left:-350px;
+    top:20px;
+}
+
+.flow-header{
+    text-align:center;
+    max-width:720px;
+    margin:0 auto 65px;
+    position:relative;
+    z-index:2;
+}
+
+.flow-header .section-title{
+    margin:auto;
+}
+
+.flow-header .section-subtitle{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.flow{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    position:relative;
+    z-index:2;
+}
+
+.flow:before{
+    content:"";
+    position:absolute;
+    left:11%;
+    right:11%;
+    top:47px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(212,175,55,.45),
+        rgba(212,175,55,.45),
+        transparent
+    );
+}
+
+.flow-step{
+    text-align:center;
+    padding:0 22px;
+    position:relative;
+}
+
+.flow-icon{
+    width:94px;
+    height:94px;
+    margin:0 auto 27px;
+    border-radius:50%;
+    border:1px solid rgba(212,175,55,.4);
+    background:#10100f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:31px;
+    box-shadow:0 0 0 9px #090909;
+    position:relative;
+    z-index:2;
+}
+
+.flow-number{
+    position:absolute;
+    right:5px;
+    top:-5px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#111;
+    font-size:10px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.flow-step h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:27px;
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.flow-step p{
+    color:#85817b;
+    font-size:11px;
+    line-height:1.7;
+    max-width:190px;
+    margin:auto;
+}
+
+/* =========================
+   BENEFITS
+========================= */
+
+.benefits{
+    background:#11110f;
+}
+
+.benefits-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.benefit{
+    padding:35px 28px;
+    background:#151512;
+    border:1px solid rgba(255,255,255,.05);
+    transition:.3s;
+}
+
+.benefit:hover{
+    transform:translateY(-4px);
+    border-color:var(--border);
+}
+
+.benefit-icon{
+    font-size:26px;
+    margin-bottom:25px;
+}
+
+.benefit h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:25px;
+    font-weight:500;
+    margin-bottom:12px;
+}
+
+.benefit p{
+    color:#85817b;
+    font-size:11px;
+    line-height:1.8;
+}
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.steps{
+    background:#090909;
+}
+
+.steps-grid{
+    margin-top:65px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.step{
+    position:relative;
+    padding:40px 30px;
+    border-top:1px solid rgba(212,175,55,.25);
+}
+
+.step-number{
+    font-family:'Cormorant Garamond',serif;
+    font-size:60px;
+    color:rgba(212,175,55,.3);
+    line-height:1;
+    margin-bottom:25px;
+}
+
+.step h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:30px;
+    font-weight:500;
+    margin-bottom:14px;
+}
+
+.step p{
+    color:#85817b;
+    font-size:12px;
+    line-height:1.8;
+}
+
+/* =========================
+   EVENT TYPES
+========================= */
+
+.events{
+    background:#11110f;
+}
+
+.event-grid{
+    margin-top:55px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+}
+
+.event{
+    min-height:180px;
+    padding:28px;
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.06);
+    background-size:cover;
+    background-position:center;
+}
+
+.event:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(transparent,rgba(0,0,0,.85));
+}
+
+.event span{
+    position:relative;
+    z-index:2;
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+}
+
+.event:nth-child(1){
+    background-image:url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(2){
+    background-image:url("https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(3){
+    background-image:url("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(4){
+    background-image:url("https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(5){
+    background-image:url("https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(6){
+    background-image:url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(7){
+    background-image:url("https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=700&q=80");
+}
+
+.event:nth-child(8){
+    background-image:url("https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&w=700&q=80");
+}
+
+/* =========================
+   DEMO
+========================= */
+
+.demo{
+    padding:110px 30px;
     background:
-        #252525;
-
-    border-radius:
-        0 0 17px 17px;
-
-    z-index:
-        15;
-
-}
-
-.phone-screen {
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    padding:
-        43px 13px 12px;
-
-    background:
-        #0d0d0d;
-
-    position:
-        relative;
-
-}
-
-.album-header {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    padding:
-        7px 5px 12px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.07);
-
-}
-
-.album-brand {
-
-    color:
-        var(--gold);
-
-    font-size:
-        7px;
-
-    letter-spacing:
-        2px;
-
-    text-transform:
-        uppercase;
-
-}
-
-.album-icon {
-
-    width:
-        22px;
-
-    height:
-        22px;
-
-    border:
-        1px solid
-        rgba(216,184,120,.5);
-
-    border-radius:
-        50%;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    font-size:
-        9px;
-
-    color:
-        var(--gold);
-
-}
-
-.album-title {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        27px;
-
-    line-height:
-        1;
-
-    text-align:
-        center;
-
-    margin:
-        16px 0 4px;
-
-}
-
-.album-subtitle {
-
-    text-align:
-        center;
-
-    color:
-        #777;
-
-    font-size:
-        6.5px;
-
-    letter-spacing:
-        .5px;
-
-    margin-bottom:
-        14px;
-
-}
-
-.album-count {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    align-items:
-        center;
-
-    gap:
-        5px;
-
-    color:
-        #999;
-
-    font-size:
-        7px;
-
-    margin-bottom:
-        12px;
-
-}
-
-.album-count strong {
-
-    color:
-        var(--gold-light);
-
-    font-weight:
-        600;
-
-}
-
-.album-gallery {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1fr 1fr 1fr;
-
-    grid-auto-rows:
-        88px;
-
-    gap:
-        4px;
-
-    overflow:
-        hidden;
-
-}
-
-.album-photo {
-
-    border-radius:
-        7px;
-
-    overflow:
-        hidden;
-
-    position:
-        relative;
-
-    background:
-        #1a1a1a;
-
-}
-
-.album-photo img {
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    object-fit:
-        cover;
-
-    display:
-        block;
-
-    transition:
-        transform .5s ease;
-
-}
-
-.album-photo:hover img {
-
-    transform:
-        scale(1.06);
-
-}
-
-.album-photo.large {
-
-    grid-column:
-        span 2;
-
-    grid-row:
-        span 2;
-
-}
-
-.album-photo::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    inset:
-        0;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent 65%,
-            rgba(0,0,0,.25)
-        );
-
-    pointer-events:
-        none;
-
-}
-
-.album-bottom {
-
-    display:
-        flex;
-
-    justify-content:
-        space-around;
-
-    align-items:
-        center;
-
-    margin-top:
-        13px;
-
-    padding:
-        10px 5px 3px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.07);
-
-}
-
-.album-nav {
-
-    color:
-        #666;
-
-    font-size:
-        6.5px;
-
-    text-align:
-        center;
-
-}
-
-.album-nav.active {
-
-    color:
-        var(--gold);
-
-}
-
-.album-nav-icon {
-
-    font-size:
-        13px;
-
-    display:
-        block;
-
-    margin-bottom:
-        3px;
-
-}
-
-.phone-badge {
-
-    position:
-        absolute;
-
-    right:
-        -30px;
-
-    top:
-        145px;
-
-    z-index:
-        10;
-
-    background:
-        rgba(17,17,17,.94);
-
-    border:
-        1px solid
-        rgba(216,184,120,.28);
-
-    border-radius:
-        12px;
-
-    padding:
-        11px 14px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.45);
-
-    backdrop-filter:
-        blur(10px);
-
-    animation:
-        floatBadge 4s ease-in-out infinite;
-
-}
-
-.phone-badge strong {
-
-    display:
-        block;
-
-    color:
-        var(--gold);
-
-    font-size:
-        11px;
-
-    margin-bottom:
-        3px;
-
-}
-
-.phone-badge span {
-
-    color:
-        #777;
-
-    font-size:
-        7px;
-
-}
-
-@keyframes floatBadge {
-
-    0%,100% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-8px);
-    }
-
-}
-
-
-/* =========================================================
-   SEÇÕES
-========================================================= */
-
-section {
-
-    padding:
-        110px 25px;
-
-}
-
-.section-inner {
-
-    max-width:
-        1080px;
-
-    margin:
-        auto;
-
-}
-
-.section-label {
-
-    text-align:
-        center;
-
-    color:
-        var(--gold);
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        4px;
-
-    text-transform:
-        uppercase;
-
-    margin-bottom:
-        15px;
-
-}
-
-.section-title {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    text-align:
-        center;
-
-    font-size:
-        clamp(42px, 5vw, 65px);
-
-    font-weight:
-        500;
-
-    line-height:
-        1;
-
-    margin-bottom:
-        20px;
-
-}
-
-.section-description {
-
-    max-width:
-        650px;
-
-    margin:
-        0 auto 55px;
-
-    text-align:
-        center;
-
-    color:
-        var(--muted);
-
-    font-size:
-        14px;
-
-    line-height:
-        1.8;
-
-}
-
-
-/* =========================================================
-   NOVA SEÇÃO — ÁLBUM
-========================================================= */
-
-.album-showcase {
-
-    background:
-        #0b0b0b;
-
-    border-top:
-        1px solid
-        #181818;
-
-    border-bottom:
-        1px solid
-        #181818;
-
-}
-
-.album-showcase-grid {
-
-    max-width:
-        1180px;
-
-    margin:
-        auto;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        .8fr 1.2fr;
-
-    gap:
-        70px;
-
-    align-items:
-        center;
-
-}
-
-.album-showcase-copy {
-
-    position:
-        relative;
-
-}
-
-.album-showcase-copy .section-label {
-
-    text-align:
-        left;
-
-}
-
-.album-showcase-copy h2 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(45px, 5vw, 72px);
-
-    line-height:
-        .92;
-
-    font-weight:
-        500;
-
-    margin-bottom:
-        25px;
-
-}
-
-.album-showcase-copy h2 span {
-
-    color:
-        var(--gold);
-
-}
-
-.album-showcase-copy p {
-
-    color:
-        #97928a;
-
-    font-size:
-        14px;
-
-    line-height:
-        1.9;
-
-    margin-bottom:
-        28px;
-
-}
-
-.album-showcase-list {
-
-    list-style:
-        none;
-
-    margin-bottom:
-        30px;
-
-}
-
-.album-showcase-list li {
-
-    padding:
-        10px 0;
-
-    color:
-        #c4bfb7;
-
-    font-size:
-        12px;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.06);
-
-}
-
-.album-showcase-list li::first-letter {
-
-    color:
-        var(--gold);
-
-}
-
-
-/* GALERIA GRANDE */
-
-.showcase-gallery {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    grid-auto-rows:
-        145px;
-
-    gap:
-        7px;
-
-}
-
-.showcase-photo {
-
-    overflow:
-        hidden;
-
-    border-radius:
-        10px;
-
-    position:
-        relative;
-
-    background:
-        #151515;
-
-}
-
-.showcase-photo.large {
-
-    grid-column:
-        span 2;
-
-    grid-row:
-        span 2;
-
-}
-
-.showcase-photo img {
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-    object-fit:
-        cover;
-
-    display:
-        block;
-
-    transition:
-        transform .6s ease;
-
-}
-
-.showcase-photo:hover img {
-
-    transform:
-        scale(1.07);
-
-}
-
-.showcase-photo::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    inset:
-        0;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent 55%,
-            rgba(0,0,0,.45)
-        );
-
-}
-
-
-/* =========================================================
-   BENEFÍCIOS
-========================================================= */
-
-.benefits {
-
-    background:
-        #0d0d0d;
-
-    border-bottom:
-        1px solid
-        #171717;
-
-}
-
-.benefit-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap:
-        18px;
-
-}
-
-.benefit {
-
-    padding:
-        30px 25px;
-
-    background:
-        #111;
-
-    border:
-        1px solid
-        #222;
-
-    border-radius:
-        16px;
-
-    text-align:
-        center;
-
-    transition:
-        .3s;
-
-}
-
-.benefit:hover {
-
-    transform:
-        translateY(-5px);
-
-    border-color:
-        var(--border);
-
-}
-
-.benefit-icon {
-
-    width:
-        55px;
-
-    height:
-        55px;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius:
-        50%;
-
-    margin:
-        0 auto 20px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    color:
-        var(--gold);
-
-    font-size:
-        22px;
-
-}
-
-.benefit h3 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        25px;
-
-    font-weight:
-        600;
-
-    margin-bottom:
-        10px;
-
-}
-
-.benefit p {
-
-    color:
-        #85817b;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.7;
-
-}
-
-
-/* =========================================================
-   COMO FUNCIONA
-========================================================= */
-
-.steps {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:
-        25px;
-
-}
-
-.step {
-
-    position:
-        relative;
-
-    padding:
-        35px 30px;
-
-    border-top:
-        1px solid
-        var(--border);
-
-}
-
-.step-number {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    color:
-        var(--gold);
-
-    font-size:
-        50px;
-
-    line-height:
-        1;
-
-    margin-bottom:
-        20px;
-
-}
-
-.step h3 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        30px;
-
-    margin-bottom:
-        12px;
-
-}
-
-.step p {
-
-    color:
-        #8f8b85;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.8;
-
-}
-
-
-/* =========================================================
-   EVENTOS
-========================================================= */
-
-.events {
-
-    background:
-        #0d0d0d;
-
-}
-
-.event-tags {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    flex-wrap:
-        wrap;
-
-    gap:
-        12px;
-
-    max-width:
-        850px;
-
-    margin:
-        auto;
-
-}
-
-.event-tag {
-
-    padding:
-        15px 23px;
-
-    border:
-        1px solid
-        #2b2926;
-
-    border-radius:
-        40px;
-
-    color:
-        #c0bbb2;
-
-    font-size:
-        12px;
-
-    transition:
-        .25s;
-
-}
-
-.event-tag:hover {
-
-    border-color:
-        var(--gold);
-
-    color:
-        var(--gold);
-
-}
-
-
-/* =========================================================
-   DEMONSTRAÇÃO
-========================================================= */
-
-.demo-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        .9fr 1.1fr;
-
-    gap:
-        70px;
-
-    align-items:
-        center;
-
-}
-
-.demo-copy h2 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(40px,5vw,65px);
-
-    line-height:
-        .95;
-
-    font-weight:
-        500;
-
-    margin-bottom:
-        25px;
-
-}
-
-.demo-copy h2 span {
-
-    color:
-        var(--gold);
-
-}
-
-.demo-copy p {
-
-    color:
-        #97928a;
-
-    font-size:
-        14px;
-
-    line-height:
-        1.9;
-
-    margin-bottom:
-        28px;
-
-}
-
-.demo-box {
-
-    background:
-        #111;
-
-    border:
-        1px solid
-        #292621;
-
-    border-radius:
-        25px;
-
-    padding:
-        40px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        35px;
-
-}
-
-.qr {
-
-    width:
-        180px;
-
-    height:
-        180px;
-
-    background:
-        white;
-
-    padding:
-        10px;
-
-    border-radius:
-        12px;
-
-    flex-shrink:
-        0;
-
-}
-
-.qr img {
-
-    width:
-        100%;
-
-    height:
-        100%;
-
-}
-
-.demo-info h3 {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        30px;
-
-    margin-bottom:
-        10px;
-
-}
-
-.demo-info p {
-
-    color:
-        #85817d;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.7;
-
+        radial-gradient(circle at center,rgba(212,175,55,.09),transparent 35%),
+        #090909;
 }
-
-
-/* =========================================================
-   PLANOS
-========================================================= */
-
-.pricing {
 
-    background:
-        #080808;
-
+.demo-box{
+    max-width:1000px;
+    margin:auto;
+    border:1px solid rgba(212,175,55,.22);
+    padding:65px;
+    display:grid;
+    grid-template-columns:1fr 220px;
+    align-items:center;
+    gap:60px;
 }
-
-.plans {
-
-    max-width:
-        1180px;
-
-    margin:
-        0 auto;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:
-        22px;
-
-    align-items:
-        stretch;
 
+.demo-box h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:52px;
+    font-weight:500;
+    line-height:1;
 }
-
-.plan {
-
-    position:
-        relative;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    padding:
-        42px 30px 30px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-
-    transition:
-        .3s ease;
 
+.demo-box p{
+    margin-top:20px;
+    color:#85817b;
+    font-size:13px;
+    line-height:1.8;
 }
 
-.plan:hover {
-
-    transform:
-        translateY(-6px);
-
-    border-color:
-        rgba(212,175,55,.5);
-
+.demo-qr{
+    background:white;
+    padding:12px;
 }
-
-.plan.featured {
 
-    border-color:
-        rgba(212,175,55,.7);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(212,175,55,.08),
-            rgba(255,255,255,.025)
-        );
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.25);
-
+.demo-qr img{
+    width:100%;
 }
-
-.popular {
-
-    position:
-        absolute;
-
-    top:
-        0;
-
-    left:
-        50%;
-
-    transform:
-        translate(-50%,-50%);
-
-    background:
-        var(--gold);
-
-    color:
-        #111;
-
-    padding:
-        7px 18px;
-
-    font-size:
-        9px;
 
-    letter-spacing:
-        2px;
+/* =========================
+   PRICING
+========================= */
 
-    font-weight:
-        800;
-
-    white-space:
-        nowrap;
-
+.pricing{
+    background:#11110f;
 }
-
-.plan-name {
-
-    font-size:
-        11px;
 
-    letter-spacing:
-        3px;
-
-    font-weight:
-        700;
-
-    color:
-        var(--gold);
-
+.pricing-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    align-items:stretch;
 }
-
-.price {
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        64px;
-
-    line-height:
-        1;
-
-    margin:
-        20px 0;
-
+.plan{
+    background:#151512;
+    border:1px solid rgba(255,255,255,.06);
+    padding:42px 32px;
+    position:relative;
 }
-
-.price small {
-
-    font-family:
-        Montserrat,
-        sans-serif;
-
-    font-size:
-        17px;
-
-    vertical-align:
-        top;
 
-    position:
-        relative;
-
-    top:
-        9px;
-
-    margin-right:
-        3px;
-
+.plan.featured{
+    border-color:var(--gold);
+    transform:translateY(-10px);
 }
-
-.price sup {
-
-    font-size:
-        28px;
-
-    vertical-align:
-        top;
-
-    position:
-        relative;
-
-    top:
-        8px;
 
+.plan-badge{
+    position:absolute;
+    top:0;
+    right:0;
+    background:var(--gold);
+    color:#111;
+    font-size:8px;
+    font-weight:700;
+    letter-spacing:1px;
+    padding:9px 13px;
 }
 
-.plan-description {
-
-    font-size:
-        12px;
-
-    line-height:
-        1.7;
-
-    color:
-        #aaa59c;
-
-    min-height:
-        62px;
-
-    margin-bottom:
-        20px;
-
+.plan-name{
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--gold);
 }
-
-.plan ul {
-
-    list-style:
-        none;
 
-    padding:
-        0;
-
-    margin:
-        0 0 30px;
-
+.plan-price{
+    font-family:'Cormorant Garamond',serif;
+    font-size:55px;
+    margin:17px 0 25px;
 }
-
-.plan li {
-
-    font-size:
-        12px;
 
-    padding:
-        9px 0;
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.06);
-
-    color:
-        #d1ccc3;
-
+.plan-price small{
+    font-family:'Montserrat',sans-serif;
+    font-size:11px;
+    color:#777;
 }
-
-.plan-button {
-
-    margin-top:
-        auto;
-
-    display:
-        block;
-
-    text-align:
-        center;
-
-    border:
-        1px solid
-        rgba(216,184,120,.75);
-
-    padding:
-        15px 10px;
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        2px;
-
-    font-weight:
-        700;
 
-    color:
-        var(--gold);
-
-    transition:
-        .3s ease;
-
+.plan ul{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    margin-bottom:32px;
 }
-
-.plan-button:hover {
-
-    background:
-        var(--gold);
 
-    color:
-        #111;
-
+.plan li{
+    color:#9b968e;
+    font-size:11px;
 }
-
-.plan.featured .plan-button {
-
-    background:
-        var(--gold);
-
-    color:
-        #111;
 
+.plan li:before{
+    content:"✓";
+    color:var(--gold);
+    margin-right:10px;
 }
 
-.plan.featured .plan-button:hover {
-
-    background:
-        var(--gold-light);
-
+.plan .btn{
+    width:100%;
 }
-
-.custom-plan {
-
-    max-width:
-        1180px;
-
-    margin:
-        35px auto 0;
-
-    padding:
-        25px 30px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.1);
-
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.1);
 
-    display:
-        flex;
+/* =========================
+   CUSTOM PACKAGE
+========================= */
 
-    align-items:
-        center;
-
-    gap:
-        15px;
-
-    flex-wrap:
-        wrap;
-
+.custom{
+    padding:90px 30px;
+    background:#090909;
 }
-
-.custom-plan strong {
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        23px;
-
-    font-weight:
-        500;
-
+.custom-box{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    padding:65px 30px;
+    border:1px solid rgba(212,175,55,.15);
 }
-
-.custom-plan span {
 
-    font-size:
-        11px;
-
-    color:
-        #918c84;
-
-    flex:
-        1;
-
+.custom-box h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:45px;
+    font-weight:500;
 }
-
-.custom-plan a {
 
-    color:
-        var(--gold);
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        2px;
-
-    font-weight:
-        700;
-
+.custom-box p{
+    max-width:600px;
+    margin:18px auto 30px;
+    color:#85817b;
+    font-size:12px;
+    line-height:1.8;
 }
-
 
-/* =========================================================
+/* =========================
    FAQ
-========================================================= */
+========================= */
 
-.faq {
-
-    max-width:
-        800px;
-
-    margin:
-        auto;
-
+.faq{
+    background:#11110f;
 }
 
-details {
-
-    border-bottom:
-        1px solid
-        #252321;
-
-    padding:
-        22px 0;
-
+.faq-list{
+    max-width:850px;
+    margin:55px auto 0;
 }
 
-summary {
-
-    cursor:
-        pointer;
-
-    list-style:
-        none;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        23px;
-
-    padding-right:
-        25px;
-
-    position:
-        relative;
-
+.faq-item{
+    padding:25px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
-summary::-webkit-details-marker {
-
-    display:
-        none;
-
+.faq-item h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:25px;
+    font-weight:500;
+    margin-bottom:9px;
 }
 
-summary::after {
-
-    content:
-        "+";
-
-    position:
-        absolute;
-
-    right:
-        0;
-
-    color:
-        var(--gold);
-
-    font-family:
-        Arial;
-
+.faq-item p{
+    color:#85817b;
+    font-size:11px;
+    line-height:1.8;
 }
 
-details[open] summary::after {
+/* =========================
+   FINAL CTA
+========================= */
 
-    content:
-        "−";
-
-}
-
-details p {
-
-    color:
-        #89857f;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.8;
-
-    padding-top:
-        15px;
-
-}
-
-
-/* =========================================================
-   CTA FINAL
-========================================================= */
-
-.final-cta {
-
-    padding:
-        130px 25px;
-
-    text-align:
-        center;
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    border-top:
-        1px solid
-        #171717;
-
-}
-
-.final-cta::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        600px;
-
-    height:
-        300px;
-
-    left:
-        50%;
-
-    top:
-        50%;
-
-    transform:
-        translate(-50%,-50%);
-
+.final-cta{
+    padding:130px 30px;
+    text-align:center;
     background:
-        radial-gradient(
-            ellipse,
-            rgba(216,184,120,.10),
-            transparent 70%
-        );
-
-    pointer-events:
-        none;
-
+        radial-gradient(circle at center,rgba(212,175,55,.12),transparent 38%),
+        #090909;
 }
 
-.final-cta h2 {
-
-    position:
-        relative;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:
-        clamp(45px,7vw,80px);
-
-    line-height:
-        .95;
-
-    font-weight:
-        500;
-
-    max-width:
-        850px;
-
-    margin:
-        0 auto 25px;
-
+.final-cta h2{
+    font-family:'Cormorant Garamond',serif;
+    font-size:70px;
+    font-weight:500;
+    line-height:.95;
+    max-width:800px;
+    margin:auto;
 }
 
-.final-cta h2 span {
-
-    color:
-        var(--gold);
-
+.final-cta p{
+    color:#85817b;
+    max-width:550px;
+    margin:25px auto 35px;
+    font-size:13px;
+    line-height:1.8;
 }
 
-.final-cta p {
-
-    position:
-        relative;
-
-    color:
-        #96918a;
-
-    max-width:
-        570px;
-
-    margin:
-        0 auto 30px;
-
-    font-size:
-        14px;
-
-    line-height:
-        1.8;
-
-}
-
-
-/* =========================================================
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
-footer {
-
-    border-top:
-        1px solid
-        #191919;
-
-    padding:
-        30px 25px;
-
+footer{
+    border-top:1px solid rgba(255,255,255,.06);
+    padding:35px 30px;
+    background:#070707;
 }
 
-.footer-inner {
-
-    max-width:
-        1180px;
-
-    margin:
-        auto;
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    gap:
-        20px;
-
+.footer-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
-.footer-logo {
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    color:
-        var(--gold);
-
-    font-size:
-        25px;
-
-    letter-spacing:
-        2px;
-
+.footer-logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:24px;
+    letter-spacing:2px;
 }
 
-.footer-text {
-
-    color:
-        #666;
-
-    font-size:
-        10px;
-
-    letter-spacing:
-        1px;
-
+.footer-logo span{
+    color:var(--gold);
 }
 
+.footer-text{
+    color:#65615b;
+    font-size:9px;
+    letter-spacing:1px;
+}
 
-/* =========================================================
+/* =========================
    WHATSAPP
-========================================================= */
+========================= */
 
-.whatsapp {
-
-    position:
-        fixed;
-
-    right:
-        20px;
-
-    bottom:
-        20px;
-
-    z-index:
-        999;
-
-    width:
-        58px;
-
-    height:
-        58px;
-
-    border-radius:
-        50%;
-
-    background:
-        #25D366;
-
-    color:
-        white;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    font-size:
-        25px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.4);
-
-    transition:
-        .25s;
-
+.whatsapp{
+    position:fixed;
+    right:22px;
+    bottom:22px;
+    width:57px;
+    height:57px;
+    border-radius:50%;
+    background:#25D366;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    z-index:100;
+    box-shadow:0 10px 35px rgba(0,0,0,.45);
+    transition:.3s;
 }
 
-.whatsapp:hover {
-
-    transform:
-        scale(1.08);
-
+.whatsapp:hover{
+    transform:scale(1.08);
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
 
-/* =========================================================
-   TABLET
-========================================================= */
+@media(max-width:1000px){
 
-@media(max-width:900px) {
-
-    .nav-links {
-        display:
-            none;
+    .hero-inner{
+        grid-template-columns:1fr 1fr;
+        gap:30px;
     }
 
-    .hero-inner {
-
-        grid-template-columns:
-            1fr;
-
-        text-align:
-            center;
-
+    h1{
+        font-size:64px;
     }
 
-    .hero-copy {
-
-        display:
-            contents;
-
+    .benefits-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .eyebrow {
-
-        order:
-            1;
-
+    .event-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .hero h1 {
-
-        order:
-            2;
-
-    }
-
-    .phone-area {
-
-        order:
-            3;
-
-        margin:
-            20px auto 30px;
-
-    }
-
-    .hero-text {
-
-        order:
-            4;
-
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
-
-    }
-
-    .hero-buttons {
-
-        order:
-            5;
-
-        justify-content:
-            center;
-
-    }
-
-    .benefit-grid {
-
-        grid-template-columns:
-            repeat(2,1fr);
-
-    }
-
-    .album-showcase-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-    .album-showcase-copy {
-
-        text-align:
-            center;
-
-    }
-
-    .album-showcase-copy .section-label {
-
-        text-align:
-            center;
-
-    }
-
-    .album-showcase-copy p {
-
-        max-width:
-            650px;
-
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
-
-    }
-
-    .album-showcase-list {
-
-        max-width:
-            600px;
-
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
-
-        text-align:
-            left;
-
-    }
-
-    .demo-grid {
-
-        grid-template-columns:
-            1fr;
-
-    }
-
-    .demo-copy {
-
-        text-align:
-            center;
-
-    }
-
-    .demo-copy p {
-
-        max-width:
-            600px;
-
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
-
-    }
-
-    .plans {
-
-        grid-template-columns:
-            1fr;
-
-        max-width:
-            500px;
-
-        margin:
-            auto;
-
-    }
-
-    .plan.featured {
-
-        order:
-            -1;
-
+    .flow{
+        gap:10px;
     }
 
 }
 
+@media(max-width:900px){
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:600px) {
-
-    section {
-
-        padding:
-            80px 18px;
-
+    nav{
+        display:none;
     }
 
-    .nav {
-
-        height:
-            68px;
-
-        padding:
-            0 18px;
-
+    .hero{
+        min-height:auto;
     }
 
-    .logo {
-
-        font-size:
-            29px;
-
+    .hero-inner{
+        display:grid;
+        grid-template-columns:1fr;
+        padding-top:130px;
+        padding-bottom:80px;
+        gap:0;
     }
 
-    .nav-cta {
-
-        padding:
-            9px 13px;
-
-        font-size:
-            9px;
-
+    .hero-copy{
+        display:contents;
     }
 
-
-    /* HERO */
-
-    .hero {
-
-        padding:
-            115px 18px 65px;
-
-        min-height:
-            auto;
-
+    .eyebrow{
+        order:1;
+        text-align:center;
+        margin-bottom:17px;
     }
 
-    .hero-inner {
-
-        display:
-            flex;
-
-        flex-direction:
-            column;
-
-        gap:
-            0;
-
+    h1{
+        order:2;
+        text-align:center;
+        font-size:60px;
+        max-width:650px;
+        margin:0 auto 25px;
     }
 
-    .hero-copy {
-
-        display:
-            contents;
-
+    .phone-area{
+        order:3;
+        margin:10px auto 40px;
     }
 
-    .eyebrow {
-
-        order:
-            1;
-
+    .hero-text{
+        order:4;
+        text-align:center;
+        margin:0 auto 30px;
     }
 
-    .hero h1 {
-
-        order:
-            2;
-
-        font-size:
-            54px;
-
-        line-height:
-            .9;
-
-        margin-bottom:
-            20px;
-
+    .hero-buttons{
+        order:5;
+        justify-content:center;
     }
 
-
-    /* ÚNICO CELULAR */
-
-    .phone-area {
-
-        order:
-            3;
-
-        width:
-            100%;
-
-        min-height:
-            auto;
-
-        margin:
-            28px 0 35px;
-
+    .album-grid{
+        grid-template-columns:1fr;
+        gap:55px;
     }
 
-    .phone {
-
-        width:
-            255px;
-
-        height:
-            520px;
-
-        border-radius:
-            38px;
-
+    .album-info{
+        max-width:650px;
     }
 
-    .phone-screen {
-
-        padding:
-            40px 12px 10px;
-
+    .flow{
+        grid-template-columns:repeat(2,1fr);
+        gap:50px 20px;
     }
 
-    .album-title {
-
-        font-size:
-            25px;
-
-        margin-top:
-            14px;
-
+    .flow:before{
+        display:none;
     }
 
-    .album-gallery {
-
-        grid-auto-rows:
-            78px;
-
+    .steps-grid{
+        grid-template-columns:1fr;
     }
 
-    .phone-badge {
-
-        right:
-            -12px;
-
-        top:
-            125px;
-
-        padding:
-            9px 11px;
-
+    .demo-box{
+        grid-template-columns:1fr;
+        text-align:center;
     }
 
-    .phone-badge strong {
-
-        font-size:
-            9px;
-
+    .demo-qr{
+        width:220px;
+        margin:auto;
     }
 
-    .phone-badge span {
-
-        font-size:
-            6px;
-
+    .pricing-grid{
+        grid-template-columns:1fr;
+        max-width:500px;
+        margin-left:auto;
+        margin-right:auto;
     }
 
-
-    .hero-text {
-
-        order:
-            4;
-
-        font-size:
-            14px;
-
-        line-height:
-            1.7;
-
-        margin-bottom:
-            28px;
-
+    .plan.featured{
+        transform:none;
     }
 
-    .hero-buttons {
+}
 
-        order:
-            5;
+@media(max-width:600px){
 
-        flex-direction:
-            column;
-
-        width:
-            100%;
-
+    .header-inner{
+        padding:22px 20px;
     }
 
-    .btn-primary,
-    .btn-secondary {
-
-        width:
-            100%;
-
+    .logo{
+        font-size:27px;
     }
 
-
-    /* ALBUM SHOWCASE */
-
-    .album-showcase-grid {
-
-        gap:
-            35px;
-
+    .hero-inner{
+        padding:115px 20px 65px;
     }
 
-    .album-showcase-copy h2 {
-
-        font-size:
-            48px;
-
+    h1{
+        font-size:49px;
+        letter-spacing:-1px;
     }
 
-    .showcase-gallery {
-
-        grid-auto-rows:
-            90px;
-
-        gap:
-            4px;
-
+    .hero-text{
+        font-size:13px;
+        line-height:1.8;
     }
 
-
-    /* BENEFÍCIOS */
-
-    .benefit-grid {
-
-        grid-template-columns:
-            1fr;
-
+    .phone{
+        width:255px;
+        height:520px;
+        border-radius:38px;
     }
 
-
-    /* COMO FUNCIONA */
-
-    .steps {
-
-        grid-template-columns:
-            1fr;
-
+    .phone-gallery img{
+        height:98px;
     }
 
-
-    /* DEMONSTRAÇÃO */
-
-    .demo-box {
-
-        flex-direction:
-            column;
-
-        padding:
-            25px;
-
-        text-align:
-            center;
-
+    .phone-badge{
+        right:-15px;
+        bottom:45px;
+        padding:11px 13px;
     }
 
-    .qr {
-
-        width:
-            170px;
-
-        height:
-            170px;
-
+    .phone-badge strong{
+        font-size:11px;
     }
 
-
-    /* TÍTULOS */
-
-    .section-title {
-
-        font-size:
-            44px;
-
+    .section{
+        padding:80px 20px;
     }
 
-
-    /* PLANOS */
-
-    .plans {
-
-        grid-template-columns:
-            1fr;
-
+    .section-title{
+        font-size:43px;
     }
 
-    .plan {
-
-        padding:
-            38px 22px 25px;
-
+    .section-subtitle{
+        font-size:12px;
     }
 
-    .price {
-
-        font-size:
-            58px;
-
+    .album-showcase{
+        padding:80px 20px;
     }
 
-
-    /* PACOTE */
-
-    .custom-plan {
-
-        flex-direction:
-            column;
-
-        align-items:
-            flex-start;
-
-        padding:
-            25px 20px;
-
+    .showcase-gallery{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .custom-plan span {
-
-        line-height:
-            1.6;
-
+    .showcase-gallery img{
+        height:165px;
     }
 
+    .guest-flow{
+        padding:85px 20px;
+    }
 
-    /* FOOTER */
+    .flow-header{
+        margin-bottom:45px;
+    }
 
-    .footer-inner {
+    .flow{
+        grid-template-columns:1fr 1fr;
+        gap:40px 8px;
+    }
 
-        flex-direction:
-            column;
+    .flow-step{
+        padding:0 8px;
+    }
 
-        text-align:
-            center;
+    .flow-icon{
+        width:75px;
+        height:75px;
+        font-size:25px;
+        margin-bottom:18px;
+    }
 
+    .flow-number{
+        right:2px;
+    }
+
+    .flow-step h3{
+        font-size:22px;
+    }
+
+    .flow-step p{
+        font-size:9px;
+    }
+
+    .benefits-grid{
+        grid-template-columns:1fr;
+    }
+
+    .event-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .event{
+        min-height:145px;
+        padding:18px;
+    }
+
+    .event span{
+        font-size:22px;
+    }
+
+    .demo{
+        padding:80px 20px;
+    }
+
+    .demo-box{
+        padding:40px 20px;
+        gap:35px;
+    }
+
+    .demo-box h2{
+        font-size:42px;
+    }
+
+    .final-cta{
+        padding:90px 20px;
+    }
+
+    .final-cta h2{
+        font-size:50px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        text-align:center;
     }
 
 }
 
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
+<!-- =========================
      HEADER
-===================================================== -->
+========================= -->
 
 <header>
 
-<div class="nav">
+<div class="header-inner">
 
-<a
-    href="#inicio"
-    class="logo"
->
-QR FOTOS
-</a>
+    <a href="#" class="logo">
+        QR <span>FOTOS</span>
+    </a>
 
-
-<nav class="nav-links">
-
-<a href="#como-funciona">
-Como funciona
-</a>
-
-<a href="#eventos">
-Eventos
-</a>
-
-<a href="#precos">
-Planos
-</a>
-
-<a
-    href="#contato"
-    class="nav-cta"
->
-Quero meu QR
-</a>
-
-</nav>
+    <nav>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#planos">Planos</a>
+        <a href="#quero">Quero meu QR</a>
+    </nav>
 
 </div>
 
 </header>
 
 
-
-<!-- =====================================================
+<!-- =========================
      HERO
-===================================================== -->
+========================= -->
 
-<section
-    class="hero"
-    id="inicio"
->
+<section class="hero">
 
 <div class="hero-inner">
 
+    <div class="hero-copy">
 
-<div class="hero-copy">
+        <div class="eyebrow">
+            Álbum colaborativo de eventos
+        </div>
 
-<div class="eyebrow">
-Álbum colaborativo de eventos
-</div>
+        <h1>
+            As fotos do seu evento.<br>
+            Feitas por todos.
+        </h1>
 
+        <p class="hero-text">
+            Um QR Code. Centenas de momentos.
+            Seus convidados registram, enviam e compartilham
+            as fotos do evento em um único álbum online.
+        </p>
 
-<h1>
+        <div class="hero-buttons">
 
-As fotos do seu evento.
-<br>
+            <a
+                href="https://wa.me/5515981689760?text=Olá!%20Quero%20conhecer%20o%20QR%20Fotos%20para%20meu%20evento."
+                class="btn btn-gold"
+                target="_blank"
+            >
+                QUERO MEU QR FOTOS
+            </a>
 
-<span>Feitas por todos.</span>
+            <a
+                href="https://gumath121.github.io/qr-fotos/album.html?evento=teste"
+                class="btn btn-outline"
+                target="_blank"
+            >
+                VER DEMONSTRAÇÃO
+            </a>
 
-</h1>
+        </div>
 
+    </div>
 
-<p class="hero-text">
 
-Um QR Code transforma seus convidados em
-fotógrafos do evento. Eles tiram fotos,
-compartilham na hora e ajudam a criar um
-álbum completo com os melhores momentos.
+    <!-- UM ÚNICO CELULAR -->
 
-</p>
+    <div class="phone-area">
 
+        <div class="phone">
 
-<div class="hero-buttons">
+            <div class="phone-screen">
 
-<a
-    href="#contato"
-    class="btn-primary"
->
-QUERO QR FOTOS
-</a>
+                <div class="phone-top">
 
+                    <div class="phone-small">
+                        Álbum do evento
+                    </div>
 
-<a
-    href="#como-funciona"
-    class="btn-secondary"
->
-COMO FUNCIONA
-</a>
+                    <div class="phone-title">
+                        Gustavo & Ana
+                    </div>
 
-</div>
+                    <div class="phone-date">
+                        CASAMENTO • 15.09.2026
+                    </div>
 
-</div>
+                    <div class="phone-count">
+                        128 fotos
+                    </div>
 
+                </div>
 
+                <div class="phone-gallery">
 
-<!-- =====================================================
-     ÚNICO CELULAR
-===================================================== -->
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80">
 
-<div class="phone-area">
+                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=80">
 
-<div class="phone">
+                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=80">
 
-<div class="phone-notch"></div>
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=80">
 
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=80">
 
-<div class="phone-screen">
+                    <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=500&q=80">
 
+                </div>
 
-<div class="album-header">
+                <div class="phone-bottom">
 
-<div class="album-brand">
-QR FOTOS
-</div>
+                    <span class="active">⌂</span>
+                    <span>♡</span>
+                    <span>＋</span>
+                    <span>↗</span>
 
-<div class="album-icon">
-♡
-</div>
+                </div>
 
-</div>
+            </div>
 
+        </div>
 
-<div class="album-title">
-Gustavo & Ana
-</div>
+        <div class="phone-badge">
 
+            <strong>+128 momentos</strong>
 
-<div class="album-subtitle">
-CASAMENTO • 15.09.2026
-</div>
+            <span>adicionados pelos convidados</span>
 
+        </div>
 
-<div class="album-count">
-
-<span>●</span>
-
-<strong>128 fotos</strong>
-
-<span>compartilhadas</span>
-
-</div>
-
-
-<div class="album-gallery">
-
-
-<div class="album-photo large">
-
-<img
-src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=85"
-alt="Casamento"
->
-
-</div>
-
-
-<div class="album-photo">
-
-<img
-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=500&q=85"
-alt="Casamento"
->
-
-</div>
-
-
-<div class="album-photo">
-
-<img
-src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=85"
-alt="Evento"
->
-
-</div>
-
-
-<div class="album-photo">
-
-<img
-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=85"
-alt="Festa"
->
-
-</div>
-
-
-<div class="album-photo">
-
-<img
-src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=85"
-alt="Casamento"
->
-
-</div>
-
-
-<div class="album-photo">
-
-<img
-src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=500&q=85"
-alt="Festa"
->
-
-</div>
-
-
-</div>
-
-
-<div class="album-bottom">
-
-<div class="album-nav active">
-
-<span class="album-nav-icon">
-▦
-</span>
-
-ÁLBUM
-
-</div>
-
-
-<div class="album-nav">
-
-<span class="album-nav-icon">
-＋
-</span>
-
-ENVIAR
-
-</div>
-
-
-<div class="album-nav">
-
-<span class="album-nav-icon">
-♡
-</span>
-
-MOMENTOS
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="phone-badge">
-
-<strong>
-+128 momentos
-</strong>
-
-<span>
-adicionados pelos convidados
-</span>
-
-</div>
-
-
-</div>
+    </div>
 
 </div>
 
 </section>
 
 
+<!-- =========================
+     ALBUM SHOWCASE
+========================= -->
 
-<!-- =====================================================
-     NOVA SEÇÃO — O ÁLBUM
-===================================================== -->
+<section class="album-showcase">
 
-<section
-    class="album-showcase"
->
+<div class="album-grid">
 
-<div class="album-showcase-grid">
+    <div class="album-info">
 
+        <div class="section-label">
+            Um álbum diferente
+        </div>
 
-<div class="album-showcase-copy">
+        <h2 class="section-title">
+            Tudo em um só lugar.
+            Do jeito que aconteceu.
+        </h2>
 
-<div class="section-label">
-O álbum do seu evento
-</div>
+        <p class="section-subtitle">
+            Cada convidado registra o evento pelo próprio celular.
+            As fotos chegam ao álbum e todos podem acompanhar
+            os momentos praticamente em tempo real.
+        </p>
 
+        <div class="album-list">
 
-<h2>
+            <div class="album-list-item">
+                <span>✓</span>
+                Fotos espontâneas dos convidados
+            </div>
 
-Tudo em um só lugar.
-<br>
+            <div class="album-list-item">
+                <span>✓</span>
+                Atualização em tempo real
+            </div>
 
-<span>Do jeito que aconteceu.</span>
+            <div class="album-list-item">
+                <span>✓</span>
+                Álbum acessível pelo celular
+            </div>
 
-</h2>
+            <div class="album-list-item">
+                <span>✓</span>
+                Compartilhamento fácil
+            </div>
 
+        </div>
 
-<p>
+        <a
+            href="https://gumath121.github.io/qr-fotos/album.html?evento=teste"
+            target="_blank"
+            class="btn btn-gold"
+        >
+            VER ÁLBUM DE DEMONSTRAÇÃO
+        </a>
 
-Enquanto seu evento acontece, seus convidados
-registram momentos que talvez você nem tivesse
-visto.
-
-O QR Fotos reúne tudo em um único álbum
-colaborativo.
-
-</p>
-
-
-<ul class="album-showcase-list">
-
-<li>
-✓ Fotos espontâneas dos convidados
-</li>
-
-<li>
-✓ Atualização em tempo real
-</li>
-
-<li>
-✓ Álbum acessível pelo celular
-</li>
-
-<li>
-✓ Compartilhamento fácil
-</li>
-
-</ul>
+    </div>
 
 
-<a
-    href="https://gumath121.github.io/qr-fotos/album.html?evento=teste"
-    target="_blank"
-    class="btn-primary"
->
-VER ÁLBUM DE DEMONSTRAÇÃO
-</a>
+    <div class="showcase-gallery">
 
-</div>
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=85">
 
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=85">
 
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=85">
 
-<div class="showcase-gallery">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=85">
 
+        <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=85">
 
-<div class="showcase-photo large">
+        <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=85">
 
-<img
-src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=90"
-alt="Momentos de casamento"
->
-
-</div>
-
-
-<div class="showcase-photo">
-
-<img
-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=700&q=90"
-alt="Momento de casamento"
->
-
-</div>
-
-
-<div class="showcase-photo">
-
-<img
-src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=700&q=90"
-alt="Festa"
->
-
-</div>
-
-
-<div class="showcase-photo">
-
-<img
-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=700&q=90"
-alt="Evento"
->
-
-</div>
-
-
-<div class="showcase-photo">
-
-<img
-src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=700&q=90"
-alt="Casamento"
->
-
-</div>
-
-
-<div class="showcase-photo">
-
-<img
-src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=700&q=90"
-alt="Festa"
->
-
-</div>
-
-
-<div class="showcase-photo">
-
-<img
-src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=700&q=90"
-alt="Evento"
->
-
-</div>
-
-
-</div>
+    </div>
 
 </div>
 
 </section>
 
 
+<!-- =========================
+     COMO OS CONVIDADOS USAM
+========================= -->
 
-<!-- =====================================================
+<section class="guest-flow" id="como-funciona">
+
+<div class="flow-header">
+
+    <div class="section-label">
+        Simples para todo mundo
+    </div>
+
+    <h2 class="section-title">
+        Seu convidado não precisa aprender nada.
+    </h2>
+
+    <p class="section-subtitle">
+        É só apontar a câmera para o QR Code.
+        Em poucos segundos, ele já pode registrar
+        e compartilhar aquele momento.
+    </p>
+
+</div>
+
+
+<div class="flow">
+
+    <!-- 1 -->
+
+    <div class="flow-step">
+
+        <div class="flow-icon">
+
+            📱
+
+            <div class="flow-number">
+                1
+            </div>
+
+        </div>
+
+        <h3>
+            Escaneia
+        </h3>
+
+        <p>
+            Aponta a câmera do celular para o QR Code do evento.
+        </p>
+
+    </div>
+
+
+    <!-- 2 -->
+
+    <div class="flow-step">
+
+        <div class="flow-icon">
+
+            📸
+
+            <div class="flow-number">
+                2
+            </div>
+
+        </div>
+
+        <h3>
+            Fotografa
+        </h3>
+
+        <p>
+            Registra aquele momento especial direto pelo celular.
+        </p>
+
+    </div>
+
+
+    <!-- 3 -->
+
+    <div class="flow-step">
+
+        <div class="flow-icon">
+
+            ☁️
+
+            <div class="flow-number">
+                3
+            </div>
+
+        </div>
+
+        <h3>
+            Envia
+        </h3>
+
+        <p>
+            A foto é enviada para o álbum colaborativo do evento.
+        </p>
+
+    </div>
+
+
+    <!-- 4 -->
+
+    <div class="flow-step">
+
+        <div class="flow-icon">
+
+            ❤️
+
+            <div class="flow-number">
+                4
+            </div>
+
+        </div>
+
+        <h3>
+            Todo mundo vê
+        </h3>
+
+        <p>
+            Os convidados acompanham juntos todas as fotos do evento.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
      BENEFÍCIOS
-===================================================== -->
+========================= -->
 
-<section
-    class="benefits"
->
+<section class="section benefits">
 
-<div class="section-inner">
+<div class="container">
 
-<div class="section-label">
-Por que usar?
-</div>
+    <div class="section-label">
+        Por que QR Fotos?
+    </div>
 
+    <h2 class="section-title">
+        Mais momentos.<br>
+        Menos preocupação.
+    </h2>
 
-<h2 class="section-title">
-
-Simples para você.
-<br>
-
-Divertido para seus convidados.
-
-</h2>
+    <p class="section-subtitle">
+        Você aproveita o evento enquanto seus convidados ajudam
+        a construir o álbum.
+    </p>
 
 
-<p class="section-description">
+    <div class="benefits-grid">
 
-Você não precisa ficar pedindo fotos depois do evento.
-Com o QR Fotos, cada convidado pode registrar o que está
-vendo e compartilhar diretamente no álbum.
+        <div class="benefit">
 
-</p>
+            <div class="benefit-icon">
+                📱
+            </div>
 
+            <h3>
+                Sem aplicativo
+            </h3>
 
-<div class="benefit-grid">
+            <p>
+                Funciona diretamente pelo navegador do celular.
+                Sem downloads ou instalações.
+            </p>
 
-
-<div class="benefit">
-
-<div class="benefit-icon">
-⌁
-</div>
-
-<h3>
-Sem aplicativo
-</h3>
-
-<p>
-O convidado acessa diretamente pelo celular.
-Nada para instalar.
-</p>
-
-</div>
+        </div>
 
 
-<div class="benefit">
+        <div class="benefit">
 
-<div class="benefit-icon">
-◉
-</div>
+            <div class="benefit-icon">
+                ✨
+            </div>
 
-<h3>
-Sem cadastro
-</h3>
+            <h3>
+                Sem cadastro
+            </h3>
 
-<p>
-Escaneou o QR Code, abriu e fotografou.
-É simples assim.
-</p>
+            <p>
+                O convidado não precisa criar conta nem preencher formulários.
+            </p>
 
-</div>
-
-
-<div class="benefit">
-
-<div class="benefit-icon">
-↗
-</div>
-
-<h3>
-Na hora
-</h3>
-
-<p>
-As fotos são enviadas para o álbum do evento
-em poucos segundos.
-</p>
-
-</div>
+        </div>
 
 
-<div class="benefit">
+        <div class="benefit">
 
-<div class="benefit-icon">
-♡
-</div>
+            <div class="benefit-icon">
+                ⚡
+            </div>
 
-<h3>
-Colaborativo
-</h3>
+            <h3>
+                Instantâneo
+            </h3>
 
-<p>
-Todos participam e ajudam a construir uma
-coleção única de lembranças.
-</p>
+            <p>
+                As fotos entram no álbum e podem ser visualizadas pelos convidados.
+            </p>
 
-</div>
+        </div>
 
 
-</div>
+        <div class="benefit">
+
+            <div class="benefit-icon">
+                ❤️
+            </div>
+
+            <h3>
+                Colaborativo
+            </h3>
+
+            <p>
+                Todos ajudam a registrar o evento de diferentes perspectivas.
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================
      COMO FUNCIONA
-===================================================== -->
+========================= -->
 
-<section
-    id="como-funciona"
->
+<section class="section steps">
 
-<div class="section-inner">
+<div class="container">
 
-<div class="section-label">
-Como funciona
-</div>
+    <div class="section-label">
+        Como funciona
+    </div>
 
+    <h2 class="section-title">
+        Do QR Code ao álbum completo.
+    </h2>
 
-<h2 class="section-title">
+    <div class="steps-grid">
 
-Três passos.
-<br>
+        <div class="step">
 
-Um álbum inesquecível.
+            <div class="step-number">
+                01
+            </div>
 
-</h2>
+            <h3>
+                Criamos seu evento
+            </h3>
 
+            <p>
+                Seu evento recebe uma página exclusiva,
+                um endereço próprio e um QR Code personalizado.
+            </p>
 
-<p class="section-description">
-
-Você coloca o QR Code no evento.
-Seus convidados fazem o resto.
-
-</p>
-
-
-<div class="steps">
-
-
-<div class="step">
-
-<div class="step-number">
-01
-</div>
-
-<h3>
-Aponte a câmera
-</h3>
-
-<p>
-
-O convidado encontra o QR Code
-disponível no evento e aponta
-a câmera do celular.
-
-</p>
-
-</div>
+        </div>
 
 
-<div class="step">
+        <div class="step">
 
-<div class="step-number">
-02
-</div>
+            <div class="step-number">
+                02
+            </div>
 
-<h3>
-Tire a foto
-</h3>
+            <h3>
+                Você espalha o QR
+            </h3>
 
-<p>
+            <p>
+                Coloque o QR Code nas mesas, recepção,
+                lembrancinhas, convites ou materiais impressos.
+            </p>
 
-Uma página personalizada do evento
-é aberta. O convidado pode tirar
-uma foto ou escolher uma imagem.
-
-</p>
-
-</div>
+        </div>
 
 
-<div class="step">
+        <div class="step">
 
-<div class="step-number">
-03
-</div>
+            <div class="step-number">
+                03
+            </div>
 
-<h3>
-Compartilhe
-</h3>
+            <h3>
+                O álbum acontece
+            </h3>
 
-<p>
+            <p>
+                Os convidados enviam as fotos e todos
+                acompanham os momentos em um único lugar.
+            </p>
 
-A foto vai para o álbum colaborativo
-e pode ser vista pelos outros
-participantes.
+        </div>
 
-</p>
-
-</div>
-
-
-</div>
+    </div>
 
 </div>
 
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================
      EVENTOS
-===================================================== -->
+========================= -->
 
-<section
-    class="events"
-    id="eventos"
->
+<section class="section events" id="eventos">
 
-<div class="section-inner">
+<div class="container">
 
-<div class="section-label">
-Para qualquer ocasião
-</div>
+    <div class="section-label">
+        Para qualquer ocasião
+    </div>
 
+    <h2 class="section-title">
+        Um álbum para cada história.
+    </h2>
 
-<h2 class="section-title">
-
-Seu evento.
-<br>
-
-Suas memórias.
-
-</h2>
+    <p class="section-subtitle">
+        O QR Fotos pode acompanhar praticamente qualquer tipo de evento.
+    </p>
 
 
-<p class="section-description">
+    <div class="event-grid">
 
-Do casamento da sua vida à confraternização
-da empresa. O QR Fotos se adapta ao seu evento.
+        <div class="event">
+            <span>Casamentos</span>
+        </div>
 
-</p>
+        <div class="event">
+            <span>Aniversários</span>
+        </div>
 
+        <div class="event">
+            <span>Corporativos</span>
+        </div>
 
-<div class="event-tags">
+        <div class="event">
+            <span>Formaturas</span>
+        </div>
 
-<div class="event-tag">
-💍 Casamentos
-</div>
+        <div class="event">
+            <span>15 anos</span>
+        </div>
 
-<div class="event-tag">
-🎂 Aniversários
-</div>
+        <div class="event">
+            <span>Festas</span>
+        </div>
 
-<div class="event-tag">
-🎓 Formaturas
-</div>
+        <div class="event">
+            <span>Eventos</span>
+        </div>
 
-<div class="event-tag">
-🏢 Eventos corporativos
-</div>
+        <div class="event">
+            <span>E muito mais</span>
+        </div>
 
-<div class="event-tag">
-🎉 Festas
-</div>
-
-<div class="event-tag">
-🏆 Eventos esportivos
-</div>
-
-<div class="event-tag">
-👶 Chá de bebê
-</div>
-
-<div class="event-tag">
-✨ E muito mais
-</div>
-
-</div>
+    </div>
 
 </div>
 
 </section>
 
 
+<!-- =========================
+     DEMO
+========================= -->
 
-<!-- =====================================================
-     DEMONSTRAÇÃO
-===================================================== -->
-
-<section>
-
-<div class="section-inner">
-
-<div class="demo-grid">
-
-
-<div class="demo-copy">
-
-<div
-    class="section-label"
-    style="text-align:left;"
->
-Experimente
-</div>
-
-
-<h2>
-
-Veja como é
-<br>
-
-<span>na prática.</span>
-
-</h2>
-
-
-<p>
-
-Não precisa imaginar como funciona.
-Experimente agora.
-
-Escaneie o QR Code ao lado e conheça
-uma página de evento real funcionando
-de verdade.
-
-</p>
-
-
-<a
-    href="https://gumath121.github.io/qr-fotos/index.html?evento=teste"
-    target="_blank"
-    class="btn-primary"
->
-ABRIR DEMONSTRAÇÃO
-</a>
-
-</div>
-
-
+<section class="demo">
 
 <div class="demo-box">
 
+    <div>
 
-<div class="qr">
+        <div class="section-label">
+            Teste agora
+        </div>
 
-<img
-src="https://quickchart.io/qr?size=500&text=https%3A%2F%2Fgumath121.github.io%2Fqr-fotos%2Findex.html%3Fevento%3Dteste"
-alt="QR Code de demonstração"
->
+        <h2>
+            Veja o QR Fotos funcionando.
+        </h2>
 
-</div>
+        <p>
+            Aponte a câmera do seu celular para o QR Code
+            e conheça um álbum de demonstração.
+        </p>
 
+        <br>
 
-<div class="demo-info">
+        <a
+            href="https://gumath121.github.io/qr-fotos/album.html?evento=teste"
+            target="_blank"
+            class="btn btn-gold"
+        >
+            ABRIR ÁLBUM
+        </a>
 
-<h3>
-Aponte a câmera.
-</h3>
-
-<p>
-
-Você será levado para uma página
-de evento real do QR Fotos.
-
-Sem aplicativo.
-Sem cadastro.
-
-</p>
-
-</div>
+    </div>
 
 
-</div>
+    <div class="demo-qr">
 
-</div>
+        <img
+            src="https://quickchart.io/qr?size=500&text=https%3A%2F%2Fgumath121.github.io%2Fqr-fotos%2Findex.html%3Fevento%3Dteste"
+            alt="QR Code demonstração QR Fotos"
+        >
+
+    </div>
 
 </div>
 
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================
      PLANOS
-===================================================== -->
+========================= -->
 
-<section
-    class="pricing"
-    id="precos"
->
+<section class="section pricing" id="planos">
 
-<div class="section-inner">
+<div class="container">
 
+    <div class="section-label">
+        Escolha seu plano
+    </div>
 
-<div class="section-label">
-ESCOLHA SEU PLANO
-</div>
+    <h2 class="section-title">
+        Seu evento merece<br>
+        ser lembrado.
+    </h2>
 
+    <p class="section-subtitle">
+        Escolha a opção que combina com o tamanho e o estilo do seu evento.
+    </p>
 
-<h2 class="section-title">
 
-Seu evento merece ser
-<br>
+    <div class="pricing-grid">
 
-lembrado para sempre.
+        <!-- ESSENCIAL -->
 
-</h2>
+        <div class="plan">
 
+            <div class="plan-name">
+                Essencial
+            </div>
 
-<p class="section-description">
+            <div class="plan-price">
+                R$49<small>,90</small>
+            </div>
 
-Escolha o pacote ideal e transforme seus convidados
-em fotógrafos do seu evento.
+            <ul>
 
-</p>
+                <li>Álbum digital</li>
+                <li>QR Code exclusivo</li>
+                <li>Upload dos convidados</li>
+                <li>Sem aplicativo</li>
+                <li>Página personalizada</li>
+                <li>Até 200 fotos</li>
 
+            </ul>
 
-<div class="plans">
+            <a
+                href="https://wa.me/5515981689760?text=Olá!%20Tenho%20interesse%20no%20plano%20Essencial%20do%20QR%20Fotos."
+                target="_blank"
+                class="btn btn-outline"
+            >
+                QUERO ESSE
+            </a>
 
+        </div>
 
-<!-- ESSENCIAL -->
 
-<div class="plan">
+        <!-- PREMIUM -->
 
-<div class="plan-name">
-ESSENCIAL
-</div>
+        <div class="plan featured">
 
+            <div class="plan-badge">
+                MAIS VENDIDO
+            </div>
 
-<div class="price">
+            <div class="plan-name">
+                Premium
+            </div>
 
-<small>R$</small>49<sup>,90</sup>
+            <div class="plan-price">
+                R$79<small>,90</small>
+            </div>
 
-</div>
+            <ul>
 
+                <li>Tudo do Essencial</li>
+                <li>Até 500 fotos</li>
+                <li>Página personalizada</li>
+                <li>QR Code exclusivo</li>
+                <li>Álbum em tempo real</li>
+                <li>Compartilhamento do álbum</li>
+                <li>Suporte durante o evento</li>
 
-<p class="plan-description">
+            </ul>
 
-Para quem quer registrar os melhores momentos
-de forma simples e prática.
+            <a
+                href="https://wa.me/5515981689760?text=Olá!%20Tenho%20interesse%20no%20plano%20Premium%20do%20QR%20Fotos."
+                target="_blank"
+                class="btn btn-gold"
+            >
+                QUERO ESSE
+            </a>
 
-</p>
+        </div>
 
 
-<ul>
+        <!-- COMPLETO -->
 
-<li>✓ Álbum digital do evento</li>
+        <div class="plan">
 
-<li>✓ QR Code exclusivo</li>
-
-<li>✓ Upload pelos convidados</li>
-
-<li>✓ Sem aplicativo</li>
-
-<li>✓ Página personalizada</li>
-
-<li>✓ Até 200 fotos</li>
-
-</ul>
-
-
-<a
-class="plan-button"
-href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Essencial."
-target="_blank"
->
-QUERO ESTE PLANO
-</a>
-
-</div>
-
-
-
-<!-- PREMIUM -->
-
-<div class="plan featured">
-
-<div class="popular">
-MAIS VENDIDO
-</div>
-
-
-<div class="plan-name">
-PREMIUM
-</div>
-
-
-<div class="price">
-
-<small>R$</small>79<sup>,90</sup>
-
-</div>
-
-
-<p class="plan-description">
-
-A experiência completa para guardar
-cada momento do seu evento.
-
-</p>
-
-
-<ul>
-
-<li>✓ Tudo do plano Essencial</li>
-
-<li>✓ Até 500 fotos</li>
-
-<li>✓ Página personalizada</li>
-
-<li>✓ QR Code personalizado</li>
-
-<li>✓ Álbum atualizado em tempo real</li>
-
-<li>✓ Compartilhamento do álbum</li>
-
-<li>✓ Suporte durante o evento</li>
-
-</ul>
-
-
-<a
-class="plan-button"
-href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Premium."
-target="_blank"
->
-QUERO ESTE PLANO
-</a>
-
-</div>
-
-
-
-<!-- COMPLETO -->
-
-<div class="plan">
-
-<div class="plan-name">
-COMPLETO
-</div>
-
-
-<div class="price">
-
-<small>R$</small>129<sup>,90</sup>
-
-</div>
-
-
-<p class="plan-description">
-
-Para quem quer uma experiência completa,
-do QR Code ao material físico.
-
-</p>
-
-
-<ul>
-
-<li>✓ Tudo do plano Premium</li>
-
-<li>✓ Fotos ilimitadas</li>
-
-<li>✓ QR Codes adicionais</li>
-
-<li>✓ Identidade visual personalizada</li>
-
-<li>✓ Material impresso com QR Code</li>
-
-<li>✓ Suporte personalizado</li>
-
-<li>✓ Álbum disponível após o evento</li>
-
-</ul>
-
-
-<a
-class="plan-button"
-href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Completo."
-target="_blank"
->
-QUERO ESTE PLANO
-</a>
-
-</div>
-
-
-</div>
-
-
-
-<div class="custom-plan">
-
-<strong>
-Precisa de algo personalizado?
-</strong>
-
-
-<span>
-
-Casamentos, empresas, formaturas,
-grandes eventos e muito mais.
-
-</span>
-
-
-<a
-href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Gostaria%20de%20montar%20um%20pacote%20personalizado%20do%20QR%20Fotos."
-target="_blank"
->
-FALAR NO WHATSAPP →
-</a>
-
-</div>
-
+            <div class="plan-name">
+                Completo
+            </div>
+
+            <div class="plan-price">
+                R$129<small>,90</small>
+            </div>
+
+            <ul>
+
+                <li>Tudo do Premium</li>
+                <li>Fotos ilimitadas</li>
+                <li>QR Codes adicionais</li>
+                <li>Identidade visual</li>
+                <li>Material QR impresso</li>
+                <li>Suporte personalizado</li>
+                <li>Álbum após o evento</li>
+
+            </ul>
+
+            <a
+                href="https://wa.me/5515981689760?text=Olá!%20Tenho%20interesse%20no%20plano%20Completo%20do%20QR%20Fotos."
+                target="_blank"
+                class="btn btn-outline"
+            >
+                QUERO ESSE
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 
 </section>
 
 
+<!-- =========================
+     PACOTE PERSONALIZADO
+========================= -->
 
-<!-- =====================================================
+<section class="custom">
+
+<div class="custom-box">
+
+    <div class="section-label">
+        Precisa de algo diferente?
+    </div>
+
+    <h2>
+        Monte seu próprio pacote.
+    </h2>
+
+    <p>
+        Eventos maiores, identidade visual personalizada,
+        materiais impressos, vários QR Codes ou necessidades específicas?
+        Fale comigo e montamos uma solução para você.
+    </p>
+
+    <a
+        href="https://wa.me/5515981689760?text=Olá!%20Quero%20montar%20um%20pacote%20personalizado%20do%20QR%20Fotos."
+        target="_blank"
+        class="btn btn-gold"
+    >
+        FALAR NO WHATSAPP
+    </a>
+
+</div>
+
+</section>
+
+
+<!-- =========================
      FAQ
-===================================================== -->
+========================= -->
 
-<section>
+<section class="section faq">
 
-<div class="section-inner">
+<div class="container">
 
-<div class="section-label">
-Dúvidas
-</div>
+    <div class="section-label">
+        Dúvidas
+    </div>
 
-
-<h2 class="section-title">
-Perguntas frequentes
-</h2>
-
-
-<div class="faq">
+    <h2 class="section-title">
+        Perguntas frequentes.
+    </h2>
 
 
-<details>
+    <div class="faq-list">
 
-<summary>
-Precisa baixar algum aplicativo?
-</summary>
+        <div class="faq-item">
 
-<p>
+            <h3>
+                Precisa baixar algum aplicativo?
+            </h3>
 
-Não. O QR Fotos funciona diretamente pelo
-navegador do celular.
+            <p>
+                Não. O QR Fotos funciona diretamente pelo navegador do celular.
+            </p>
 
-</p>
-
-</details>
-
-
-<details>
-
-<summary>
-Os convidados precisam criar uma conta?
-</summary>
-
-<p>
-
-Não. A experiência foi pensada para ser rápida:
-escaneou, abriu e fotografou.
-
-</p>
-
-</details>
+        </div>
 
 
-<details>
+        <div class="faq-item">
 
-<summary>
-As fotos ficam disponíveis para todos?
-</summary>
+            <h3>
+                O convidado precisa criar uma conta?
+            </h3>
 
-<p>
+            <p>
+                Não. Basta acessar o QR Code e enviar a foto.
+            </p>
 
-Sim. As imagens enviadas ficam disponíveis
-no álbum colaborativo daquele evento.
-
-</p>
-
-</details>
+        </div>
 
 
-<details>
+        <div class="faq-item">
 
-<summary>
-Posso personalizar o evento?
-</summary>
+            <h3>
+                As fotos aparecem na hora?
+            </h3>
 
-<p>
+            <p>
+                O álbum é atualizado continuamente para que os convidados
+                possam acompanhar os novos registros.
+            </p>
 
-Sim. O evento pode ter nome, mensagem,
-identidade visual e outras personalizações.
-
-</p>
-
-</details>
+        </div>
 
 
-<details>
+        <div class="faq-item">
 
-<summary>
-Vocês fazem o QR Code impresso?
-</summary>
+            <h3>
+                Posso personalizar o evento?
+            </h3>
 
-<p>
+            <p>
+                Sim. O evento pode ter nome, mensagem, cores e QR Code próprios.
+            </p>
 
-Sim. É possível combinar o QR Fotos com
-materiais impressos para deixar o QR Code
-espalhado pelo evento.
-
-</p>
-
-</details>
+        </div>
 
 
-</div>
+        <div class="faq-item">
+
+            <h3>
+                Vocês fazem o material impresso?
+            </h3>
+
+            <p>
+                Sim. É possível contratar materiais como placas,
+                displays e outros impressos com o QR Code do evento.
+            </p>
+
+        </div>
+
+    </div>
 
 </div>
 
 </section>
 
 
+<!-- =========================
+     FINAL CTA
+========================= -->
 
-<!-- =====================================================
-     CTA FINAL
-===================================================== -->
+<section class="final-cta" id="quero">
 
-<section
-    class="final-cta"
-    id="contato"
->
+    <h2>
+        Seu evento acontece uma vez.
+        As fotos ficam para sempre.
+    </h2>
 
-<h2>
+    <p>
+        Transforme os celulares dos seus convidados
+        em uma coleção de memórias do seu evento.
+    </p>
 
-Seu evento acontece uma vez.
-<br>
-
-<span>As lembranças ficam para sempre.</span>
-
-</h2>
-
-
-<p>
-
-Quer oferecer o QR Fotos no seu casamento,
-aniversário, formatura ou evento?
-
-Fale conosco e solicite seu orçamento.
-
-</p>
-
-
-<a
-href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20QR%20Fotos."
-class="btn-primary"
-target="_blank"
->
-QUERO MEU QR FOTOS
-</a>
+    <a
+        href="https://wa.me/5515981689760?text=Olá!%20Quero%20criar%20um%20QR%20Fotos%20para%20meu%20evento."
+        target="_blank"
+        class="btn btn-gold"
+    >
+        QUERO QR FOTOS PARA MEU EVENTO
+    </a>
 
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================
      FOOTER
-===================================================== -->
+========================= -->
 
 <footer>
 
 <div class="footer-inner">
 
-<div class="footer-logo">
-QR FOTOS
-</div>
+    <div class="footer-logo">
+        QR <span>FOTOS</span>
+    </div>
 
-
-<div class="footer-text">
-Desenvolvido por Gustavo M.
-</div>
+    <div class="footer-text">
+        QR FOTOS POR GUSTAVO M. • ITAPETININGA E REGIÃO
+    </div>
 
 </div>
 
 </footer>
 
 
-
-<!-- =====================================================
+<!-- =========================
      WHATSAPP
-===================================================== -->
+========================= -->
 
 <a
-class="whatsapp"
-href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20conhecer%20o%20QR%20Fotos."
-target="_blank"
-aria-label="Falar pelo WhatsApp"
+    href="https://wa.me/5515981689760?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20QR%20Fotos."
+    target="_blank"
+    class="whatsapp"
+    aria-label="Falar pelo WhatsApp"
 >
-◉
+    ☎
 </a>
 
-
 </body>
-
 </html>
