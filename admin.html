@@ -1,8 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Administração — QR Fotos</title>
@@ -39,10 +41,6 @@ h1 {
     color: #aaa;
     margin-bottom: 40px;
 }
-
-/* =========================
-   CRIAR EVENTO
-========================= */
 
 .card {
     background: #121212;
@@ -108,6 +106,7 @@ button:hover {
     margin-top: 22px;
     font-size: 15px;
 }
+
 
 /* =========================
    EVENTOS
@@ -188,6 +187,12 @@ button:hover {
     border: 1px solid #444;
 }
 
+.btn-edit {
+    background: #292313;
+    color: #d8b878;
+    border: 1px solid #766333;
+}
+
 .btn-delete {
     background: #241515;
     color: #e99a9a;
@@ -235,6 +240,7 @@ button:hover {
     padding: 30px;
 }
 
+
 /* =========================
    RESULTADO
 ========================= */
@@ -266,6 +272,69 @@ button:hover {
     margin-top: 15px;
 }
 
+
+/* =========================
+   MODAL EDITAR
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-box {
+    max-width: 550px;
+    margin: 50px auto;
+    background: #121212;
+    border: 1px solid #d8b878;
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.modal-box h2 {
+    margin-top: 0;
+    color: #d8b878;
+    font-family: Georgia, serif;
+}
+
+.modal-id {
+    background: #090909;
+    border: 1px solid #292929;
+    color: #777;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+.modal-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.btn-save {
+    background: #d8b878;
+    color: #111;
+}
+
+.btn-cancel {
+    background: #252525;
+    color: white;
+    border: 1px solid #444;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
 @media(max-width:600px) {
 
     h1 {
@@ -284,10 +353,20 @@ button:hover {
         grid-column: span 1;
     }
 
+    .modal-box {
+        margin: 20px auto;
+    }
+
+    .modal-buttons {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 </style>
+
 </head>
+
 
 <body>
 
@@ -410,18 +489,101 @@ GERAR QR CODE
 
 
 <!-- =========================
-     LISTA
+     LISTA DE EVENTOS
 ========================= -->
 
 <div class="card">
 
 <h2>Meus eventos</h2>
 
-<div id="eventos" class="event-grid">
+<div
+    id="eventos"
+    class="event-grid"
+>
 
 <div class="loading">
 Carregando eventos...
 </div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     MODAL EDITAR
+========================= -->
+
+<div
+    id="modalEditar"
+    class="modal"
+>
+
+<div class="modal-box">
+
+<h2>Editar evento</h2>
+
+<div
+    id="editarId"
+    class="modal-id"
+></div>
+
+
+<label>Nome do evento</label>
+
+<input
+    type="text"
+    id="editarNome"
+>
+
+
+<label>Tipo do evento</label>
+
+<select id="editarTipo">
+
+<option value="Casamento">Casamento</option>
+<option value="Aniversário">Aniversário</option>
+<option value="Empresa">Evento Corporativo</option>
+<option value="Formatura">Formatura</option>
+<option value="Festa">Festa</option>
+<option value="Outro">Outro</option>
+
+</select>
+
+
+<label>Mensagem</label>
+
+<textarea
+    id="editarMensagem"
+></textarea>
+
+
+<label>Cor do evento</label>
+
+<input
+    type="color"
+    id="editarCor"
+    value="#d8b878"
+>
+
+
+<div class="modal-buttons">
+
+<button
+    class="btn-save"
+    onclick="salvarEdicao()"
+>
+SALVAR ALTERAÇÕES
+</button>
+
+<button
+    class="btn-cancel"
+    onclick="fecharModal()"
+>
+CANCELAR
+</button>
 
 </div>
 
@@ -444,6 +606,8 @@ const SITE =
 
 
 let resultadoData = null;
+
+let eventoEditando = null;
 
 
 /* =====================================================
@@ -482,6 +646,7 @@ function jsonp(url, callback) {
 
 
     document.body.appendChild(script);
+
 }
 
 
@@ -526,6 +691,7 @@ function criarEvento() {
         );
 
         return;
+
     }
 
 
@@ -565,6 +731,7 @@ function criarEvento() {
             );
 
             return;
+
         }
 
 
@@ -643,6 +810,7 @@ function carregarEventos() {
     jsonp(
         API +
         "?acao=listarEventos",
+
         function(data) {
 
             if (
@@ -659,6 +827,7 @@ function carregarEventos() {
                     '</div>';
 
                 return;
+
             }
 
 
@@ -672,6 +841,7 @@ function carregarEventos() {
                     '</div>';
 
                 return;
+
             }
 
 
@@ -728,10 +898,12 @@ function carregarEventos() {
                             ${escapeHTML(evento.nome)}
                         </div>
 
+
                         <div class="event-id">
                             ID:
                             ${escapeHTML(evento.id)}
                         </div>
+
 
                         <div class="event-type">
                             ${escapeHTML(
@@ -739,6 +911,7 @@ function carregarEventos() {
                                 "Evento"
                             )}
                         </div>
+
 
                         <div class="photo-count">
 
@@ -754,36 +927,55 @@ function carregarEventos() {
 
                         </div>
 
+
                         <div class="actions">
+
 
                             <button
                                 class="btn-event"
                                 onclick="window.open(
-                                    '${eventUrl}',
+                                    '${escapeJS(eventUrl)}',
                                     '_blank'
                                 )"
                             >
                                 EVENTO
                             </button>
 
+
                             <button
                                 class="btn-album"
                                 onclick="window.open(
-                                    '${albumUrl}',
+                                    '${escapeJS(albumUrl)}',
                                     '_blank'
                                 )"
                             >
                                 ÁLBUM
                             </button>
 
+
                             <button
                                 class="btn-copy"
                                 onclick="copiarLink(
-                                    '${eventUrl}'
+                                    '${escapeJS(eventUrl)}'
                                 )"
                             >
                                 COPIAR LINK
                             </button>
+
+
+                            <button
+                                class="btn-edit"
+                                onclick="abrirEdicao(
+                                    '${escapeJS(evento.id)}',
+                                    '${escapeJS(evento.nome)}',
+                                    '${escapeJS(evento.tipo || "Outro")}',
+                                    '${escapeJS(evento.mensagem || "")}',
+                                    '${escapeJS(evento.cor || "#d8b878")}'
+                                )"
+                            >
+                                EDITAR
+                            </button>
+
 
                             <button
                                 class="btn-delete"
@@ -795,6 +987,7 @@ function carregarEventos() {
                                 EXCLUIR
                             </button>
 
+
                             <button
                                 class="btn-qr"
                                 onclick="toggleQR(
@@ -803,6 +996,7 @@ function carregarEventos() {
                             >
                                 MOSTRAR QR CODE
                             </button>
+
 
                         </div>
 
@@ -817,21 +1011,25 @@ function carregarEventos() {
                                 alt="QR Code"
                             >
 
+
                             <div class="qr-link">
                                 ${escapeHTML(eventUrl)}
                             </div>
 
+
                             <br>
+
 
                             <button
                                 class="btn-event"
                                 onclick="window.open(
-                                    '${qrUrl}',
+                                    '${escapeJS(qrUrl)}',
                                     '_blank'
                                 )"
                             >
                                 ABRIR QR
                             </button>
+
 
                         </div>
 
@@ -844,6 +1042,194 @@ function carregarEventos() {
 
                 }
             );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   ABRIR EDIÇÃO
+===================================================== */
+
+function abrirEdicao(
+    id,
+    nome,
+    tipo,
+    mensagem,
+    cor
+) {
+
+    eventoEditando =
+        id;
+
+
+    document.getElementById(
+        "editarId"
+    ).innerText =
+        "ID: " + id;
+
+
+    document.getElementById(
+        "editarNome"
+    ).value =
+        nome;
+
+
+    document.getElementById(
+        "editarTipo"
+    ).value =
+        tipo || "Outro";
+
+
+    document.getElementById(
+        "editarMensagem"
+    ).value =
+        mensagem || "";
+
+
+    document.getElementById(
+        "editarCor"
+    ).value =
+        /^#[0-9A-Fa-f]{6}$/.test(cor)
+        ? cor
+        : "#d8b878";
+
+
+    document.getElementById(
+        "modalEditar"
+    ).style.display =
+        "block";
+
+}
+
+
+/* =====================================================
+   FECHAR MODAL
+===================================================== */
+
+function fecharModal() {
+
+    document.getElementById(
+        "modalEditar"
+    ).style.display =
+        "none";
+
+
+    eventoEditando =
+        null;
+
+}
+
+
+/* =====================================================
+   SALVAR EDIÇÃO
+===================================================== */
+
+function salvarEdicao() {
+
+    if (!eventoEditando) {
+
+        alert(
+            "Nenhum evento selecionado."
+        );
+
+        return;
+
+    }
+
+
+    const nome =
+        document.getElementById(
+            "editarNome"
+        ).value.trim();
+
+
+    const tipo =
+        document.getElementById(
+            "editarTipo"
+        ).value;
+
+
+    const mensagem =
+        document.getElementById(
+            "editarMensagem"
+        ).value.trim();
+
+
+    const cor =
+        document.getElementById(
+            "editarCor"
+        ).value;
+
+
+    if (!nome) {
+
+        alert(
+            "Digite o nome do evento."
+        );
+
+        return;
+
+    }
+
+
+    const url =
+        API +
+        "?acao=editarEvento" +
+        "&id=" +
+        encodeURIComponent(
+            eventoEditando
+        ) +
+        "&nome=" +
+        encodeURIComponent(
+            nome
+        ) +
+        "&tipo=" +
+        encodeURIComponent(
+            tipo
+        ) +
+        "&mensagem=" +
+        encodeURIComponent(
+            mensagem
+        ) +
+        "&cor=" +
+        encodeURIComponent(
+            cor
+        );
+
+
+    jsonp(
+        url,
+
+        function(data) {
+
+            if (
+                !data ||
+                !data.sucesso
+            ) {
+
+                alert(
+                    data && data.erro
+                    ? data.erro
+                    : "Não foi possível salvar as alterações."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Evento atualizado com sucesso!"
+            );
+
+
+            fecharModal();
+
+
+            carregarEventos();
 
         }
     );
@@ -893,19 +1279,26 @@ function copiarLinkFallback(link) {
             "textarea"
         );
 
-    campo.value = link;
+
+    campo.value =
+        link;
+
 
     campo.style.position =
         "fixed";
 
+
     campo.style.opacity =
         "0";
+
 
     document.body.appendChild(
         campo
     );
 
+
     campo.select();
+
 
     try {
 
@@ -913,9 +1306,11 @@ function copiarLinkFallback(link) {
             "copy"
         );
 
+
         alert(
             "Link copiado!"
         );
+
 
     } catch (erro) {
 
@@ -924,6 +1319,7 @@ function copiarLinkFallback(link) {
         );
 
     }
+
 
     campo.remove();
 
@@ -975,6 +1371,7 @@ function excluirEvento(
                 );
 
                 return;
+
             }
 
 
@@ -1157,5 +1554,5 @@ carregarEventos();
 </script>
 
 </body>
+
 </html>
-```
