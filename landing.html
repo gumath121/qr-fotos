@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="description"
-content="QR Fotos — transforme seu evento em um álbum colaborativo e instantâneo. Seus convidados fotografam, compartilham e criam juntos as lembranças do seu evento.">
+content="QR Fotos — As fotos do seu evento. Feitas por todos. Um QR Code. Centenas de momentos. Um álbum completo.">
 
 <title>QR Fotos — As fotos do seu evento. Feitas por todos.</title>
 
@@ -57,6 +57,10 @@ button {
     font-family: inherit;
 }
 
+img {
+    max-width: 100%;
+}
+
 
 /* =========================================================
    VARIÁVEIS
@@ -68,9 +72,11 @@ button {
     --gold-light: #f0d9a1;
     --cream: #f5f0e8;
     --muted: #a9a39a;
+
     --dark: #080808;
     --dark-2: #101010;
     --dark-3: #171717;
+
     --border: rgba(216,184,120,.22);
 
 }
@@ -91,11 +97,9 @@ header {
 
     z-index: 1000;
 
-    background:
-        rgba(8,8,8,.82);
+    background: rgba(8,8,8,.82);
 
-    backdrop-filter:
-        blur(16px);
+    backdrop-filter: blur(16px);
 
     border-bottom:
         1px solid
@@ -488,7 +492,7 @@ header {
 
 
 /* =========================================================
-   CELULAR / ÁLBUM
+   CELULAR
 ========================================================= */
 
 .phone-area {
@@ -545,11 +549,6 @@ header {
 
 }
 
-
-/* =========================================================
-   CORPO DO CELULAR
-========================================================= */
-
 .phone {
 
     width:
@@ -584,46 +583,6 @@ header {
 
 }
 
-.phone::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    top:
-        40px;
-
-    right:
-        3px;
-
-    width:
-        2px;
-
-    height:
-        150px;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(255,255,255,.22),
-            transparent
-        );
-
-    border-radius:
-        10px;
-
-    z-index:
-        20;
-
-}
-
-
-/* =========================================================
-   NOTCH
-========================================================= */
-
 .phone-notch {
 
     position:
@@ -655,11 +614,6 @@ header {
 
 }
 
-
-/* =========================================================
-   TELA
-========================================================= */
-
 .phone-screen {
 
     width:
@@ -678,11 +632,6 @@ header {
         relative;
 
 }
-
-
-/* =========================================================
-   CABEÇALHO DO ÁLBUM
-========================================================= */
 
 .album-header {
 
@@ -752,11 +701,6 @@ header {
 
 }
 
-
-/* =========================================================
-   EVENTO
-========================================================= */
-
 .album-title {
 
     font-family:
@@ -796,11 +740,6 @@ header {
 
 }
 
-
-/* =========================================================
-   CONTADOR
-========================================================= */
-
 .album-count {
 
     display:
@@ -835,11 +774,6 @@ header {
         600;
 
 }
-
-
-/* =========================================================
-   GALERIA
-========================================================= */
 
 .album-gallery {
 
@@ -935,11 +869,6 @@ header {
 
 }
 
-
-/* =========================================================
-   RODAPÉ DO CELULAR
-========================================================= */
-
 .album-bottom {
 
     display:
@@ -995,11 +924,6 @@ header {
         3px;
 
 }
-
-
-/* =========================================================
-   BADGE
-========================================================= */
 
 .phone-badge {
 
@@ -1081,7 +1005,7 @@ header {
 
 
 /* =========================================================
-   SEÇÃO
+   SEÇÕES
 ========================================================= */
 
 section {
@@ -1170,6 +1094,230 @@ section {
 
 
 /* =========================================================
+   NOVA SEÇÃO — ÁLBUM
+========================================================= */
+
+.album-showcase {
+
+    background:
+        #0b0b0b;
+
+    border-top:
+        1px solid
+        #181818;
+
+    border-bottom:
+        1px solid
+        #181818;
+
+}
+
+.album-showcase-grid {
+
+    max-width:
+        1180px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        .8fr 1.2fr;
+
+    gap:
+        70px;
+
+    align-items:
+        center;
+
+}
+
+.album-showcase-copy {
+
+    position:
+        relative;
+
+}
+
+.album-showcase-copy .section-label {
+
+    text-align:
+        left;
+
+}
+
+.album-showcase-copy h2 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(45px, 5vw, 72px);
+
+    line-height:
+        .92;
+
+    font-weight:
+        500;
+
+    margin-bottom:
+        25px;
+
+}
+
+.album-showcase-copy h2 span {
+
+    color:
+        var(--gold);
+
+}
+
+.album-showcase-copy p {
+
+    color:
+        #97928a;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+
+    margin-bottom:
+        28px;
+
+}
+
+.album-showcase-list {
+
+    list-style:
+        none;
+
+    margin-bottom:
+        30px;
+
+}
+
+.album-showcase-list li {
+
+    padding:
+        10px 0;
+
+    color:
+        #c4bfb7;
+
+    font-size:
+        12px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+}
+
+.album-showcase-list li::first-letter {
+
+    color:
+        var(--gold);
+
+}
+
+
+/* GALERIA GRANDE */
+
+.showcase-gallery {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    grid-auto-rows:
+        145px;
+
+    gap:
+        7px;
+
+}
+
+.showcase-photo {
+
+    overflow:
+        hidden;
+
+    border-radius:
+        10px;
+
+    position:
+        relative;
+
+    background:
+        #151515;
+
+}
+
+.showcase-photo.large {
+
+    grid-column:
+        span 2;
+
+    grid-row:
+        span 2;
+
+}
+
+.showcase-photo img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform .6s ease;
+
+}
+
+.showcase-photo:hover img {
+
+    transform:
+        scale(1.07);
+
+}
+
+.showcase-photo::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 55%,
+            rgba(0,0,0,.45)
+        );
+
+}
+
+
+/* =========================================================
    BENEFÍCIOS
 ========================================================= */
 
@@ -1177,10 +1325,6 @@ section {
 
     background:
         #0d0d0d;
-
-    border-top:
-        1px solid
-        #171717;
 
     border-bottom:
         1px solid
@@ -1310,7 +1454,7 @@ section {
         grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
     gap:
         25px;
@@ -1473,7 +1617,7 @@ section {
         serif;
 
     font-size:
-        clamp(40px, 5vw, 65px);
+        clamp(40px,5vw,65px);
 
     line-height:
         .95;
@@ -1618,7 +1762,7 @@ section {
         grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
     gap:
         22px;
@@ -1694,7 +1838,7 @@ section {
         50%;
 
     transform:
-        translate(-50%, -50%);
+        translate(-50%,-50%);
 
     background:
         var(--gold);
@@ -1885,6 +2029,23 @@ section {
 
 }
 
+.plan.featured .plan-button {
+
+    background:
+        var(--gold);
+
+    color:
+        #111;
+
+}
+
+.plan.featured .plan-button:hover {
+
+    background:
+        var(--gold-light);
+
+}
+
 .custom-plan {
 
     max-width:
@@ -1958,16 +2119,6 @@ section {
 
     font-weight:
         700;
-
-    transition:
-        .25s;
-
-}
-
-.custom-plan a:hover {
-
-    color:
-        var(--gold-light);
 
 }
 
@@ -2139,7 +2290,7 @@ details p {
         serif;
 
     font-size:
-        clamp(45px, 7vw, 80px);
+        clamp(45px,7vw,80px);
 
     line-height:
         .95;
@@ -2151,7 +2302,7 @@ details p {
         850px;
 
     margin:
-        auto auto 25px;
+        0 auto 25px;
 
 }
 
@@ -2316,13 +2467,14 @@ footer {
 
 
 /* =========================================================
-   RESPONSIVO TABLET
+   TABLET
 ========================================================= */
 
 @media(max-width:900px) {
 
     .nav-links {
-        display: none;
+        display:
+            none;
     }
 
     .hero-inner {
@@ -2342,27 +2494,19 @@ footer {
 
     }
 
-    .hero-text {
+    .eyebrow {
 
-        margin-left:
-            auto;
-
-        margin-right:
-            auto;
+        order:
+            1;
 
     }
 
-    .hero-buttons {
+    .hero h1 {
 
-        justify-content:
-            center;
+        order:
+            2;
 
     }
-
-    /*
-       No tablet o celular também fica
-       depois do título e antes do texto.
-    */
 
     .phone-area {
 
@@ -2379,6 +2523,12 @@ footer {
         order:
             4;
 
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
     }
 
     .hero-buttons {
@@ -2386,12 +2536,65 @@ footer {
         order:
             5;
 
+        justify-content:
+            center;
+
     }
 
     .benefit-grid {
 
         grid-template-columns:
             repeat(2,1fr);
+
+    }
+
+    .album-showcase-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+    .album-showcase-copy {
+
+        text-align:
+            center;
+
+    }
+
+    .album-showcase-copy .section-label {
+
+        text-align:
+            center;
+
+    }
+
+    .album-showcase-copy p {
+
+        max-width:
+            650px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
+    }
+
+    .album-showcase-list {
+
+        max-width:
+            600px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+
+        text-align:
+            left;
 
     }
 
@@ -2406,13 +2609,6 @@ footer {
 
         text-align:
             center;
-
-    }
-
-    .demo-copy .section-label {
-
-        text-align:
-            center !important;
 
     }
 
@@ -2453,7 +2649,7 @@ footer {
 
 
 /* =========================================================
-   RESPONSIVO MOBILE
+   MOBILE
 ========================================================= */
 
 @media(max-width:600px) {
@@ -2549,10 +2745,7 @@ footer {
     }
 
 
-    /*
-       ÚNICO CELULAR
-       Ele é movido para cá pelo order.
-    */
+    /* ÚNICO CELULAR */
 
     .phone-area {
 
@@ -2673,6 +2866,33 @@ footer {
     }
 
 
+    /* ALBUM SHOWCASE */
+
+    .album-showcase-grid {
+
+        gap:
+            35px;
+
+    }
+
+    .album-showcase-copy h2 {
+
+        font-size:
+            48px;
+
+    }
+
+    .showcase-gallery {
+
+        grid-auto-rows:
+            90px;
+
+        gap:
+            4px;
+
+    }
+
+
     /* BENEFÍCIOS */
 
     .benefit-grid {
@@ -2753,7 +2973,7 @@ footer {
     }
 
 
-    /* PACOTE PERSONALIZADO */
+    /* PACOTE */
 
     .custom-plan {
 
@@ -2787,61 +3007,6 @@ footer {
             center;
 
     }
-
-}
-
-
-/* =========================================================
-   MELHORIAS VISUAIS DOS PLANOS
-========================================================= */
-
-.plan.featured .plan-button {
-
-    background:
-        var(--gold);
-
-    color:
-        #111;
-
-}
-
-.plan.featured .plan-button:hover {
-
-    background:
-        var(--gold-light);
-
-}
-
-.plan.featured .plan-name {
-
-    color:
-        var(--gold-light);
-
-}
-
-
-/* =========================================================
-   DESTAQUE DE PREÇO
-========================================================= */
-
-.plan:nth-child(1) .price {
-
-    color:
-        #f0ebe2;
-
-}
-
-.plan:nth-child(2) .price {
-
-    color:
-        var(--gold-light);
-
-}
-
-.plan:nth-child(3) .price {
-
-    color:
-        #f0ebe2;
 
 }
 
@@ -2910,10 +3075,6 @@ Quero meu QR
 <div class="hero-inner">
 
 
-<!-- =====================================================
-     TEXTO DO HERO
-===================================================== -->
-
 <div class="hero-copy">
 
 <div class="eyebrow">
@@ -2965,7 +3126,7 @@ COMO FUNCIONA
 
 
 <!-- =====================================================
-     ÚNICO CELULAR DO SITE
+     ÚNICO CELULAR
 ===================================================== -->
 
 <div class="phone-area">
@@ -2977,8 +3138,6 @@ COMO FUNCIONA
 
 <div class="phone-screen">
 
-
-<!-- CABEÇALHO -->
 
 <div class="album-header">
 
@@ -2993,8 +3152,6 @@ QR FOTOS
 </div>
 
 
-<!-- EVENTO -->
-
 <div class="album-title">
 Gustavo & Ana
 </div>
@@ -3005,20 +3162,16 @@ CASAMENTO • 15.09.2026
 </div>
 
 
-<!-- CONTADOR -->
-
 <div class="album-count">
 
 <span>●</span>
 
 <strong>128 fotos</strong>
 
-<span>compartilhadas pelos convidados</span>
+<span>compartilhadas</span>
 
 </div>
 
-
-<!-- GALERIA -->
 
 <div class="album-gallery">
 
@@ -3047,7 +3200,7 @@ alt="Casamento"
 
 <img
 src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=500&q=85"
-alt="Festa"
+alt="Evento"
 >
 
 </div>
@@ -3057,7 +3210,7 @@ alt="Festa"
 
 <img
 src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=500&q=85"
-alt="Evento"
+alt="Festa"
 >
 
 </div>
@@ -3086,10 +3239,7 @@ alt="Festa"
 </div>
 
 
-<!-- NAVEGAÇÃO -->
-
 <div class="album-bottom">
-
 
 <div class="album-nav active">
 
@@ -3123,7 +3273,6 @@ MOMENTOS
 
 </div>
 
-
 </div>
 
 
@@ -3131,14 +3280,170 @@ MOMENTOS
 
 </div>
 
-
-<!-- BADGE -->
 
 <div class="phone-badge">
 
-<strong>+128 momentos</strong>
+<strong>
++128 momentos
+</strong>
 
-<span>adicionados pelos convidados</span>
+<span>
+adicionados pelos convidados
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NOVA SEÇÃO — O ÁLBUM
+===================================================== -->
+
+<section
+    class="album-showcase"
+>
+
+<div class="album-showcase-grid">
+
+
+<div class="album-showcase-copy">
+
+<div class="section-label">
+O álbum do seu evento
+</div>
+
+
+<h2>
+
+Tudo em um só lugar.
+<br>
+
+<span>Do jeito que aconteceu.</span>
+
+</h2>
+
+
+<p>
+
+Enquanto seu evento acontece, seus convidados
+registram momentos que talvez você nem tivesse
+visto.
+
+O QR Fotos reúne tudo em um único álbum
+colaborativo.
+
+</p>
+
+
+<ul class="album-showcase-list">
+
+<li>
+✓ Fotos espontâneas dos convidados
+</li>
+
+<li>
+✓ Atualização em tempo real
+</li>
+
+<li>
+✓ Álbum acessível pelo celular
+</li>
+
+<li>
+✓ Compartilhamento fácil
+</li>
+
+</ul>
+
+
+<a
+    href="https://gumath121.github.io/qr-fotos/album.html?evento=teste"
+    target="_blank"
+    class="btn-primary"
+>
+VER ÁLBUM DE DEMONSTRAÇÃO
+</a>
+
+</div>
+
+
+
+<div class="showcase-gallery">
+
+
+<div class="showcase-photo large">
+
+<img
+src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=90"
+alt="Momentos de casamento"
+>
+
+</div>
+
+
+<div class="showcase-photo">
+
+<img
+src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=700&q=90"
+alt="Momento de casamento"
+>
+
+</div>
+
+
+<div class="showcase-photo">
+
+<img
+src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=700&q=90"
+alt="Festa"
+>
+
+</div>
+
+
+<div class="showcase-photo">
+
+<img
+src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=700&q=90"
+alt="Evento"
+>
+
+</div>
+
+
+<div class="showcase-photo">
+
+<img
+src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=700&q=90"
+alt="Casamento"
+>
+
+</div>
+
+
+<div class="showcase-photo">
+
+<img
+src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=700&q=90"
+alt="Festa"
+>
+
+</div>
+
+
+<div class="showcase-photo">
+
+<img
+src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=700&q=90"
+alt="Evento"
+>
 
 </div>
 
@@ -3167,9 +3472,12 @@ Por que usar?
 
 
 <h2 class="section-title">
+
 Simples para você.
 <br>
+
 Divertido para seus convidados.
+
 </h2>
 
 
@@ -3281,9 +3589,12 @@ Como funciona
 
 
 <h2 class="section-title">
+
 Três passos.
 <br>
+
 Um álbum inesquecível.
+
 </h2>
 
 
@@ -3319,7 +3630,6 @@ a câmera do celular.
 </div>
 
 
-
 <div class="step">
 
 <div class="step-number">
@@ -3339,7 +3649,6 @@ uma foto ou escolher uma imagem.
 </p>
 
 </div>
-
 
 
 <div class="step">
@@ -3388,9 +3697,12 @@ Para qualquer ocasião
 
 
 <h2 class="section-title">
+
 Seu evento.
 <br>
+
 Suas memórias.
+
 </h2>
 
 
@@ -3481,7 +3793,7 @@ Não precisa imaginar como funciona.
 Experimente agora.
 
 Escaneie o QR Code ao lado e conheça
-uma página de evento funcionando
+uma página de evento real funcionando
 de verdade.
 
 </p>
@@ -3562,6 +3874,7 @@ ESCOLHA SEU PLANO
 
 Seu evento merece ser
 <br>
+
 lembrado para sempre.
 
 </h2>
@@ -3604,37 +3917,25 @@ de forma simples e prática.
 
 <ul>
 
-<li>
-✓ Álbum digital do evento
-</li>
+<li>✓ Álbum digital do evento</li>
 
-<li>
-✓ QR Code exclusivo
-</li>
+<li>✓ QR Code exclusivo</li>
 
-<li>
-✓ Upload pelos convidados
-</li>
+<li>✓ Upload pelos convidados</li>
 
-<li>
-✓ Sem aplicativo
-</li>
+<li>✓ Sem aplicativo</li>
 
-<li>
-✓ Página personalizada
-</li>
+<li>✓ Página personalizada</li>
 
-<li>
-✓ Até 200 fotos
-</li>
+<li>✓ Até 200 fotos</li>
 
 </ul>
 
 
 <a
-    class="plan-button"
-    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Essencial."
-    target="_blank"
+class="plan-button"
+href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Essencial."
+target="_blank"
 >
 QUERO ESTE PLANO
 </a>
@@ -3646,7 +3947,6 @@ QUERO ESTE PLANO
 <!-- PREMIUM -->
 
 <div class="plan featured">
-
 
 <div class="popular">
 MAIS VENDIDO
@@ -3675,41 +3975,27 @@ cada momento do seu evento.
 
 <ul>
 
-<li>
-✓ Tudo do plano Essencial
-</li>
+<li>✓ Tudo do plano Essencial</li>
 
-<li>
-✓ Até 500 fotos
-</li>
+<li>✓ Até 500 fotos</li>
 
-<li>
-✓ Página personalizada
-</li>
+<li>✓ Página personalizada</li>
 
-<li>
-✓ QR Code personalizado
-</li>
+<li>✓ QR Code personalizado</li>
 
-<li>
-✓ Álbum atualizado em tempo real
-</li>
+<li>✓ Álbum atualizado em tempo real</li>
 
-<li>
-✓ Compartilhamento do álbum
-</li>
+<li>✓ Compartilhamento do álbum</li>
 
-<li>
-✓ Suporte durante o evento
-</li>
+<li>✓ Suporte durante o evento</li>
 
 </ul>
 
 
 <a
-    class="plan-button"
-    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Premium."
-    target="_blank"
+class="plan-button"
+href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Premium."
+target="_blank"
 >
 QUERO ESTE PLANO
 </a>
@@ -3744,41 +4030,27 @@ do QR Code ao material físico.
 
 <ul>
 
-<li>
-✓ Tudo do plano Premium
-</li>
+<li>✓ Tudo do plano Premium</li>
 
-<li>
-✓ Fotos ilimitadas
-</li>
+<li>✓ Fotos ilimitadas</li>
 
-<li>
-✓ QR Codes adicionais
-</li>
+<li>✓ QR Codes adicionais</li>
 
-<li>
-✓ Identidade visual personalizada
-</li>
+<li>✓ Identidade visual personalizada</li>
 
-<li>
-✓ Material impresso com QR Code
-</li>
+<li>✓ Material impresso com QR Code</li>
 
-<li>
-✓ Suporte personalizado
-</li>
+<li>✓ Suporte personalizado</li>
 
-<li>
-✓ Álbum disponível após o evento
-</li>
+<li>✓ Álbum disponível após o evento</li>
 
 </ul>
 
 
 <a
-    class="plan-button"
-    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Completo."
-    target="_blank"
+class="plan-button"
+href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Completo."
+target="_blank"
 >
 QUERO ESTE PLANO
 </a>
@@ -3789,8 +4061,6 @@ QUERO ESTE PLANO
 </div>
 
 
-
-<!-- PACOTE PERSONALIZADO -->
 
 <div class="custom-plan">
 
@@ -3808,8 +4078,8 @@ grandes eventos e muito mais.
 
 
 <a
-    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Gostaria%20de%20montar%20um%20pacote%20personalizado%20do%20QR%20Fotos."
-    target="_blank"
+href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Gostaria%20de%20montar%20um%20pacote%20personalizado%20do%20QR%20Fotos."
+target="_blank"
 >
 FALAR NO WHATSAPP →
 </a>
@@ -3963,9 +4233,9 @@ Fale conosco e solicite seu orçamento.
 
 
 <a
-    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20QR%20Fotos."
-    class="btn-primary"
-    target="_blank"
+href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20QR%20Fotos."
+class="btn-primary"
+target="_blank"
 >
 QUERO MEU QR FOTOS
 </a>
@@ -4002,10 +4272,10 @@ Desenvolvido por Gustavo M.
 ===================================================== -->
 
 <a
-    class="whatsapp"
-    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20conhecer%20o%20QR%20Fotos."
-    target="_blank"
-    aria-label="Falar pelo WhatsApp"
+class="whatsapp"
+href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20conhecer%20o%20QR%20Fotos."
+target="_blank"
+aria-label="Falar pelo WhatsApp"
 >
 ◉
 </a>
