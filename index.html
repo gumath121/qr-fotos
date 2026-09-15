@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Compartilhe sua foto</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 25px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #bbb;
+    margin-bottom: 25px;
+}
+
+video {
+    width: 100%;
+    border-radius: 20px;
+    background: #000;
+    display: none;
+}
+
+canvas {
+    display: none;
+}
+
+button {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 17px;
+    margin-top: 15px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#abrir {
+    background: white;
+    color: #111;
+}
+
+#tirar {
+    background: #ff3366;
+    color: white;
+    display: none;
+}
+
+#outra {
+    background: #333;
+    color: white;
+    display: none;
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📸 Compartilhe sua foto</h1>
+
+    <p>
+        Registre esse momento e compartilhe com os noivos! ❤️
+    </p>
+
+    <button id="abrir">
+        📷 ABRIR CÂMERA
+    </button>
+
+    <video id="camera" autoplay playsinline></video>
+
+    <canvas id="canvas"></canvas>
+
+    <button id="tirar">
+        📸 TIRAR FOTO
+    </button>
+
+    <button id="outra">
+        🔄 TIRAR OUTRA
+    </button>
+
+    <div id="status"></div>
+
+</div>
+
+<script>
+
+let stream = null;
+
+const abrir = document.getElementById("abrir");
+const camera = document.getElementById("camera");
+const tirar = document.getElementById("tirar");
+const outra = document.getElementById("outra");
+const canvas = document.getElementById("canvas");
+const status = document.getElementById("status");
+
+abrir.addEventListener("click", async () => {
+
+    try {
+
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: {
+                    ideal: "environment"
+                }
+            },
+            audio: false
+        });
+
+        camera.srcObject = stream;
+
+        camera.style.display = "block";
+        tirar.style.display = "block";
+        abrir.style.display = "none";
+
+        status.innerText = "Câmera ativada! 📸";
+
+    } catch (erro) {
+
+        status.innerText =
+            "Não conseguimos acessar a câmera. Verifique a permissão do navegador.";
+
+        console.error(erro);
+
+    }
+
+});
+
+tirar.addEventListener("click", () => {
+
+    const larguraMaxima = 1600;
+
+    let largura = camera.videoWidth;
+    let altura = camera.videoHeight;
+
+    if (largura > larguraMaxima) {
+
+        const proporcao = larguraMaxima / largura;
+
+        largura = larguraMaxima;
+        altura = altura * proporcao;
+
+    }
+
+    canvas.width = largura;
+    canvas.height = altura;
+
+    const contexto = canvas.getContext("2d");
+
+    contexto.drawImage(
+        camera,
+        0,
+        0,
+        largura,
+        altura
+    );
+
+    camera.style.display = "none";
+    tirar.style.display = "none";
+    outra.style.display = "block";
+
+    status.innerText = "Foto tirada! 🎉";
+
+});
+
+outra.addEventListener("click", () => {
+
+    camera.style.display = "block";
+    tirar.style.display = "block";
+    outra.style.display = "none";
+
+    status.innerText = "Pode tirar outra foto 📸";
+
+});
+
+</script>
+
+</body>
+</html>
