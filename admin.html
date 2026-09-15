@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
 <title>QR Fotos — Administração</title>
 
@@ -16,18 +21,29 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+
     background:
-        radial-gradient(circle at top, #242424 0%, #111 45%, #080808 100%);
+        radial-gradient(
+            circle at top,
+            #242424 0%,
+            #111 45%,
+            #080808 100%
+        );
+
     color: #f5f0e6;
+
     min-height: 100vh;
 }
 
 .container {
     width: 100%;
     max-width: 1150px;
+
     margin: auto;
+
     padding: 30px 20px 60px;
 }
+
 
 /* HEADER */
 
@@ -39,45 +55,65 @@ body {
 .logo {
     font-size: 42px;
     font-weight: 800;
+
     letter-spacing: 6px;
+
     color: #d6b36a;
 }
 
 .subtitle {
     margin-top: 8px;
+
     color: #aaa;
+
     font-size: 14px;
+
     letter-spacing: 2px;
 }
+
 
 /* CARDS */
 
 .card {
     background: rgba(22,22,22,.92);
+
     border: 1px solid #3b3324;
+
     border-radius: 18px;
+
     padding: 25px;
+
     margin-bottom: 25px;
-    box-shadow: 0 15px 45px rgba(0,0,0,.35);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35);
 }
 
 .card-title {
     font-size: 20px;
+
     margin-bottom: 20px;
+
     color: #d6b36a;
 }
+
 
 /* FORM */
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+        1fr 1fr;
+
     gap: 15px;
 }
 
 .form-group {
     display: flex;
+
     flex-direction: column;
+
     gap: 7px;
 }
 
@@ -87,265 +123,427 @@ body {
 
 label {
     font-size: 13px;
+
     color: #aaa;
 }
 
 input,
 textarea {
+
     width: 100%;
+
     background: #101010;
+
     border: 1px solid #403824;
+
     border-radius: 10px;
+
     color: white;
+
     padding: 13px;
+
     font-size: 15px;
+
     outline: none;
 }
 
 input:focus,
 textarea:focus {
+
     border-color: #d6b36a;
+
 }
 
 textarea {
+
     min-height: 90px;
+
     resize: vertical;
+
 }
+
 
 /* BOTÕES */
 
 .buttons {
+
     display: flex;
+
     gap: 12px;
+
     margin-top: 20px;
+
     flex-wrap: wrap;
 }
 
 button {
+
     border: none;
+
     border-radius: 10px;
+
     padding: 13px 20px;
+
     font-weight: bold;
+
     cursor: pointer;
+
     transition: .2s;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg,#d6b36a,#a67c2f);
+
+    background:
+        linear-gradient(
+            135deg,
+            #d6b36a,
+            #a67c2f
+        );
+
     color: #111;
 }
 
 .btn-primary:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.1);
+
+    transform:
+        translateY(-1px);
+
+    filter:
+        brightness(1.1);
 }
 
 .btn-secondary {
+
     background: #292929;
+
     color: #ddd;
+
     border: 1px solid #444;
 }
 
 .btn-danger {
+
     background: #551f1f;
+
     color: #ffb1b1;
+
     border: 1px solid #793030;
 }
 
 .btn-copy {
+
     background: #252525;
+
     color: #d6b36a;
+
     border: 1px solid #4a402d;
 }
+
 
 /* EVENTOS */
 
 .events-header {
+
     display: flex;
-    justify-content: space-between;
+
+    justify-content:
+        space-between;
+
     align-items: center;
+
     gap: 15px;
+
     margin-bottom: 20px;
 }
 
 .events-count {
+
     background: #27231c;
+
     color: #d6b36a;
+
     border: 1px solid #4a402d;
+
     padding: 7px 12px;
+
     border-radius: 20px;
+
     font-size: 13px;
 }
 
 .events-grid {
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 18px;
 }
 
 .event-card {
+
     background: #111;
+
     border: 1px solid #353535;
+
     border-radius: 15px;
+
     padding: 20px;
 }
 
 .event-name {
+
     font-size: 21px;
+
     font-weight: bold;
+
     color: #f5f0e6;
+
     margin-bottom: 8px;
 }
 
 .event-id {
+
     color: #d6b36a;
+
     font-size: 13px;
+
     margin-bottom: 14px;
 }
 
 .event-message {
+
     color: #999;
+
     font-size: 14px;
+
     line-height: 1.5;
+
     min-height: 42px;
 }
 
 .event-url {
+
     margin-top: 15px;
+
     padding: 10px;
+
     background: #080808;
+
     border-radius: 8px;
+
     color: #777;
+
     font-size: 11px;
+
     word-break: break-all;
 }
 
 .event-buttons {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 8px;
+
     margin-top: 15px;
 }
 
 .event-buttons button {
+
     padding: 9px 12px;
+
     font-size: 12px;
 }
+
 
 /* STATUS */
 
 .status {
+
     display: none;
+
     margin-bottom: 20px;
+
     padding: 14px;
+
     border-radius: 10px;
+
     font-size: 14px;
 }
 
 .status.success {
+
     display: block;
+
     background: #18351f;
+
     color: #9be3a8;
+
     border: 1px solid #285b34;
 }
 
 .status.error {
+
     display: block;
+
     background: #3a1818;
+
     color: #ffaaaa;
+
     border: 1px solid #652b2b;
 }
+
 
 /* EMPTY */
 
 .empty {
+
     text-align: center;
+
     padding: 45px 20px;
+
     color: #777;
 }
 
 .empty-icon {
+
     font-size: 40px;
+
     margin-bottom: 12px;
 }
+
 
 /* QR */
 
 .qr-section {
+
     display: none;
 }
 
 .qr-box {
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     gap: 15px;
 }
 
 .qr-box img {
+
     width: 220px;
+
     height: 220px;
+
     background: white;
+
     padding: 10px;
+
     border-radius: 12px;
 }
 
 .qr-link {
+
     color: #aaa;
+
     text-align: center;
+
     word-break: break-all;
+
     font-size: 12px;
 }
+
 
 /* MOBILE */
 
 @media(max-width: 750px) {
 
     .container {
-        padding: 22px 14px 45px;
+
+        padding:
+            22px
+            14px
+            45px;
     }
 
     .logo {
+
         font-size: 31px;
+
         letter-spacing: 4px;
     }
 
     .form-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
 
     .form-group.full {
+
         grid-column: auto;
     }
 
     .events-grid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            1fr;
     }
 
     .events-header {
-        align-items: flex-start;
-        flex-direction: column;
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
     }
 
     .card {
+
         padding: 18px;
     }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
+
+    <!-- HEADER -->
+
     <header class="header">
-        <div class="logo">QR FOTOS</div>
-        <div class="subtitle">PAINEL DE ADMINISTRAÇÃO</div>
+
+        <div class="logo">
+            QR FOTOS
+        </div>
+
+        <div class="subtitle">
+            PAINEL DE ADMINISTRAÇÃO
+        </div>
+
     </header>
 
-    <div id="status" class="status"></div>
+
+    <!-- STATUS -->
+
+    <div
+        id="status"
+        class="status"
+    ></div>
+
 
     <!-- NOVO EVENTO -->
 
@@ -355,43 +553,59 @@ button {
             Criar novo evento
         </div>
 
+
         <div class="form-grid">
 
+
             <div class="form-group">
-                <label>Nome do evento</label>
+
+                <label>
+                    Nome do evento
+                </label>
 
                 <input
                     id="nomeEvento"
                     type="text"
                     placeholder="Ex.: Casamento Gustavo & Ana"
                 >
+
             </div>
 
 
             <div class="form-group">
-                <label>ID do evento</label>
+
+                <label>
+                    ID do evento
+                </label>
 
                 <input
                     id="idEvento"
                     type="text"
                     placeholder="Ex.: casamento-gustavo"
                 >
+
             </div>
 
 
             <div class="form-group full">
-                <label>Mensagem do evento</label>
+
+                <label>
+                    Mensagem do evento
+                </label>
 
                 <textarea
                     id="mensagemEvento"
                     placeholder="Ex.: Compartilhe suas fotos e recados!"
                 ></textarea>
+
             </div>
+
 
         </div>
 
 
         <div class="buttons">
+
 
             <button
                 class="btn-primary"
@@ -400,6 +614,7 @@ button {
                 + Criar evento
             </button>
 
+
             <button
                 class="btn-secondary"
                 onclick="limparFormulario()"
@@ -407,7 +622,9 @@ button {
                 Limpar
             </button>
 
+
         </div>
+
 
     </section>
 
@@ -416,11 +633,17 @@ button {
 
     <section class="card">
 
+
         <div class="events-header">
 
-            <div class="card-title" style="margin:0;">
+
+            <div
+                class="card-title"
+                style="margin:0;"
+            >
                 Meus eventos
             </div>
+
 
             <div
                 id="contadorEventos"
@@ -429,6 +652,7 @@ button {
                 Carregando...
             </div>
 
+
         </div>
 
 
@@ -436,6 +660,7 @@ button {
             id="eventos"
             class="events-grid"
         ></div>
+
 
     </section>
 
@@ -447,11 +672,14 @@ button {
         class="card qr-section"
     >
 
+
         <div class="card-title">
             QR Code do evento
         </div>
 
+
         <div class="qr-box">
+
 
             <img
                 id="qrImagem"
@@ -459,12 +687,15 @@ button {
                 alt="QR Code"
             >
 
+
             <div
                 id="qrLink"
                 class="qr-link"
             ></div>
 
+
             <div class="buttons">
+
 
                 <button
                     class="btn-primary"
@@ -473,6 +704,7 @@ button {
                     Abrir QR Code
                 </button>
 
+
                 <button
                     class="btn-copy"
                     onclick="copiarLinkQR()"
@@ -480,16 +712,25 @@ button {
                     Copiar link
                 </button>
 
+
             </div>
+
 
         </div>
 
+
     </section>
+
 
 </div>
 
 
 <script>
+
+
+/*************************************************
+ * CONFIGURAÇÕES
+ *************************************************/
 
 const API =
 "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
@@ -518,8 +759,10 @@ function mostrarStatus(
             "status"
         );
 
+
     status.className =
         "status " + tipo;
+
 
     status.textContent =
         mensagem;
@@ -563,6 +806,12 @@ function carregarEventos() {
         Date.now();
 
 
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
     window[callback] =
         function(resposta) {
 
@@ -599,15 +848,12 @@ function carregarEventos() {
 
             delete window[callback];
 
-            script.remove();
+
+            if (script) {
+                script.remove();
+            }
 
         };
-
-
-    const script =
-        document.createElement(
-            "script"
-        );
 
 
     script.src =
@@ -626,6 +872,10 @@ function carregarEventos() {
                 "Erro ao conectar com o servidor.",
                 "error"
             );
+
+
+            delete window[callback];
+
 
             script.remove();
 
@@ -744,12 +994,14 @@ function renderizarEventos() {
                                 Abrir evento
                             </button>
 
+
                             <button
                                 class="btn-copy"
                                 onclick="copiarTexto('${escaparJS(link)}')"
                             >
                                 Copiar link
                             </button>
+
 
                             <button
                                 class="btn-copy"
@@ -758,12 +1010,14 @@ function renderizarEventos() {
                                 QR Code
                             </button>
 
+
                             <button
                                 class="btn-secondary"
                                 onclick="editarEvento('${escaparJS(id)}')"
                             >
                                 Editar
                             </button>
+
 
                             <button
                                 class="btn-danger"
@@ -871,6 +1125,7 @@ function salvarEvento() {
 
 /*************************************************
  * ENVIAR EVENTO
+ * GET + JSONP
  *************************************************/
 
 function enviarEvento(
@@ -883,83 +1138,102 @@ function enviarEvento(
     );
 
 
-    const dados =
-        new URLSearchParams();
+    const callback =
+        "salvarEvento_" +
+        Date.now();
 
 
-    dados.append(
-        "acao",
-        "salvarEvento"
-    );
+    let script =
+        document.createElement(
+            "script"
+        );
 
 
-    dados.append(
-        "id",
-        id
-    );
-
-
-    dados.append(
-        "nome",
-        evento.nome
-    );
-
-
-    dados.append(
-        "mensagem",
-        evento.mensagem
-    );
-
-
-    fetch(
-        API,
-        {
-
-            method: "POST",
-
-            body: dados
-
-        }
-    )
-    .then(
-        response =>
-            response.json()
-    )
-    .then(
+    window[callback] =
         function(resposta) {
 
-            if (
-                !resposta.sucesso
-            ) {
+            try {
 
-                throw new Error(
-                    resposta.erro ||
-                    "Erro ao salvar evento."
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        resposta.erro
+                            ? resposta.erro
+                            : "Erro ao salvar evento."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    "Evento salvo com sucesso!"
+                );
+
+
+                limparFormulario();
+
+
+                carregarEventos();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
                 );
 
             }
 
 
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=salvarEvento" +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&nome=" +
+        encodeURIComponent(evento.nome) +
+        "&mensagem=" +
+        encodeURIComponent(evento.mensagem) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
             mostrarStatus(
-                "Evento salvo com sucesso!"
-            );
-
-
-            limparFormulario();
-
-            carregarEventos();
-
-        }
-    )
-    .catch(
-        function(erro) {
-
-            mostrarStatus(
-                erro.message,
+                "Erro ao conectar com o servidor.",
                 "error"
             );
 
-        }
+
+            delete window[callback];
+
+
+            script.remove();
+
+        };
+
+
+    document.body.appendChild(
+        script
     );
 
 }
@@ -1000,12 +1274,16 @@ function editarEvento(id) {
 
     document.getElementById(
         "idEvento"
-    ).readOnly = true;
+    ).readOnly =
+        true;
 
 
     window.scrollTo({
+
         top: 0,
+
         behavior: "smooth"
+
     });
 
 
@@ -1017,7 +1295,7 @@ function editarEvento(id) {
 
 
 /*************************************************
- * EXCLUIR
+ * EXCLUIR EVENTO
  *************************************************/
 
 function excluirEvento(id) {
@@ -1033,10 +1311,13 @@ function excluirEvento(id) {
 
     const confirmar =
         confirm(
+
             "Excluir o evento \"" +
             evento.nome +
             "\"?\n\n" +
+
             "Os arquivos do Google Drive NÃO serão apagados."
+
         );
 
 
@@ -1050,69 +1331,95 @@ function excluirEvento(id) {
     );
 
 
-    const dados =
-        new URLSearchParams();
+    const callback =
+        "excluirEvento_" +
+        Date.now();
 
 
-    dados.append(
-        "acao",
-        "excluirEvento"
-    );
+    let script =
+        document.createElement(
+            "script"
+        );
 
 
-    dados.append(
-        "id",
-        id
-    );
-
-
-    fetch(
-        API,
-        {
-
-            method: "POST",
-
-            body: dados
-
-        }
-    )
-    .then(
-        response =>
-            response.json()
-    )
-    .then(
+    window[callback] =
         function(resposta) {
 
-            if (
-                !resposta.sucesso
-            ) {
+            try {
 
-                throw new Error(
-                    resposta.erro ||
-                    "Erro ao excluir evento."
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        resposta.erro
+                            ? resposta.erro
+                            : "Erro ao excluir evento."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    "Evento excluído."
+                );
+
+
+                carregarEventos();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
                 );
 
             }
 
 
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=excluirEvento" +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
             mostrarStatus(
-                "Evento excluído."
-            );
-
-
-            carregarEventos();
-
-        }
-    )
-    .catch(
-        function(erro) {
-
-            mostrarStatus(
-                erro.message,
+                "Erro ao conectar com o servidor.",
                 "error"
             );
 
-        }
+
+            delete window[callback];
+
+
+            script.remove();
+
+        };
+
+
+    document.body.appendChild(
+        script
     );
 
 }
@@ -1153,10 +1460,13 @@ function limparFormulario() {
 function abrirEvento(id) {
 
     window.open(
+
         SITE +
         "index.html?evento=" +
         encodeURIComponent(id),
+
         "_blank"
+
     );
 
 }
@@ -1181,7 +1491,9 @@ function mostrarQR(id) {
     document.getElementById(
         "qrImagem"
     ).src =
+
         "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" +
+
         encodeURIComponent(
             link
         );
@@ -1204,7 +1516,10 @@ function mostrarQR(id) {
             "qrSection"
         )
         .scrollIntoView({
-            behavior: "smooth"
+
+            behavior:
+                "smooth"
+
         });
 
 }
@@ -1218,11 +1533,15 @@ function abrirQR() {
 
 
     window.open(
+
         "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=" +
+
         encodeURIComponent(
             eventoQRAtual
         ),
+
         "_blank"
+
     );
 
 }
@@ -1243,27 +1562,42 @@ function copiarLinkQR() {
 
 function copiarTexto(texto) {
 
-    navigator.clipboard
-        .writeText(texto)
-        .then(
-            function() {
+    if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ) {
 
-                mostrarStatus(
-                    "Link copiado!"
-                );
+        navigator.clipboard
+            .writeText(texto)
+            .then(
+                function() {
 
-            }
-        )
-        .catch(
-            function() {
+                    mostrarStatus(
+                        "Link copiado!"
+                    );
 
-                prompt(
-                    "Copie o link:",
-                    texto
-                );
+                }
+            )
+            .catch(
+                function() {
 
-            }
-        );
+                    prompt(
+                        "Copie o link:",
+                        texto
+                    );
+
+                }
+            );
+
+        return;
+
+    }
+
+
+    prompt(
+        "Copie o link:",
+        texto
+    );
 
 }
 
@@ -1275,22 +1609,27 @@ function copiarTexto(texto) {
 function escapar(texto) {
 
     return String(texto)
+
         .replace(
             /&/g,
             "&amp;"
         )
+
         .replace(
             /</g,
             "&lt;"
         )
+
         .replace(
             />/g,
             "&gt;"
         )
+
         .replace(
             /"/g,
             "&quot;"
         )
+
         .replace(
             /'/g,
             "&#039;"
@@ -1306,10 +1645,12 @@ function escapar(texto) {
 function escaparJS(texto) {
 
     return String(texto)
+
         .replace(
             /\\/g,
             "\\\\"
         )
+
         .replace(
             /'/g,
             "\\'"
@@ -1324,7 +1665,9 @@ function escaparJS(texto) {
 
 carregarEventos();
 
+
 </script>
+
 
 </body>
 </html>
