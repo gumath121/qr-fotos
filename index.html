@@ -1,2619 +1,1719 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Compartilhe esse momento</title>
-
-
-<style>
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
-
-
-* {
-    box-sizing: border-box;
-}
-
-
-:root {
-    --cor-evento: #c9a96e;
-}
-
-
-body {
-
-    margin: 0;
-
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% 15%,
-            #3a3024 0%,
-            #17130f 35%,
-            #090807 75%
-        );
-
-    color: #f5eee3;
-
-    font-family: 'Montserrat', sans-serif;
-
-    display: flex;
-
-    justify-content: center;
-}
-
-
-.container {
-
-    width: 100%;
-
-    max-width: 480px;
-
-    min-height: 100vh;
-
-    padding: 45px 24px 35px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-}
-
-
-.ornamento {
-
-    color: var(--cor-evento);
-
-    font-size: 22px;
-
-    letter-spacing: 8px;
-
-    margin-bottom: 20px;
-}
-
-
-h1 {
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-size: 43px;
-
-    line-height: 1;
-
-    font-weight: 500;
-
-    text-align: center;
-
-    margin: 0;
-}
-
-
-.subtitulo {
-
-    text-align: center;
-
-    color: #cfc5b6;
-
-    font-size: 13px;
-
-    line-height: 1.7;
-
-    margin: 18px 10px 30px;
-}
-
-
-.linha {
-
-    width: 55px;
-
-    height: 1px;
-
-    background: var(--cor-evento);
-
-    margin: 25px 0 0;
-}
-
-
-/* =========================
-   ESCOLHA FOTO / VÍDEO
-========================= */
-
-.escolha {
-
-    width: 100%;
-
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 8px;
-}
-
-
-.botao-escolha {
-
-    flex: 1;
-
-    margin-top: 0;
-
-    padding: 16px 10px;
-
-    background: rgba(255,255,255,.035);
-
-    color: #e8dfd3;
-
-    border: 1px solid rgba(201,169,110,.35);
-
-    border-radius: 18px;
-
-    font-size: 12px;
-
-    letter-spacing: .5px;
-}
-
-
-.botao-escolha:hover {
-
-    background: rgba(201,169,110,.08);
-
-}
-
-
-.botao-escolha.ativo {
-
-    background: var(--cor-evento);
-
-    color: #17130f;
-
-    border-color: var(--cor-evento);
-}
-
-
-/* =========================
-   CÂMERA
-========================= */
-
-.camera-box {
-
-    width: 100%;
-
-    overflow: hidden;
-
-    border-radius: 22px;
-
-    border: 1px solid rgba(201,169,110,.35);
-
-    background: #050505;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.45);
-
-    position: relative;
-
-    display: none;
-}
-
-
-#camera {
-
-    width: 100%;
-
-    display: block;
-
-    aspect-ratio: 3 / 4;
-
-    object-fit: cover;
-
-    background: #000;
-}
-
-
-#fotoTirada {
-
-    width: 100%;
-
-    display: none;
-
-    aspect-ratio: 3 / 4;
-
-    object-fit: cover;
-}
-
-
-#videoPreview {
-
-    width: 100%;
-
-    display: none;
-
-    aspect-ratio: 3 / 4;
-
-    object-fit: cover;
-
-    background: #000;
-}
-
-
-canvas {
-
-    display: none;
-}
-
-
-/* =========================
-   CONTADOR
-========================= */
-
-#contadorVideo {
-
-    position: absolute;
-
-    top: 14px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    padding: 8px 14px;
-
-    border-radius: 30px;
-
-    background: rgba(0,0,0,.7);
-
-    border: 1px solid rgba(255,255,255,.25);
-
-    color: #fff;
-
-    font-size: 12px;
-
-    z-index: 20;
-
-    display: none;
-
-    backdrop-filter: blur(8px);
-}
-
-
-#contadorVideo.gravando {
-
-    color: #ffb0b0;
-
-}
-
-
-/* =========================
-   TROCAR CÂMERA
-========================= */
-
-#trocar {
-
-    position: absolute;
-
-    right: 14px;
-
-    bottom: 14px;
-
-    width: auto;
-
-    margin: 0;
-
-    padding: 11px 15px;
-
-    border-radius: 50px;
-
-    background: rgba(0,0,0,.65);
-
-    color: white;
-
-    border: 1px solid rgba(255,255,255,.35);
-
-    backdrop-filter: blur(8px);
-
-    font-size: 12px;
-
-    z-index: 10;
-
-    display: none;
-}
-
-
-/* =========================
-   BOTÕES
-========================= */
-
-button {
-
-    width: 100%;
-
-    border: none;
-
-    border-radius: 50px;
-
-    padding: 17px 20px;
-
-    margin-top: 16px;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    letter-spacing: 1px;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-
-button:active {
-
-    transform: scale(.98);
-
-}
-
-
-button:disabled {
-
-    opacity: .55;
-
-    cursor: default;
-
-}
-
-
-#abrir {
-
-    background: var(--cor-evento);
-
-    color: #17130f;
-}
-
-
-#tirar {
-
-    background: var(--cor-evento);
-
-    color: #17130f;
-
-    display: none;
-}
-
-
-#gravar {
-
-    background: var(--cor-evento);
-
-    color: #17130f;
-
-    display: none;
-}
-
-
-#enviar {
-
-    background: var(--cor-evento);
-
-    color: #17130f;
-
-    display: none;
-}
-
-
-#enviarVideo {
-
-    background: var(--cor-evento);
-
-    color: #17130f;
-
-    display: none;
-}
-
-
-#outra {
-
-    background: transparent;
-
-    color: #d9d0c3;
-
-    border: 1px solid rgba(255,255,255,.2);
-
-    display: none;
-}
-
-
-#novoVideo {
-
-    background: transparent;
-
-    color: #d9d0c3;
-
-    border: 1px solid rgba(255,255,255,.2);
-
-    display: none;
-}
-
-
-#album {
-
-    background: transparent;
-
-    color: var(--cor-evento);
-
-    border: 1px solid rgba(201,169,110,.5);
-
-    display: none;
-}
-
-
-/* =========================
-   STATUS
-========================= */
-
-#status {
-
-    margin-top: 22px;
-
-    min-height: 45px;
-
-    text-align: center;
-
-    font-size: 12px;
-
-    color: #cfc5b6;
-
-    transition: .3s;
-
-    line-height: 1.6;
-}
-
-
-/* =========================
-   RODAPÉ
-========================= */
-
-.rodape {
-
-    margin-top: auto;
-
-    padding-top: 35px;
-
-    font-family: 'Cormorant Garamond', serif;
-
-    font-size: 18px;
-
-    color: #a99d8c;
-}
-
-
-.desenvolvido {
-
-    margin-top: 10px;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 9px;
-
-    letter-spacing: 1px;
-
-    color: #756d62;
-
-    opacity: .75;
-}
-
-
-iframe {
-
-    display: none;
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-    <div class="ornamento">
-        ✦
-    </div>
-
-
-    <h1 id="tituloEvento">
-
-        Compartilhe<br>
-
-        esse momento
-
-    </h1>
-
-
-    <div class="linha"></div>
-
-
-    <p class="subtitulo" id="mensagemEvento">
-
-        Registre um momento especial e<br>
-
-        faça parte das nossas memórias. ❤️
-
-    </p>
-
-
-    <!-- ESCOLHA -->
-
-    <div class="escolha">
-
-        <button
-            type="button"
-            class="botao-escolha ativo"
-            id="modoFoto">
-
-            📷 &nbsp; FOTO
-
-        </button>
-
-
-        <button
-            type="button"
-            class="botao-escolha"
-            id="modoVideo">
-
-            🎥 &nbsp; RECADO
-
-        </button>
-
-    </div>
-
-
-    <!-- CÂMERA -->
-
-    <div class="camera-box">
-
-
-        <video
-            id="camera"
-            autoplay
-            muted
-            playsinline>
-        </video>
-
-
-        <img
-            id="fotoTirada"
-            alt="Foto capturada">
-
-
-        <video
-            id="videoPreview"
-            controls
-            playsinline>
-        </video>
-
-
-        <div id="contadorVideo">
-            00:30
-        </div>
-
-
-        <button
-            type="button"
-            id="trocar">
-
-            ↻ &nbsp; Trocar câmera
-
-        </button>
-
-
-    </div>
-
-
-    <canvas id="canvas"></canvas>
-
-
-    <!-- ABRIR CÂMERA -->
-
-    <button
-        type="button"
-        id="abrir">
-
-        📷 &nbsp; ABRIR CÂMERA
-
-    </button>
-
-
-    <!-- TIRAR FOTO -->
-
-    <button
-        type="button"
-        id="tirar">
-
-        ✦ &nbsp; TIRAR FOTO
-
-    </button>
-
-
-    <!-- GRAVAR -->
-
-    <button
-        type="button"
-        id="gravar">
-
-        ● &nbsp; GRAVAR RECADO
-
-    </button>
-
-
-    <!-- ENVIAR FOTO -->
-
-    <button
-        type="button"
-        id="enviar">
-
-        ♥ &nbsp; COMPARTILHAR FOTO
-
-    </button>
-
-
-    <!-- ENVIAR VÍDEO -->
-
-    <button
-        type="button"
-        id="enviarVideo">
-
-        🎥 &nbsp; ENVIAR RECADO
-
-    </button>
-
-
-    <!-- OUTRA FOTO -->
-
-    <button
-        type="button"
-        id="outra">
-
-        ↻ &nbsp; TIRAR OUTRA
-
-    </button>
-
-
-    <!-- NOVO VÍDEO -->
-
-    <button
-        type="button"
-        id="novoVideo">
-
-        ↻ &nbsp; GRAVAR NOVAMENTE
-
-    </button>
-
-
-    <!-- ÁLBUM -->
-
-    <button
-        type="button"
-        id="album">
-
-        ♥ &nbsp; VER ÁLBUM
-
-    </button>
-
-
-    <div id="status"></div>
-
-
-    <div class="rodape">
-
-        Feito para guardar momentos.
-
-        <div class="desenvolvido">
-
-            Desenvolvido por Gustavo M.
-
-        </div>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- FORMULÁRIO -->
-
-<form
-
-    id="formulario"
-
-    action="https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec"
-
-    method="POST"
-
-    target="resposta">
-
-
-    <input
-        type="hidden"
-        name="foto"
-        id="foto">
-
-
-    <input
-        type="hidden"
-        name="nomeArquivo"
-        id="nomeArquivo">
-
-
-    <input
-        type="hidden"
-        name="evento"
-        id="evento">
-
-
-    <input
-        type="hidden"
-        name="tipo"
-        id="tipo"
-        value="foto">
-
-</form>
-
-
-<iframe
-    name="resposta"
-    id="resposta">
-</iframe>
-
-
-
-<script>
-
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
-
-let stream = null;
-
-let cameraAtual = "environment";
-
-let modoAtual = "foto";
-
-let mediaRecorder = null;
-
-let chunksVideo = [];
-
-let videoBlob = null;
-
-let videoMimeType = "";
-
-let contadorInterval = null;
-
-let segundosRestantes = 30;
+const PASTA_ID = "1KYTgInkJGHXm4cHRGc65hJ6p-gPz6FBp";
+
+
+const EVENTOS_PADRAO = {
+
+  "teste": {
+    nome: "Meu Evento",
+    tipo: "Evento",
+    mensagem: "Compartilhe seus melhores momentos.",
+    cor: "#d4af37"
+  },
+
+  "casamento-gustavo": {
+    nome: "Gustavo & Ana",
+    tipo: "Casamento",
+    mensagem: "Compartilhe seus melhores momentos.",
+    cor: "#d4af37"
+  },
+
+  "empresa-2026": {
+    nome: "Evento Corporativo 2026",
+    tipo: "Corporativo",
+    mensagem: "Compartilhe seus melhores momentos.",
+    cor: "#d4af37"
+  },
+
+  "nelson-viadinho": {
+    nome: "NELSON viadinho",
+    tipo: "Evento",
+    mensagem: "Compartilhe seus melhores momentos.",
+    cor: "#d4af37"
+  }
+
+};
 
 
 /* =====================================================
-   API
+   EVENTOS
 ===================================================== */
 
-const API_EVENTOS =
-"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+function obterEventos() {
+
+  const propriedades =
+    PropertiesService.getScriptProperties();
+
+  const salvo =
+    propriedades.getProperty("EVENTOS");
+
+  if (!salvo) {
+
+    salvarEventos(EVENTOS_PADRAO);
+
+    return EVENTOS_PADRAO;
+
+  }
+
+  try {
+
+    return JSON.parse(salvo);
+
+  }
+
+  catch (erro) {
+
+    salvarEventos(EVENTOS_PADRAO);
+
+    return EVENTOS_PADRAO;
+
+  }
+
+}
+
+
+function salvarEventos(eventos) {
+
+  PropertiesService
+    .getScriptProperties()
+    .setProperty(
+      "EVENTOS",
+      JSON.stringify(eventos)
+    );
+
+}
+
+
+function obterEvento(id) {
+
+  const eventos =
+    obterEventos();
+
+  return eventos[id] || null;
+
+}
 
 
 /* =====================================================
-   EVENTO
+   ID DO EVENTO
 ===================================================== */
 
-const parametros =
-    new URLSearchParams(
-        window.location.search
+function criarIdEvento(nome) {
+
+  return nome
+    .toString()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+}
+
+
+/* =====================================================
+   PASTA DO EVENTO
+===================================================== */
+
+function obterPastaEvento(idEvento) {
+
+  const pastaPrincipal =
+    DriveApp.getFolderById(PASTA_ID);
+
+  const pastas =
+    pastaPrincipal.getFoldersByName(idEvento);
+
+  if (pastas.hasNext()) {
+
+    return pastas.next();
+
+  }
+
+  return pastaPrincipal.createFolder(idEvento);
+
+}
+
+
+/* =====================================================
+   CONTAR FOTOS
+===================================================== */
+
+function contarFotosEvento(idEvento) {
+
+  try {
+
+    const pasta =
+      obterPastaEvento(idEvento);
+
+    const arquivos =
+      pasta.getFiles();
+
+    let total = 0;
+
+    while (arquivos.hasNext()) {
+
+      const arquivo =
+        arquivos.next();
+
+      const tipo =
+        arquivo.getMimeType();
+
+      if (
+        tipo &&
+        tipo.indexOf("image/") === 0
+      ) {
+
+        total++;
+
+      }
+
+    }
+
+    return total;
+
+  }
+
+  catch (erro) {
+
+    Logger.log(
+      "Erro ao contar fotos: " +
+      erro
+    );
+
+    return 0;
+
+  }
+
+}
+
+
+/* =====================================================
+   CONTAR VÍDEOS
+===================================================== */
+
+function contarVideosEvento(idEvento) {
+
+  try {
+
+    const pasta =
+      obterPastaEvento(idEvento);
+
+    const arquivos =
+      pasta.getFiles();
+
+    let total = 0;
+
+    while (arquivos.hasNext()) {
+
+      const arquivo =
+        arquivos.next();
+
+      const tipo =
+        arquivo.getMimeType();
+
+      if (
+        tipo &&
+        tipo.indexOf("video/") === 0
+      ) {
+
+        total++;
+
+      }
+
+    }
+
+    return total;
+
+  }
+
+  catch (erro) {
+
+    Logger.log(
+      "Erro ao contar vídeos: " +
+      erro
+    );
+
+    return 0;
+
+  }
+
+}
+
+
+/* =====================================================
+   CONTAR MÍDIA
+===================================================== */
+
+function contarMidiaEvento(idEvento) {
+
+  return {
+
+    fotos:
+      contarFotosEvento(idEvento),
+
+    videos:
+      contarVideosEvento(idEvento)
+
+  };
+
+}
+
+
+/* =====================================================
+   FUNÇÃO AUXILIAR
+   RESPOSTA JSON
+===================================================== */
+
+function respostaJSON(dados) {
+
+  return ContentService
+    .createTextOutput(
+      JSON.stringify(dados)
+    )
+    .setMimeType(
+      ContentService.MimeType.JSON
+    );
+
+}
+
+
+/* =====================================================
+   UPLOAD
+   FOTO + VÍDEO
+===================================================== */
+
+function doPost(e) {
+
+  try {
+
+    Logger.log(
+      "======================================"
+    );
+
+    Logger.log(
+      "NOVO UPLOAD"
+    );
+
+    Logger.log(
+      "======================================"
     );
 
 
-const evento =
-    parametros.get("evento") ||
-    "teste";
+    /* -------------------------------------------------
+       VERIFICA EVENTO
+    ------------------------------------------------- */
 
+    if (!e) {
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const abrir =
-    document.getElementById("abrir");
-
-
-const camera =
-    document.getElementById("camera");
-
-
-const trocar =
-    document.getElementById("trocar");
-
-
-const tirar =
-    document.getElementById("tirar");
-
-
-const gravar =
-    document.getElementById("gravar");
-
-
-const enviar =
-    document.getElementById("enviar");
-
-
-const enviarVideo =
-    document.getElementById("enviarVideo");
-
-
-const outra =
-    document.getElementById("outra");
-
-
-const novoVideo =
-    document.getElementById("novoVideo");
-
-
-const album =
-    document.getElementById("album");
-
-
-const fotoTirada =
-    document.getElementById("fotoTirada");
-
-
-const videoPreview =
-    document.getElementById("videoPreview");
-
-
-const contadorVideo =
-    document.getElementById("contadorVideo");
-
-
-const status =
-    document.getElementById("status");
-
-
-const modoFoto =
-    document.getElementById("modoFoto");
-
-
-const modoVideo =
-    document.getElementById("modoVideo");
-
-
-const cameraBox =
-    document.querySelector(".camera-box");
-
-
-/* =====================================================
-   FORMULÁRIO
-===================================================== */
-
-const formulario =
-    document.getElementById("formulario");
-
-
-const campoFoto =
-    document.getElementById("foto");
-
-
-const campoNome =
-    document.getElementById("nomeArquivo");
-
-
-const campoEvento =
-    document.getElementById("evento");
-
-
-const campoTipo =
-    document.getElementById("tipo");
-
-
-campoEvento.value =
-    evento;
-
-
-/* =====================================================
-   PARAR CÂMERA
-===================================================== */
-
-function pararCamera() {
-
-    if (stream) {
-
-        stream
-            .getTracks()
-            .forEach(
-                track => track.stop()
-            );
-
-        stream = null;
+      throw new Error(
+        "Objeto de requisição não recebido."
+      );
 
     }
 
-}
 
+    if (!e.parameter) {
 
-/* =====================================================
-   VERIFICAR SUPORTE
-===================================================== */
-
-function verificarSuporteCamera() {
-
-    if (
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia
-    ) {
-
-        status.innerHTML = `
-
-            <strong style="color:#c9a96e;">
-                Navegador incompatível
-            </strong>
-
-            <br>
-
-            Seu navegador não permite acesso
-            à câmera neste dispositivo.
-
-            <br><br>
-
-            Tente usar o Google Chrome ou Safari.
-
-        `;
-
-        return false;
+      throw new Error(
+        "Nenhum parâmetro foi recebido."
+      );
 
     }
 
 
-    return true;
+    const evento =
+      e.parameter.evento;
 
-}
+
+    Logger.log(
+      "Evento: " +
+      evento
+    );
 
 
-/* =====================================================
-   ABRIR CÂMERA
-===================================================== */
+    if (!evento) {
 
-async function abrirCamera() {
-
-    if (
-        !verificarSuporteCamera()
-    ) {
-
-        return;
+      throw new Error(
+        "Evento não informado."
+      );
 
     }
 
 
-    try {
+    /* -------------------------------------------------
+       VERIFICA SE EVENTO EXISTE
+    ------------------------------------------------- */
 
-        pararCamera();
+    const configuracao =
+      obterEvento(evento);
 
 
-        status.innerText =
-            modoAtual === "video"
-                ? "Solicitando acesso à câmera e ao microfone..."
-                : "Solicitando acesso à câmera...";
+    if (!configuracao) {
 
+      throw new Error(
+        "Evento não encontrado: " +
+        evento
+      );
+
+    }
+
+
+    /* -------------------------------------------------
+       TIPO
+    ------------------------------------------------- */
+
+    const tipo =
+      (
+        e.parameter.tipo ||
+        "foto"
+      )
+      .toString()
+      .toLowerCase()
+      .trim();
+
+
+    Logger.log(
+      "Tipo: " +
+      tipo
+    );
+
+
+    /* -------------------------------------------------
+       LOCALIZA O ARQUIVO RECEBIDO
+    ------------------------------------------------- */
+
+    const base64 =
+      e.parameter.imagem ||
+      e.parameter.foto ||
+      e.parameter.image ||
+      e.parameter.video ||
+      e.parameter.arquivo;
+
+
+    if (!base64) {
+
+      throw new Error(
+        "Nenhum arquivo foi recebido pelo servidor."
+      );
+
+    }
+
+
+    Logger.log(
+      "Base64 recebido."
+    );
+
+
+    Logger.log(
+      "Tamanho original: " +
+      base64.length
+    );
+
+
+    /* -------------------------------------------------
+       DETECTA MIME
+    ------------------------------------------------- */
+
+    let mimeType = "";
+    let extensao = "";
+
+
+    if (tipo === "video") {
+
+      if (
+        base64.indexOf("video/mp4") !== -1
+      ) {
+
+        mimeType = "video/mp4";
+        extensao = "mp4";
+
+      }
+
+      else if (
+        base64.indexOf("video/webm") !== -1
+      ) {
+
+        mimeType = "video/webm";
+        extensao = "webm";
+
+      }
+
+      else {
 
         /*
-         * FOTO NÃO PRECISA DE MICROFONE.
-         *
-         * VÍDEO PRECISA DE CÂMERA + MICROFONE.
+         * Caso o navegador não envie
+         * o prefixo MIME, assumimos WebM.
          */
 
-        const constraints = {
+        mimeType = "video/webm";
+        extensao = "webm";
 
-            video: {
-
-                facingMode:
-                    cameraAtual,
-
-                width: {
-
-                    ideal: 1280,
-
-                    max: 1280
-
-                },
-
-                height: {
-
-                    ideal: 720,
-
-                    max: 720
-
-                }
-
-            },
-
-            audio:
-                modoAtual === "video"
-
-        };
-
-
-        stream =
-            await navigator.mediaDevices
-                .getUserMedia(
-                    constraints
-                );
-
-
-        camera.srcObject =
-            stream;
-
-
-        await camera.play();
-
-
-        camera.style.display =
-            "block";
-
-
-        fotoTirada.style.display =
-            "none";
-
-
-        videoPreview.style.display =
-            "none";
-
-
-        cameraBox.style.display =
-            "block";
-
-
-        abrir.style.display =
-            "none";
-
-
-        trocar.style.display =
-            "block";
-
-
-        album.style.display =
-            "none";
-
-
-        if (
-            modoAtual === "foto"
-        ) {
-
-            tirar.style.display =
-                "block";
-
-
-            gravar.style.display =
-                "none";
-
-
-            status.innerText =
-
-                cameraAtual === "user"
-
-                    ? "🤳 Câmera frontal pronta."
-
-                    : "📷 Câmera traseira pronta.";
-
-        }
-
-        else {
-
-            tirar.style.display =
-                "none";
-
-
-            gravar.style.display =
-                "block";
-
-
-            status.innerHTML = `
-
-                <span style="color:#c9a96e;">
-                    🎥 Tudo pronto!
-                </span>
-
-                <br>
-
-                Clique em "GRAVAR RECADO".
-
-            `;
-
-        }
+      }
 
     }
 
-    catch (erro) {
+    else {
 
-        console.error(
-            "Erro ao abrir câmera:",
-            erro
-        );
+      if (
+        base64.indexOf("image/png") !== -1
+      ) {
 
+        mimeType = "image/png";
+        extensao = "png";
 
-        pararCamera();
+      }
 
+      else if (
+        base64.indexOf("image/webp") !== -1
+      ) {
 
-        let mensagem =
-            "Não foi possível acessar a câmera.";
+        mimeType = "image/webp";
+        extensao = "webp";
 
+      }
 
-        if (
-            erro.name ===
-            "NotAllowedError"
-        ) {
+      else {
 
-            mensagem = `
+        mimeType = "image/jpeg";
+        extensao = "jpg";
 
-                <strong style="color:#c9a96e;">
-                    Permissão bloqueada
-                </strong>
-
-                <br>
-
-                Permita o acesso à câmera
-                ${modoAtual === "video"
-                    ? "e ao microfone"
-                    : ""}
-                nas configurações do navegador
-                e tente novamente.
-
-            `;
-
-        }
-
-        else if (
-            erro.name ===
-            "NotFoundError"
-        ) {
-
-            mensagem = `
-
-                <strong style="color:#c9a96e;">
-                    Câmera ou microfone não encontrado
-                </strong>
-
-                <br>
-
-                Verifique se o dispositivo possui
-                câmera e microfone disponíveis.
-
-            `;
-
-        }
-
-        else if (
-            erro.name ===
-            "NotReadableError"
-        ) {
-
-            mensagem = `
-
-                <strong style="color:#c9a96e;">
-                    Câmera está sendo usada
-                </strong>
-
-                <br>
-
-                Feche outros aplicativos ou abas
-                que estejam usando a câmera.
-
-            `;
-
-        }
-
-        else if (
-            erro.name ===
-            "SecurityError"
-        ) {
-
-            mensagem = `
-
-                <strong style="color:#c9a96e;">
-                    Acesso bloqueado pelo navegador
-                </strong>
-
-                <br>
-
-                Abra o site diretamente pelo
-                endereço HTTPS do GitHub Pages.
-
-            `;
-
-        }
-
-        else {
-
-            mensagem = `
-
-                <strong style="color:#c9a96e;">
-                    Não foi possível acessar a câmera
-                </strong>
-
-                <br>
-
-                ${erro.message || "Verifique as permissões do dispositivo."}
-
-            `;
-
-        }
-
-
-        status.innerHTML =
-            mensagem;
-
-    }
-
-}
-
-
-/* =====================================================
-   MODO FOTO
-===================================================== */
-
-modoFoto.addEventListener(
-    "click",
-    function() {
-
-        if (
-            mediaRecorder &&
-            mediaRecorder.state === "recording"
-        ) {
-
-            return;
-
-        }
-
-
-        modoAtual =
-            "foto";
-
-
-        modoFoto.classList.add(
-            "ativo"
-        );
-
-
-        modoVideo.classList.remove(
-            "ativo"
-        );
-
-
-        resetarInterface();
-
-
-        abrir.style.display =
-            "block";
-
-
-        status.innerText =
-            "Escolha abrir a câmera para tirar uma foto.";
-
-    }
-);
-
-
-/* =====================================================
-   MODO VÍDEO
-===================================================== */
-
-modoVideo.addEventListener(
-    "click",
-    function() {
-
-        if (
-            mediaRecorder &&
-            mediaRecorder.state === "recording"
-        ) {
-
-            return;
-
-        }
-
-
-        modoAtual =
-            "video";
-
-
-        modoVideo.classList.add(
-            "ativo"
-        );
-
-
-        modoFoto.classList.remove(
-            "ativo"
-        );
-
-
-        resetarInterface();
-
-
-        abrir.style.display =
-            "block";
-
-
-        status.innerText =
-            "Grave um recado de até 30 segundos. ❤️";
-
-    }
-);
-
-
-/* =====================================================
-   ABRIR
-===================================================== */
-
-abrir.addEventListener(
-    "click",
-    function() {
-
-        abrirCamera();
-
-    }
-);
-
-
-/* =====================================================
-   TROCAR CÂMERA
-===================================================== */
-
-trocar.addEventListener(
-    "click",
-    async function() {
-
-        if (
-            mediaRecorder &&
-            mediaRecorder.state === "recording"
-        ) {
-
-            return;
-
-        }
-
-
-        cameraAtual =
-
-            cameraAtual === "environment"
-
-                ? "user"
-
-                : "environment";
-
-
-        await abrirCamera();
-
-    }
-);
-
-
-/* =====================================================
-   TIRAR FOTO
-===================================================== */
-
-tirar.addEventListener(
-    "click",
-    function() {
-
-        let largura =
-            camera.videoWidth;
-
-
-        let altura =
-            camera.videoHeight;
-
-
-        if (
-            !largura ||
-            !altura
-        ) {
-
-            status.innerText =
-                "Aguarde a câmera carregar.";
-
-            return;
-
-        }
-
-
-        const larguraMaxima =
-            1600;
-
-
-        if (
-            largura >
-            larguraMaxima
-        ) {
-
-            const proporcao =
-                larguraMaxima /
-                largura;
-
-
-            largura =
-                larguraMaxima;
-
-
-            altura =
-                altura *
-                proporcao;
-
-        }
-
-
-        canvas.width =
-            largura;
-
-
-        canvas.height =
-            altura;
-
-
-        const contexto =
-            canvas.getContext(
-                "2d"
-            );
-
-
-        contexto.drawImage(
-
-            camera,
-
-            0,
-            0,
-
-            largura,
-            altura
-
-        );
-
-
-        const fotoBase64 =
-            canvas.toDataURL(
-                "image/jpeg",
-                0.75
-            );
-
-
-        fotoTirada.src =
-            fotoBase64;
-
-
-        fotoTirada.style.display =
-            "block";
-
-
-        camera.style.display =
-            "none";
-
-
-        pararCamera();
-
-
-        tirar.style.display =
-            "none";
-
-
-        trocar.style.display =
-            "none";
-
-
-        enviar.style.display =
-            "block";
-
-
-        outra.style.display =
-            "block";
-
-
-        status.innerText =
-            "Sua foto está pronta ♥";
-
-    }
-);
-
-
-/* =====================================================
-   ENVIAR FOTO
-===================================================== */
-
-enviar.addEventListener(
-    "click",
-    function() {
-
-        const fotoBase64 =
-            canvas.toDataURL(
-                "image/jpeg",
-                0.75
-            );
-
-
-        const base64 =
-            fotoBase64.split(",")[1];
-
-
-        campoFoto.value =
-            base64;
-
-
-        campoNome.value =
-            "foto_" +
-            Date.now() +
-            ".jpg";
-
-
-        campoTipo.value =
-            "foto";
-
-
-        campoEvento.value =
-            evento;
-
-
-        enviar.disabled =
-            true;
-
-
-        enviar.innerHTML =
-            "⏳ &nbsp; ENVIANDO...";
-
-
-        status.innerText =
-            "Compartilhando sua foto...";
-
-
-        formulario.submit();
-
-
-        setTimeout(
-            function() {
-
-                status.innerHTML = `
-
-                    <div style="
-                        font-family:'Cormorant Garamond',serif;
-                        font-size:25px;
-                        color:var(--cor-evento);
-                        margin-bottom:8px;
-                    ">
-
-                        Foto compartilhada ♥
-
-                    </div>
-
-                    <div style="
-                        font-family:'Montserrat',sans-serif;
-                        font-size:12px;
-                        line-height:1.7;
-                        color:#cfc5b6;
-                    ">
-
-                        Obrigado por fazer parte
-                        desse momento especial.
-
-                    </div>
-
-                `;
-
-
-                enviar.innerHTML =
-                    "✓ &nbsp; FOTO COMPARTILHADA";
-
-
-                outra.style.display =
-                    "block";
-
-
-                album.style.display =
-                    "block";
-
-
-                outra.innerHTML =
-                    "📷 &nbsp; TIRAR OUTRA FOTO";
-
-
-            },
-            3000
-        );
-
-    }
-);
-
-
-/* =====================================================
-   ESCOLHER MIME TYPE
-===================================================== */
-
-function escolherMimeType() {
-
-    if (
-        typeof MediaRecorder ===
-        "undefined"
-    ) {
-
-        return null;
+      }
 
     }
 
 
-    const tipos = [
-
-        "video/mp4;codecs=h264,aac",
-
-        "video/mp4",
-
-        "video/webm;codecs=vp8,opus",
-
-        "video/webm;codecs=vp9,opus",
-
-        "video/webm"
-
-    ];
-
-
-    for (
-        const tipo of tipos
-    ) {
-
-        try {
-
-            if (
-                MediaRecorder.isTypeSupported(
-                    tipo
-                )
-            ) {
-
-                return tipo;
-
-            }
-
-        }
-
-        catch (erro) {}
-
-    }
-
-
-    return null;
-
-}
-
-
-/* =====================================================
-   INICIAR GRAVAÇÃO
-===================================================== */
-
-function iniciarGravacao() {
-
-    if (!stream) {
-
-        status.innerText =
-            "Abra a câmera primeiro.";
-
-        return;
-
-    }
-
-
-    if (
-        typeof MediaRecorder ===
-        "undefined"
-    ) {
-
-        status.innerHTML = `
-
-            <strong style="color:#c9a96e;">
-                Gravação não suportada
-            </strong>
-
-            <br>
-
-            Este navegador não oferece
-            suporte à gravação de vídeo.
-
-            <br><br>
-
-            Tente usar Google Chrome ou Safari.
-
-        `;
-
-        return;
-
-    }
-
-
-    videoMimeType =
-        escolherMimeType();
-
-
-    if (!videoMimeType) {
-
-        status.innerHTML = `
-
-            <strong style="color:#c9a96e;">
-                Formato de vídeo não suportado
-            </strong>
-
-            <br>
-
-            Seu navegador não possui um formato
-            compatível para gravar vídeos.
-
-        `;
-
-        return;
-
-    }
-
-
-    chunksVideo = [];
-
-    videoBlob = null;
-
-
-    try {
-
-        mediaRecorder =
-            new MediaRecorder(
-
-                stream,
-
-                {
-
-                    mimeType:
-                        videoMimeType,
-
-                    videoBitsPerSecond:
-                        800000,
-
-                    audioBitsPerSecond:
-                        64000
-
-                }
-
-            );
-
-    }
-
-    catch (erro) {
-
-        console.error(
-            "MediaRecorder:",
-            erro
-        );
-
-
-        status.innerHTML = `
-
-            <strong style="color:#c9a96e;">
-                Não foi possível iniciar a gravação
-            </strong>
-
-            <br>
-
-            Seu navegador não conseguiu
-            preparar a câmera para gravação.
-
-        `;
-
-        return;
-
-    }
-
-
-    mediaRecorder.ondataavailable =
-        function(event) {
-
-            if (
-                event.data &&
-                event.data.size > 0
-            ) {
-
-                chunksVideo.push(
-                    event.data
-                );
-
-            }
-
-        };
-
-
-    mediaRecorder.onerror =
-        function(event) {
-
-            console.error(
-                "Erro no MediaRecorder:",
-                event
-            );
-
-
-            status.innerText =
-                "Ocorreu um erro durante a gravação.";
-
-        };
-
-
-    mediaRecorder.onstop =
-        function() {
-
-            if (
-                chunksVideo.length === 0
-            ) {
-
-                status.innerText =
-                    "Nenhum vídeo foi gravado.";
-
-                return;
-
-            }
-
-
-            videoBlob =
-                new Blob(
-
-                    chunksVideo,
-
-                    {
-
-                        type:
-                            videoMimeType
-
-                    }
-
-                );
-
-
-            const videoURL =
-                URL.createObjectURL(
-                    videoBlob
-                );
-
-
-            videoPreview.src =
-                videoURL;
-
-
-            videoPreview.style.display =
-                "block";
-
-
-            camera.style.display =
-                "none";
-
-
-            contadorVideo.style.display =
-                "none";
-
-
-            trocar.style.display =
-                "none";
-
-
-            gravar.style.display =
-                "none";
-
-
-            enviarVideo.style.display =
-                "block";
-
-
-            novoVideo.style.display =
-                "block";
-
-
-            const tamanhoMB =
-                (
-                    videoBlob.size /
-                    1024 /
-                    1024
-                ).toFixed(2);
-
-
-            status.innerHTML = `
-
-                <strong style="color:#c9a96e;">
-                    Seu recado está pronto ❤️
-                </strong>
-
-                <br>
-
-                ${tamanhoMB} MB
-
-            `;
-
-
-            pararCamera();
-
-        };
+    Logger.log(
+      "MIME: " +
+      mimeType
+    );
+
+    Logger.log(
+      "Extensão: " +
+      extensao
+    );
+
+
+    /* -------------------------------------------------
+       REMOVE CABEÇALHO DATA URI
+    ------------------------------------------------- */
+
+    let dados =
+      base64.replace(
+        /^data:[^,]+,/,
+        ""
+      );
 
 
     /*
-     * Começa a gravação.
+     * Remove espaços, quebras de linha
+     * e caracteres invisíveis.
      */
+
+    dados =
+      dados
+        .replace(/\s/g, "")
+        .trim();
+
+
+    if (!dados) {
+
+      throw new Error(
+        "O Base64 ficou vazio após o processamento."
+      );
+
+    }
+
+
+    Logger.log(
+      "Base64 processado: " +
+      dados.length
+    );
+
+
+    /* -------------------------------------------------
+       DECODIFICA
+    ------------------------------------------------- */
+
+    let bytes;
 
     try {
 
-        mediaRecorder.start(
-            1000
-        );
+      bytes =
+        Utilities.base64Decode(dados);
 
     }
 
-    catch (erro) {
+    catch (erroBase64) {
 
-        console.error(erro);
+      Logger.log(
+        "Erro Base64: " +
+        erroBase64
+      );
 
-        status.innerText =
-            "Não foi possível começar a gravação.";
-
-        return;
-
-    }
-
-
-    segundosRestantes =
-        30;
-
-
-    contadorVideo.innerText =
-        "00:30";
-
-
-    contadorVideo.classList.add(
-        "gravando"
-    );
-
-
-    contadorVideo.style.display =
-        "block";
-
-
-    gravar.innerHTML =
-        "■ &nbsp; PARAR GRAVAÇÃO";
-
-
-    status.innerText =
-        "Gravando seu recado...";
-
-
-    contadorInterval =
-        setInterval(
-            function() {
-
-                segundosRestantes--;
-
-
-                const segundos =
-                    String(
-                        segundosRestantes
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-
-
-                contadorVideo.innerText =
-                    "00:" +
-                    segundos;
-
-
-                if (
-                    segundosRestantes <= 0
-                ) {
-
-                    pararGravacao();
-
-                }
-
-            },
-            1000
-        );
-
-}
-
-
-/* =====================================================
-   PARAR GRAVAÇÃO
-===================================================== */
-
-function pararGravacao() {
-
-    if (contadorInterval) {
-
-        clearInterval(
-            contadorInterval
-        );
-
-        contadorInterval =
-            null;
+      throw new Error(
+        "Não foi possível decodificar o arquivo enviado."
+      );
 
     }
-
-
-    contadorVideo.classList.remove(
-        "gravando"
-    );
 
 
     if (
-        mediaRecorder &&
-        mediaRecorder.state === "recording"
+      !bytes ||
+      bytes.length === 0
     ) {
 
-        mediaRecorder.stop();
+      throw new Error(
+        "O arquivo recebido possui 0 bytes."
+      );
 
     }
+
+
+    Logger.log(
+      "Bytes decodificados: " +
+      bytes.length
+    );
+
+
+    /* -------------------------------------------------
+       PASTA
+    ------------------------------------------------- */
+
+    const pasta =
+      obterPastaEvento(evento);
+
+
+    Logger.log(
+      "Pasta encontrada: " +
+      pasta.getName()
+    );
+
+    Logger.log(
+      "ID da pasta: " +
+      pasta.getId()
+    );
+
+
+    /* =================================================
+       FOTO
+    ================================================= */
+
+    if (tipo === "foto") {
+
+      const nomeArquivo =
+        "foto_" +
+        new Date().getTime() +
+        "." +
+        extensao;
+
+
+      const blob =
+        Utilities.newBlob(
+          bytes,
+          mimeType,
+          nomeArquivo
+        );
+
+
+      Logger.log(
+        "Criando foto no Drive..."
+      );
+
+
+      const arquivo =
+        pasta.createFile(blob);
+
+
+      Logger.log(
+        "FOTO CRIADA!"
+      );
+
+      Logger.log(
+        "Nome: " +
+        arquivo.getName()
+      );
+
+      Logger.log(
+        "ID: " +
+        arquivo.getId()
+      );
+
+      Logger.log(
+        "Tamanho: " +
+        arquivo.getSize()
+      );
+
+
+      try {
+
+        arquivo.setSharing(
+          DriveApp.Access.ANYONE_WITH_LINK,
+          DriveApp.Permission.VIEW
+        );
+
+      }
+
+      catch (erroCompartilhamento) {
+
+        Logger.log(
+          "Compartilhamento não alterado: " +
+          erroCompartilhamento
+        );
+
+      }
+
+
+      /* -------------------------------------------------
+         CONFIRMA QUE O ARQUIVO EXISTE
+      ------------------------------------------------- */
+
+      const arquivoConfirmacao =
+        DriveApp.getFileById(
+          arquivo.getId()
+        );
+
+
+      if (!arquivoConfirmacao) {
+
+        throw new Error(
+          "O arquivo foi criado, mas não pôde ser confirmado."
+        );
+
+      }
+
+
+      const totalFotos =
+        contarFotosEvento(evento);
+
+
+      return respostaJSON({
+
+        sucesso: true,
+
+        tipo: "foto",
+
+        mensagem:
+          "Foto enviada com sucesso!",
+
+        evento:
+          evento,
+
+        nome:
+          arquivo.getName(),
+
+        id:
+          arquivo.getId(),
+
+        tamanho:
+          arquivo.getSize(),
+
+        url:
+          "https://drive.google.com/uc?export=view&id=" +
+          arquivo.getId(),
+
+        fotos:
+          totalFotos
+
+      });
+
+    }
+
+
+    /* =================================================
+       VÍDEO
+    ================================================= */
+
+    if (tipo === "video") {
+
+      const nomeArquivo =
+        "recado_" +
+        new Date().getTime() +
+        "." +
+        extensao;
+
+
+      Logger.log(
+        "Preparando Blob do vídeo..."
+      );
+
+
+      const blob =
+        Utilities.newBlob(
+          bytes,
+          mimeType,
+          nomeArquivo
+        );
+
+
+      Logger.log(
+        "Blob criado."
+      );
+
+      Logger.log(
+        "Tamanho do Blob: " +
+        blob.getBytes().length
+      );
+
+
+      Logger.log(
+        "Criando vídeo no Drive..."
+      );
+
+
+      const arquivo =
+        pasta.createFile(blob);
+
+
+      Logger.log(
+        "======================================"
+      );
+
+      Logger.log(
+        "VÍDEO CRIADO COM SUCESSO!"
+      );
+
+      Logger.log(
+        "Nome: " +
+        arquivo.getName()
+      );
+
+      Logger.log(
+        "ID: " +
+        arquivo.getId()
+      );
+
+      Logger.log(
+        "Tamanho: " +
+        arquivo.getSize()
+      );
+
+      Logger.log(
+        "MIME: " +
+        arquivo.getMimeType()
+      );
+
+      Logger.log(
+        "======================================"
+      );
+
+
+      /* -------------------------------------------------
+         COMPARTILHAMENTO
+      ------------------------------------------------- */
+
+      try {
+
+        arquivo.setSharing(
+          DriveApp.Access.ANYONE_WITH_LINK,
+          DriveApp.Permission.VIEW
+        );
+
+
+        Logger.log(
+          "Compartilhamento configurado."
+        );
+
+      }
+
+      catch (erroCompartilhamento) {
+
+        Logger.log(
+          "Erro no compartilhamento:"
+        );
+
+        Logger.log(
+          erroCompartilhamento
+        );
+
+      }
+
+
+      /* -------------------------------------------------
+         CONFIRMA ARQUIVO NO DRIVE
+      ------------------------------------------------- */
+
+      let arquivoConfirmacao;
+
+      try {
+
+        arquivoConfirmacao =
+          DriveApp.getFileById(
+            arquivo.getId()
+          );
+
+      }
+
+      catch (erroConfirmacao) {
+
+        Logger.log(
+          "Erro ao confirmar arquivo:"
+        );
+
+        Logger.log(
+          erroConfirmacao
+        );
+
+        throw new Error(
+          "O vídeo foi criado, mas não pôde ser confirmado no Google Drive."
+        );
+
+      }
+
+
+      if (
+        !arquivoConfirmacao ||
+        arquivoConfirmacao.getSize() <= 0
+      ) {
+
+        throw new Error(
+          "O vídeo foi criado, mas possui tamanho inválido."
+        );
+
+      }
+
+
+      const totalVideos =
+        contarVideosEvento(evento);
+
+
+      return respostaJSON({
+
+        sucesso: true,
+
+        tipo: "video",
+
+        mensagem:
+          "Recado enviado com sucesso!",
+
+        evento:
+          evento,
+
+        nome:
+          arquivo.getName(),
+
+        id:
+          arquivo.getId(),
+
+        tamanho:
+          arquivo.getSize(),
+
+        mime:
+          arquivo.getMimeType(),
+
+        url:
+          "https://drive.google.com/uc?export=view&id=" +
+          arquivo.getId(),
+
+        videos:
+          totalVideos
+
+      });
+
+    }
+
+
+    /* -------------------------------------------------
+       TIPO INVÁLIDO
+    ------------------------------------------------- */
+
+    throw new Error(
+      "Tipo de arquivo inválido: " +
+      tipo
+    );
+
+
+  }
+
+  catch (erro) {
+
+    Logger.log(
+      "======================================"
+    );
+
+    Logger.log(
+      "ERRO NO UPLOAD"
+    );
+
+    Logger.log(
+      erro
+    );
+
+    Logger.log(
+      "======================================"
+    );
+
+
+    return respostaJSON({
+
+      sucesso: false,
+
+      erro:
+        erro.message ||
+        String(erro)
+
+    });
+
+  }
 
 }
 
 
 /* =====================================================
-   BOTÃO GRAVAR
-   IMPORTANTE:
-   AGORA EXISTE APENAS UM EVENTO
+   JSONP
 ===================================================== */
 
-gravar.addEventListener(
-    "click",
-    function() {
-
-        if (
-            mediaRecorder &&
-            mediaRecorder.state === "recording"
-        ) {
-
-            pararGravacao();
-
-            return;
-
-        }
-
-
-        iniciarGravacao();
-
-    }
-);
-
-
-/* =====================================================
-   ENVIAR VÍDEO
-===================================================== */
-
-enviarVideo.addEventListener(
-    "click",
-    async function() {
-
-        if (!videoBlob) {
-
-            status.innerText =
-                "Nenhum vídeo foi gravado.";
-
-            return;
-
-        }
-
-
-        enviarVideo.disabled =
-            true;
-
-
-        enviarVideo.innerHTML =
-            "⏳ &nbsp; PREPARANDO RECADO...";
-
-
-        status.innerText =
-            "Preparando seu recado...";
-
-
-        try {
-
-            const base64 =
-                await blobParaBase64(
-                    videoBlob
-                );
-
-
-            campoFoto.value =
-                base64;
-
-
-            /*
-             * Descobre extensão pelo formato.
-             */
-
-            let extensao =
-                "webm";
-
-
-            if (
-                videoMimeType
-                    .toLowerCase()
-                    .includes(
-                        "mp4"
-                    )
-            ) {
-
-                extensao =
-                    "mp4";
-
-            }
-
-
-            campoNome.value =
-                "recado_" +
-                Date.now() +
-                "." +
-                extensao;
-
-
-            campoTipo.value =
-                "video";
-
-
-            campoEvento.value =
-                evento;
-
-
-            enviarVideo.innerHTML =
-                "⏳ &nbsp; ENVIANDO RECADO...";
-
-
-            status.innerText =
-                "Enviando seu recado...";
-
-
-            formulario.submit();
-
-
-            setTimeout(
-                function() {
-
-                    status.innerHTML = `
-
-                        <div style="
-                            font-family:'Cormorant Garamond',serif;
-                            font-size:25px;
-                            color:var(--cor-evento);
-                            margin-bottom:8px;
-                        ">
-
-                            Recado enviado ♥
-
-                        </div>
-
-                        <div style="
-                            font-family:'Montserrat',sans-serif;
-                            font-size:12px;
-                            line-height:1.7;
-                            color:#cfc5b6;
-                        ">
-
-                            Obrigado por deixar
-                            uma lembrança especial.
-
-                        </div>
-
-                    `;
-
-
-                    enviarVideo.innerHTML =
-                        "✓ &nbsp; RECADO ENVIADO";
-
-
-                    novoVideo.style.display =
-                        "block";
-
-
-                    album.style.display =
-                        "block";
-
-
-                    enviarVideo.disabled =
-                        false;
-
-                },
-                4000
-            );
-
-        }
-
-        catch (erro) {
-
-            console.error(
-                "Erro ao enviar vídeo:",
-                erro
-            );
-
-
-            status.innerText =
-                "Não foi possível preparar o vídeo.";
-
-
-            enviarVideo.disabled =
-                false;
-
-
-            enviarVideo.innerHTML =
-                "🎥 &nbsp; ENVIAR RECADO";
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   BLOB → BASE64
-===================================================== */
-
-function blobParaBase64(
-    blob
+function responderJSONP(
+  dados,
+  callback
 ) {
 
-    return new Promise(
-        function(resolve, reject) {
-
-            const reader =
-                new FileReader();
+  const json =
+    JSON.stringify(dados);
 
 
-            reader.onloadend =
-                function() {
+  if (!callback) {
 
-                    const resultado =
-                        reader.result;
+    return ContentService
+      .createTextOutput(json)
+      .setMimeType(
+        ContentService.MimeType.JSON
+      );
 
-
-                    resolve(
-                        resultado.split(",")[1]
-                    );
-
-                };
+  }
 
 
-            reader.onerror =
-                reject;
-
-
-            reader.readAsDataURL(
-                blob
-            );
-
-        }
+  return ContentService
+    .createTextOutput(
+      callback +
+      "(" +
+      json +
+      ");"
+    )
+    .setMimeType(
+      ContentService.MimeType.JAVASCRIPT
     );
 
 }
-
-
-/* =====================================================
-   TIRAR OUTRA FOTO
-===================================================== */
-
-outra.addEventListener(
-    "click",
-    async function() {
-
-        modoAtual =
-            "foto";
-
-
-        modoFoto.classList.add(
-            "ativo"
-        );
-
-
-        modoVideo.classList.remove(
-            "ativo"
-        );
-
-
-        resetarInterface();
-
-
-        await abrirCamera();
-
-    }
-);
-
-
-/* =====================================================
-   GRAVAR NOVAMENTE
-===================================================== */
-
-novoVideo.addEventListener(
-    "click",
-    async function() {
-
-        modoAtual =
-            "video";
-
-
-        modoVideo.classList.add(
-            "ativo"
-        );
-
-
-        modoFoto.classList.remove(
-            "ativo"
-        );
-
-
-        resetarInterface();
-
-
-        await abrirCamera();
-
-    }
-);
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetarInterface() {
-
-    pararGravacao();
-
-    pararCamera();
-
-
-    if (
-        videoPreview.src
-    ) {
-
-        try {
-
-            URL.revokeObjectURL(
-                videoPreview.src
-            );
-
-        }
-
-        catch (erro) {}
-
-    }
-
-
-    videoPreview.removeAttribute(
-        "src"
-    );
-
-
-    camera.srcObject =
-        null;
-
-
-    camera.style.display =
-        "none";
-
-
-    fotoTirada.style.display =
-        "none";
-
-
-    videoPreview.style.display =
-        "none";
-
-
-    contadorVideo.style.display =
-        "none";
-
-
-    cameraBox.style.display =
-        "none";
-
-
-    abrir.style.display =
-        "none";
-
-
-    tirar.style.display =
-        "none";
-
-
-    gravar.style.display =
-        "none";
-
-
-    enviar.style.display =
-        "none";
-
-
-    enviarVideo.style.display =
-        "none";
-
-
-    outra.style.display =
-        "none";
-
-
-    novoVideo.style.display =
-        "none";
-
-
-    album.style.display =
-        "none";
-
-
-    trocar.style.display =
-        "none";
-
-
-    enviar.disabled =
-        false;
-
-
-    enviarVideo.disabled =
-        false;
-
-
-    enviar.innerHTML =
-        "♥ &nbsp; COMPARTILHAR FOTO";
-
-
-    enviarVideo.innerHTML =
-        "🎥 &nbsp; ENVIAR RECADO";
-
-
-    gravar.innerHTML =
-        "● &nbsp; GRAVAR RECADO";
-
-
-    chunksVideo = [];
-
-    videoBlob = null;
-
-    mediaRecorder = null;
-
-}
-
-
-/* =====================================================
-   VER ÁLBUM
-===================================================== */
-
-album.addEventListener(
-    "click",
-    function() {
-
-        window.location.href =
-            "album.html?evento=" +
-            encodeURIComponent(
-                evento
-            );
-
-    }
-);
 
 
 /* =====================================================
    CONFIGURAÇÃO DO EVENTO
 ===================================================== */
 
-function carregarEvento() {
+function obterConfiguracaoEvento(
+  evento
+) {
 
-    const callback =
-        "evento_" +
-        Date.now();
-
-
-    window[callback] =
-        function(config) {
-
-            delete window[callback];
+  const dados =
+    obterEvento(evento);
 
 
-            if (
-                !config ||
-                config.erro
-            ) {
+  if (!dados) {
 
-                console.log(
-                    "Evento não encontrado."
-                );
+    return {
 
-                return;
+      sucesso: false,
 
-            }
+      erro:
+        "Evento não encontrado."
 
+    };
 
-            const titulo =
-                document.getElementById(
-                    "tituloEvento"
-                );
+  }
 
 
-            if (titulo) {
+  return {
 
-                titulo.innerHTML =
-                    config.nome;
+    sucesso: true,
 
-            }
+    evento: evento,
 
+    nome:
+      dados.nome,
 
-            const mensagem =
-                document.getElementById(
-                    "mensagemEvento"
-                );
+    tipo:
+      dados.tipo,
 
+    mensagem:
+      dados.mensagem,
 
-            if (mensagem) {
+    cor:
+      dados.cor
 
-                mensagem.innerHTML =
-                    config.mensagem;
-
-            }
-
-
-            if (config.cor) {
-
-                document.documentElement
-                    .style.setProperty(
-                        "--cor-evento",
-                        config.cor
-                    );
-
-            }
-
-        };
-
-
-    const script =
-        document.createElement(
-            "script"
-        );
-
-
-    script.src =
-        API_EVENTOS +
-        "?evento=" +
-        encodeURIComponent(
-            evento
-        ) +
-        "&config=true" +
-        "&callback=" +
-        callback;
-
-
-    script.onerror =
-        function() {
-
-            delete window[callback];
-
-        };
-
-
-    document.body.appendChild(
-        script
-    );
+  };
 
 }
 
 
 /* =====================================================
-   INICIAR
+   CRIAR EVENTO
 ===================================================== */
 
-carregarEvento();
+function criarEvento(e) {
 
-</script>
+  try {
 
-</body>
+    const nome =
+      e.parameter.nome;
 
-</html>
+
+    if (!nome) {
+
+      throw new Error(
+        "Nome do evento é obrigatório."
+      );
+
+    }
+
+
+    let id =
+      e.parameter.id ||
+      criarIdEvento(nome);
+
+
+    const eventos =
+      obterEventos();
+
+
+    if (eventos[id]) {
+
+      throw new Error(
+        "Já existe um evento com esse ID."
+      );
+
+    }
+
+
+    eventos[id] = {
+
+      nome:
+        nome,
+
+      tipo:
+        e.parameter.tipo ||
+        "Evento",
+
+      mensagem:
+        e.parameter.mensagem ||
+        "Compartilhe seus melhores momentos.",
+
+      cor:
+        e.parameter.cor ||
+        "#d4af37"
+
+    };
+
+
+    salvarEventos(eventos);
+
+
+    const pasta =
+      obterPastaEvento(id);
+
+
+    return {
+
+      sucesso: true,
+
+      id:
+        id,
+
+      nome:
+        nome,
+
+      tipo:
+        eventos[id].tipo,
+
+      mensagem:
+        eventos[id].mensagem,
+
+      cor:
+        eventos[id].cor,
+
+      pasta:
+        pasta.getName(),
+
+      link:
+        "https://gumath121.github.io/qr-fotos/index.html?evento=" +
+        encodeURIComponent(id),
+
+      album:
+        "https://gumath121.github.io/qr-fotos/album.html?evento=" +
+        encodeURIComponent(id),
+
+      fotos:
+        0,
+
+      videos:
+        0
+
+    };
+
+  }
+
+  catch (erro) {
+
+    return {
+
+      sucesso: false,
+
+      erro:
+        erro.message ||
+        String(erro)
+
+    };
+
+  }
+
+}
+
+
+/* =====================================================
+   EDITAR EVENTO
+===================================================== */
+
+function editarEvento(e) {
+
+  try {
+
+    const id =
+      e.parameter.id;
+
+    const nome =
+      e.parameter.nome;
+
+    const tipo =
+      e.parameter.tipo ||
+      "Evento";
+
+    const mensagem =
+      e.parameter.mensagem ||
+      "Compartilhe seus melhores momentos.";
+
+    const cor =
+      e.parameter.cor ||
+      "#d4af37";
+
+
+    if (!id) {
+
+      throw new Error(
+        "ID do evento não informado."
+      );
+
+    }
+
+
+    if (!nome) {
+
+      throw new Error(
+        "Nome do evento é obrigatório."
+      );
+
+    }
+
+
+    const eventos =
+      obterEventos();
+
+
+    if (!eventos[id]) {
+
+      throw new Error(
+        "Evento não encontrado."
+      );
+
+    }
+
+
+    eventos[id].nome =
+      nome;
+
+    eventos[id].tipo =
+      tipo;
+
+    eventos[id].mensagem =
+      mensagem;
+
+    eventos[id].cor =
+      cor;
+
+
+    salvarEventos(eventos);
+
+
+    return {
+
+      sucesso: true,
+
+      id:
+        id,
+
+      nome:
+        eventos[id].nome,
+
+      tipo:
+        eventos[id].tipo,
+
+      mensagem:
+        eventos[id].mensagem,
+
+      cor:
+        eventos[id].cor
+
+    };
+
+  }
+
+  catch (erro) {
+
+    return {
+
+      sucesso: false,
+
+      erro:
+        erro.message ||
+        String(erro)
+
+    };
+
+  }
+
+}
+
+
+/* =====================================================
+   LISTAR EVENTOS
+===================================================== */
+
+function listarEventos() {
+
+  const eventos =
+    obterEventos();
+
+
+  const resultado = [];
+
+
+  Object.keys(eventos).forEach(
+    function(id) {
+
+      const midia =
+        contarMidiaEvento(id);
+
+
+      resultado.push({
+
+        id:
+          id,
+
+        nome:
+          eventos[id].nome,
+
+        tipo:
+          eventos[id].tipo,
+
+        mensagem:
+          eventos[id].mensagem,
+
+        cor:
+          eventos[id].cor,
+
+        fotos:
+          midia.fotos,
+
+        videos:
+          midia.videos
+
+      });
+
+    }
+  );
+
+
+  return {
+
+    sucesso: true,
+
+    eventos:
+      resultado
+
+  };
+
+}
+
+
+/* =====================================================
+   DELETAR EVENTO
+===================================================== */
+
+function deletarEvento(id) {
+
+  try {
+
+    const eventos =
+      obterEventos();
+
+
+    if (!eventos[id]) {
+
+      throw new Error(
+        "Evento não encontrado."
+      );
+
+    }
+
+
+    delete eventos[id];
+
+
+    salvarEventos(eventos);
+
+
+    return {
+
+      sucesso: true,
+
+      mensagem:
+        "Evento removido."
+
+    };
+
+  }
+
+  catch (erro) {
+
+    return {
+
+      sucesso: false,
+
+      erro:
+        erro.message ||
+        String(erro)
+
+    };
+
+  }
+
+}
+
+
+/* =====================================================
+   GET
+===================================================== */
+
+function doGet(e) {
+
+  try {
+
+    const parametros =
+      e.parameter || {};
+
+
+    const callback =
+      parametros.callback;
+
+
+    /* =================================================
+       CONFIGURAÇÃO
+    ================================================= */
+
+    if (
+      parametros.config === "true"
+    ) {
+
+      const evento =
+        parametros.evento ||
+        "teste";
+
+
+      return responderJSONP(
+
+        obterConfiguracaoEvento(
+          evento
+        ),
+
+        callback
+
+      );
+
+    }
+
+
+    /* =================================================
+       CRIAR EVENTO
+    ================================================= */
+
+    if (
+      parametros.acao ===
+      "criarEvento"
+    ) {
+
+      return responderJSONP(
+
+        criarEvento(e),
+
+        callback
+
+      );
+
+    }
+
+
+    /* =================================================
+       EDITAR EVENTO
+    ================================================= */
+
+    if (
+      parametros.acao ===
+      "editarEvento"
+    ) {
+
+      return responderJSONP(
+
+        editarEvento(e),
+
+        callback
+
+      );
+
+    }
+
+
+    /* =================================================
+       LISTAR EVENTOS
+    ================================================= */
+
+    if (
+      parametros.acao ===
+      "listarEventos"
+    ) {
+
+      return responderJSONP(
+
+        listarEventos(),
+
+        callback
+
+      );
+
+    }
+
+
+    /* =================================================
+       DELETAR EVENTO
+    ================================================= */
+
+    if (
+      parametros.acao ===
+      "deletarEvento"
+    ) {
+
+      return responderJSONP(
+
+        deletarEvento(
+          parametros.id
+        ),
+
+        callback
+
+      );
+
+    }
+
+
+    /* =================================================
+       ÁLBUM
+    ================================================= */
+
+    const evento =
+      parametros.evento ||
+      "teste";
+
+
+    const configuracao =
+      obterEvento(evento);
+
+
+    if (!configuracao) {
+
+      return responderJSONP({
+
+        sucesso: false,
+
+        erro:
+          "Evento não encontrado."
+
+      }, callback);
+
+    }
+
+
+    const pasta =
+      obterPastaEvento(evento);
+
+
+    const arquivos =
+      pasta.getFiles();
+
+
+    const fotos = [];
+
+    const videos = [];
+
+
+    while (
+      arquivos.hasNext()
+    ) {
+
+      const arquivo =
+        arquivos.next();
+
+
+      const mime =
+        arquivo.getMimeType();
+
+
+      /* -------------------------------------------------
+         FOTO
+      ------------------------------------------------- */
+
+      if (
+        mime &&
+        mime.indexOf("image/") === 0
+      ) {
+
+        fotos.push({
+
+          tipo:
+            "foto",
+
+          nome:
+            arquivo.getName(),
+
+          url:
+            "https://drive.google.com/uc?export=view&id=" +
+            arquivo.getId(),
+
+          id:
+            arquivo.getId(),
+
+          data:
+            arquivo
+              .getDateCreated()
+              .getTime()
+
+        });
+
+      }
+
+
+      /* -------------------------------------------------
+         VÍDEO
+      ------------------------------------------------- */
+
+      else if (
+        mime &&
+        mime.indexOf("video/") === 0
+      ) {
+
+        videos.push({
+
+          tipo:
+            "video",
+
+          nome:
+            arquivo.getName(),
+
+          url:
+            "https://drive.google.com/uc?export=view&id=" +
+            arquivo.getId(),
+
+          id:
+            arquivo.getId(),
+
+          data:
+            arquivo
+              .getDateCreated()
+              .getTime()
+
+        });
+
+      }
+
+    }
+
+
+    /* =================================================
+       ORDENA
+    ================================================= */
+
+    fotos.sort(
+      function(a, b) {
+
+        return b.data - a.data;
+
+      }
+    );
+
+
+    videos.sort(
+      function(a, b) {
+
+        return b.data - a.data;
+
+      }
+    );
+
+
+    /* =================================================
+       RESPOSTA
+    ================================================= */
+
+    return responderJSONP({
+
+      sucesso:
+        true,
+
+      evento:
+        evento,
+
+      nome:
+        configuracao.nome,
+
+      fotos:
+        fotos,
+
+      videos:
+        videos,
+
+      total:
+        fotos.length,
+
+      totalFotos:
+        fotos.length,
+
+      totalVideos:
+        videos.length
+
+    }, callback);
+
+
+  }
+
+  catch (erro) {
+
+    return responderJSONP({
+
+      sucesso:
+        false,
+
+      erro:
+        erro.message ||
+        String(erro)
+
+    }, e.parameter.callback);
+
+  }
+
+}
