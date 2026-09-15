@@ -7,6 +7,7 @@
 <title>Compartilhe esse momento</title>
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
 
 * {
@@ -16,452 +17,959 @@
 body {
     margin: 0;
     min-height: 100vh;
+
     background:
-        radial-gradient(circle at 50% 15%, #3a3024 0%, #17130f 35%, #090807 75%);
+        radial-gradient(
+            circle at 50% 15%,
+            #3a3024 0%,
+            #17130f 35%,
+            #090807 75%
+        );
+
     color: #f5eee3;
+
     font-family: 'Montserrat', sans-serif;
+
     display: flex;
     justify-content: center;
 }
 
 .container {
+
     width: 100%;
     max-width: 480px;
     min-height: 100vh;
+
     padding: 45px 24px 35px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .ornamento {
+
     color: #c9a96e;
+
     font-size: 22px;
+
     letter-spacing: 8px;
+
     margin-bottom: 20px;
 }
 
 h1 {
+
     font-family: 'Cormorant Garamond', serif;
+
     font-size: 43px;
+
     line-height: 1;
+
     font-weight: 500;
+
     text-align: center;
+
     margin: 0;
 }
 
 .subtitulo {
+
     text-align: center;
+
     color: #cfc5b6;
+
     font-size: 13px;
+
     line-height: 1.7;
+
     margin: 18px 10px 30px;
 }
 
 .linha {
+
     width: 55px;
+
     height: 1px;
+
     background: #c9a96e;
+
     margin: 25px 0 0;
 }
 
 .camera-box {
+
     width: 100%;
+
     overflow: hidden;
+
     border-radius: 22px;
+
     border: 1px solid rgba(201,169,110,.35);
+
     background: #050505;
-    box-shadow: 0 20px 60px rgba(0,0,0,.45);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.45);
+
     position: relative;
 }
 
 video,
 #fotoTirada {
+
     width: 100%;
+
     display: block;
 }
 
 #fotoTirada {
+
     display: none;
 }
 
 canvas {
+
     display: none;
 }
 
-/* BOTÃO DE TROCAR CÂMERA */
+
+/* =========================
+   BOTÃO TROCAR CÂMERA
+========================= */
 
 #trocar {
+
     position: absolute;
+
     right: 14px;
     bottom: 14px;
+
     width: auto;
+
     margin: 0;
+
     padding: 11px 15px;
+
     border-radius: 50px;
+
     background: rgba(0,0,0,.65);
+
     color: white;
+
     border: 1px solid rgba(255,255,255,.35);
+
     backdrop-filter: blur(8px);
+
     font-size: 12px;
+
     z-index: 10;
+
     display: none;
 }
 
-/* BOTÕES */
+
+/* =========================
+   BOTÕES
+========================= */
 
 button {
+
     width: 100%;
+
     border: none;
+
     border-radius: 50px;
+
     padding: 17px 20px;
+
     margin-top: 16px;
+
     font-family: 'Montserrat', sans-serif;
+
     font-size: 13px;
+
     font-weight: 600;
+
     letter-spacing: 1px;
+
     cursor: pointer;
+
     transition: .2s;
 }
 
 button:active {
+
     transform: scale(.98);
 }
 
+
+/* ABRIR CÂMERA */
+
 #abrir {
+
     background: #c9a96e;
+
     color: #17130f;
 }
+
+
+/* TIRAR FOTO */
 
 #tirar {
+
     background: #c9a96e;
+
     color: #17130f;
+
     display: none;
 }
+
+
+/* COMPARTILHAR */
 
 #enviar {
+
     background: #c9a96e;
+
     color: #17130f;
+
     display: none;
 }
+
+
+/* TIRAR OUTRA */
 
 #outra {
+
     background: transparent;
+
     color: #d9d0c3;
+
     border: 1px solid rgba(255,255,255,.2);
+
     display: none;
 }
 
+
+/* =========================
+   STATUS
+========================= */
+
 #status {
-    margin-top: 18px;
-    min-height: 20px;
+
+    margin-top: 22px;
+
+    min-height: 45px;
+
     text-align: center;
+
     font-size: 12px;
+
     color: #cfc5b6;
+
+    transition: .3s;
 }
 
+
+/* =========================
+   RODAPÉ
+========================= */
+
 .rodape {
+
     margin-top: auto;
+
     padding-top: 35px;
+
     font-family: 'Cormorant Garamond', serif;
+
     font-size: 18px;
+
     color: #a99d8c;
 }
 
 iframe {
+
     display: none;
 }
+
 </style>
+
 </head>
 
 <body>
 
+
 <div class="container">
 
-    <div class="ornamento">✦</div>
 
-    <h1>Compartilhe<br>esse momento</h1>
+    <!-- ORNAMENTO -->
+
+    <div class="ornamento">
+        ✦
+    </div>
+
+
+    <!-- TÍTULO -->
+
+    <h1>
+        Compartilhe<br>
+        esse momento
+    </h1>
+
 
     <div class="linha"></div>
 
+
+    <!-- SUBTÍTULO -->
+
     <p class="subtitulo">
+
         Registre um momento especial e<br>
+
         faça parte das nossas memórias. ❤️
+
     </p>
+
+
+    <!-- =========================
+         CÂMERA
+    ========================== -->
 
     <div class="camera-box">
 
-        <video id="camera" autoplay playsinline></video>
 
-        <img id="fotoTirada">
+        <video
+            id="camera"
+            autoplay
+            playsinline>
+        </video>
+
+
+        <img
+            id="fotoTirada">
+
+
+        <!-- TROCAR CÂMERA -->
 
         <button id="trocar">
+
             ↻ &nbsp; Trocar câmera
+
         </button>
 
+
     </div>
+
+
+    <!-- CANVAS INVISÍVEL -->
 
     <canvas id="canvas"></canvas>
 
+
+    <!-- =========================
+         BOTÃO ABRIR
+    ========================== -->
+
     <button id="abrir">
+
         📷 &nbsp; ABRIR CÂMERA
+
     </button>
+
+
+    <!-- =========================
+         BOTÃO TIRAR FOTO
+    ========================== -->
 
     <button id="tirar">
+
         ✦ &nbsp; TIRAR FOTO
+
     </button>
+
+
+    <!-- =========================
+         BOTÃO COMPARTILHAR
+    ========================== -->
 
     <button id="enviar">
+
         ♥ &nbsp; COMPARTILHAR FOTO
+
     </button>
 
+
+    <!-- =========================
+         BOTÃO TIRAR OUTRA
+    ========================== -->
+
     <button id="outra">
+
         ↻ &nbsp; TIRAR OUTRA
+
     </button>
+
+
+    <!-- STATUS -->
 
     <div id="status"></div>
 
+
+    <!-- RODAPÉ -->
+
     <div class="rodape">
+
         Feito para guardar momentos.
+
     </div>
+
 
 </div>
 
 
-<!-- ENVIO PARA O GOOGLE APPS SCRIPT -->
+
+<!-- =====================================================
+     FORMULÁRIO DE ENVIO PARA GOOGLE APPS SCRIPT
+===================================================== -->
 
 <form
+
     id="formulario"
+
     action="https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec"
+
     method="POST"
+
     target="resposta">
 
-    <input type="hidden" name="foto" id="foto">
 
-    <input type="hidden" name="nomeArquivo" id="nomeArquivo">
+    <input
+
+        type="hidden"
+
+        name="foto"
+
+        id="foto">
+
+
+    <input
+
+        type="hidden"
+
+        name="nomeArquivo"
+
+        id="nomeArquivo">
+
 
 </form>
 
-<iframe name="resposta" id="resposta"></iframe>
+
+<iframe
+    name="resposta"
+    id="resposta">
+</iframe>
+
 
 
 <script>
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
 
 let stream = null;
 
 let cameraAtual = "environment";
 
-const abrir = document.getElementById("abrir");
-const camera = document.getElementById("camera");
-const trocar = document.getElementById("trocar");
-const tirar = document.getElementById("tirar");
-const enviar = document.getElementById("enviar");
-const outra = document.getElementById("outra");
-const fotoTirada = document.getElementById("fotoTirada");
-const canvas = document.getElementById("canvas");
-const status = document.getElementById("status");
 
-const formulario = document.getElementById("formulario");
-const campoFoto = document.getElementById("foto");
-const campoNome = document.getElementById("nomeArquivo");
+/* ELEMENTOS */
+
+const abrir =
+    document.getElementById("abrir");
+
+const camera =
+    document.getElementById("camera");
+
+const trocar =
+    document.getElementById("trocar");
+
+const tirar =
+    document.getElementById("tirar");
+
+const enviar =
+    document.getElementById("enviar");
+
+const outra =
+    document.getElementById("outra");
+
+const fotoTirada =
+    document.getElementById("fotoTirada");
+
+const canvas =
+    document.getElementById("canvas");
+
+const status =
+    document.getElementById("status");
 
 
-// FUNÇÃO PARA ABRIR A CÂMERA
+/* FORMULÁRIO */
+
+const formulario =
+    document.getElementById("formulario");
+
+const campoFoto =
+    document.getElementById("foto");
+
+const campoNome =
+    document.getElementById("nomeArquivo");
+
+
+
+/* =====================================================
+   ABRIR CÂMERA
+===================================================== */
 
 async function abrirCamera() {
 
+
     try {
 
-        // Encerra a câmera atual antes de trocar
+
+        /* ENCERRA CÂMERA ANTERIOR */
 
         if (stream) {
 
-            stream.getTracks().forEach(track => {
-                track.stop();
-            });
+
+            stream
+                .getTracks()
+                .forEach(track => {
+
+                    track.stop();
+
+                });
+
 
             stream = null;
+
         }
 
-        stream = await navigator.mediaDevices.getUserMedia({
 
-            video: {
-                facingMode: cameraAtual,
-                width: {
-                    ideal: 1920
+        /* SOLICITA CÂMERA */
+
+        stream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video: {
+
+                    facingMode: cameraAtual,
+
+                    width: {
+                        ideal: 1920
+                    },
+
+                    height: {
+                        ideal: 1080
+                    }
+
                 },
-                height: {
-                    ideal: 1080
-                }
-            },
 
-            audio: false
+                audio: false
 
-        });
+            });
+
+
+        /* MOSTRA STREAM */
 
         camera.srcObject = stream;
 
-        camera.style.display = "block";
 
-        abrir.style.display = "none";
+        camera.style.display =
+            "block";
 
-        tirar.style.display = "block";
 
-        trocar.style.display = "block";
+        abrir.style.display =
+            "none";
+
+
+        tirar.style.display =
+            "block";
+
+
+        trocar.style.display =
+            "block";
+
+
+        /* STATUS */
 
         status.innerText =
+
             cameraAtual === "user"
+
             ? "🤳 Câmera frontal"
+
             : "📷 Câmera traseira";
+
 
     }
 
+
     catch (erro) {
+
 
         console.error(erro);
 
+
         status.innerText =
+
             "Não foi possível acessar esta câmera.";
+
 
     }
 
 }
 
 
-// BOTÃO ABRIR
 
-abrir.addEventListener("click", async () => {
+/* =====================================================
+   BOTÃO ABRIR CÂMERA
+===================================================== */
 
-    await abrirCamera();
+abrir.addEventListener(
+    "click",
+    async () => {
 
-});
-
-
-// TROCAR CÂMERA
-
-trocar.addEventListener("click", async () => {
-
-    cameraAtual =
-        cameraAtual === "environment"
-        ? "user"
-        : "environment";
-
-    await abrirCamera();
-
-});
-
-
-// TIRAR FOTO
-
-tirar.addEventListener("click", () => {
-
-    let largura = camera.videoWidth;
-    let altura = camera.videoHeight;
-
-    const larguraMaxima = 1600;
-
-    if (largura > larguraMaxima) {
-
-        const proporcao = larguraMaxima / largura;
-
-        largura = larguraMaxima;
-        altura = altura * proporcao;
+        await abrirCamera();
 
     }
-
-    canvas.width = largura;
-    canvas.height = altura;
-
-    const contexto = canvas.getContext("2d");
-
-    contexto.drawImage(
-        camera,
-        0,
-        0,
-        largura,
-        altura
-    );
-
-    const fotoBase64 = canvas.toDataURL(
-        "image/jpeg",
-        0.75
-    );
-
-    fotoTirada.src = fotoBase64;
-
-    fotoTirada.style.display = "block";
-
-    camera.style.display = "none";
-
-    tirar.style.display = "none";
-
-    trocar.style.display = "none";
-
-    enviar.style.display = "block";
-
-    outra.style.display = "block";
-
-    status.innerText =
-        "Sua foto está pronta ♥";
-
-});
+);
 
 
-// ENVIAR FOTO
 
-enviar.addEventListener("click", () => {
+/* =====================================================
+   TROCAR CÂMERA
+===================================================== */
 
-    const fotoBase64 = canvas.toDataURL(
-        "image/jpeg",
-        0.75
-    );
+trocar.addEventListener(
+    "click",
+    async () => {
 
-    const base64 = fotoBase64.split(",")[1];
 
-    campoFoto.value = base64;
+        cameraAtual =
 
-    campoNome.value =
-        "foto_" + Date.now() + ".jpg";
+            cameraAtual === "environment"
 
-    status.innerText =
-        "Compartilhando sua foto...";
+            ? "user"
 
-    enviar.disabled = true;
+            : "environment";
 
-    formulario.submit();
 
-    setTimeout(() => {
+        await abrirCamera();
+
+
+    }
+);
+
+
+
+/* =====================================================
+   TIRAR FOTO
+===================================================== */
+
+tirar.addEventListener(
+    "click",
+    () => {
+
+
+        let largura =
+            camera.videoWidth;
+
+
+        let altura =
+            camera.videoHeight;
+
+
+        /* TAMANHO MÁXIMO */
+
+        const larguraMaxima =
+            1600;
+
+
+        if (
+            largura >
+            larguraMaxima
+        ) {
+
+
+            const proporcao =
+                larguraMaxima /
+                largura;
+
+
+            largura =
+                larguraMaxima;
+
+
+            altura =
+                altura *
+                proporcao;
+
+        }
+
+
+        /* CANVAS */
+
+        canvas.width =
+            largura;
+
+        canvas.height =
+            altura;
+
+
+        const contexto =
+            canvas.getContext("2d");
+
+
+        /* CAPTURA */
+
+        contexto.drawImage(
+
+            camera,
+
+            0,
+            0,
+
+            largura,
+            altura
+
+        );
+
+
+        /* CONVERTE PARA JPEG */
+
+        const fotoBase64 =
+            canvas.toDataURL(
+                "image/jpeg",
+                0.75
+            );
+
+
+        /* MOSTRA FOTO */
+
+        fotoTirada.src =
+            fotoBase64;
+
+
+        fotoTirada.style.display =
+            "block";
+
+
+        camera.style.display =
+            "none";
+
+
+        tirar.style.display =
+            "none";
+
+
+        trocar.style.display =
+            "none";
+
+
+        enviar.style.display =
+            "block";
+
+
+        outra.style.display =
+            "block";
+
 
         status.innerText =
-            "♥ Foto compartilhada com sucesso!";
-
-        enviar.disabled = false;
-
-    }, 2500);
-
-});
+            "Sua foto está pronta ♥";
 
 
-// TIRAR OUTRA
+    }
+);
 
-outra.addEventListener("click", () => {
 
-    fotoTirada.style.display = "none";
 
-    camera.style.display = "block";
+/* =====================================================
+   COMPARTILHAR FOTO
+===================================================== */
 
-    enviar.style.display = "none";
+enviar.addEventListener(
+    "click",
+    () => {
 
-    outra.style.display = "none";
 
-    trocar.style.display = "block";
+        /* CONVERTE FOTO */
 
-    tirar.style.display = "block";
+        const fotoBase64 =
+            canvas.toDataURL(
+                "image/jpeg",
+                0.75
+            );
 
-    status.innerText =
-        "Pronto para outra foto 📷";
 
-});
+        const base64 =
+            fotoBase64.split(",")[1];
+
+
+        /* PREENCHE FORMULÁRIO */
+
+        campoFoto.value =
+            base64;
+
+
+        campoNome.value =
+            "foto_" +
+            Date.now() +
+            ".jpg";
+
+
+        /* MENSAGEM PREMIUM */
+
+        status.innerHTML = `
+
+            <div style="
+
+                font-family:
+                    'Cormorant Garamond',
+                    serif;
+
+                font-size:25px;
+
+                color:#c9a96e;
+
+                margin-bottom:8px;
+
+            ">
+
+                Foto compartilhada ♥
+
+            </div>
+
+
+            <div style="
+
+                font-family:
+                    'Montserrat',
+                    sans-serif;
+
+                font-size:12px;
+
+                line-height:1.7;
+
+                color:#cfc5b6;
+
+            ">
+
+                Obrigado por fazer parte<br>
+
+                desse momento especial.
+
+            </div>
+
+        `;
+
+
+        /* ALTERA BOTÃO */
+
+        enviar.innerHTML =
+            "✓ &nbsp; FOTO COMPARTILHADA";
+
+
+        enviar.disabled =
+            true;
+
+
+        /* ENVIA PARA GOOGLE DRIVE */
+
+        formulario.submit();
+
+
+        /* APÓS ENVIO */
+
+        setTimeout(
+            () => {
+
+
+                enviar.style.display =
+                    "none";
+
+
+                outra.style.display =
+                    "block";
+
+
+                outra.innerHTML =
+                    "📷 &nbsp; TIRAR OUTRA FOTO";
+
+
+                enviar.disabled =
+                    false;
+
+
+            },
+            3000
+        );
+
+
+    }
+);
+
+
+
+/* =====================================================
+   TIRAR OUTRA FOTO
+===================================================== */
+
+outra.addEventListener(
+    "click",
+    () => {
+
+
+        /* ESCONDE FOTO */
+
+        fotoTirada.style.display =
+            "none";
+
+
+        /* MOSTRA CÂMERA */
+
+        camera.style.display =
+            "block";
+
+
+        /* BOTÕES */
+
+        enviar.style.display =
+            "none";
+
+
+        outra.style.display =
+            "none";
+
+
+        trocar.style.display =
+            "block";
+
+
+        tirar.style.display =
+            "block";
+
+
+        /* STATUS */
+
+        status.innerText =
+            "Pronto para outra foto 📷";
+
+
+    }
+);
+
 
 </script>
 
