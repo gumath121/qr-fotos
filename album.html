@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Álbum de Fotos</title>
+
+
+<style>
+
+@import url(
+'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap'
+);
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            #3a3024 0%,
+            #17130f 35%,
+            #090807 75%
+        );
+
+    color: #f5eee3;
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.header {
+
+    text-align: center;
+
+    padding:
+        50px 25px 35px;
+}
+
+
+.ornamento {
+
+    color: #c9a96e;
+
+    font-size: 22px;
+
+    letter-spacing: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+h1 {
+
+    margin: 0;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 46px;
+
+    line-height: 1;
+
+    font-weight: 500;
+}
+
+
+.linha {
+
+    width: 55px;
+
+    height: 1px;
+
+    background: #c9a96e;
+
+    margin:
+        24px auto 20px;
+}
+
+
+.subtitulo {
+
+    color: #cfc5b6;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* =========================
+   CONTADOR
+========================= */
+
+.contador {
+
+    text-align: center;
+
+    color: #a99d8c;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    margin:
+        0 auto 25px;
+}
+
+
+/* =========================
+   GALERIA
+========================= */
+
+.galeria {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding:
+        0 14px 40px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 8px;
+}
+
+
+.foto {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #15120f;
+
+    aspect-ratio: 1 / 1;
+
+    cursor: pointer;
+
+    border:
+        1px solid
+        rgba(201,169,110,.20);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.25);
+}
+
+
+.foto img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform .4s ease;
+}
+
+
+.foto:hover img {
+
+    transform:
+        scale(1.05);
+}
+
+
+/* =========================
+   CARREGANDO
+========================= */
+
+.carregando {
+
+    text-align: center;
+
+    padding: 45px 20px;
+
+    color: #cfc5b6;
+
+    font-size: 12px;
+}
+
+
+.rodape {
+
+    text-align: center;
+
+    padding:
+        15px 20px 40px;
+
+    color: #8f8578;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 18px;
+}
+
+
+/* =========================
+   VISUALIZADOR
+========================= */
+
+.lightbox {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.94);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 999;
+
+    padding: 20px;
+}
+
+
+.lightbox.aberto {
+
+    display: flex;
+}
+
+
+.lightbox img {
+
+    max-width: 100%;
+
+    max-height: 85vh;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+
+.fechar {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 20px;
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
+    background:
+        rgba(0,0,0,.5);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 700px) {
+
+    .galeria {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 12px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     CABEÇALHO
+========================= -->
+
+<header class="header">
+
+    <div class="ornamento">
+        ✦
+    </div>
+
+
+    <h1>
+        Nossas memórias
+    </h1>
+
+
+    <div class="linha"></div>
+
+
+    <p class="subtitulo">
+
+        Momentos especiais registrados<br>
+        por quem fez parte desse dia. ❤️
+
+    </p>
+
+</header>
+
+
+
+<!-- CONTADOR -->
+
+<div
+    class="contador"
+    id="contador"
+>
+
+    Carregando fotos...
+
+</div>
+
+
+
+<!-- =========================
+     GALERIA
+========================= -->
+
+<div
+    class="galeria"
+    id="galeria"
+>
+
+    <div class="carregando">
+
+        ✦<br><br>
+
+        Carregando as memórias...
+
+    </div>
+
+</div>
+
+
+
+<div class="rodape">
+
+    Feito para guardar momentos.
+
+</div>
+
+
+
+<!-- =========================
+     LIGHTBOX
+========================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+>
+
+    <button
+        class="fechar"
+        onclick="fecharFoto()"
+    >
+        ×
+    </button>
+
+
+    <img
+        id="fotoGrande"
+        src=""
+    >
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   URL DO GOOGLE APPS SCRIPT
+===================================================== */
+
+const API =
+
+    "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+
+
+
+/* =====================================================
+   RECEBE FOTOS
+===================================================== */
+
+function receberFotos(fotos) {
+
+
+    const galeria =
+        document.getElementById(
+            "galeria"
+        );
+
+
+    const contador =
+        document.getElementById(
+            "contador"
+        );
+
+
+    galeria.innerHTML = "";
+
+
+    if (
+        !fotos ||
+        fotos.length === 0
+    ) {
+
+
+        contador.innerText =
+            "Nenhuma foto ainda";
+
+
+        galeria.innerHTML = `
+
+            <div class="carregando">
+
+                ✦<br><br>
+
+                As primeiras memórias
+                ainda estão por vir. ❤️
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    contador.innerText =
+
+        fotos.length === 1
+
+        ? "1 foto compartilhada"
+
+        : fotos.length +
+          " fotos compartilhadas";
+
+
+
+    fotos.forEach(
+        foto => {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "foto";
+
+
+            const imagem =
+                document.createElement(
+                    "img"
+                );
+
+
+            /*
+               Thumbnail do Google Drive
+            */
+
+            imagem.src =
+
+                "https://drive.google.com/thumbnail?id=" +
+                foto.id +
+                "&sz=w1000";
+
+
+            imagem.loading =
+                "lazy";
+
+
+            imagem.onclick =
+                () => abrirFoto(
+                    imagem.src
+                );
+
+
+            item.appendChild(
+                imagem
+            );
+
+
+            galeria.appendChild(
+                item
+            );
+
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   ABRIR FOTO
+===================================================== */
+
+function abrirFoto(url) {
+
+
+    const lightbox =
+        document.getElementById(
+            "lightbox"
+        );
+
+
+    const fotoGrande =
+        document.getElementById(
+            "fotoGrande"
+        );
+
+
+    fotoGrande.src =
+        url;
+
+
+    lightbox.classList.add(
+        "aberto"
+    );
+
+}
+
+
+
+/* =====================================================
+   FECHAR FOTO
+===================================================== */
+
+function fecharFoto() {
+
+
+    document
+        .getElementById(
+            "lightbox"
+        )
+        .classList.remove(
+            "aberto"
+        );
+
+}
+
+
+
+/* =====================================================
+   FECHAR CLICANDO FORA
+===================================================== */
+
+document
+    .getElementById("lightbox")
+    .addEventListener(
+        "click",
+        function(e) {
+
+            if (
+                e.target === this
+            ) {
+
+                fecharFoto();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   CARREGA O ÁLBUM
+===================================================== */
+
+const script =
+    document.createElement(
+        "script"
+    );
+
+
+script.src =
+    API +
+    "?callback=receberFotos&t=" +
+    Date.now();
+
+
+document
+    .body
+    .appendChild(script);
+
+
+</script>
+
+
+</body>
+
+</html>
