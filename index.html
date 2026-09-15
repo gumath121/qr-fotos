@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compartilhe sua foto</title>
+<title>Compartilhe esse momento</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
 
 * {
     box-sizing: border-box;
@@ -15,37 +15,70 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
     min-height: 100vh;
+    background:
+        radial-gradient(circle at 50% 15%, #3a3024 0%, #17130f 35%, #090807 75%);
+    color: #f5eee3;
+    font-family: 'Montserrat', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .container {
     width: 100%;
-    max-width: 500px;
-    padding: 25px;
-    text-align: center;
+    max-width: 480px;
+    min-height: 100vh;
+    padding: 45px 24px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ornamento {
+    color: #c9a96e;
+    font-size: 22px;
+    letter-spacing: 8px;
+    margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 28px;
-    margin-bottom: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 43px;
+    line-height: 1;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+    letter-spacing: -0.5px;
 }
 
-p {
-    color: #bbb;
-    margin-bottom: 25px;
+.subtitulo {
+    text-align: center;
+    color: #cfc5b6;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 18px 10px 30px;
+}
+
+.linha {
+    width: 55px;
+    height: 1px;
+    background: #c9a96e;
+    margin-bottom: 30px;
+}
+
+.camera-box {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(201,169,110,.35);
+    background: #050505;
+    box-shadow: 0 20px 60px rgba(0,0,0,.45);
 }
 
 video,
 #fotoTirada {
     width: 100%;
-    border-radius: 20px;
-    background: #000;
+    display: block;
 }
 
 #fotoTirada {
@@ -59,47 +92,64 @@ canvas {
 button {
     width: 100%;
     border: none;
-    border-radius: 14px;
-    padding: 17px;
-    margin-top: 15px;
-    font-size: 17px;
-    font-weight: bold;
+    border-radius: 50px;
+    padding: 17px 20px;
+    margin-top: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
     cursor: pointer;
+    transition: .2s;
+}
+
+button:active {
+    transform: scale(.98);
 }
 
 #abrir {
-    background: white;
-    color: #111;
+    background: #c9a96e;
+    color: #17130f;
 }
 
 #tirar {
-    background: #ff3366;
-    color: white;
+    background: #c9a96e;
+    color: #17130f;
     display: none;
 }
 
 #enviar {
-    background: #22c55e;
-    color: white;
+    background: #c9a96e;
+    color: #17130f;
     display: none;
 }
 
 #outra {
-    background: #333;
-    color: white;
+    background: transparent;
+    color: #d9d0c3;
+    border: 1px solid rgba(255,255,255,.2);
     display: none;
 }
 
 #status {
-    margin-top: 20px;
-    font-size: 15px;
-    color: #aaa;
+    margin-top: 18px;
+    min-height: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #cfc5b6;
+}
+
+.rodape {
+    margin-top: auto;
+    padding-top: 35px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: #a99d8c;
 }
 
 iframe {
     display: none;
 }
-
 </style>
 </head>
 
@@ -107,40 +157,51 @@ iframe {
 
 <div class="container">
 
-    <h1>📸 Compartilhe sua foto</h1>
+    <div class="ornamento">✦</div>
 
-    <p>
-        Registre esse momento e compartilhe com os noivos! ❤️
+    <h1>Compartilhe<br>esse momento</h1>
+
+    <div class="linha"></div>
+
+    <p class="subtitulo">
+        Registre um momento especial e<br>
+        faça parte das nossas memórias. ❤️
     </p>
 
-    <button id="abrir">
-        📷 ABRIR CÂMERA
-    </button>
+    <div class="camera-box">
 
-    <video id="camera" autoplay playsinline></video>
+        <video id="camera" autoplay playsinline></video>
 
-    <img id="fotoTirada">
+        <img id="fotoTirada">
+
+    </div>
 
     <canvas id="canvas"></canvas>
 
+    <button id="abrir">
+        📷 &nbsp; ABRIR CÂMERA
+    </button>
+
     <button id="tirar">
-        📸 TIRAR FOTO
+        ✦ &nbsp; TIRAR FOTO
     </button>
 
     <button id="enviar">
-        ❤️ ENVIAR FOTO
+        ♥ &nbsp; COMPARTILHAR FOTO
     </button>
 
     <button id="outra">
-        🔄 TIRAR OUTRA
+        ↻ &nbsp; TIRAR OUTRA
     </button>
 
     <div id="status"></div>
 
+    <div class="rodape">
+        Feito para guardar momentos.
+    </div>
+
 </div>
 
-
-<!-- FORMULÁRIO INVISÍVEL PARA ENVIAR AO GOOGLE -->
 
 <form
     id="formulario"
@@ -175,49 +236,37 @@ const campoFoto = document.getElementById("foto");
 const campoNome = document.getElementById("nomeArquivo");
 
 
-// ABRIR CÂMERA
-
 abrir.addEventListener("click", async () => {
 
     try {
 
         stream = await navigator.mediaDevices.getUserMedia({
-
             video: {
                 facingMode: {
                     ideal: "environment"
                 }
             },
-
             audio: false
-
         });
 
         camera.srcObject = stream;
 
         camera.style.display = "block";
-
         abrir.style.display = "none";
-
         tirar.style.display = "block";
 
-        status.innerText = "Câmera ativada! 📸";
+        status.innerText = "Câmera ativada";
 
-    }
-
-    catch (erro) {
+    } catch (erro) {
 
         status.innerText =
-            "Não conseguimos acessar a câmera. Verifique a permissão do navegador.";
+            "Não foi possível acessar a câmera.";
 
         console.error(erro);
-
     }
 
 });
 
-
-// TIRAR FOTO
 
 tirar.addEventListener("click", () => {
 
@@ -232,7 +281,6 @@ tirar.addEventListener("click", () => {
 
         largura = larguraMaxima;
         altura = altura * proporcao;
-
     }
 
     canvas.width = largura;
@@ -248,35 +296,24 @@ tirar.addEventListener("click", () => {
         altura
     );
 
-
-    // COMPRIME A FOTO
-
     const fotoBase64 = canvas.toDataURL(
         "image/jpeg",
         0.75
     );
 
-
-    // MOSTRA A FOTO
-
     fotoTirada.src = fotoBase64;
 
     fotoTirada.style.display = "block";
-
     camera.style.display = "none";
 
     tirar.style.display = "none";
-
     enviar.style.display = "block";
-
     outra.style.display = "block";
 
-    status.innerText = "Foto pronta! ❤️";
+    status.innerText = "Sua foto está pronta ♥";
 
 });
 
-
-// ENVIAR FOTO
 
 enviar.addEventListener("click", () => {
 
@@ -285,33 +322,24 @@ enviar.addEventListener("click", () => {
         0.75
     );
 
-
-    // Remove o começo "data:image/jpeg;base64,"
-
     const base64 = fotoBase64.split(",")[1];
-
 
     campoFoto.value = base64;
 
     campoNome.value =
-        "foto_" +
-        Date.now() +
-        ".jpg";
-
+        "foto_" + Date.now() + ".jpg";
 
     status.innerText =
-        "Enviando foto... ⏳";
+        "Compartilhando sua foto...";
 
     enviar.disabled = true;
 
-
     formulario.submit();
-
 
     setTimeout(() => {
 
         status.innerText =
-            "✅ Foto enviada! Obrigado por participar! ❤️";
+            "♥ Foto compartilhada com sucesso!";
 
         enviar.disabled = false;
 
@@ -320,8 +348,6 @@ enviar.addEventListener("click", () => {
 });
 
 
-// TIRAR OUTRA
-
 outra.addEventListener("click", () => {
 
     fotoTirada.style.display = "none";
@@ -329,13 +355,12 @@ outra.addEventListener("click", () => {
     camera.style.display = "block";
 
     enviar.style.display = "none";
-
     outra.style.display = "none";
 
     tirar.style.display = "block";
 
     status.innerText =
-        "Pode tirar outra foto 📸";
+        "Pronto para outra foto 📷";
 
 });
 
