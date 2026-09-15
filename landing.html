@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+content="QR Fotos — transforme seu evento em um álbum colaborativo e instantâneo. Seus convidados fotografam, compartilham e criam juntos as lembranças do seu evento.">
+
+<title>QR Fotos — As fotos do seu evento. Feitas por todos.</title>
+
+
+<!-- FONTES -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #080808;
+    color: #f5f0e8;
+    font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --gold: #d8b878;
+    --gold-light: #f0d9a1;
+    --cream: #f5f0e8;
+    --muted: #a9a39a;
+    --dark: #080808;
+    --dark-2: #101010;
+    --dark-3: #171717;
+    --border: rgba(216,184,120,.22);
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    z-index: 1000;
+
+    background:
+        rgba(8,8,8,.82);
+
+    backdrop-filter:
+        blur(16px);
+
+    border-bottom:
+        1px solid
+        rgba(216,184,120,.10);
+
+}
+
+.nav {
+
+    max-width: 1180px;
+
+    margin: auto;
+
+    height: 78px;
+
+    padding: 0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.logo {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size: 34px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+
+    color: var(--gold);
+
+}
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+}
+
+.nav-links a {
+
+    color: #c9c4bb;
+
+    transition: .25s;
+
+}
+
+.nav-links a:hover {
+
+    color: var(--gold);
+
+}
+
+.nav-cta {
+
+    padding:
+        11px 18px;
+
+    border:
+        1px solid
+        var(--gold);
+
+    color:
+        var(--gold) !important;
+
+    border-radius:
+        30px;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height:
+        100vh;
+
+    padding:
+        150px 25px 80px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+}
+
+
+/* brilho */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(216,184,120,.13),
+            transparent 68%
+        );
+
+    top:
+        -180px;
+
+    right:
+        -150px;
+
+    pointer-events:
+        none;
+
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(216,184,120,.08),
+            transparent 70%
+        );
+
+    bottom:
+        -300px;
+
+    left:
+        -200px;
+
+    pointer-events:
+        none;
+
+}
+
+.hero-inner {
+
+    width:
+        100%;
+
+    max-width:
+        1180px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1.15fr .85fr;
+
+    gap:
+        70px;
+
+    align-items:
+        center;
+
+}
+
+.eyebrow {
+
+    color:
+        var(--gold);
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        4px;
+
+    text-transform:
+        uppercase;
+
+    margin-bottom:
+        22px;
+
+}
+
+.hero h1 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(54px, 7vw, 92px);
+
+    line-height:
+        .91;
+
+    font-weight:
+        500;
+
+    letter-spacing:
+        -2px;
+
+    margin-bottom:
+        30px;
+
+}
+
+.hero h1 span {
+
+    color:
+        var(--gold);
+
+}
+
+.hero-text {
+
+    color:
+        #b4afa7;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.8;
+
+    max-width:
+        580px;
+
+    margin-bottom:
+        35px;
+
+}
+
+.hero-buttons {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        12px;
+
+}
+
+.btn-primary {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        var(--gold);
+
+    color:
+        #111;
+
+    padding:
+        15px 25px;
+
+    border-radius:
+        40px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        .25s;
+
+}
+
+.btn-primary:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        var(--gold-light);
+
+}
+
+.btn-secondary {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        15px 25px;
+
+    border:
+        1px solid
+        #3c3934;
+
+    border-radius:
+        40px;
+
+    color:
+        #d0cbc3;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+
+    transition:
+        .25s;
+
+}
+
+.btn-secondary:hover {
+
+    border-color:
+        var(--gold);
+
+    color:
+        var(--gold);
+
+}
+
+
+/* =========================================================
+   DEMO DO CELULAR
+========================================================= */
+
+.phone-area {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    position:
+        relative;
+
+}
+
+.phone {
+
+    width:
+        285px;
+
+    height:
+        575px;
+
+    border:
+        7px solid
+        #242424;
+
+    border-radius:
+        42px;
+
+    background:
+        #0c0c0c;
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.7),
+        0 0 60px rgba(216,184,120,.08);
+
+    overflow:
+        hidden;
+
+    position:
+        relative;
+
+}
+
+.phone-notch {
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        100px;
+
+    height:
+        24px;
+
+    background:
+        #242424;
+
+    border-radius:
+        0 0 18px 18px;
+
+    z-index:
+        5;
+
+}
+
+.phone-screen {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    padding:
+        58px 20px 20px;
+
+    background:
+        linear-gradient(
+            150deg,
+            #111 0%,
+            #0b0b0b 100%
+        );
+
+}
+
+.phone-small {
+
+    color:
+        var(--gold);
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        2px;
+
+    text-transform:
+        uppercase;
+
+    text-align:
+        center;
+
+    margin-bottom:
+        12px;
+
+}
+
+.phone-title {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        30px;
+
+    text-align:
+        center;
+
+    margin-bottom:
+        8px;
+
+}
+
+.phone-message {
+
+    color:
+        #888;
+
+    font-size:
+        8px;
+
+    text-align:
+        center;
+
+    line-height:
+        1.6;
+
+    margin-bottom:
+        20px;
+
+}
+
+.fake-camera {
+
+    height:
+        235px;
+
+    border-radius:
+        20px;
+
+    border:
+        1px solid
+        #302d28;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #2c2821,
+            #121212 60%
+        );
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    position:
+        relative;
+
+}
+
+.fake-camera::after {
+
+    content:
+        "⌾";
+
+    font-size:
+        46px;
+
+    color:
+        rgba(216,184,120,.55);
+
+}
+
+.camera-button {
+
+    position:
+        absolute;
+
+    bottom:
+        18px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        55px;
+
+    height:
+        55px;
+
+    border-radius:
+        50%;
+
+    border:
+        4px solid
+        rgba(255,255,255,.7);
+
+    background:
+        var(--gold);
+
+}
+
+.phone-bottom {
+
+    margin-top:
+        20px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    color:
+        #777;
+
+    font-size:
+        8px;
+
+}
+
+
+/* =========================================================
+   SEÇÃO
+========================================================= */
+
+section {
+
+    padding:
+        110px 25px;
+
+}
+
+.section-inner {
+
+    max-width:
+        1080px;
+
+    margin:
+        auto;
+
+}
+
+.section-label {
+
+    text-align:
+        center;
+
+    color:
+        var(--gold);
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        4px;
+
+    text-transform:
+        uppercase;
+
+    margin-bottom:
+        15px;
+
+}
+
+.section-title {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    text-align:
+        center;
+
+    font-size:
+        clamp(42px, 5vw, 65px);
+
+    font-weight:
+        500;
+
+    line-height:
+        1;
+
+    margin-bottom:
+        20px;
+
+}
+
+.section-description {
+
+    max-width:
+        650px;
+
+    margin:
+        0 auto 55px;
+
+    text-align:
+        center;
+
+    color:
+        var(--muted);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   BENEFÍCIOS
+========================================================= */
+
+.benefits {
+
+    background:
+        #0d0d0d;
+
+    border-top:
+        1px solid
+        #171717;
+
+    border-bottom:
+        1px solid
+        #171717;
+
+}
+
+.benefit-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap:
+        18px;
+
+}
+
+.benefit {
+
+    padding:
+        30px 25px;
+
+    background:
+        #111;
+
+    border:
+        1px solid
+        #222;
+
+    border-radius:
+        16px;
+
+    text-align:
+        center;
+
+    transition:
+        .3s;
+
+}
+
+.benefit:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--border);
+
+}
+
+.benefit-icon {
+
+    width:
+        55px;
+
+    height:
+        55px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        50%;
+
+    margin:
+        0 auto 20px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    color:
+        var(--gold);
+
+    font-size:
+        22px;
+
+}
+
+.benefit h3 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        25px;
+
+    font-weight:
+        600;
+
+    margin-bottom:
+        10px;
+
+}
+
+.benefit p {
+
+    color:
+        #85817b;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   COMO FUNCIONA
+========================================================= */
+
+.steps {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        25px;
+
+}
+
+.step {
+
+    position:
+        relative;
+
+    padding:
+        35px 30px;
+
+    border-top:
+        1px solid
+        var(--border);
+
+}
+
+.step-number {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    color:
+        var(--gold);
+
+    font-size:
+        50px;
+
+    line-height:
+        1;
+
+    margin-bottom:
+        20px;
+
+}
+
+.step h3 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        30px;
+
+    margin-bottom:
+        12px;
+
+}
+
+.step p {
+
+    color:
+        #8f8b85;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   EVENTOS
+========================================================= */
+
+.events {
+
+    background:
+        #0d0d0d;
+
+}
+
+.event-tags {
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        12px;
+
+    max-width:
+        850px;
+
+    margin:
+        auto;
+
+}
+
+.event-tag {
+
+    padding:
+        15px 23px;
+
+    border:
+        1px solid
+        #2b2926;
+
+    border-radius:
+        40px;
+
+    color:
+        #c0bbb2;
+
+    font-size:
+        12px;
+
+    transition:
+        .25s;
+
+}
+
+.event-tag:hover {
+
+    border-color:
+        var(--gold);
+
+    color:
+        var(--gold);
+
+}
+
+
+/* =========================================================
+   DEMONSTRAÇÃO
+========================================================= */
+
+.demo-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        .9fr 1.1fr;
+
+    gap:
+        70px;
+
+    align-items:
+        center;
+
+}
+
+.demo-copy h2 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(40px, 5vw, 65px);
+
+    line-height:
+        .95;
+
+    font-weight:
+        500;
+
+    margin-bottom:
+        25px;
+
+}
+
+.demo-copy h2 span {
+
+    color:
+        var(--gold);
+
+}
+
+.demo-copy p {
+
+    color:
+        #97928a;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.9;
+
+    margin-bottom:
+        28px;
+
+}
+
+.demo-box {
+
+    background:
+        #111;
+
+    border:
+        1px solid
+        #292621;
+
+    border-radius:
+        25px;
+
+    padding:
+        40px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        35px;
+
+}
+
+.qr {
+
+    width:
+        180px;
+
+    height:
+        180px;
+
+    background:
+        white;
+
+    padding:
+        10px;
+
+    border-radius:
+        12px;
+
+    flex-shrink:
+        0;
+
+}
+
+.qr img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+}
+
+.demo-info h3 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        30px;
+
+    margin-bottom:
+        10px;
+
+}
+
+.demo-info p {
+
+    color:
+        #85817d;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+
+}
+
+
+/* =========================================================
+   PREÇO
+========================================================= */
+
+.pricing {
+
+    background:
+        linear-gradient(
+            180deg,
+            #0d0d0d,
+            #080808
+        );
+
+}
+
+.price-card {
+
+    max-width:
+        620px;
+
+    margin:
+        auto;
+
+    padding:
+        50px 40px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        25px;
+
+    text-align:
+        center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0d0d0d
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.35);
+
+}
+
+.price-label {
+
+    color:
+        var(--gold);
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        3px;
+
+    text-transform:
+        uppercase;
+
+    margin-bottom:
+        15px;
+
+}
+
+.price-card h2 {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        45px;
+
+    margin-bottom:
+        10px;
+
+}
+
+.price-card > p {
+
+    color:
+        #8d8982;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.7;
+
+    margin-bottom:
+        30px;
+
+}
+
+.features {
+
+    text-align:
+        left;
+
+    max-width:
+        390px;
+
+    margin:
+        0 auto 30px;
+
+}
+
+.feature {
+
+    padding:
+        10px 0;
+
+    border-bottom:
+        1px solid
+        #222;
+
+    color:
+        #bbb6ae;
+
+    font-size:
+        12px;
+
+}
+
+.feature::before {
+
+    content:
+        "✓";
+
+    color:
+        var(--gold);
+
+    margin-right:
+        10px;
+
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq {
+
+    max-width:
+        800px;
+
+    margin:
+        auto;
+
+}
+
+details {
+
+    border-bottom:
+        1px solid
+        #252321;
+
+    padding:
+        22px 0;
+
+}
+
+summary {
+
+    cursor:
+        pointer;
+
+    list-style:
+        none;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        23px;
+
+    padding-right:
+        25px;
+
+    position:
+        relative;
+
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary::after {
+
+    content:
+        "+";
+
+    position:
+        absolute;
+
+    right:
+        0;
+
+    color:
+        var(--gold);
+
+    font-family:
+        Arial;
+
+}
+
+details[open] summary::after {
+
+    content:
+        "−";
+
+}
+
+details p {
+
+    color:
+        #89857f;
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+
+    padding-top:
+        15px;
+
+}
+
+
+/* =========================================================
+   CTA FINAL
+========================================================= */
+
+.final-cta {
+
+    padding:
+        130px 25px;
+
+    text-align:
+        center;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    border-top:
+        1px solid
+        #171717;
+
+}
+
+.final-cta::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        600px;
+
+    height:
+        300px;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(216,184,120,.10),
+            transparent 70%
+        );
+
+    pointer-events:
+        none;
+
+}
+
+.final-cta h2 {
+
+    position:
+        relative;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        clamp(45px, 7vw, 80px);
+
+    line-height:
+        .95;
+
+    font-weight:
+        500;
+
+    max-width:
+        850px;
+
+    margin:
+        auto auto 25px;
+
+}
+
+.final-cta h2 span {
+
+    color:
+        var(--gold);
+
+}
+
+.final-cta p {
+
+    position:
+        relative;
+
+    color:
+        #96918a;
+
+    max-width:
+        570px;
+
+    margin:
+        0 auto 30px;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.8;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    border-top:
+        1px solid
+        #191919;
+
+    padding:
+        30px 25px;
+
+}
+
+.footer-inner {
+
+    max-width:
+        1180px;
+
+    margin:
+        auto;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        20px;
+
+}
+
+.footer-logo {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    color:
+        var(--gold);
+
+    font-size:
+        25px;
+
+    letter-spacing:
+        2px;
+
+}
+
+.footer-text {
+
+    color:
+        #666;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1px;
+
+}
+
+
+/* =========================================================
+   BOTÃO FLUTUANTE WHATSAPP
+========================================================= */
+
+.whatsapp {
+
+    position:
+        fixed;
+
+    right:
+        20px;
+
+    bottom:
+        20px;
+
+    z-index:
+        999;
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    border-radius:
+        50%;
+
+    background:
+        #25D366;
+
+    color:
+        white;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        25px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.4);
+
+    transition:
+        .25s;
+
+}
+
+.whatsapp:hover {
+
+    transform:
+        scale(1.08);
+
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width:900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .phone-area {
+        margin-top: 20px;
+    }
+
+    .benefit-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .demo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .demo-copy {
+        text-align: center;
+    }
+
+    .demo-copy p {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    section {
+        padding:
+            80px 18px;
+    }
+
+    .nav {
+        height: 68px;
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 29px;
+    }
+
+    .nav-cta {
+        padding: 9px 13px;
+        font-size: 9px;
+    }
+
+    .hero {
+        padding:
+            125px 18px 70px;
+    }
+
+    .hero h1 {
+        font-size:
+            56px;
+    }
+
+    .hero-text {
+        font-size:
+            14px;
+    }
+
+    .hero-buttons {
+        flex-direction:
+            column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width:
+            100%;
+    }
+
+    .phone {
+        width:
+            260px;
+
+        height:
+            530px;
+    }
+
+    .benefit-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .steps {
+        grid-template-columns:
+            1fr;
+    }
+
+    .demo-box {
+        flex-direction:
+            column;
+
+        padding:
+            25px;
+
+        text-align:
+            center;
+    }
+
+    .qr {
+        width:
+            170px;
+
+        height:
+            170px;
+    }
+
+    .price-card {
+        padding:
+            35px 22px;
+    }
+
+    .footer-inner {
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+<div class="nav">
+
+<a
+    href="#inicio"
+    class="logo"
+>
+QR FOTOS
+</a>
+
+
+<nav class="nav-links">
+
+<a href="#como-funciona">
+Como funciona
+</a>
+
+<a href="#eventos">
+Eventos
+</a>
+
+<a href="#precos">
+Planos
+</a>
+
+<a
+    href="#contato"
+    class="nav-cta"
+>
+Quero meu QR
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    class="hero"
+    id="inicio"
+>
+
+<div class="hero-inner">
+
+
+<div>
+
+<div class="eyebrow">
+Álbum colaborativo de eventos
+</div>
+
+
+<h1>
+
+As fotos do seu evento.
+<br>
+
+<span>Feitas por todos.</span>
+
+</h1>
+
+
+<p class="hero-text">
+
+Um QR Code transforma seus convidados em
+fotógrafos do evento. Eles tiram fotos,
+compartilham na hora e ajudam a criar um
+álbum completo com os melhores momentos.
+
+</p>
+
+
+<div class="hero-buttons">
+
+<a
+    href="#contato"
+    class="btn-primary"
+>
+QUERO QR FOTOS
+</a>
+
+
+<a
+    href="#como-funciona"
+    class="btn-secondary"
+>
+COMO FUNCIONA
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- CELULAR -->
+
+<div class="phone-area">
+
+<div class="phone">
+
+<div class="phone-notch"></div>
+
+
+<div class="phone-screen">
+
+<div class="phone-small">
+QR FOTOS
+</div>
+
+
+<div class="phone-title">
+Gustavo & Ana
+</div>
+
+
+<div class="phone-message">
+
+Compartilhe seus melhores
+momentos com a gente.
+
+</div>
+
+
+<div class="fake-camera">
+
+<div class="camera-button"></div>
+
+</div>
+
+
+<div class="phone-bottom">
+
+<span>
+📷 CÂMERA
+</span>
+
+<span>
+▦ ÁLBUM
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BENEFÍCIOS
+===================================================== -->
+
+<section
+    class="benefits"
+>
+
+<div class="section-inner">
+
+<div class="section-label">
+Por que usar?
+</div>
+
+
+<h2 class="section-title">
+Simples para você.
+<br>
+Divertido para seus convidados.
+</h2>
+
+
+<p class="section-description">
+
+Você não precisa ficar pedindo fotos depois do evento.
+Com o QR Fotos, cada convidado pode registrar o que está
+vendo e compartilhar diretamente no álbum.
+
+</p>
+
+
+<div class="benefit-grid">
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+⌁
+</div>
+
+<h3>
+Sem aplicativo
+</h3>
+
+<p>
+O convidado acessa diretamente pelo celular.
+Nada para instalar.
+</p>
+
+</div>
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+◉
+</div>
+
+<h3>
+Sem cadastro
+</h3>
+
+<p>
+Escaneou o QR Code, abriu e fotografou.
+É simples assim.
+</p>
+
+</div>
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+↗
+</div>
+
+<h3>
+Na hora
+</h3>
+
+<p>
+As fotos são enviadas para o álbum do evento
+em poucos segundos.
+</p>
+
+</div>
+
+
+<div class="benefit">
+
+<div class="benefit-icon">
+♡
+</div>
+
+<h3>
+Colaborativo
+</h3>
+
+<p>
+Todos participam e ajudam a construir uma
+coleção única de lembranças.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     COMO FUNCIONA
+===================================================== -->
+
+<section
+    id="como-funciona"
+>
+
+<div class="section-inner">
+
+<div class="section-label">
+Como funciona
+</div>
+
+
+<h2 class="section-title">
+Três passos.
+<br>
+Um álbum inesquecível.
+</h2>
+
+
+<p class="section-description">
+
+Você coloca o QR Code no evento.
+Seus convidados fazem o resto.
+
+</p>
+
+
+<div class="steps">
+
+
+<div class="step">
+
+<div class="step-number">
+01
+</div>
+
+<h3>
+Aponte a câmera
+</h3>
+
+<p>
+
+O convidado encontra o QR Code
+disponível no evento e aponta
+a câmera do celular.
+
+</p>
+
+</div>
+
+
+
+<div class="step">
+
+<div class="step-number">
+02
+</div>
+
+<h3>
+Tire a foto
+</h3>
+
+<p>
+
+Uma página personalizada do evento
+é aberta. O convidado pode tirar
+uma foto ou escolher uma imagem.
+
+</p>
+
+</div>
+
+
+
+<div class="step">
+
+<div class="step-number">
+03
+</div>
+
+<h3>
+Compartilhe
+</h3>
+
+<p>
+
+A foto vai para o álbum colaborativo
+e pode ser vista pelos outros
+participantes.
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EVENTOS
+===================================================== -->
+
+<section
+    class="events"
+    id="eventos"
+>
+
+<div class="section-inner">
+
+<div class="section-label">
+Para qualquer ocasião
+</div>
+
+
+<h2 class="section-title">
+Seu evento.
+<br>
+Suas memórias.
+</h2>
+
+
+<p class="section-description">
+
+Do casamento da sua vida à confraternização
+da empresa. O QR Fotos se adapta ao seu evento.
+
+</p>
+
+
+<div class="event-tags">
+
+<div class="event-tag">
+💍 Casamentos
+</div>
+
+<div class="event-tag">
+🎂 Aniversários
+</div>
+
+<div class="event-tag">
+🎓 Formaturas
+</div>
+
+<div class="event-tag">
+🏢 Eventos corporativos
+</div>
+
+<div class="event-tag">
+🎉 Festas
+</div>
+
+<div class="event-tag">
+🏆 Eventos esportivos
+</div>
+
+<div class="event-tag">
+👶 Chá de bebê
+</div>
+
+<div class="event-tag">
+✨ E muito mais
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DEMONSTRAÇÃO
+===================================================== -->
+
+<section>
+
+<div class="section-inner">
+
+<div class="demo-grid">
+
+
+<div class="demo-copy">
+
+<div class="section-label"
+style="text-align:left;">
+Experimente
+</div>
+
+
+<h2>
+
+Veja como é
+<br>
+
+<span>na prática.</span>
+
+</h2>
+
+
+<p>
+
+Não precisa imaginar como funciona.
+Experimente agora.
+
+Escaneie o QR Code ao lado e conheça
+uma página de evento funcionando
+de verdade.
+
+</p>
+
+
+<a
+    href="https://gumath121.github.io/qr-fotos/index.html?evento=teste"
+    target="_blank"
+    class="btn-primary"
+>
+ABRIR DEMONSTRAÇÃO
+</a>
+
+</div>
+
+
+
+<div class="demo-box">
+
+
+<div class="qr">
+
+<img
+src="https://quickchart.io/qr?size=500&text=https%3A%2F%2Fgumath121.github.io%2Fqr-fotos%2Findex.html%3Fevento%3Dteste"
+alt="QR Code de demonstração"
+>
+
+</div>
+
+
+<div class="demo-info">
+
+<h3>
+Aponte a câmera.
+</h3>
+
+<p>
+
+Você será levado para uma página
+de evento real do QR Fotos.
+
+Sem aplicativo.
+Sem cadastro.
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PREÇOS
+===================================================== -->
+
+<section
+    class="pricing"
+    id="precos"
+>
+
+<div class="section-inner">
+
+<div class="section-label">
+Seu evento merece isso
+</div>
+
+
+<h2 class="section-title">
+Uma experiência especial.
+</h2>
+
+
+<p class="section-description">
+
+Cada evento recebe seu próprio espaço,
+com página personalizada e álbum exclusivo.
+
+</p>
+
+
+<div class="price-card">
+
+<div class="price-label">
+QR FOTOS
+</div>
+
+
+<h2>
+Pacote personalizado
+</h2>
+
+
+<p>
+
+O valor pode variar de acordo com o tipo
+de evento, duração e quantidade de materiais.
+
+</p>
+
+
+<div class="features">
+
+<div class="feature">
+Página exclusiva do seu evento
+</div>
+
+<div class="feature">
+Álbum colaborativo
+</div>
+
+<div class="feature">
+QR Code personalizado
+</div>
+
+<div class="feature">
+Acesso pelo celular
+</div>
+
+<div class="feature">
+Sem aplicativo para os convidados
+</div>
+
+<div class="feature">
+Possibilidade de material impresso
+</div>
+
+</div>
+
+
+<a
+    href="#contato"
+    class="btn-primary"
+>
+SOLICITAR ORÇAMENTO
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section>
+
+<div class="section-inner">
+
+<div class="section-label">
+Dúvidas
+</div>
+
+
+<h2 class="section-title">
+Perguntas frequentes
+</h2>
+
+
+<div class="faq">
+
+
+<details>
+
+<summary>
+Precisa baixar algum aplicativo?
+</summary>
+
+<p>
+
+Não. O QR Fotos funciona diretamente pelo
+navegador do celular.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Os convidados precisam criar uma conta?
+</summary>
+
+<p>
+
+Não. A experiência foi pensada para ser rápida:
+escaneou, abriu e fotografou.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+As fotos ficam disponíveis para todos?
+</summary>
+
+<p>
+
+Sim. As imagens enviadas ficam disponíveis
+no álbum colaborativo daquele evento.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Posso personalizar o evento?
+</summary>
+
+<p>
+
+Sim. O evento pode ter nome, mensagem,
+identidade visual e outras personalizações.
+
+</p>
+
+</details>
+
+
+<details>
+
+<summary>
+Vocês fazem o QR Code impresso?
+</summary>
+
+<p>
+
+Sim. É possível combinar o QR Fotos com
+materiais impressos para deixar o QR Code
+espalhado pelo evento.
+
+</p>
+
+</details>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA FINAL
+===================================================== -->
+
+<section
+    class="final-cta"
+    id="contato"
+>
+
+<h2>
+
+Seu evento acontece uma vez.
+<br>
+
+<span>As lembranças ficam para sempre.</span>
+
+</h2>
+
+
+<p>
+
+Quer oferecer o QR Fotos no seu casamento,
+aniversário, formatura ou evento?
+Fale conosco e solicite seu orçamento.
+
+</p>
+
+
+<a
+    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20QR%20Fotos."
+    class="btn-primary"
+    target="_blank"
+>
+QUERO MEU QR FOTOS
+</a>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="footer-inner">
+
+<div class="footer-logo">
+QR FOTOS
+</div>
+
+
+<div class="footer-text">
+Desenvolvido por Gustavo M.
+</div>
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+    class="whatsapp"
+    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Quero%20conhecer%20o%20QR%20Fotos."
+    target="_blank"
+    aria-label="Falar pelo WhatsApp"
+>
+◉
+</a>
+
+
+</body>
+
+</html>
