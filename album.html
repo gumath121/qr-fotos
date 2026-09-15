@@ -1132,7 +1132,7 @@ h1 {
 
 const API =
 
-"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 
 /* =====================================================
@@ -1369,7 +1369,7 @@ function carregarFotos() {
 
 
             /*
-             * O backend agora retorna:
+             * O backend retorna:
              *
              * fotos: [...]
              * videos: [...]
@@ -1467,10 +1467,17 @@ function carregarFotos() {
         );
 
 
+    /*
+     * CORREÇÃO:
+     * informa explicitamente ao Apps Script
+     * que esta requisição é para listar o álbum.
+     */
+
     script.src =
         API +
         "?evento=" +
         encodeURIComponent(evento) +
+        "&album=true" +
         "&callback=" +
         callbackName +
         "&t=" +
@@ -1885,10 +1892,6 @@ function criarCardVideo(
 
     /*
      * Thumbnail do Drive.
-     *
-     * Se o navegador não conseguir
-     * utilizar como poster, o vídeo
-     * continuará funcionando normalmente.
      */
 
     player.poster =
@@ -2073,14 +2076,6 @@ function abrirMidia(midia) {
 
     videoGrande.load();
 
-
-    /*
-     * Tenta iniciar.
-     *
-     * Alguns navegadores podem
-     * bloquear autoplay, então
-     * o usuário ainda terá os controles.
-     */
 
     videoGrande.play()
         .catch(
