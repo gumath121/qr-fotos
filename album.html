@@ -10,17 +10,28 @@
 
 <title>Nossas memórias</title>
 
+
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+/* =====================================================
+   FONTES
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
+
+
+/* =====================================================
+   RESET
+===================================================== */
 
 * {
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
+
+/* =====================================================
+   BODY
+===================================================== */
 
 body {
 
@@ -44,6 +55,11 @@ body {
 
 }
 
+
+/* =====================================================
+   CONTAINER
+===================================================== */
+
 .container {
 
     width: 100%;
@@ -56,13 +72,19 @@ body {
 
 }
 
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
 header {
 
     text-align: center;
 
-    margin-bottom: 32px;
+    margin-bottom: 35px;
 
 }
+
 
 .ornamento {
 
@@ -75,6 +97,7 @@ header {
     margin-bottom: 15px;
 
 }
+
 
 h1 {
 
@@ -92,6 +115,7 @@ h1 {
 
 }
 
+
 .linha {
 
     width: 55px;
@@ -104,6 +128,7 @@ h1 {
 
 }
 
+
 .subtitulo {
 
     color: #cfc5b6;
@@ -114,9 +139,14 @@ h1 {
 
     margin: 0 auto;
 
-    max-width: 520px;
+    max-width: 500px;
 
 }
+
+
+/* =====================================================
+   BARRA SUPERIOR
+===================================================== */
 
 .topo {
 
@@ -128,9 +158,10 @@ h1 {
 
     gap: 12px;
 
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 
 }
+
 
 .contador {
 
@@ -140,11 +171,23 @@ h1 {
 
 }
 
+
+.acoes-topo {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+
 .botao-topo {
 
-    border: 1px solid rgba(201,169,110,.45);
+    border: 1px solid
+        rgba(201,169,110,.45);
 
-    background: rgba(0,0,0,.25);
+    background:
+        rgba(0,0,0,.25);
 
     color: #c9a96e;
 
@@ -152,7 +195,9 @@ h1 {
 
     padding: 9px 14px;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family:
+        'Montserrat',
+        sans-serif;
 
     font-size: 11px;
 
@@ -162,11 +207,14 @@ h1 {
 
 }
 
+
 .botao-topo:hover {
 
-    background: rgba(201,169,110,.12);
+    background:
+        rgba(201,169,110,.12);
 
 }
+
 
 .botao-topo:active {
 
@@ -176,78 +224,74 @@ h1 {
 
 
 /* =====================================================
-   ABAS
+   FILTROS
 ===================================================== */
 
 .filtros {
 
     display: flex;
 
-    width: 100%;
+    justify-content: center;
 
-    max-width: 560px;
+    gap: 8px;
 
-    margin: 0 auto 28px;
+    margin-bottom: 25px;
 
-    padding: 5px;
-
-    border-radius: 50px;
-
-    background: rgba(0,0,0,.35);
-
-    border: 1px solid rgba(201,169,110,.22);
-
-    gap: 4px;
+    flex-wrap: wrap;
 
 }
 
+
 .filtro {
 
-    flex: 1;
+    border: 1px solid
+        rgba(201,169,110,.28);
 
-    border: 0;
+    background:
+        rgba(0,0,0,.22);
 
-    background: transparent;
+    color: #a99d8d;
 
-    color: #9f9486;
+    border-radius: 50px;
 
-    border-radius: 40px;
+    padding: 9px 16px;
 
-    padding: 12px 14px;
-
-    font-family: 'Montserrat', sans-serif;
+    font-family:
+        'Montserrat',
+        sans-serif;
 
     font-size: 10px;
 
     font-weight: 600;
 
-    letter-spacing: .4px;
+    letter-spacing: .3px;
 
     cursor: pointer;
 
-    transition: .25s;
+    transition: .2s;
 
 }
 
+
 .filtro:hover {
+
+    border-color:
+        rgba(201,169,110,.55);
 
     color: #c9a96e;
 
 }
 
+
 .filtro.ativo {
 
-    background: linear-gradient(
-        135deg,
-        rgba(201,169,110,.22),
-        rgba(201,169,110,.08)
-    );
+    background:
+        rgba(201,169,110,.13);
 
-    color: #e1c486;
+    border-color:
+        rgba(201,169,110,.65);
 
-    box-shadow:
-        inset 0 0 0 1px rgba(201,169,110,.25),
-        0 4px 20px rgba(0,0,0,.25);
+    color: #c9a96e;
 
 }
 
@@ -263,13 +307,13 @@ h1 {
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 9px;
+    gap: 8px;
 
 }
 
 
 /* =====================================================
-   FOTO
+   CARD DE FOTO
 ===================================================== */
 
 .foto {
@@ -286,11 +330,15 @@ h1 {
 
     cursor: pointer;
 
-    border: 1px solid rgba(201,169,110,.18);
+    border:
+        1px solid
+        rgba(201,169,110,.18);
 
-    animation: aparecer .5s ease both;
+    animation:
+        aparecer .5s ease both;
 
 }
+
 
 .foto img {
 
@@ -302,19 +350,21 @@ h1 {
 
     object-fit: cover;
 
-    transition: transform .5s ease;
+    transition:
+        transform .5s ease;
 
 }
 
+
 .foto:hover img {
 
-    transform: scale(1.05);
+    transform: scale(1.04);
 
 }
 
 
 /* =====================================================
-   VIDEO
+   CARD DE VÍDEO
 ===================================================== */
 
 .video-card {
@@ -327,13 +377,17 @@ h1 {
 
     aspect-ratio: 1 / 1;
 
-    background: #090909;
+    background: #0d0c0b;
 
-    border: 1px solid rgba(201,169,110,.22);
+    border:
+        1px solid
+        rgba(201,169,110,.22);
 
-    animation: aparecer .5s ease both;
+    animation:
+        aparecer .5s ease both;
 
 }
+
 
 .video-card video {
 
@@ -351,7 +405,7 @@ h1 {
 
 
 /* =====================================================
-   ETIQUETA
+   ETIQUETA RECADO
 ===================================================== */
 
 .etiqueta-video {
@@ -364,13 +418,16 @@ h1 {
 
     z-index: 5;
 
-    padding: 6px 10px;
+    padding: 6px 9px;
 
     border-radius: 30px;
 
-    background: rgba(10,8,6,.82);
+    background:
+        rgba(10,8,6,.78);
 
-    border: 1px solid rgba(201,169,110,.45);
+    border:
+        1px solid
+        rgba(201,169,110,.45);
 
     color: #c9a96e;
 
@@ -380,60 +437,35 @@ h1 {
 
     letter-spacing: .5px;
 
-    backdrop-filter: blur(8px);
-
-    pointer-events: none;
+    backdrop-filter:
+        blur(8px);
 
 }
 
 
 /* =====================================================
-   PLAY OVERLAY
+   ANIMAÇÃO
 ===================================================== */
 
-.video-play {
+@keyframes aparecer {
 
-    position: absolute;
+    from {
 
-    left: 50%;
+        opacity: 0;
 
-    top: 50%;
+        transform:
+            translateY(10px);
 
-    transform: translate(-50%, -50%);
+    }
 
-    width: 58px;
+    to {
 
-    height: 58px;
+        opacity: 1;
 
-    border-radius: 50%;
+        transform:
+            translateY(0);
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: rgba(10,8,6,.78);
-
-    border: 1px solid rgba(201,169,110,.6);
-
-    color: #e1c486;
-
-    font-size: 23px;
-
-    pointer-events: none;
-
-    backdrop-filter: blur(8px);
-
-    transition: .2s;
-
-}
-
-.video-card:hover .video-play {
-
-    transform:
-        translate(-50%, -50%)
-        scale(1.08);
+    }
 
 }
 
@@ -444,11 +476,12 @@ h1 {
 
 .carregando {
 
-    grid-column: 1 / -1;
+    grid-column:
+        1 / -1;
 
     text-align: center;
 
-    padding: 65px 20px;
+    padding: 60px 20px;
 
     color: #cfc5b6;
 
@@ -456,19 +489,20 @@ h1 {
 
 }
 
+
 .carregando span {
 
     display: block;
 
-    font-family: 'Cormorant Garamond', serif;
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
     color: #c9a96e;
 
-    font-size: 30px;
+    font-size: 28px;
 
     margin-bottom: 10px;
-
-    animation: brilho 1.5s infinite;
 
 }
 
@@ -479,7 +513,8 @@ h1 {
 
 .sem-fotos {
 
-    grid-column: 1 / -1;
+    grid-column:
+        1 / -1;
 
     text-align: center;
 
@@ -493,15 +528,18 @@ h1 {
 
 }
 
+
 .sem-fotos strong {
 
     display: block;
 
-    font-family: 'Cormorant Garamond', serif;
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
     color: #c9a96e;
 
-    font-size: 29px;
+    font-size: 28px;
 
     font-weight: 500;
 
@@ -511,7 +549,7 @@ h1 {
 
 
 /* =====================================================
-   VOLTAR
+   BOTÃO VOLTAR
 ===================================================== */
 
 .voltar {
@@ -528,7 +566,9 @@ h1 {
 
     border-radius: 50px;
 
-    border: 1px solid rgba(201,169,110,.5);
+    border:
+        1px solid
+        rgba(201,169,110,.5);
 
     background: transparent;
 
@@ -548,9 +588,18 @@ h1 {
 
 }
 
+
 .voltar:hover {
 
-    background: rgba(201,169,110,.1);
+    background:
+        rgba(201,169,110,.1);
+
+}
+
+
+.voltar:active {
+
+    transform: scale(.98);
 
 }
 
@@ -567,7 +616,9 @@ h1 {
 
     color: #81776b;
 
-    font-family: 'Cormorant Garamond', serif;
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
     font-size: 17px;
 
@@ -584,7 +635,8 @@ h1 {
 
     inset: 0;
 
-    background: rgba(0,0,0,.96);
+    background:
+        rgba(0,0,0,.94);
 
     z-index: 1000;
 
@@ -598,15 +650,17 @@ h1 {
 
 }
 
+
 .lightbox.ativo {
 
     display: flex;
 
 }
 
+
 .lightbox img {
 
-    max-width: 95vw;
+    max-width: 100%;
 
     max-height: 78vh;
 
@@ -614,7 +668,51 @@ h1 {
 
     border-radius: 8px;
 
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.7);
+
 }
+
+
+/* =====================================================
+   BOTÃO FECHAR
+===================================================== */
+
+.fechar {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.25);
+
+    background:
+        rgba(0,0,0,.5);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+}
+
+
+/* =====================================================
+   VÍDEO NO LIGHTBOX
+===================================================== */
 
 .videoGrande {
 
@@ -632,39 +730,14 @@ h1 {
 
     background: #000;
 
-}
-
-.fechar {
-
-    position: absolute;
-
-    top: 18px;
-
-    right: 18px;
-
-    width: 45px;
-
-    height: 45px;
-
-    border-radius: 50%;
-
-    border: 1px solid rgba(255,255,255,.25);
-
-    background: rgba(0,0,0,.6);
-
-    color: white;
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    z-index: 10;
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.8);
 
 }
 
 
 /* =====================================================
-   AÇÕES
+   AÇÕES DA MÍDIA
 ===================================================== */
 
 .acoes-foto {
@@ -687,11 +760,14 @@ h1 {
 
 }
 
+
 .acao-foto {
 
-    border: 1px solid rgba(201,169,110,.5);
+    border: 1px solid
+        rgba(201,169,110,.5);
 
-    background: rgba(15,12,9,.92);
+    background:
+        rgba(15,12,9,.9);
 
     color: #c9a96e;
 
@@ -699,7 +775,9 @@ h1 {
 
     padding: 12px 18px;
 
-    font-family: 'Montserrat', sans-serif;
+    font-family:
+        'Montserrat',
+        sans-serif;
 
     font-size: 11px;
 
@@ -707,44 +785,15 @@ h1 {
 
     cursor: pointer;
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 
 }
 
 
-/* =====================================================
-   ANIMAÇÕES
-===================================================== */
+.acao-foto:active {
 
-@keyframes aparecer {
-
-    from {
-
-        opacity: 0;
-
-        transform: translateY(10px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform: translateY(0);
-
-    }
-
-}
-
-@keyframes brilho {
-
-    0%,100% {
-        opacity: .5;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    transform: scale(.96);
 
 }
 
@@ -763,6 +812,7 @@ h1 {
         gap: 10px;
 
     }
+
 
     .foto,
     .video-card {
@@ -787,31 +837,58 @@ h1 {
 
     }
 
+
     h1 {
 
         font-size: 42px;
 
     }
 
+
     .topo {
 
-        padding: 0 3px;
+        padding:
+            0 3px;
 
     }
 
+
+    .botao-topo {
+
+        padding:
+            8px 11px;
+
+    }
+
+
+    .filtros {
+
+        margin-bottom: 20px;
+
+    }
+
+
     .filtro {
 
-        padding: 11px 7px;
+        padding:
+            8px 13px;
 
         font-size: 9px;
 
     }
 
-    .video-play {
 
-        width: 52px;
+    .acoes-foto {
 
-        height: 52px;
+        bottom: 15px;
+
+    }
+
+
+    .acao-foto {
+
+        padding:
+            11px 14px;
 
     }
 
@@ -828,105 +905,154 @@ h1 {
 <div class="container">
 
 
-<header>
+    <!-- =================================================
+         CABEÇALHO
+    ================================================== -->
 
-    <div class="ornamento">✦</div>
+    <header>
 
-    <h1 id="tituloEvento">
-        Nossas memórias
-    </h1>
+        <div class="ornamento">
 
-    <div class="linha"></div>
+            ✦
 
-    <p class="subtitulo" id="mensagemEvento">
-        Momentos especiais registrados por quem
-        fez parte desse dia. ❤️
-    </p>
-
-</header>
+        </div>
 
 
-<div class="topo">
+        <h1 id="tituloEvento">
 
-    <div class="contador" id="contador">
-        Carregando memórias...
-    </div>
+            Nossas memórias
 
-    <button
-        class="botao-topo"
-        id="atualizar">
-        ↻ Atualizar
-    </button>
-
-</div>
+        </h1>
 
 
-<!-- =====================================================
-     ABAS
-===================================================== -->
-
-<div class="filtros">
-
-    <button
-        class="filtro ativo"
-        data-filtro="todos">
-
-        ✨ TODOS
-
-    </button>
-
-    <button
-        class="filtro"
-        data-filtro="foto">
-
-        📷 FOTOS
-
-    </button>
-
-    <button
-        class="filtro"
-        data-filtro="video">
-
-        🎥 RECADOS
-
-    </button>
-
-</div>
+        <div class="linha"></div>
 
 
-<div
-    class="galeria"
-    id="galeria">
+        <p
+            class="subtitulo"
+            id="mensagemEvento">
 
-    <div class="carregando">
+            Momentos especiais registrados por quem
+            fez parte desse dia. ❤️
 
-        <span>✦</span>
+        </p>
 
-        Carregando nossas memórias...
+    </header>
+
+
+    <!-- =================================================
+         TOPO
+    ================================================== -->
+
+    <div class="topo">
+
+
+        <div
+            class="contador"
+            id="contador">
+
+            Carregando memórias...
+
+        </div>
+
+
+        <div class="acoes-topo">
+
+            <button
+                class="botao-topo"
+                id="atualizar">
+
+                ↻ Atualizar
+
+            </button>
+
+        </div>
+
 
     </div>
 
+
+    <!-- =================================================
+         FILTROS
+    ================================================== -->
+
+    <div class="filtros">
+
+
+        <button
+            class="filtro ativo"
+            data-filtro="todos">
+
+            ✨ TODOS
+
+        </button>
+
+
+        <button
+            class="filtro"
+            data-filtro="foto">
+
+            📷 FOTOS
+
+        </button>
+
+
+        <button
+            class="filtro"
+            data-filtro="video">
+
+            🎥 RECADOS
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =================================================
+         GALERIA
+    ================================================== -->
+
+    <div
+        class="galeria"
+        id="galeria">
+
+
+        <div class="carregando">
+
+            <span>✦</span>
+
+            Carregando nossas memórias...
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         VOLTAR
+    ================================================== -->
+
+    <a
+        href="index.html"
+        id="voltar"
+        class="voltar">
+
+        📷 &nbsp; VOLTAR PARA TIRAR FOTOS
+
+    </a>
+
+
+    <div class="rodape">
+
+        Feito para guardar momentos.
+
+    </div>
+
+
 </div>
 
-
-<a
-    href="index.html"
-    id="voltar"
-    class="voltar">
-
-    📷 &nbsp; VOLTAR PARA TIRAR FOTOS
-
-</a>
-
-
-<div class="rodape">
-
-    Feito para guardar momentos.
-
-</div>
-
-
-</div>
 
 
 <!-- =====================================================
@@ -937,6 +1063,9 @@ h1 {
     class="lightbox"
     id="lightbox">
 
+
+    <!-- FECHAR -->
+
     <button
         class="fechar"
         id="fechar">
@@ -946,11 +1075,15 @@ h1 {
     </button>
 
 
+    <!-- FOTO -->
+
     <img
         id="fotoGrande"
         src=""
         alt="Foto do evento">
 
+
+    <!-- VÍDEO -->
 
     <video
         id="videoGrande"
@@ -960,7 +1093,10 @@ h1 {
     </video>
 
 
+    <!-- AÇÕES -->
+
     <div class="acoes-foto">
+
 
         <button
             class="acao-foto"
@@ -970,6 +1106,7 @@ h1 {
 
         </button>
 
+
         <button
             class="acao-foto"
             id="compartilhar">
@@ -978,62 +1115,92 @@ h1 {
 
         </button>
 
+
     </div>
 
+
 </div>
+
 
 
 <script>
 
 
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
 const API =
+
 "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 
+/* =====================================================
+   EVENTO ATUAL
+===================================================== */
+
 const parametros =
-new URLSearchParams(
-    window.location.search
-);
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 const evento =
-parametros.get("evento") ||
-"teste";
+    parametros.get("evento") ||
+    "teste";
 
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
 
 const galeria =
-document.getElementById("galeria");
+    document.getElementById("galeria");
+
 
 const contador =
-document.getElementById("contador");
+    document.getElementById("contador");
+
 
 const atualizar =
-document.getElementById("atualizar");
+    document.getElementById("atualizar");
+
 
 const lightbox =
-document.getElementById("lightbox");
+    document.getElementById("lightbox");
+
 
 const fotoGrande =
-document.getElementById("fotoGrande");
+    document.getElementById("fotoGrande");
+
 
 const videoGrande =
-document.getElementById("videoGrande");
+    document.getElementById("videoGrande");
+
 
 const fechar =
-document.getElementById("fechar");
+    document.getElementById("fechar");
+
 
 const baixar =
-document.getElementById("baixar");
+    document.getElementById("baixar");
+
 
 const compartilhar =
-document.getElementById("compartilhar");
+    document.getElementById("compartilhar");
+
 
 const voltar =
-document.getElementById("voltar");
+    document.getElementById("voltar");
+
 
 const filtros =
-document.querySelectorAll(".filtro");
+    document.querySelectorAll(".filtro");
 
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
 
 let fotos = [];
 
@@ -1045,78 +1212,122 @@ let midiaAtual = null;
 
 let filtroAtual = "todos";
 
+let quantidadeAnterior = 0;
+
 
 /* =====================================================
-   VOLTAR
+   MANTER EVENTO AO VOLTAR
 ===================================================== */
 
 voltar.href =
-"index.html?evento=" +
-encodeURIComponent(evento);
+    "index.html?evento=" +
+    encodeURIComponent(evento);
 
 
 /* =====================================================
-   EVENTO
+   CARREGAR CONFIGURAÇÃO DO EVENTO
 ===================================================== */
 
 function carregarEvento() {
 
-    const callback =
-    "evento_" + Date.now();
+    const callbackName =
+        "evento_" +
+        Date.now();
 
 
-    window[callback] =
-    function(config) {
+    window[callbackName] =
+        function(config) {
 
-        delete window[callback];
-
-
-        if (!config || config.erro)
-            return;
+            delete window[callbackName];
 
 
-        if (config.nome) {
+            if (
+                !config ||
+                config.erro
+            ) {
 
-            document.getElementById(
-                "tituloEvento"
-            ).textContent =
-            config.nome;
+                console.log(
+                    "Evento não encontrado."
+                );
 
-        }
+                return;
+
+            }
 
 
-        if (config.mensagem) {
+            const titulo =
+                document.getElementById(
+                    "tituloEvento"
+                );
 
-            document.getElementById(
-                "mensagemEvento"
-            ).textContent =
-            config.mensagem;
 
-        }
+            if (titulo) {
 
-    };
+                titulo.innerHTML =
+                    config.nome;
+
+            }
+
+
+            const mensagem =
+                document.getElementById(
+                    "mensagemEvento"
+                );
+
+
+            if (mensagem) {
+
+                mensagem.innerHTML =
+                    config.mensagem;
+
+            }
+
+
+            if (config.cor) {
+
+                document.documentElement
+                    .style.setProperty(
+                        "--cor-evento",
+                        config.cor
+                    );
+
+            }
+
+        };
 
 
     const script =
-    document.createElement("script");
+        document.createElement(
+            "script"
+        );
 
 
     script.src =
-    API +
-    "?evento=" +
-    encodeURIComponent(evento) +
-    "&config=true" +
-    "&callback=" +
-    callback;
+        API +
+        "?evento=" +
+        encodeURIComponent(evento) +
+        "&config=true" +
+        "&callback=" +
+        callbackName;
 
 
-    document.body.appendChild(script);
+    script.onerror =
+        function() {
+
+            delete window[callbackName];
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
 
 }
 
 
 /* =====================================================
-   CARREGAR MÍDIAS
+   CARREGAR MÍDIAS DO EVENTO
 ===================================================== */
 
 function carregarFotos() {
@@ -1134,92 +1345,151 @@ function carregarFotos() {
     `;
 
 
-    const callback =
-    "midias_" + Date.now();
+    const callbackName =
+        "receberMidias_" +
+        Date.now();
 
 
-    window[callback] =
-    function(resposta) {
+    window[callbackName] =
+        function(resposta) {
 
-        delete window[callback];
-
-
-        if (
-            !resposta ||
-            resposta.sucesso !== true
-        ) {
-
-            mostrarErro();
-
-            return;
-
-        }
+            delete window[callbackName];
 
 
-        fotos =
-        Array.isArray(resposta.fotos)
-        ? resposta.fotos.map(item => ({
-            ...item,
-            tipo: "foto"
-        }))
-        : [];
+            if (
+                !resposta ||
+                resposta.sucesso !== true
+            ) {
+
+                mostrarErro();
+
+                return;
+
+            }
 
 
-        videos =
-        Array.isArray(resposta.videos)
-        ? resposta.videos.map(item => ({
-            ...item,
-            tipo: "video"
-        }))
-        : [];
+            /*
+             * O backend agora retorna:
+             *
+             * fotos: [...]
+             * videos: [...]
+             * totalFotos: número
+             * totalVideos: número
+             * total: número total de mídias
+             */
 
 
-        midias =
-        [
-            ...fotos,
-            ...videos
-        ];
+            fotos =
+                Array.isArray(
+                    resposta.fotos
+                )
+                ? resposta.fotos
+                : [];
 
 
-        midias.sort(
-            (a,b) =>
-            Number(b.data || 0) -
-            Number(a.data || 0)
-        );
+            videos =
+                Array.isArray(
+                    resposta.videos
+                )
+                ? resposta.videos
+                : [];
 
 
-        atualizarContador();
+            /*
+             * Garante o tipo das mídias.
+             */
 
-        renderizarGaleria();
+            fotos =
+                fotos.map(
+                    function(item) {
 
-    };
+                        return {
+                            ...item,
+                            tipo: "foto"
+                        };
+
+                    }
+                );
+
+
+            videos =
+                videos.map(
+                    function(item) {
+
+                        return {
+                            ...item,
+                            tipo: "video"
+                        };
+
+                    }
+                );
+
+
+            /*
+             * Junta fotos e vídeos.
+             */
+
+            midias =
+                [
+                    ...fotos,
+                    ...videos
+                ];
+
+
+            /*
+             * Ordena tudo pelo momento
+             * de envio, do mais recente
+             * para o mais antigo.
+             */
+
+            midias.sort(
+                function(a, b) {
+
+                    return (
+                        Number(b.data || 0) -
+                        Number(a.data || 0)
+                    );
+
+                }
+            );
+
+
+            atualizarContador();
+
+            renderizarGaleria();
+
+        };
 
 
     const script =
-    document.createElement("script");
+        document.createElement(
+            "script"
+        );
 
 
     script.src =
-    API +
-    "?evento=" +
-    encodeURIComponent(evento) +
-    "&callback=" +
-    callback +
-    "&t=" +
-    Date.now();
+        API +
+        "?evento=" +
+        encodeURIComponent(evento) +
+        "&callback=" +
+        callbackName +
+        "&t=" +
+        Date.now();
 
 
     script.onerror =
-    function() {
+        function() {
 
-        delete window[callback];
+            delete window[callbackName];
 
-        mostrarErro();
+            mostrarErro();
 
-    };
+        };
 
 
-    document.body.appendChild(script);
+    document.body.appendChild(
+        script
+    );
 
 }
 
@@ -1230,17 +1500,21 @@ function carregarFotos() {
 
 function atualizarContador() {
 
-    const f =
-    fotos.length;
-
-    const v =
-    videos.length;
+    const totalFotos =
+        fotos.length;
 
 
-    if (f === 0 && v === 0) {
+    const totalVideos =
+        videos.length;
 
-        contador.textContent =
-        "Nenhuma memória compartilhada";
+
+    if (
+        totalFotos === 0 &&
+        totalVideos === 0
+    ) {
+
+        contador.innerText =
+            "Nenhuma memória compartilhada";
 
         return;
 
@@ -1250,50 +1524,74 @@ function atualizarContador() {
     let texto = "";
 
 
-    if (f > 0) {
+    if (totalFotos > 0) {
 
         texto +=
-        "📷 " +
-        f +
-        (f === 1 ? " foto" : " fotos");
+            "📷 " +
+            totalFotos +
+            (
+                totalFotos === 1
+                    ? " foto"
+                    : " fotos"
+            );
 
     }
 
 
-    if (f > 0 && v > 0) {
-
-        texto += "  •  ";
-
-    }
-
-
-    if (v > 0) {
+    if (
+        totalFotos > 0 &&
+        totalVideos > 0
+    ) {
 
         texto +=
-        "🎥 " +
-        v +
-        (v === 1 ? " recado" : " recados");
+            "  •  ";
 
     }
 
 
-    contador.textContent =
-    texto;
+    if (totalVideos > 0) {
+
+        texto +=
+            "🎥 " +
+            totalVideos +
+            (
+                totalVideos === 1
+                    ? " recado"
+                    : " recados"
+            );
+
+    }
+
+
+    contador.innerText =
+        texto;
 
 }
 
 
 /* =====================================================
-   FILTRO
+   FILTRAR MÍDIAS
 ===================================================== */
 
-function obterLista() {
+function obterMidiasFiltradas() {
 
-    if (filtroAtual === "foto")
+    if (
+        filtroAtual === "foto"
+    ) {
+
         return fotos;
 
-    if (filtroAtual === "video")
+    }
+
+
+    if (
+        filtroAtual === "video"
+    ) {
+
         return videos;
+
+    }
+
 
     return midias;
 
@@ -1301,50 +1599,71 @@ function obterLista() {
 
 
 /* =====================================================
-   GALERIA
+   RENDERIZAR GALERIA
 ===================================================== */
 
 function renderizarGaleria() {
 
     const lista =
-    obterLista();
+        obterMidiasFiltradas();
+
+
+    const novasMidias =
+        midias.length >
+        quantidadeAnterior;
+
+
+    quantidadeAnterior =
+        midias.length;
 
 
     galeria.innerHTML = "";
 
 
-    if (lista.length === 0) {
+    /* =================================================
+       SEM MÍDIA
+    ================================================= */
+
+    if (
+        lista.length === 0
+    ) {
 
         let titulo =
-        "Ainda não temos fotos";
+            "Ainda não temos fotos";
+
 
         let texto =
-        "Seja o primeiro a registrar<br>" +
-        "um momento especial. ❤️";
+            "Seja o primeiro a registrar<br>" +
+            "um momento especial. ❤️";
 
 
-        if (filtroAtual === "video") {
+        if (
+            filtroAtual === "video"
+        ) {
 
             titulo =
-            "Ainda não temos recados";
+                "Ainda não temos recados";
+
 
             texto =
-            "Seja o primeiro a deixar<br>" +
-            "um recado em vídeo. 🎥";
+                "Seja o primeiro a deixar<br>" +
+                "um recado em vídeo. 🎥";
 
         }
 
 
         if (
             filtroAtual === "todos" &&
+            fotos.length === 0 &&
             videos.length > 0
         ) {
 
             titulo =
-            "Ainda não temos fotos";
+                "Ainda não temos fotos";
+
 
             texto =
-            "Mas já temos recados em vídeo. 🎥";
+                "Mas já temos recados em vídeo. 🎥";
 
         }
 
@@ -1363,22 +1682,31 @@ function renderizarGaleria() {
 
         `;
 
+
         return;
 
     }
 
 
-    lista.forEach(
-        (midia, indice) => {
+    /*
+     * Renderiza cada mídia.
+     */
 
-            if (midia.tipo === "video") {
+    lista.forEach(
+        function(midia, indice) {
+
+            if (
+                midia.tipo === "video"
+            ) {
 
                 criarCardVideo(
                     midia,
                     indice
                 );
 
-            } else {
+            }
+
+            else {
 
                 criarCardFoto(
                     midia,
@@ -1390,11 +1718,26 @@ function renderizarGaleria() {
         }
     );
 
+
+    /*
+     * Pequeno feedback quando
+     * chegam novas mídias.
+     */
+
+    if (
+        novasMidias &&
+        midias.length > 0
+    ) {
+
+        atualizarContador();
+
+    }
+
 }
 
 
 /* =====================================================
-   FOTO
+   CRIAR CARD DE FOTO
 ===================================================== */
 
 function criarCardFoto(
@@ -1403,49 +1746,76 @@ function criarCardFoto(
 ) {
 
     const div =
-    document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.className =
-    "foto";
+        "foto";
 
 
     div.style.animationDelay =
-    (indice * .03) + "s";
+        (indice * 0.03) +
+        "s";
 
 
     const img =
-    document.createElement("img");
+        document.createElement(
+            "img"
+        );
 
 
     img.loading =
-    "lazy";
+        "lazy";
 
 
     img.alt =
-    "Foto compartilhada";
+        "Foto compartilhada";
 
 
     img.src =
-    "https://drive.google.com/thumbnail?id=" +
-    encodeURIComponent(foto.id) +
-    "&sz=w1000";
+
+        "https://drive.google.com/thumbnail?id=" +
+        encodeURIComponent(
+            foto.id
+        ) +
+        "&sz=w1000";
 
 
-    div.appendChild(img);
+    img.onerror =
+        function() {
+
+            this.style.opacity =
+                "0.3";
+
+        };
 
 
-    div.onclick =
-    () => abrirMidia(foto);
+    div.appendChild(
+        img
+    );
 
 
-    galeria.appendChild(div);
+    div.addEventListener(
+        "click",
+        function() {
+
+            abrirMidia(foto);
+
+        }
+    );
+
+
+    galeria.appendChild(
+        div
+    );
 
 }
 
 
 /* =====================================================
-   VIDEO
+   CRIAR CARD DE VÍDEO
 ===================================================== */
 
 function criarCardVideo(
@@ -1454,117 +1824,121 @@ function criarCardVideo(
 ) {
 
     const div =
-    document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
 
     div.className =
-    "video-card";
+        "video-card";
 
 
     div.style.animationDelay =
-    (indice * .03) + "s";
-
-
-    const etiqueta =
-    document.createElement("div");
-
-
-    etiqueta.className =
-    "etiqueta-video";
-
-
-    etiqueta.textContent =
-    "🎥 RECADO";
-
-
-    div.appendChild(etiqueta);
-
-
-    const player =
-    document.createElement("video");
-
-
-    player.controls =
-    true;
-
-    player.playsInline =
-    true;
-
-    player.preload =
-    "metadata";
+        (indice * 0.03) +
+        "s";
 
 
     /*
-     * IMPORTANTE:
-     * usamos a URL de visualização,
-     * não export=download.
+     * Etiqueta RECADO
      */
 
+    const etiqueta =
+        document.createElement(
+            "div"
+        );
+
+
+    etiqueta.className =
+        "etiqueta-video";
+
+
+    etiqueta.innerHTML =
+        "🎥 RECADO";
+
+
+    div.appendChild(
+        etiqueta
+    );
+
+
+    /*
+     * Elemento de vídeo.
+     */
+
+    const player =
+        document.createElement(
+            "video"
+        );
+
+
+    player.controls =
+        true;
+
+
+    player.playsInline =
+        true;
+
+
+    player.preload =
+        "metadata";
+
+
+    /*
+     * Thumbnail do Drive.
+     *
+     * Se o navegador não conseguir
+     * utilizar como poster, o vídeo
+     * continuará funcionando normalmente.
+     */
+
+    player.poster =
+
+        "https://drive.google.com/thumbnail?id=" +
+        encodeURIComponent(
+            video.id
+        ) +
+        "&sz=w1000";
+
+
     player.src =
-    "https://drive.google.com/uc?export=view&id=" +
-    encodeURIComponent(video.id);
 
+        "https://drive.google.com/uc?export=download&id=" +
+        encodeURIComponent(
+            video.id
+        );
+
+
+    /*
+     * Impede que um clique nos controles
+     * abra o lightbox.
+     */
 
     player.addEventListener(
-        "error",
-        function() {
+        "click",
+        function(event) {
 
-            console.log(
-                "Erro ao carregar vídeo:",
-                video.id
-            );
+            event.stopPropagation();
 
         }
     );
 
 
-    div.appendChild(player);
-
-
-    const play =
-    document.createElement("div");
-
-
-    play.className =
-    "video-play";
-
-
-    play.innerHTML =
-    "▶";
-
-
-    div.appendChild(play);
-
-
-    player.addEventListener(
-        "play",
-        function() {
-
-            play.style.display =
-            "none";
-
-        }
+    div.appendChild(
+        player
     );
 
 
-    player.addEventListener(
-        "pause",
-        function() {
-
-            play.style.display =
-            "flex";
-
-        }
-    );
-
+    /*
+     * Clique fora dos controles:
+     * abre o vídeo maior.
+     */
 
     div.addEventListener(
         "click",
         function(event) {
 
             if (
-                event.target === player ||
-                player.contains(event.target)
+                event.target === player
             ) {
 
                 return;
@@ -1578,7 +1952,9 @@ function criarCardVideo(
     );
 
 
-    galeria.appendChild(div);
+    galeria.appendChild(
+        div
+    );
 
 }
 
@@ -1589,8 +1965,8 @@ function criarCardVideo(
 
 function mostrarErro() {
 
-    contador.textContent =
-    "Não foi possível carregar as memórias";
+    contador.innerText =
+        "Não foi possível carregar as memórias";
 
 
     galeria.innerHTML = `
@@ -1616,40 +1992,53 @@ function mostrarErro() {
 
 
 /* =====================================================
-   LIGHTBOX
+   ABRIR MÍDIA
 ===================================================== */
 
 function abrirMidia(midia) {
 
     midiaAtual =
-    midia;
+        midia;
 
 
-    lightbox.classList.add("ativo");
+    lightbox.classList.add(
+        "ativo"
+    );
 
 
     document.body.style.overflow =
-    "hidden";
+        "hidden";
 
 
-    if (midia.tipo === "foto") {
+    /*
+     * FOTO
+     */
+
+    if (
+        midia.tipo === "foto"
+    ) {
 
         videoGrande.pause();
 
-        videoGrande.removeAttribute("src");
+        videoGrande.removeAttribute(
+            "src"
+        );
 
         videoGrande.style.display =
-        "none";
+            "none";
 
 
         fotoGrande.style.display =
-        "block";
+            "block";
 
 
         fotoGrande.src =
-        "https://drive.google.com/thumbnail?id=" +
-        encodeURIComponent(midia.id) +
-        "&sz=w2000";
+
+            "https://drive.google.com/thumbnail?id=" +
+            encodeURIComponent(
+                midia.id
+            ) +
+            "&sz=w2000";
 
 
         return;
@@ -1657,228 +2046,349 @@ function abrirMidia(midia) {
     }
 
 
+    /*
+     * VÍDEO
+     */
+
     fotoGrande.style.display =
-    "none";
+        "none";
 
 
-    fotoGrande.removeAttribute("src");
+    fotoGrande.removeAttribute(
+        "src"
+    );
 
 
     videoGrande.style.display =
-    "block";
+        "block";
 
 
     videoGrande.src =
-    "https://drive.google.com/uc?export=view&id=" +
-    encodeURIComponent(midia.id);
+
+        "https://drive.google.com/uc?export=download&id=" +
+        encodeURIComponent(
+            midia.id
+        );
 
 
     videoGrande.load();
+
+
+    /*
+     * Tenta iniciar.
+     *
+     * Alguns navegadores podem
+     * bloquear autoplay, então
+     * o usuário ainda terá os controles.
+     */
+
+    videoGrande.play()
+        .catch(
+            function() {}
+        );
 
 }
 
 
 /* =====================================================
-   FECHAR
+   FECHAR LIGHTBOX
 ===================================================== */
 
 function fecharFoto() {
 
-    lightbox.classList.remove("ativo");
+    lightbox.classList.remove(
+        "ativo"
+    );
 
 
     videoGrande.pause();
 
-    videoGrande.removeAttribute("src");
+    videoGrande.removeAttribute(
+        "src"
+    );
 
-    fotoGrande.removeAttribute("src");
 
-
-    videoGrande.style.display =
-    "none";
+    fotoGrande.removeAttribute(
+        "src"
+    );
 
 
     fotoGrande.style.display =
-    "block";
+        "block";
+
+
+    videoGrande.style.display =
+        "none";
 
 
     midiaAtual =
-    null;
+        null;
 
 
     document.body.style.overflow =
-    "";
+        "";
 
 }
 
 
-fechar.onclick =
-fecharFoto;
+fechar.addEventListener(
+    "click",
+    fecharFoto
+);
 
 
-lightbox.onclick =
-function(event) {
+/* =====================================================
+   CLICAR FORA
+===================================================== */
 
-    if (event.target === lightbox)
-        fecharFoto();
+lightbox.addEventListener(
+    "click",
+    function(event) {
 
-};
+        if (
+            event.target ===
+            lightbox
+        ) {
 
+            fecharFoto();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESC
+===================================================== */
 
 document.addEventListener(
     "keydown",
     function(event) {
 
-        if (event.key === "Escape")
+        if (
+            event.key === "Escape"
+        ) {
+
             fecharFoto();
+
+        }
 
     }
 );
 
 
 /* =====================================================
-   BAIXAR
+   BAIXAR MÍDIA
 ===================================================== */
 
-baixar.onclick =
-function() {
+baixar.addEventListener(
+    "click",
+    function() {
 
-    if (!midiaAtual)
-        return;
-
-
-    const url =
-    "https://drive.google.com/uc?export=download&id=" +
-    encodeURIComponent(midiaAtual.id);
+        if (!midiaAtual)
+            return;
 
 
-    window.open(
-        url,
-        "_blank"
-    );
+        const url =
 
-};
+            "https://drive.google.com/uc?export=download&id=" +
+            encodeURIComponent(
+                midiaAtual.id
+            );
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            url;
+
+
+        link.target =
+            "_blank";
+
+
+        link.rel =
+            "noopener";
+
+
+        link.click();
+
+    }
+);
 
 
 /* =====================================================
-   COMPARTILHAR
+   COMPARTILHAR MÍDIA
 ===================================================== */
 
-compartilhar.onclick =
-async function() {
+compartilhar.addEventListener(
+    "click",
+    async function() {
 
-    if (!midiaAtual)
-        return;
-
-
-    const url =
-    "https://drive.google.com/uc?export=view&id=" +
-    encodeURIComponent(midiaAtual.id);
+        if (!midiaAtual)
+            return;
 
 
-    if (navigator.share) {
+        const url =
+
+            "https://drive.google.com/uc?export=view&id=" +
+            encodeURIComponent(
+                midiaAtual.id
+            );
+
+
+        /*
+         * CELULAR / WEB SHARE
+         */
+
+        if (
+            navigator.share
+        ) {
+
+            try {
+
+                await navigator.share({
+
+                    title:
+                        midiaAtual.tipo === "video"
+                            ? "Um recado especial ❤️"
+                            : "Uma memória especial ❤️",
+
+                    text:
+                        midiaAtual.tipo === "video"
+                            ? "Confira esse recado!"
+                            : "Confira essa foto!",
+
+                    url:
+                        url
+
+                });
+
+            }
+
+            catch (erro) {
+
+                /*
+                 * Usuário cancelou.
+                 */
+
+            }
+
+
+            return;
+
+        }
+
+
+        /*
+         * COMPUTADOR
+         */
 
         try {
 
-            await navigator.share({
-
-                title:
-                midiaAtual.tipo === "video"
-                ? "Um recado especial ❤️"
-                : "Uma memória especial ❤️",
-
-                text:
-                midiaAtual.tipo === "video"
-                ? "Confira esse recado!"
-                : "Confira essa foto!",
-
-                url: url
-
-            });
-
-        } catch(e) {}
-
-        return;
-
-    }
+            await navigator.clipboard.writeText(
+                url
+            );
 
 
-    try {
-
-        await navigator.clipboard.writeText(url);
-
-
-        const original =
-        compartilhar.innerHTML;
+            const textoOriginal =
+                compartilhar.innerHTML;
 
 
-        compartilhar.innerHTML =
-        "✓ &nbsp; LINK COPIADO";
+            compartilhar.innerHTML =
+                "✓ &nbsp; LINK COPIADO";
 
 
-        setTimeout(
-            () => {
+            setTimeout(
+                function() {
 
-                compartilhar.innerHTML =
-                original;
+                    compartilhar.innerHTML =
+                        textoOriginal;
 
-            },
-            2000
-        );
+                },
+                2000
+            );
 
-    } catch(e) {
+        }
 
-        window.open(
-            url,
-            "_blank"
-        );
+        catch (erro) {
+
+            window.open(
+                url,
+                "_blank"
+            );
+
+        }
 
     }
-
-};
+);
 
 
 /* =====================================================
-   ABAS
+   FILTROS
 ===================================================== */
 
 filtros.forEach(
     function(botao) {
 
-        botao.onclick =
-        function() {
+        botao.addEventListener(
+            "click",
+            function() {
 
-            filtros.forEach(
-                item =>
-                item.classList.remove("ativo")
-            );
+                /*
+                 * Remove ativo dos outros.
+                 */
+
+                filtros.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "ativo"
+                        );
+
+                    }
+                );
 
 
-            botao.classList.add("ativo");
+                /*
+                 * Ativa o escolhido.
+                 */
+
+                botao.classList.add(
+                    "ativo"
+                );
 
 
-            filtroAtual =
-            botao.dataset.filtro;
+                filtroAtual =
+                    botao.dataset.filtro;
 
 
-            renderizarGaleria();
+                renderizarGaleria();
 
-        };
+            }
+        );
 
     }
 );
 
 
 /* =====================================================
-   ATUALIZAR
+   BOTÃO ATUALIZAR
 ===================================================== */
 
-atualizar.onclick =
-function() {
+atualizar.addEventListener(
+    "click",
+    function() {
 
-    carregarFotos();
+        carregarFotos();
 
-};
+    }
+);
 
 
 /* =====================================================
@@ -1886,18 +2396,23 @@ function() {
 ===================================================== */
 
 setInterval(
-    carregarFotos,
+    function() {
+
+        carregarFotos();
+
+    },
     10000
 );
 
 
 /* =====================================================
-   INÍCIO
+   PRIMEIRO CARREGAMENTO
 ===================================================== */
 
 carregarEvento();
 
 carregarFotos();
+
 
 </script>
 
