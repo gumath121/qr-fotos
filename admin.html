@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Painel Administrativo — Álbum Digital</title>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+
+      margin: 0;
+
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #26221c 0%,
+          #11100e 45%,
+          #080807 100%
+        );
+
+      color: #f4eee3;
+
+      font-family: 'Montserrat', sans-serif;
+
+      padding: 30px 20px 60px;
+
+    }
+
+
+    .container {
+
+      width: 100%;
+
+      max-width: 1100px;
+
+      margin: auto;
+
+    }
+
+
+    .topo {
+
+      text-align: center;
+
+      margin-bottom: 35px;
+
+    }
+
+
+    .marca {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 16px;
+
+      letter-spacing: 4px;
+
+      color: #c9a96e;
+
+      text-transform: uppercase;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    h1 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 52px;
+
+      line-height: 1;
+
+      margin: 0 0 12px;
+
+      font-weight: 600;
+
+    }
+
+
+    .descricao {
+
+      color: #aaa39a;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+      margin: auto;
+
+      max-width: 550px;
+
+    }
+
+
+    .grid {
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(300px, 420px)
+        1fr;
+
+      gap: 25px;
+
+      align-items: start;
+
+    }
+
+
+    .card {
+
+      background: rgba(255,255,255,0.04);
+
+      border: 1px solid rgba(201,169,110,0.25);
+
+      border-radius: 20px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.35);
+
+      backdrop-filter: blur(10px);
+
+    }
+
+
+    .card h2 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 30px;
+
+      margin: 0 0 22px;
+
+      font-weight: 600;
+
+    }
+
+
+    .campo {
+
+      margin-bottom: 18px;
+
+    }
+
+
+    label {
+
+      display: block;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      color: #c9a96e;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    input,
+    select,
+    textarea {
+
+      width: 100%;
+
+      padding: 14px 15px;
+
+      border-radius: 9px;
+
+      border: 1px solid #3d3932;
+
+      background: #151411;
+
+      color: #fff;
+
+      outline: none;
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 13px;
+
+    }
+
+
+    textarea {
+
+      min-height: 90px;
+
+      resize: vertical;
+
+    }
+
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+
+      border-color: #c9a96e;
+
+      box-shadow:
+        0 0 0 3px rgba(201,169,110,0.08);
+
+    }
+
+
+    .linha-cor {
+
+      display: flex;
+
+      gap: 10px;
+
+      align-items: center;
+
+    }
+
+
+    #cor {
+
+      width: 65px;
+
+      height: 48px;
+
+      padding: 4px;
+
+      cursor: pointer;
+
+    }
+
+
+    .valor-cor {
+
+      color: #aaa39a;
+
+      font-size: 12px;
+
+    }
+
+
+    button {
+
+      width: 100%;
+
+      border: 0;
+
+      border-radius: 9px;
+
+      padding: 15px;
+
+      background: #c9a96e;
+
+      color: #111;
+
+      font-family: 'Montserrat', sans-serif;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      letter-spacing: 1px;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+    }
+
+
+    button:hover {
+
+      transform: translateY(-1px);
+
+      filter: brightness(1.08);
+
+    }
+
+
+    button:disabled {
+
+      opacity: .5;
+
+      cursor: wait;
+
+      transform: none;
+
+    }
+
+
+    .mensagem {
+
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 13px;
+
+      border-radius: 9px;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .mensagem.ok {
+
+      display: block;
+
+      background: rgba(90,140,90,.12);
+
+      border: 1px solid rgba(90,140,90,.3);
+
+      color: #b9d7b9;
+
+    }
+
+
+    .mensagem.erro {
+
+      display: block;
+
+      background: rgba(180,70,70,.12);
+
+      border: 1px solid rgba(180,70,70,.3);
+
+      color: #e5aaaa;
+
+    }
+
+
+    .evento-criado {
+
+      display: none;
+
+      margin-top: 20px;
+
+      border-top: 1px solid #302d28;
+
+      padding-top: 20px;
+
+    }
+
+
+    .evento-criado.ativo {
+
+      display: block;
+
+    }
+
+
+    .evento-criado h3 {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 25px;
+
+      margin: 0 0 15px;
+
+    }
+
+
+    .resultado-link {
+
+      background: #151411;
+
+      border: 1px solid #302d28;
+
+      border-radius: 8px;
+
+      padding: 11px;
+
+      margin-bottom: 10px;
+
+      font-size: 10px;
+
+      color: #aaa39a;
+
+      word-break: break-all;
+
+    }
+
+
+    .btn-link {
+
+      background: transparent;
+
+      border: 1px solid #c9a96e;
+
+      color: #c9a96e;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .lista {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+    }
+
+
+    .evento {
+
+      border: 1px solid #302d28;
+
+      background: rgba(0,0,0,.15);
+
+      border-radius: 12px;
+
+      padding: 17px;
+
+    }
+
+
+    .evento-topo {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      align-items: center;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .evento-nome {
+
+      font-family: 'Cormorant Garamond', serif;
+
+      font-size: 24px;
+
+      font-weight: 600;
+
+    }
+
+
+    .evento-id {
+
+      color: #77736d;
+
+      font-size: 10px;
+
+      word-break: break-all;
+
+    }
+
+
+    .evento-tipo {
+
+      display: inline-block;
+
+      margin-top: 6px;
+
+      color: #c9a96e;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+
+    }
+
+
+    .acoes {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-top: 14px;
+
+    }
+
+
+    .acoes button {
+
+      padding: 11px;
+
+      font-size: 10px;
+
+    }
+
+
+    .vazio {
+
+      color: #77736d;
+
+      font-size: 12px;
+
+      text-align: center;
+
+      padding: 30px 10px;
+
+    }
+
+
+    .carregando {
+
+      color: #aaa39a;
+
+      font-size: 12px;
+
+      text-align: center;
+
+      padding: 30px;
+
+    }
+
+
+    .rodape {
+
+      text-align: center;
+
+      margin-top: 35px;
+
+      color: #55514b;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+    }
+
+
+    @media (max-width: 800px) {
+
+      .grid {
+
+        grid-template-columns: 1fr;
+
+      }
+
+
+      h1 {
+
+        font-size: 42px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <main class="container">
+
+
+    <header class="topo">
+
+      <div class="marca">
+        ÁLBUM DIGITAL
+      </div>
+
+      <h1>
+        Painel Administrativo
+      </h1>
+
+      <p class="descricao">
+        Crie e gerencie os eventos da sua plataforma
+        de álbum colaborativo.
+      </p>
+
+    </header>
+
+
+    <section class="grid">
+
+
+      <!-- =========================================
+           CRIAR EVENTO
+      ========================================== -->
+
+      <div class="card">
+
+        <h2>
+          Novo evento
+        </h2>
+
+
+        <div class="campo">
+
+          <label for="nome">
+            Nome do evento
+          </label>
+
+          <input
+            id="nome"
+            type="text"
+            placeholder="Ex.: Casamento Gustavo & Ana"
+          >
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="id">
+            ID do evento
+          </label>
+
+          <input
+            id="id"
+            type="text"
+            placeholder="Será criado automaticamente"
+          >
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="tipo">
+            Tipo de evento
+          </label>
+
+          <select id="tipo">
+
+            <option value="Evento">
+              Evento
+            </option>
+
+            <option value="Casamento">
+              Casamento
+            </option>
+
+            <option value="Aniversário">
+              Aniversário
+            </option>
+
+            <option value="Formatura">
+              Formatura
+            </option>
+
+            <option value="Evento Corporativo">
+              Evento Corporativo
+            </option>
+
+            <option value="Festa">
+              Festa
+            </option>
+
+            <option value="Outro">
+              Outro
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="mensagem">
+            Mensagem para os convidados
+          </label>
+
+          <textarea
+            id="mensagem"
+            placeholder="Compartilhe esse momento com a gente ❤️"
+          >Compartilhe esse momento com a gente ❤️</textarea>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>
+            Cor principal
+          </label>
+
+          <div class="linha-cor">
+
+            <input
+              id="cor"
+              type="color"
+              value="#c9a96e"
+            >
+
+            <span
+              class="valor-cor"
+              id="valorCor"
+            >
+              #c9a96e
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <button
+          id="btnCriar"
+          onclick="criarEvento()"
+        >
+
+          CRIAR EVENTO
+
+        </button>
+
+
+        <div
+          id="mensagem"
+          class="mensagem"
+        ></div>
+
+
+        <div
+          id="eventoCriado"
+          class="evento-criado"
+        >
+
+          <h3 id="eventoCriadoNome"></h3>
+
+
+          <div
+            class="resultado-link"
+            id="linkEvento"
+          ></div>
+
+
+          <button
+            class="btn-link"
+            onclick="abrirLinkEvento()"
+          >
+
+            ABRIR EVENTO
+
+          </button>
+
+
+          <div
+            class="resultado-link"
+            id="linkAlbum"
+          ></div>
+
+
+          <button
+            class="btn-link"
+            onclick="abrirLinkAlbum()"
+          >
+
+            ABRIR ÁLBUM
+
+          </button>
+
+
+          <button
+            class="btn-link"
+            onclick="abrirGeradorQR()"
+          >
+
+            GERAR QR CODE
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =========================================
+           EVENTOS EXISTENTES
+      ========================================== -->
+
+      <div class="card">
+
+        <h2>
+          Meus eventos
+        </h2>
+
+
+        <div
+          id="listaEventos"
+          class="lista"
+        >
+
+          <div class="carregando">
+            Carregando eventos...
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </section>
+
+
+    <div class="rodape">
+
+      ÁLBUM COLABORATIVO E INSTANTÂNEO
+
+    </div>
+
+
+  </main>
+
+
+
+  <script>
+
+
+    /* =====================================================
+       CONFIGURAÇÃO
+    ===================================================== */
+
+    const API =
+      "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+
+
+    let ultimoEvento = null;
+
+
+
+    /* =====================================================
+       COR
+    ===================================================== */
+
+    document
+      .getElementById("cor")
+      .addEventListener(
+        "input",
+        function() {
+
+          document
+            .getElementById("valorCor")
+            .textContent =
+            this.value;
+
+        }
+      );
+
+
+
+    /* =====================================================
+       CRIAR EVENTO
+    ===================================================== */
+
+    function criarEvento() {
+
+
+      const nome =
+        document
+          .getElementById("nome")
+          .value
+          .trim();
+
+
+      const id =
+        document
+          .getElementById("id")
+          .value
+          .trim();
+
+
+      const tipo =
+        document
+          .getElementById("tipo")
+          .value;
+
+
+      const mensagem =
+        document
+          .getElementById("mensagem")
+          .value
+          .trim();
+
+
+      const cor =
+        document
+          .getElementById("cor")
+          .value;
+
+
+      if (!nome) {
+
+        mostrarMensagem(
+          "Digite o nome do evento.",
+          "erro"
+        );
+
+        return;
+
+      }
+
+
+      const botao =
+        document
+          .getElementById("btnCriar");
+
+
+      botao.disabled = true;
+
+      botao.textContent =
+        "CRIANDO...";
+
+
+      const callbackName =
+        "criarEventoCallback_" +
+        Date.now();
+
+
+      window[callbackName] =
+        function(resposta) {
+
+
+          delete window[callbackName];
+
+
+          if (
+            script &&
+            script.parentNode
+          ) {
+
+            script.parentNode
+              .removeChild(script);
+
+          }
+
+
+          botao.disabled = false;
+
+          botao.textContent =
+            "CRIAR EVENTO";
+
+
+          if (
+            !resposta ||
+            !resposta.sucesso
+          ) {
+
+            mostrarMensagem(
+
+              resposta &&
+              resposta.erro
+                ? resposta.erro
+                : "Erro ao criar evento.",
+
+              "erro"
+
+            );
+
+            return;
+
+          }
+
+
+          ultimoEvento =
+            resposta;
+
+
+          mostrarMensagem(
+
+            "Evento criado com sucesso! " +
+            "A pasta foi criada no Google Drive.",
+
+            "ok"
+
+          );
+
+
+          mostrarEventoCriado(
+            resposta
+          );
+
+
+          limparFormulario();
+
+
+          carregarEventos();
+
+        };
+
+
+      const parametros =
+        new URLSearchParams();
+
+
+      parametros.set(
+        "acao",
+        "criarEvento"
+      );
+
+
+      parametros.set(
+        "nome",
+        nome
+      );
+
+
+      if (id) {
+
+        parametros.set(
+          "id",
+          id
+        );
+
+      }
+
+
+      parametros.set(
+        "tipo",
+        tipo
+      );
+
+
+      parametros.set(
+        "mensagem",
+        mensagem
+      );
+
+
+      parametros.set(
+        "cor",
+        cor
+      );
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      script.src =
+        API +
+        "?" +
+        parametros.toString() +
+        "&callback=" +
+        callbackName +
+        "&t=" +
+        Date.now();
+
+
+      document
+        .body
+        .appendChild(script);
+
+    }
+
+
+
+    /* =====================================================
+       MOSTRAR RESULTADO
+    ===================================================== */
+
+    function mostrarEventoCriado(
+      evento
+    ) {
+
+
+      document
+        .getElementById(
+          "eventoCriadoNome"
+        )
+        .textContent =
+        evento.nome;
+
+
+      document
+        .getElementById(
+          "linkEvento"
+        )
+        .textContent =
+        evento.link;
+
+
+      document
+        .getElementById(
+          "linkAlbum"
+        )
+        .textContent =
+        evento.album;
+
+
+      document
+        .getElementById(
+          "eventoCriado"
+        )
+        .classList
+        .add("ativo");
+
+    }
+
+
+
+    /* =====================================================
+       ABRIR EVENTO
+    ===================================================== */
+
+    function abrirLinkEvento() {
+
+      if (!ultimoEvento) {
+
+        return;
+
+      }
+
+
+      window.open(
+        ultimoEvento.link,
+        "_blank"
+      );
+
+    }
+
+
+
+    /* =====================================================
+       ABRIR ÁLBUM
+    ===================================================== */
+
+    function abrirLinkAlbum() {
+
+      if (!ultimoEvento) {
+
+        return;
+
+      }
+
+
+      window.open(
+        ultimoEvento.album,
+        "_blank"
+      );
+
+    }
+
+
+
+    /* =====================================================
+       GERADOR QR
+    ===================================================== */
+
+    function abrirGeradorQR() {
+
+      if (!ultimoEvento) {
+
+        return;
+
+      }
+
+
+      const url =
+        "gerar-qr.html" +
+        "?nome=" +
+        encodeURIComponent(
+          ultimoEvento.nome
+        ) +
+        "&id=" +
+        encodeURIComponent(
+          ultimoEvento.id
+        );
+
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+    }
+
+
+
+    /* =====================================================
+       LISTAR EVENTOS
+    ===================================================== */
+
+    function carregarEventos() {
+
+
+      const container =
+        document
+          .getElementById(
+            "listaEventos"
+          );
+
+
+      container.innerHTML =
+        '<div class="carregando">' +
+        'Carregando eventos...' +
+        '</div>';
+
+
+      const callbackName =
+        "listarEventosCallback_" +
+        Date.now();
+
+
+      window[callbackName] =
+        function(resposta) {
+
+
+          delete window[callbackName];
+
+
+          if (
+            script &&
+            script.parentNode
+          ) {
+
+            script.parentNode
+              .removeChild(script);
+
+          }
+
+
+          if (
+            !resposta ||
+            !resposta.sucesso
+          ) {
+
+            container.innerHTML =
+              '<div class="vazio">' +
+              'Não foi possível carregar os eventos.' +
+              '</div>';
+
+            return;
+
+          }
+
+
+          renderizarEventos(
+            resposta.eventos || []
+          );
+
+        };
+
+
+      const script =
+        document.createElement(
+          "script"
+        );
+
+
+      script.src =
+        API +
+        "?acao=listarEventos" +
+        "&callback=" +
+        callbackName +
+        "&t=" +
+        Date.now();
+
+
+      document
+        .body
+        .appendChild(script);
+
+    }
+
+
+
+    /* =====================================================
+       RENDERIZAR EVENTOS
+    ===================================================== */
+
+    function renderizarEventos(
+      eventos
+    ) {
+
+
+      const container =
+        document
+          .getElementById(
+            "listaEventos"
+          );
+
+
+      if (!eventos.length) {
+
+        container.innerHTML =
+          '<div class="vazio">' +
+          'Nenhum evento cadastrado.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      container.innerHTML = "";
+
+
+      eventos.forEach(
+        function(evento) {
+
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+
+          div.className =
+            "evento";
+
+
+          div.innerHTML = `
+
+            <div class="evento-topo">
+
+              <div>
+
+                <div
+                  class="evento-nome"
+                >
+                  ${escaparHTML(
+                    evento.nome
+                  )}
+                </div>
+
+                <div
+                  class="evento-id"
+                >
+                  ${escaparHTML(
+                    evento.id
+                  )}
+                </div>
+
+                <span
+                  class="evento-tipo"
+                >
+                  ${escaparHTML(
+                    evento.tipo
+                  )}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="acoes">
+
+              <button
+                onclick="abrirEventoPorId('${escaparJS(evento.id)}')"
+              >
+                EVENTO
+              </button>
+
+              <button
+                onclick="abrirAlbumPorId('${escaparJS(evento.id)}')"
+              >
+                ÁLBUM
+              </button>
+
+            </div>
+
+          `;
+
+
+          container.appendChild(
+            div
+          );
+
+        }
+      );
+
+    }
+
+
+
+    /* =====================================================
+       ABRIR EVENTO DA LISTA
+    ===================================================== */
+
+    function abrirEventoPorId(
+      id
+    ) {
+
+      const url =
+        "index.html?evento=" +
+        encodeURIComponent(id);
+
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+    }
+
+
+
+    /* =====================================================
+       ABRIR ÁLBUM DA LISTA
+    ===================================================== */
+
+    function abrirAlbumPorId(
+      id
+    ) {
+
+      const url =
+        "album.html?evento=" +
+        encodeURIComponent(id);
+
+
+      window.open(
+        url,
+        "_blank"
+      );
+
+    }
+
+
+
+    /* =====================================================
+       LIMPAR FORMULÁRIO
+    ===================================================== */
+
+    function limparFormulario() {
+
+      document
+        .getElementById("nome")
+        .value = "";
+
+
+      document
+        .getElementById("id")
+        .value = "";
+
+
+      document
+        .getElementById("tipo")
+        .value =
+        "Evento";
+
+
+      document
+        .getElementById("mensagem")
+        .value =
+        "Compartilhe esse momento com a gente ❤️";
+
+
+      document
+        .getElementById("cor")
+        .value =
+        "#c9a96e";
+
+
+      document
+        .getElementById("valorCor")
+        .textContent =
+        "#c9a96e";
+
+    }
+
+
+
+    /* =====================================================
+       MENSAGEM
+    ===================================================== */
+
+    function mostrarMensagem(
+      texto,
+      tipo
+    ) {
+
+
+      const elemento =
+        document
+          .getElementById(
+            "mensagem"
+          );
+
+
+      elemento.textContent =
+        texto;
+
+
+      elemento.className =
+        "mensagem " +
+        tipo;
+
+    }
+
+
+
+    /* =====================================================
+       SEGURANÇA HTML
+    ===================================================== */
+
+    function escaparHTML(
+      texto
+    ) {
+
+      return String(texto)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       SEGURANÇA JS
+    ===================================================== */
+
+    function escaparJS(
+      texto
+    ) {
+
+      return String(texto)
+        .replace(
+          /\\/g,
+          "\\\\"
+        )
+        .replace(
+          /'/g,
+          "\\'"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CARREGAR AO ABRIR
+    ===================================================== */
+
+    carregarEventos();
+
+
+  </script>
+
+
+</body>
+
+</html>
