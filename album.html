@@ -1096,14 +1096,29 @@ function carregarFotos() {
 
 
     window[callbackName] =
-        function(lista) {
+        function(resposta) {
 
 
             delete window[callbackName];
 
 
+            /*
+             * O Apps Script retorna agora:
+             *
+             * {
+             *   sucesso: true,
+             *   evento: "...",
+             *   nome: "...",
+             *   fotos: [...],
+             *   total: 1
+             * }
+             */
+
+
             if (
-                !Array.isArray(lista)
+                !resposta ||
+                resposta.sucesso !== true ||
+                !Array.isArray(resposta.fotos)
             ) {
 
                 mostrarErro();
@@ -1113,8 +1128,38 @@ function carregarFotos() {
             }
 
 
+            /*
+             * Guarda somente o array de fotos.
+             */
+
             fotos =
-                lista;
+                resposta.fotos;
+
+
+            /*
+             * O servidor também informa
+             * a quantidade total.
+             */
+
+            const total =
+                typeof resposta.total === "number"
+                    ? resposta.total
+                    : fotos.length;
+
+
+            /*
+             * Atualiza o contador
+             * imediatamente.
+             */
+
+            contador.innerText =
+
+                total === 1
+
+                ? "1 foto compartilhada"
+
+                : total +
+                  " fotos compartilhadas";
 
 
             renderizarFotos();
@@ -1128,12 +1173,6 @@ function carregarFotos() {
             "script"
         );
 
-
-    /*
-       AQUI ESTÁ A MUDANÇA PRINCIPAL:
-
-       enviamos o evento para o Apps Script.
-    */
 
     script.src =
         API +
@@ -1168,6 +1207,11 @@ function carregarFotos() {
 
 function renderizarFotos() {
 
+
+    /*
+     * Atualiza o contador com base
+     * no número real de fotos recebido.
+     */
 
     contador.innerText =
 
