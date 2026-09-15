@@ -1,997 +1,593 @@
-const PASTA_ID = "1KYTgInkJGHXm4cHRGc65hJ6p-gPz6FBp";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b0b">
 
+<title>QR Fotos</title>
 
-const EVENTOS_PADRAO = {
+<style>
+* {
+  box-sizing: border-box;
+}
 
-  "teste": {
-    nome: "Meu Evento",
-    tipo: "Evento",
-    mensagem: "Compartilhe seus melhores momentos.",
-    cor: "#d4af37"
-  },
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, #222 0%, #0d0d0d 45%, #050505 100%);
+  color: #fff;
+}
 
-  "casamento-gustavo": {
-    nome: "Gustavo & Ana",
-    tipo: "Casamento",
-    mensagem: "Compartilhe seus melhores momentos.",
-    cor: "#d4af37"
-  },
+body {
+  min-height: 100vh;
+}
 
-  "empresa-2026": {
-    nome: "Evento Corporativo 2026",
-    tipo: "Corporativo",
-    mensagem: "Compartilhe seus melhores momentos.",
-    cor: "#d4af37"
-  },
+.container {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 28px 18px 40px;
+}
 
-  "nelson-viadinho": {
-    nome: "NELSON viadinho",
-    tipo: "Evento",
-    mensagem: "Compartilhe seus melhores momentos.",
-    cor: "#d4af37"
+.topo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,175,55,.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  background: rgba(212,175,55,.08);
+  box-shadow: 0 0 30px rgba(212,175,55,.12);
+}
+
+h1 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+
+.subtitulo {
+  margin: 8px 0 0;
+  color: #bcbcbc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.evento-tipo {
+  display: inline-block;
+  margin-top: 13px;
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: 1px solid rgba(212,175,55,.35);
+  color: #d4af37;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.card {
+  background: rgba(22,22,22,.94);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 15px 50px rgba(0,0,0,.35);
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+}
+
+.card p {
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 18px;
+}
+
+.camera-area {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #050505;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 15px;
+}
+
+#camera {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+#preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+#videoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  background: #000;
+}
+
+.camera-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+}
+
+.camera-placeholder .icone {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.camera-placeholder span {
+  font-size: 13px;
+}
+
+.botoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+button,
+.botao {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 15px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+button:active,
+.botao:active {
+  transform: scale(.98);
+}
+
+.btn-principal {
+  background: #d4af37;
+  color: #111;
+}
+
+.btn-principal:hover {
+  background: #e5c45b;
+}
+
+.btn-secundario {
+  background: #292929;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.btn-secundario:hover {
+  background: #333;
+}
+
+.btn-video {
+  background: linear-gradient(135deg, #8c6b17, #d4af37);
+  color: #111;
+}
+
+.btn-video.gravando {
+  background: #b32626;
+  color: #fff;
+  animation: pulsar 1.2s infinite;
+}
+
+@keyframes pulsar {
+  0% {
+    box-shadow: 0 0 0 0 rgba(179,38,38,.5);
   }
 
-};
+  70% {
+    box-shadow: 0 0 0 12px rgba(179,38,38,0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(179,38,38,0);
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.status {
+  display: none;
+  margin-top: 15px;
+  padding: 13px 15px;
+  border-radius: 13px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.status.sucesso {
+  display: block;
+  background: rgba(39,125,65,.15);
+  border: 1px solid rgba(39,125,65,.4);
+  color: #8ee5a5;
+}
+
+.status.erro {
+  display: block;
+  background: rgba(170,40,40,.15);
+  border: 1px solid rgba(170,40,40,.4);
+  color: #ff9999;
+}
+
+.status.carregando {
+  display: block;
+  background: rgba(212,175,55,.08);
+  border: 1px solid rgba(212,175,55,.25);
+  color: #e4c967;
+}
+
+.album-link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #d4af37;
+  font-size: 14px;
+  margin-top: 18px;
+}
+
+.album-link:hover {
+  text-decoration: underline;
+}
+
+.contador {
+  text-align: center;
+  color: #777;
+  font-size: 11px;
+  margin-top: 25px;
+}
+
+#tempoGravacao {
+  display: none;
+  text-align: center;
+  margin: 10px 0;
+  color: #ff7777;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#fileInput {
+  display: none;
+}
+
+@media (max-width: 400px) {
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .botoes {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="topo">
+
+    <div class="logo">
+      📸
+    </div>
+
+    <h1 id="nomeEvento">
+      QR Fotos
+    </h1>
+
+    <p class="subtitulo" id="mensagemEvento">
+      Compartilhe seus melhores momentos.
+    </p>
+
+    <div class="evento-tipo" id="tipoEvento">
+      EVENTO
+    </div>
+
+  </div>
+
+
+  <!-- FOTO -->
+  <div class="card">
+
+    <h2>📸 Compartilhe uma foto</h2>
+
+    <p>
+      Tire uma foto agora ou escolha uma imagem da sua galeria.
+    </p>
+
+    <div class="camera-area">
+
+      <video
+        id="camera"
+        autoplay
+        playsinline>
+      </video>
+
+      <img
+        id="preview"
+        alt="Pré-visualização">
+
+      <video
+        id="videoPreview"
+        controls
+        playsinline>
+      </video>
+
+      <div
+        class="camera-placeholder"
+        id="cameraPlaceholder">
+
+        <div class="icone">📷</div>
+
+        <span>
+          Sua foto aparecerá aqui
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="botoes">
+
+      <button
+        class="btn-principal"
+        id="abrirCamera">
+        📷 Abrir câmera
+      </button>
+
+      <label
+        class="botao btn-secundario"
+        for="fileInput">
+        🖼️ Galeria
+      </label>
+
+    </div>
+
+
+    <input
+      type="file"
+      id="fileInput"
+      accept="image/*"
+      capture="environment">
+
+
+    <div
+      class="botoes"
+      style="margin-top:10px;">
+
+      <button
+        class="btn-secundario"
+        id="tirarFoto"
+        style="display:none;">
+        📸 Tirar foto
+      </button>
+
+      <button
+        class="btn-principal"
+        id="enviarFoto"
+        style="display:none;">
+        ⬆️ Enviar foto
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- VIDEO -->
+  <div class="card">
+
+    <h2>🎥 Grave um recado</h2>
+
+    <p>
+      Deixe uma mensagem em vídeo para guardar como lembrança deste evento.
+    </p>
+
+    <div id="tempoGravacao">
+      🔴 Gravando <span id="tempo">00:00</span>
+    </div>
+
+    <button
+      class="btn-video"
+      id="gravar">
+      🎥 Gravar recado
+    </button>
+
+    <button
+      class="btn-principal"
+      id="enviarVideo"
+      style="display:none; margin-top:10px;">
+      ⬆️ Enviar recado
+    </button>
+
+  </div>
+
+
+  <!-- STATUS -->
+
+  <div
+    class="status"
+    id="status">
+  </div>
+
+
+  <a
+    class="album-link"
+    id="albumLink"
+    href="#">
+    ✨ Ver álbum do evento
+  </a>
+
+
+  <div class="contador">
+    QR Fotos • Compartilhe. Viva. Guarde.
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CONFIGURAÇÃO
+===================================================== */
+
+const API =
+  "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+
+
+const parametros =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const evento =
+  parametros.get("evento") || "teste";
+
+
+const albumLink =
+  document.getElementById("albumLink");
+
+
+albumLink.href =
+  "album.html?evento=" +
+  encodeURIComponent(evento);
 
 
 /* =====================================================
-   EVENTOS
+   ELEMENTOS
 ===================================================== */
 
-function obterEventos() {
+const nomeEvento =
+  document.getElementById("nomeEvento");
 
-  const propriedades =
-    PropertiesService.getScriptProperties();
+const mensagemEvento =
+  document.getElementById("mensagemEvento");
 
-  const salvo =
-    propriedades.getProperty("EVENTOS");
+const tipoEvento =
+  document.getElementById("tipoEvento");
 
-  if (!salvo) {
+const status =
+  document.getElementById("status");
 
-    salvarEventos(EVENTOS_PADRAO);
+const camera =
+  document.getElementById("camera");
 
-    return EVENTOS_PADRAO;
+const preview =
+  document.getElementById("preview");
 
-  }
+const videoPreview =
+  document.getElementById("videoPreview");
 
-  try {
+const cameraPlaceholder =
+  document.getElementById("cameraPlaceholder");
 
-    return JSON.parse(salvo);
+const abrirCamera =
+  document.getElementById("abrirCamera");
 
-  }
+const tirarFoto =
+  document.getElementById("tirarFoto");
 
-  catch (erro) {
+const enviarFoto =
+  document.getElementById("enviarFoto");
 
-    salvarEventos(EVENTOS_PADRAO);
+const fileInput =
+  document.getElementById("fileInput");
 
-    return EVENTOS_PADRAO;
+const gravar =
+  document.getElementById("gravar");
 
-  }
+const enviarVideo =
+  document.getElementById("enviarVideo");
 
-}
+const tempoGravacao =
+  document.getElementById("tempoGravacao");
 
-
-function salvarEventos(eventos) {
-
-  PropertiesService
-    .getScriptProperties()
-    .setProperty(
-      "EVENTOS",
-      JSON.stringify(eventos)
-    );
-
-}
+const tempo =
+  document.getElementById("tempo");
 
 
-function obterEvento(id) {
+let streamCamera = null;
 
-  const eventos =
-    obterEventos();
+let fotoBlob = null;
 
-  return eventos[id] || null;
+let mediaRecorder = null;
 
-}
+let partesVideo = [];
+
+let videoBlob = null;
+
+let intervaloTempo = null;
+
+let segundosGravacao = 0;
 
 
 /* =====================================================
-   ID DO EVENTO
+   STATUS
 ===================================================== */
 
-function criarIdEvento(nome) {
-
-  return nome
-    .toString()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
-}
-
-
-/* =====================================================
-   PASTA DO EVENTO
-===================================================== */
-
-function obterPastaEvento(idEvento) {
-
-  const pastaPrincipal =
-    DriveApp.getFolderById(PASTA_ID);
-
-  const pastas =
-    pastaPrincipal.getFoldersByName(idEvento);
-
-  if (pastas.hasNext()) {
-
-    return pastas.next();
-
-  }
-
-  return pastaPrincipal.createFolder(idEvento);
-
-}
-
-
-/* =====================================================
-   CONTAR FOTOS
-===================================================== */
-
-function contarFotosEvento(idEvento) {
-
-  try {
-
-    const pasta =
-      obterPastaEvento(idEvento);
-
-    const arquivos =
-      pasta.getFiles();
-
-    let total = 0;
-
-    while (arquivos.hasNext()) {
-
-      const arquivo =
-        arquivos.next();
-
-      const tipo =
-        arquivo.getMimeType();
-
-      if (
-        tipo &&
-        tipo.indexOf("image/") === 0
-      ) {
-
-        total++;
-
-      }
-
-    }
-
-    return total;
-
-  }
-
-  catch (erro) {
-
-    Logger.log(
-      "Erro ao contar fotos: " +
-      erro
-    );
-
-    return 0;
-
-  }
-
-}
-
-
-/* =====================================================
-   CONTAR VÍDEOS
-===================================================== */
-
-function contarVideosEvento(idEvento) {
-
-  try {
-
-    const pasta =
-      obterPastaEvento(idEvento);
-
-    const arquivos =
-      pasta.getFiles();
-
-    let total = 0;
-
-    while (arquivos.hasNext()) {
-
-      const arquivo =
-        arquivos.next();
-
-      const tipo =
-        arquivo.getMimeType();
-
-      if (
-        tipo &&
-        tipo.indexOf("video/") === 0
-      ) {
-
-        total++;
-
-      }
-
-    }
-
-    return total;
-
-  }
-
-  catch (erro) {
-
-    Logger.log(
-      "Erro ao contar vídeos: " +
-      erro
-    );
-
-    return 0;
-
-  }
-
-}
-
-
-/* =====================================================
-   CONTAR MÍDIA
-===================================================== */
-
-function contarMidiaEvento(idEvento) {
-
-  return {
-
-    fotos:
-      contarFotosEvento(idEvento),
-
-    videos:
-      contarVideosEvento(idEvento)
-
-  };
-
-}
-
-
-/* =====================================================
-   FUNÇÃO AUXILIAR
-   RESPOSTA JSON
-===================================================== */
-
-function respostaJSON(dados) {
-
-  return ContentService
-    .createTextOutput(
-      JSON.stringify(dados)
-    )
-    .setMimeType(
-      ContentService.MimeType.JSON
-    );
-
-}
-
-
-/* =====================================================
-   UPLOAD
-   FOTO + VÍDEO
-===================================================== */
-
-function doPost(e) {
-
-  try {
-
-    Logger.log(
-      "======================================"
-    );
-
-    Logger.log(
-      "NOVO UPLOAD"
-    );
-
-    Logger.log(
-      "======================================"
-    );
-
-
-    /* -------------------------------------------------
-       VERIFICA EVENTO
-    ------------------------------------------------- */
-
-    if (!e) {
-
-      throw new Error(
-        "Objeto de requisição não recebido."
-      );
-
-    }
-
-
-    if (!e.parameter) {
-
-      throw new Error(
-        "Nenhum parâmetro foi recebido."
-      );
-
-    }
-
-
-    const evento =
-      e.parameter.evento;
-
-
-    Logger.log(
-      "Evento: " +
-      evento
-    );
-
-
-    if (!evento) {
-
-      throw new Error(
-        "Evento não informado."
-      );
-
-    }
-
-
-    /* -------------------------------------------------
-       VERIFICA SE EVENTO EXISTE
-    ------------------------------------------------- */
-
-    const configuracao =
-      obterEvento(evento);
-
-
-    if (!configuracao) {
-
-      throw new Error(
-        "Evento não encontrado: " +
-        evento
-      );
-
-    }
-
-
-    /* -------------------------------------------------
-       TIPO
-    ------------------------------------------------- */
-
-    const tipo =
-      (
-        e.parameter.tipo ||
-        "foto"
-      )
-      .toString()
-      .toLowerCase()
-      .trim();
-
-
-    Logger.log(
-      "Tipo: " +
-      tipo
-    );
-
-
-    /* -------------------------------------------------
-       LOCALIZA O ARQUIVO RECEBIDO
-    ------------------------------------------------- */
-
-    const base64 =
-      e.parameter.imagem ||
-      e.parameter.foto ||
-      e.parameter.image ||
-      e.parameter.video ||
-      e.parameter.arquivo;
-
-
-    if (!base64) {
-
-      throw new Error(
-        "Nenhum arquivo foi recebido pelo servidor."
-      );
-
-    }
-
-
-    Logger.log(
-      "Base64 recebido."
-    );
-
-
-    Logger.log(
-      "Tamanho original: " +
-      base64.length
-    );
-
-
-    /* -------------------------------------------------
-       DETECTA MIME
-    ------------------------------------------------- */
-
-    let mimeType = "";
-    let extensao = "";
-
-
-    if (tipo === "video") {
-
-      if (
-        base64.indexOf("video/mp4") !== -1
-      ) {
-
-        mimeType = "video/mp4";
-        extensao = "mp4";
-
-      }
-
-      else if (
-        base64.indexOf("video/webm") !== -1
-      ) {
-
-        mimeType = "video/webm";
-        extensao = "webm";
-
-      }
-
-      else {
-
-        /*
-         * Caso o navegador não envie
-         * o prefixo MIME, assumimos WebM.
-         */
-
-        mimeType = "video/webm";
-        extensao = "webm";
-
-      }
-
-    }
-
-    else {
-
-      if (
-        base64.indexOf("image/png") !== -1
-      ) {
-
-        mimeType = "image/png";
-        extensao = "png";
-
-      }
-
-      else if (
-        base64.indexOf("image/webp") !== -1
-      ) {
-
-        mimeType = "image/webp";
-        extensao = "webp";
-
-      }
-
-      else {
-
-        mimeType = "image/jpeg";
-        extensao = "jpg";
-
-      }
-
-    }
-
-
-    Logger.log(
-      "MIME: " +
-      mimeType
-    );
-
-    Logger.log(
-      "Extensão: " +
-      extensao
-    );
-
-
-    /* -------------------------------------------------
-       REMOVE CABEÇALHO DATA URI
-    ------------------------------------------------- */
-
-    let dados =
-      base64.replace(
-        /^data:[^,]+,/,
-        ""
-      );
-
-
-    /*
-     * Remove espaços, quebras de linha
-     * e caracteres invisíveis.
-     */
-
-    dados =
-      dados
-        .replace(/\s/g, "")
-        .trim();
-
-
-    if (!dados) {
-
-      throw new Error(
-        "O Base64 ficou vazio após o processamento."
-      );
-
-    }
-
-
-    Logger.log(
-      "Base64 processado: " +
-      dados.length
-    );
-
-
-    /* -------------------------------------------------
-       DECODIFICA
-    ------------------------------------------------- */
-
-    let bytes;
-
-    try {
-
-      bytes =
-        Utilities.base64Decode(dados);
-
-    }
-
-    catch (erroBase64) {
-
-      Logger.log(
-        "Erro Base64: " +
-        erroBase64
-      );
-
-      throw new Error(
-        "Não foi possível decodificar o arquivo enviado."
-      );
-
-    }
-
-
-    if (
-      !bytes ||
-      bytes.length === 0
-    ) {
-
-      throw new Error(
-        "O arquivo recebido possui 0 bytes."
-      );
-
-    }
-
-
-    Logger.log(
-      "Bytes decodificados: " +
-      bytes.length
-    );
-
-
-    /* -------------------------------------------------
-       PASTA
-    ------------------------------------------------- */
-
-    const pasta =
-      obterPastaEvento(evento);
-
-
-    Logger.log(
-      "Pasta encontrada: " +
-      pasta.getName()
-    );
-
-    Logger.log(
-      "ID da pasta: " +
-      pasta.getId()
-    );
-
-
-    /* =================================================
-       FOTO
-    ================================================= */
-
-    if (tipo === "foto") {
-
-      const nomeArquivo =
-        "foto_" +
-        new Date().getTime() +
-        "." +
-        extensao;
-
-
-      const blob =
-        Utilities.newBlob(
-          bytes,
-          mimeType,
-          nomeArquivo
-        );
-
-
-      Logger.log(
-        "Criando foto no Drive..."
-      );
-
-
-      const arquivo =
-        pasta.createFile(blob);
-
-
-      Logger.log(
-        "FOTO CRIADA!"
-      );
-
-      Logger.log(
-        "Nome: " +
-        arquivo.getName()
-      );
-
-      Logger.log(
-        "ID: " +
-        arquivo.getId()
-      );
-
-      Logger.log(
-        "Tamanho: " +
-        arquivo.getSize()
-      );
-
-
-      try {
-
-        arquivo.setSharing(
-          DriveApp.Access.ANYONE_WITH_LINK,
-          DriveApp.Permission.VIEW
-        );
-
-      }
-
-      catch (erroCompartilhamento) {
-
-        Logger.log(
-          "Compartilhamento não alterado: " +
-          erroCompartilhamento
-        );
-
-      }
-
-
-      /* -------------------------------------------------
-         CONFIRMA QUE O ARQUIVO EXISTE
-      ------------------------------------------------- */
-
-      const arquivoConfirmacao =
-        DriveApp.getFileById(
-          arquivo.getId()
-        );
-
-
-      if (!arquivoConfirmacao) {
-
-        throw new Error(
-          "O arquivo foi criado, mas não pôde ser confirmado."
-        );
-
-      }
-
-
-      const totalFotos =
-        contarFotosEvento(evento);
-
-
-      return respostaJSON({
-
-        sucesso: true,
-
-        tipo: "foto",
-
-        mensagem:
-          "Foto enviada com sucesso!",
-
-        evento:
-          evento,
-
-        nome:
-          arquivo.getName(),
-
-        id:
-          arquivo.getId(),
-
-        tamanho:
-          arquivo.getSize(),
-
-        url:
-          "https://drive.google.com/uc?export=view&id=" +
-          arquivo.getId(),
-
-        fotos:
-          totalFotos
-
-      });
-
-    }
-
-
-    /* =================================================
-       VÍDEO
-    ================================================= */
-
-    if (tipo === "video") {
-
-      const nomeArquivo =
-        "recado_" +
-        new Date().getTime() +
-        "." +
-        extensao;
-
-
-      Logger.log(
-        "Preparando Blob do vídeo..."
-      );
-
-
-      const blob =
-        Utilities.newBlob(
-          bytes,
-          mimeType,
-          nomeArquivo
-        );
-
-
-      Logger.log(
-        "Blob criado."
-      );
-
-      Logger.log(
-        "Tamanho do Blob: " +
-        blob.getBytes().length
-      );
-
-
-      Logger.log(
-        "Criando vídeo no Drive..."
-      );
-
-
-      const arquivo =
-        pasta.createFile(blob);
-
-
-      Logger.log(
-        "======================================"
-      );
-
-      Logger.log(
-        "VÍDEO CRIADO COM SUCESSO!"
-      );
-
-      Logger.log(
-        "Nome: " +
-        arquivo.getName()
-      );
-
-      Logger.log(
-        "ID: " +
-        arquivo.getId()
-      );
-
-      Logger.log(
-        "Tamanho: " +
-        arquivo.getSize()
-      );
-
-      Logger.log(
-        "MIME: " +
-        arquivo.getMimeType()
-      );
-
-      Logger.log(
-        "======================================"
-      );
-
-
-      /* -------------------------------------------------
-         COMPARTILHAMENTO
-      ------------------------------------------------- */
-
-      try {
-
-        arquivo.setSharing(
-          DriveApp.Access.ANYONE_WITH_LINK,
-          DriveApp.Permission.VIEW
-        );
-
-
-        Logger.log(
-          "Compartilhamento configurado."
-        );
-
-      }
-
-      catch (erroCompartilhamento) {
-
-        Logger.log(
-          "Erro no compartilhamento:"
-        );
-
-        Logger.log(
-          erroCompartilhamento
-        );
-
-      }
-
-
-      /* -------------------------------------------------
-         CONFIRMA ARQUIVO NO DRIVE
-      ------------------------------------------------- */
-
-      let arquivoConfirmacao;
-
-      try {
-
-        arquivoConfirmacao =
-          DriveApp.getFileById(
-            arquivo.getId()
-          );
-
-      }
-
-      catch (erroConfirmacao) {
-
-        Logger.log(
-          "Erro ao confirmar arquivo:"
-        );
-
-        Logger.log(
-          erroConfirmacao
-        );
-
-        throw new Error(
-          "O vídeo foi criado, mas não pôde ser confirmado no Google Drive."
-        );
-
-      }
-
-
-      if (
-        !arquivoConfirmacao ||
-        arquivoConfirmacao.getSize() <= 0
-      ) {
-
-        throw new Error(
-          "O vídeo foi criado, mas possui tamanho inválido."
-        );
-
-      }
-
-
-      const totalVideos =
-        contarVideosEvento(evento);
-
-
-      return respostaJSON({
-
-        sucesso: true,
-
-        tipo: "video",
-
-        mensagem:
-          "Recado enviado com sucesso!",
-
-        evento:
-          evento,
-
-        nome:
-          arquivo.getName(),
-
-        id:
-          arquivo.getId(),
-
-        tamanho:
-          arquivo.getSize(),
-
-        mime:
-          arquivo.getMimeType(),
-
-        url:
-          "https://drive.google.com/uc?export=view&id=" +
-          arquivo.getId(),
-
-        videos:
-          totalVideos
-
-      });
-
-    }
-
-
-    /* -------------------------------------------------
-       TIPO INVÁLIDO
-    ------------------------------------------------- */
-
-    throw new Error(
-      "Tipo de arquivo inválido: " +
-      tipo
-    );
-
-
-  }
-
-  catch (erro) {
-
-    Logger.log(
-      "======================================"
-    );
-
-    Logger.log(
-      "ERRO NO UPLOAD"
-    );
-
-    Logger.log(
-      erro
-    );
-
-    Logger.log(
-      "======================================"
-    );
-
-
-    return respostaJSON({
-
-      sucesso: false,
-
-      erro:
-        erro.message ||
-        String(erro)
-
-    });
-
-  }
-
-}
-
-
-/* =====================================================
-   JSONP
-===================================================== */
-
-function responderJSONP(
-  dados,
-  callback
+function mostrarStatus(
+  mensagem,
+  tipo
 ) {
 
-  const json =
-    JSON.stringify(dados);
+  status.textContent =
+    mensagem;
 
-
-  if (!callback) {
-
-    return ContentService
-      .createTextOutput(json)
-      .setMimeType(
-        ContentService.MimeType.JSON
-      );
-
-  }
-
-
-  return ContentService
-    .createTextOutput(
-      callback +
-      "(" +
-      json +
-      ");"
-    )
-    .setMimeType(
-      ContentService.MimeType.JAVASCRIPT
-    );
+  status.className =
+    "status " +
+    tipo;
 
 }
 
@@ -1000,720 +596,1095 @@ function responderJSONP(
    CONFIGURAÇÃO DO EVENTO
 ===================================================== */
 
-function obterConfiguracaoEvento(
-  evento
-) {
+function carregarEvento() {
 
-  const dados =
-    obterEvento(evento);
+  const script =
+    document.createElement("script");
+
+  const callback =
+    "callbackEvento_" +
+    Date.now();
 
 
-  if (!dados) {
+  window[callback] =
+    function(resposta) {
 
-    return {
+      try {
 
-      sucesso: false,
+        if (
+          resposta &&
+          resposta.sucesso
+        ) {
 
-      erro:
-        "Evento não encontrado."
+          nomeEvento.textContent =
+            resposta.nome ||
+            "QR Fotos";
+
+          mensagemEvento.textContent =
+            resposta.mensagem ||
+            "Compartilhe seus melhores momentos.";
+
+          tipoEvento.textContent =
+            resposta.tipo ||
+            "EVENTO";
+
+        }
+
+        else {
+
+          nomeEvento.textContent =
+            "QR Fotos";
+
+        }
+
+      }
+
+      catch (erro) {
+
+        console.error(erro);
+
+      }
+
+      finally {
+
+        delete window[callback];
+
+        script.remove();
+
+      }
 
     };
 
-  }
+
+  script.src =
+    API +
+    "?config=true" +
+    "&evento=" +
+    encodeURIComponent(evento) +
+    "&callback=" +
+    callback;
 
 
-  return {
+  script.onerror =
+    function() {
 
-    sucesso: true,
+      nomeEvento.textContent =
+        "QR Fotos";
 
-    evento: evento,
+      script.remove();
 
-    nome:
-      dados.nome,
+    };
 
-    tipo:
-      dados.tipo,
 
-    mensagem:
-      dados.mensagem,
-
-    cor:
-      dados.cor
-
-  };
+  document.body.appendChild(script);
 
 }
 
 
-/* =====================================================
-   CRIAR EVENTO
-===================================================== */
-
-function criarEvento(e) {
-
-  try {
-
-    const nome =
-      e.parameter.nome;
-
-
-    if (!nome) {
-
-      throw new Error(
-        "Nome do evento é obrigatório."
-      );
-
-    }
-
-
-    let id =
-      e.parameter.id ||
-      criarIdEvento(nome);
-
-
-    const eventos =
-      obterEventos();
-
-
-    if (eventos[id]) {
-
-      throw new Error(
-        "Já existe um evento com esse ID."
-      );
-
-    }
-
-
-    eventos[id] = {
-
-      nome:
-        nome,
-
-      tipo:
-        e.parameter.tipo ||
-        "Evento",
-
-      mensagem:
-        e.parameter.mensagem ||
-        "Compartilhe seus melhores momentos.",
-
-      cor:
-        e.parameter.cor ||
-        "#d4af37"
-
-    };
-
-
-    salvarEventos(eventos);
-
-
-    const pasta =
-      obterPastaEvento(id);
-
-
-    return {
-
-      sucesso: true,
-
-      id:
-        id,
-
-      nome:
-        nome,
-
-      tipo:
-        eventos[id].tipo,
-
-      mensagem:
-        eventos[id].mensagem,
-
-      cor:
-        eventos[id].cor,
-
-      pasta:
-        pasta.getName(),
-
-      link:
-        "https://gumath121.github.io/qr-fotos/index.html?evento=" +
-        encodeURIComponent(id),
-
-      album:
-        "https://gumath121.github.io/qr-fotos/album.html?evento=" +
-        encodeURIComponent(id),
-
-      fotos:
-        0,
-
-      videos:
-        0
-
-    };
-
-  }
-
-  catch (erro) {
-
-    return {
-
-      sucesso: false,
-
-      erro:
-        erro.message ||
-        String(erro)
-
-    };
-
-  }
-
-}
+carregarEvento();
 
 
 /* =====================================================
-   EDITAR EVENTO
+   CÂMERA
 ===================================================== */
 
-function editarEvento(e) {
+abrirCamera.addEventListener(
+  "click",
+  async function() {
 
-  try {
+    try {
 
-    const id =
-      e.parameter.id;
+      if (!navigator.mediaDevices ||
+          !navigator.mediaDevices.getUserMedia) {
 
-    const nome =
-      e.parameter.nome;
+        throw new Error(
+          "A câmera não é suportada neste navegador."
+        );
 
-    const tipo =
-      e.parameter.tipo ||
-      "Evento";
-
-    const mensagem =
-      e.parameter.mensagem ||
-      "Compartilhe seus melhores momentos.";
-
-    const cor =
-      e.parameter.cor ||
-      "#d4af37";
+      }
 
 
-    if (!id) {
+      streamCamera =
+        await navigator.mediaDevices.getUserMedia({
 
-      throw new Error(
-        "ID do evento não informado."
-      );
+          video: {
+            facingMode: {
+              ideal: "environment"
+            }
+          },
+
+          audio: false
+
+        });
+
+
+      camera.srcObject =
+        streamCamera;
+
+
+      camera.style.display =
+        "block";
+
+      cameraPlaceholder.style.display =
+        "none";
+
+      preview.style.display =
+        "none";
+
+      videoPreview.style.display =
+        "none";
+
+      tirarFoto.style.display =
+        "block";
+
+      abrirCamera.textContent =
+        "📷 Câmera aberta";
 
     }
 
+    catch (erro) {
 
-    if (!nome) {
+      console.error(erro);
 
-      throw new Error(
-        "Nome do evento é obrigatório."
+      mostrarStatus(
+        "Não foi possível acessar a câmera. Verifique a permissão do navegador.",
+        "erro"
       );
 
     }
-
-
-    const eventos =
-      obterEventos();
-
-
-    if (!eventos[id]) {
-
-      throw new Error(
-        "Evento não encontrado."
-      );
-
-    }
-
-
-    eventos[id].nome =
-      nome;
-
-    eventos[id].tipo =
-      tipo;
-
-    eventos[id].mensagem =
-      mensagem;
-
-    eventos[id].cor =
-      cor;
-
-
-    salvarEventos(eventos);
-
-
-    return {
-
-      sucesso: true,
-
-      id:
-        id,
-
-      nome:
-        eventos[id].nome,
-
-      tipo:
-        eventos[id].tipo,
-
-      mensagem:
-        eventos[id].mensagem,
-
-      cor:
-        eventos[id].cor
-
-    };
 
   }
-
-  catch (erro) {
-
-    return {
-
-      sucesso: false,
-
-      erro:
-        erro.message ||
-        String(erro)
-
-    };
-
-  }
-
-}
+);
 
 
 /* =====================================================
-   LISTAR EVENTOS
+   TIRAR FOTO
 ===================================================== */
 
-function listarEventos() {
+tirarFoto.addEventListener(
+  "click",
+  function() {
 
-  const eventos =
-    obterEventos();
+    if (!streamCamera) {
 
+      return;
 
-  const resultado = [];
-
-
-  Object.keys(eventos).forEach(
-    function(id) {
-
-      const midia =
-        contarMidiaEvento(id);
+    }
 
 
-      resultado.push({
+    const canvas =
+      document.createElement("canvas");
 
-        id:
-          id,
 
-        nome:
-          eventos[id].nome,
+    canvas.width =
+      camera.videoWidth;
 
-        tipo:
-          eventos[id].tipo,
+    canvas.height =
+      camera.videoHeight;
 
-        mensagem:
-          eventos[id].mensagem,
 
-        cor:
-          eventos[id].cor,
+    const contexto =
+      canvas.getContext("2d");
 
-        fotos:
-          midia.fotos,
 
-        videos:
-          midia.videos
+    contexto.drawImage(
+      camera,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
 
-      });
+
+    canvas.toBlob(
+      function(blob) {
+
+        fotoBlob =
+          blob;
+
+
+        preview.src =
+          URL.createObjectURL(blob);
+
+
+        preview.style.display =
+          "block";
+
+        camera.style.display =
+          "none";
+
+        tirarFoto.style.display =
+          "none";
+
+        enviarFoto.style.display =
+          "block";
+
+
+        if (streamCamera) {
+
+          streamCamera
+            .getTracks()
+            .forEach(
+              track => track.stop()
+            );
+
+          streamCamera = null;
+
+        }
+
+      },
+
+      "image/jpeg",
+
+      0.9
+
+    );
+
+  }
+);
+
+
+/* =====================================================
+   GALERIA
+===================================================== */
+
+fileInput.addEventListener(
+  "change",
+  function() {
+
+    const arquivo =
+      this.files &&
+      this.files[0];
+
+
+    if (!arquivo) {
+
+      return;
+
+    }
+
+
+    fotoBlob =
+      arquivo;
+
+
+    preview.src =
+      URL.createObjectURL(arquivo);
+
+
+    preview.style.display =
+      "block";
+
+    camera.style.display =
+      "none";
+
+    videoPreview.style.display =
+      "none";
+
+    cameraPlaceholder.style.display =
+      "none";
+
+    enviarFoto.style.display =
+      "block";
+
+
+    if (streamCamera) {
+
+      streamCamera
+        .getTracks()
+        .forEach(
+          track => track.stop()
+        );
+
+      streamCamera = null;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   CONVERTER BLOB PARA BASE64
+===================================================== */
+
+function blobParaBase64(blob) {
+
+  return new Promise(
+    function(resolve, reject) {
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function() {
+
+          resolve(
+            reader.result
+          );
+
+        };
+
+
+      reader.onerror =
+        reject;
+
+
+      reader.readAsDataURL(blob);
 
     }
   );
 
-
-  return {
-
-    sucesso: true,
-
-    eventos:
-      resultado
-
-  };
-
 }
 
 
 /* =====================================================
-   DELETAR EVENTO
+   ENVIAR FOTO
 ===================================================== */
 
-function deletarEvento(id) {
+enviarFoto.addEventListener(
+  "click",
+  async function() {
 
-  try {
+    if (!fotoBlob) {
 
-    const eventos =
-      obterEventos();
-
-
-    if (!eventos[id]) {
-
-      throw new Error(
-        "Evento não encontrado."
+      mostrarStatus(
+        "Nenhuma foto selecionada.",
+        "erro"
       );
 
+      return;
+
     }
 
 
-    delete eventos[id];
+    enviarFoto.disabled =
+      true;
 
 
-    salvarEventos(eventos);
+    mostrarStatus(
+      "Enviando sua foto...",
+      "carregando"
+    );
 
 
-    return {
+    try {
 
-      sucesso: true,
-
-      mensagem:
-        "Evento removido."
-
-    };
-
-  }
-
-  catch (erro) {
-
-    return {
-
-      sucesso: false,
-
-      erro:
-        erro.message ||
-        String(erro)
-
-    };
-
-  }
-
-}
+      const base64 =
+        await blobParaBase64(
+          fotoBlob
+        );
 
 
-/* =====================================================
-   GET
-===================================================== */
-
-function doGet(e) {
-
-  try {
-
-    const parametros =
-      e.parameter || {};
+      const dados =
+        new URLSearchParams();
 
 
-    const callback =
-      parametros.callback;
-
-
-    /* =================================================
-       CONFIGURAÇÃO
-    ================================================= */
-
-    if (
-      parametros.config === "true"
-    ) {
-
-      const evento =
-        parametros.evento ||
-        "teste";
-
-
-      return responderJSONP(
-
-        obterConfiguracaoEvento(
-          evento
-        ),
-
-        callback
-
+      dados.append(
+        "evento",
+        evento
       );
 
-    }
 
-
-    /* =================================================
-       CRIAR EVENTO
-    ================================================= */
-
-    if (
-      parametros.acao ===
-      "criarEvento"
-    ) {
-
-      return responderJSONP(
-
-        criarEvento(e),
-
-        callback
-
+      dados.append(
+        "tipo",
+        "foto"
       );
 
-    }
 
-
-    /* =================================================
-       EDITAR EVENTO
-    ================================================= */
-
-    if (
-      parametros.acao ===
-      "editarEvento"
-    ) {
-
-      return responderJSONP(
-
-        editarEvento(e),
-
-        callback
-
+      dados.append(
+        "imagem",
+        base64
       );
 
-    }
+
+      const resposta =
+        await fetch(
+          API,
+          {
+            method: "POST",
+            body: dados
+          }
+        );
 
 
-    /* =================================================
-       LISTAR EVENTOS
-    ================================================= */
-
-    if (
-      parametros.acao ===
-      "listarEventos"
-    ) {
-
-      return responderJSONP(
-
-        listarEventos(),
-
-        callback
-
-      );
-
-    }
+      const texto =
+        await resposta.text();
 
 
-    /* =================================================
-       DELETAR EVENTO
-    ================================================= */
-
-    if (
-      parametros.acao ===
-      "deletarEvento"
-    ) {
-
-      return responderJSONP(
-
-        deletarEvento(
-          parametros.id
-        ),
-
-        callback
-
-      );
-
-    }
+      let resultado;
 
 
-    /* =================================================
-       ÁLBUM
-    ================================================= */
+      try {
 
-    const evento =
-      parametros.evento ||
-      "teste";
+        resultado =
+          JSON.parse(texto);
 
+      }
 
-    const configuracao =
-      obterEvento(evento);
+      catch (erro) {
 
+        throw new Error(
+          "Resposta inválida do servidor."
+        );
 
-    if (!configuracao) {
+      }
 
-      return responderJSONP({
-
-        sucesso: false,
-
-        erro:
-          "Evento não encontrado."
-
-      }, callback);
-
-    }
-
-
-    const pasta =
-      obterPastaEvento(evento);
-
-
-    const arquivos =
-      pasta.getFiles();
-
-
-    const fotos = [];
-
-    const videos = [];
-
-
-    while (
-      arquivos.hasNext()
-    ) {
-
-      const arquivo =
-        arquivos.next();
-
-
-      const mime =
-        arquivo.getMimeType();
-
-
-      /* -------------------------------------------------
-         FOTO
-      ------------------------------------------------- */
 
       if (
-        mime &&
-        mime.indexOf("image/") === 0
+        resultado.sucesso
       ) {
 
-        fotos.push({
+        mostrarStatus(
+          "✅ Foto enviada com sucesso!",
+          "sucesso"
+        );
 
-          tipo:
-            "foto",
 
-          nome:
-            arquivo.getName(),
+        fotoBlob =
+          null;
 
-          url:
-            "https://drive.google.com/uc?export=view&id=" +
-            arquivo.getId(),
 
-          id:
-            arquivo.getId(),
+        enviarFoto.style.display =
+          "none";
 
-          data:
-            arquivo
-              .getDateCreated()
-              .getTime()
+        preview.style.display =
+          "none";
 
-        });
+        cameraPlaceholder.style.display =
+          "flex";
+
+        fileInput.value =
+          "";
 
       }
 
+      else {
 
-      /* -------------------------------------------------
-         VÍDEO
-      ------------------------------------------------- */
-
-      else if (
-        mime &&
-        mime.indexOf("video/") === 0
-      ) {
-
-        videos.push({
-
-          tipo:
-            "video",
-
-          nome:
-            arquivo.getName(),
-
-          url:
-            "https://drive.google.com/uc?export=view&id=" +
-            arquivo.getId(),
-
-          id:
-            arquivo.getId(),
-
-          data:
-            arquivo
-              .getDateCreated()
-              .getTime()
-
-        });
+        throw new Error(
+          resultado.erro ||
+          "Não foi possível enviar a foto."
+        );
 
       }
 
     }
 
+    catch (erro) {
 
-    /* =================================================
-       ORDENA
-    ================================================= */
+      console.error(erro);
 
-    fotos.sort(
-      function(a, b) {
+      mostrarStatus(
+        "❌ " +
+        (erro.message ||
+          "Erro ao enviar a foto."),
+        "erro"
+      );
 
-        return b.data - a.data;
+    }
 
-      }
+    finally {
+
+      enviarFoto.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   ESCOLHER MIME DO RECORDER
+===================================================== */
+
+function obterMimeVideo() {
+
+  const tipos = [
+
+    "video/mp4;codecs=h264,aac",
+
+    "video/mp4",
+
+    "video/webm;codecs=vp9,opus",
+
+    "video/webm;codecs=vp8,opus",
+
+    "video/webm"
+
+  ];
+
+
+  for (
+    const tipo of tipos
+  ) {
+
+    if (
+      typeof MediaRecorder !==
+      "undefined" &&
+      MediaRecorder.isTypeSupported &&
+      MediaRecorder.isTypeSupported(tipo)
+    ) {
+
+      return tipo;
+
+    }
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =====================================================
+   INICIAR GRAVAÇÃO
+===================================================== */
+
+async function iniciarGravacao() {
+
+  try {
+
+    if (
+      !navigator.mediaDevices ||
+      !navigator.mediaDevices.getUserMedia
+    ) {
+
+      throw new Error(
+        "A gravação de vídeo não é suportada neste navegador."
+      );
+
+    }
+
+
+    if (
+      typeof MediaRecorder ===
+      "undefined"
+    ) {
+
+      throw new Error(
+        "Este dispositivo não suporta gravação de vídeo pelo navegador."
+      );
+
+    }
+
+
+    const stream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video: {
+          facingMode: {
+            ideal: "user"
+          },
+
+          width: {
+            ideal: 1280
+          },
+
+          height: {
+            ideal: 720
+          }
+        },
+
+        audio: true
+
+      });
+
+
+    mediaRecorder =
+      new MediaRecorder(
+        stream,
+        obterMimeVideo()
+          ? {
+              mimeType:
+                obterMimeVideo()
+            }
+          : undefined
+      );
+
+
+    partesVideo =
+      [];
+
+
+    videoBlob =
+      null;
+
+
+    videoPreview.src =
+      "";
+
+
+    videoPreview.style.display =
+      "block";
+
+    camera.style.display =
+      "none";
+
+    preview.style.display =
+      "none";
+
+    cameraPlaceholder.style.display =
+      "none";
+
+
+    mediaRecorder.ondataavailable =
+      function(evento) {
+
+        if (
+          evento.data &&
+          evento.data.size > 0
+        ) {
+
+          partesVideo.push(
+            evento.data
+          );
+
+        }
+
+      };
+
+
+    mediaRecorder.onstop =
+      function() {
+
+        const mime =
+          mediaRecorder.mimeType ||
+          "video/webm";
+
+
+        videoBlob =
+          new Blob(
+            partesVideo,
+            {
+              type: mime
+            }
+          );
+
+
+        videoPreview.src =
+          URL.createObjectURL(
+            videoBlob
+          );
+
+
+        enviarVideo.style.display =
+          "block";
+
+        gravar.classList.remove(
+          "gravando"
+        );
+
+        gravar.textContent =
+          "🎥 Gravar novamente";
+
+        tempoGravacao.style.display =
+          "none";
+
+
+        pararContador();
+
+
+        mostrarStatus(
+          "Vídeo gravado! Confira e envie seu recado.",
+          "sucesso"
+        );
+
+
+        stream
+          .getTracks()
+          .forEach(
+            track => track.stop()
+          );
+
+      };
+
+
+    mediaRecorder.onerror =
+      function(evento) {
+
+        console.error(
+          "Erro MediaRecorder:",
+          evento
+        );
+
+        gravar.classList.remove(
+          "gravando"
+        );
+
+        tempoGravacao.style.display =
+          "none";
+
+
+        mostrarStatus(
+          "Não foi possível gravar o vídeo.",
+          "erro"
+        );
+
+      };
+
+
+    mediaRecorder.start(
+      250
     );
 
 
-    videos.sort(
-      function(a, b) {
-
-        return b.data - a.data;
-
-      }
+    gravar.classList.add(
+      "gravando"
     );
 
+    gravar.textContent =
+      "⏹️ Parar gravação";
 
-    /* =================================================
-       RESPOSTA
-    ================================================= */
 
-    return responderJSONP({
+    enviarVideo.style.display =
+      "none";
 
-      sucesso:
-        true,
 
-      evento:
-        evento,
+    iniciarContador();
 
-      nome:
-        configuracao.nome,
 
-      fotos:
-        fotos,
-
-      videos:
-        videos,
-
-      total:
-        fotos.length,
-
-      totalFotos:
-        fotos.length,
-
-      totalVideos:
-        videos.length
-
-    }, callback);
-
+    mostrarStatus(
+      "🔴 Gravando seu recado...",
+      "carregando"
+    );
 
   }
 
   catch (erro) {
 
-    return responderJSONP({
+    console.error(erro);
 
-      sucesso:
-        false,
-
-      erro:
+    mostrarStatus(
+      "❌ " +
+      (
         erro.message ||
-        String(erro)
-
-    }, e.parameter.callback);
+        "Não foi possível gravar neste dispositivo."
+      ),
+      "erro"
+    );
 
   }
 
 }
+
+
+/* =====================================================
+   PARAR GRAVAÇÃO
+===================================================== */
+
+function pararGravacao() {
+
+  if (
+    mediaRecorder &&
+    mediaRecorder.state ===
+    "recording"
+  ) {
+
+    mediaRecorder.stop();
+
+  }
+
+}
+
+
+/* =====================================================
+   BOTÃO GRAVAR
+===================================================== */
+
+gravar.addEventListener(
+  "click",
+  function() {
+
+    if (
+      mediaRecorder &&
+      mediaRecorder.state ===
+      "recording"
+    ) {
+
+      pararGravacao();
+
+      return;
+
+    }
+
+
+    iniciarGravacao();
+
+  }
+);
+
+
+/* =====================================================
+   CONTADOR
+===================================================== */
+
+function iniciarContador() {
+
+  segundosGravacao =
+    0;
+
+
+  tempo.textContent =
+    "00:00";
+
+
+  tempoGravacao.style.display =
+    "block";
+
+
+  intervaloTempo =
+    setInterval(
+      function() {
+
+        segundosGravacao++;
+
+
+        const minutos =
+          Math.floor(
+            segundosGravacao / 60
+          );
+
+
+        const segundos =
+          segundosGravacao % 60;
+
+
+        tempo.textContent =
+          String(minutos)
+            .padStart(2, "0") +
+          ":" +
+          String(segundos)
+            .padStart(2, "0");
+
+      },
+      1000
+    );
+
+}
+
+
+function pararContador() {
+
+  if (
+    intervaloTempo
+  ) {
+
+    clearInterval(
+      intervaloTempo
+    );
+
+    intervaloTempo =
+      null;
+
+  }
+
+}
+
+
+/* =====================================================
+   ENVIAR VÍDEO
+===================================================== */
+
+enviarVideo.addEventListener(
+  "click",
+  async function() {
+
+    if (!videoBlob) {
+
+      mostrarStatus(
+        "Nenhum vídeo gravado.",
+        "erro"
+      );
+
+      return;
+
+    }
+
+
+    enviarVideo.disabled =
+      true;
+
+
+    mostrarStatus(
+      "Enviando seu recado...",
+      "carregando"
+    );
+
+
+    try {
+
+      const base64 =
+        await blobParaBase64(
+          videoBlob
+        );
+
+
+      const dados =
+        new URLSearchParams();
+
+
+      dados.append(
+        "evento",
+        evento
+      );
+
+
+      dados.append(
+        "tipo",
+        "video"
+      );
+
+
+      dados.append(
+        "video",
+        base64
+      );
+
+
+      const resposta =
+        await fetch(
+          API,
+          {
+            method: "POST",
+            body: dados
+          }
+        );
+
+
+      const texto =
+        await resposta.text();
+
+
+      let resultado;
+
+
+      try {
+
+        resultado =
+          JSON.parse(texto);
+
+      }
+
+      catch (erro) {
+
+        throw new Error(
+          "Resposta inválida do servidor."
+        );
+
+      }
+
+
+      if (
+        resultado.sucesso
+      ) {
+
+        mostrarStatus(
+          "🎉 Recado enviado com sucesso!",
+          "sucesso"
+        );
+
+
+        videoBlob =
+          null;
+
+        partesVideo =
+          [];
+
+
+        enviarVideo.style.display =
+          "none";
+
+
+        videoPreview.style.display =
+          "none";
+
+
+        videoPreview.removeAttribute(
+          "src"
+        );
+
+
+        gravar.classList.remove(
+          "gravando"
+        );
+
+
+        gravar.textContent =
+          "🎥 Gravar recado";
+
+
+        mostrarStatus(
+          "🎉 Recado enviado com sucesso! Ele já foi salvo no álbum.",
+          "sucesso"
+        );
+
+      }
+
+      else {
+
+        throw new Error(
+          resultado.erro ||
+          "Não foi possível enviar o recado."
+        );
+
+      }
+
+    }
+
+    catch (erro) {
+
+      console.error(erro);
+
+      mostrarStatus(
+        "❌ " +
+        (
+          erro.message ||
+          "Erro ao enviar o vídeo."
+        ),
+        "erro"
+      );
+
+    }
+
+    finally {
+
+      enviarVideo.disabled =
+        false;
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   LIMPEZA
+===================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  function() {
+
+    if (streamCamera) {
+
+      streamCamera
+        .getTracks()
+        .forEach(
+          track => track.stop()
+        );
+
+    }
+
+
+    pararContador();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
