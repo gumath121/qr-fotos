@@ -211,9 +211,6 @@ header {
 
 }
 
-
-/* brilho */
-
 .hero::before {
 
     content: "";
@@ -1250,136 +1247,381 @@ section {
 
 
 /* =========================================================
-   PREÇO
+   PLANOS
 ========================================================= */
 
-<section class="pricing" id="planos">
-  <div class="section-title">
-    <span>ESCOLHA SEU PLANO</span>
-    <h2>Seu evento merece ser<br>lembrado para sempre.</h2>
-    <p>
-      Escolha o pacote ideal e transforme seus convidados
-      em fotógrafos do seu evento.
-    </p>
-  </div>
+.pricing {
 
-  <div class="plans">
+    background:
+        #080808;
 
-    <!-- ESSENCIAL -->
-    <div class="plan">
-      <div class="plan-name">ESSENCIAL</div>
+}
 
-      <div class="price">
-        <small>R$</small>49<sup>,90</sup>
-      </div>
+.plans {
 
-      <p class="plan-description">
-        Para quem quer registrar os melhores momentos
-        de forma simples e prática.
-      </p>
+    max-width:
+        1180px;
 
-      <ul>
-        <li>✓ Álbum digital do evento</li>
-        <li>✓ QR Code exclusivo</li>
-        <li>✓ Upload pelos convidados</li>
-        <li>✓ Sem aplicativo</li>
-        <li>✓ Página personalizada</li>
-        <li>✓ Até 200 fotos</li>
-      </ul>
+    margin:
+        0 auto;
 
-      <a
-        class="plan-button"
-        href="https://wa.me/5515981689760?text=Olá!%20Tenho%20interesse%20no%20QR%20Fotos%20Essencial."
-        target="_blank">
-        QUERO ESTE PLANO
-      </a>
-    </div>
+    display:
+        grid;
 
+    grid-template-columns:
+        repeat(3, 1fr);
 
-    <!-- PREMIUM -->
-    <div class="plan featured">
+    gap:
+        22px;
 
-      <div class="popular">
-        MAIS VENDIDO
-      </div>
+    align-items:
+        stretch;
 
-      <div class="plan-name">PREMIUM</div>
+}
 
-      <div class="price">
-        <small>R$</small>79<sup>,90</sup>
-      </div>
+.plan {
 
-      <p class="plan-description">
-        A experiência completa para guardar
-        cada momento do seu evento.
-      </p>
+    position:
+        relative;
 
-      <ul>
-        <li>✓ Tudo do plano Essencial</li>
-        <li>✓ Até 500 fotos</li>
-        <li>✓ Página personalizada</li>
-        <li>✓ QR Code personalizado</li>
-        <li>✓ Álbum atualizado em tempo real</li>
-        <li>✓ Compartilhamento do álbum</li>
-        <li>✓ Suporte durante o evento</li>
-      </ul>
+    border:
+        1px solid
+        rgba(255,255,255,.12);
 
-      <a
-        class="plan-button"
-        href="https://wa.me/5515981689760?text=Olá!%20Tenho%20interesse%20no%20QR%20Fotos%20Premium."
-        target="_blank">
-        QUERO ESTE PLANO
-      </a>
-    </div>
+    padding:
+        42px 30px 30px;
 
+    background:
+        rgba(255,255,255,.025);
 
-    <!-- COMPLETO -->
-    <div class="plan">
+    display:
+        flex;
 
-      <div class="plan-name">COMPLETO</div>
+    flex-direction:
+        column;
 
-      <div class="price">
-        <small>R$</small>129<sup>,90</sup>
-      </div>
+    transition:
+        .3s ease;
 
-      <p class="plan-description">
-        Para quem quer uma experiência completa,
-        do QR Code ao material físico.
-      </p>
+}
 
-      <ul>
-        <li>✓ Tudo do plano Premium</li>
-        <li>✓ Fotos ilimitadas</li>
-        <li>✓ QR Codes adicionais</li>
-        <li>✓ Identidade visual personalizada</li>
-        <li>✓ Material impresso com QR Code</li>
-        <li>✓ Suporte personalizado</li>
-        <li>✓ Álbum disponível após o evento</li>
-      </ul>
+.plan:hover {
 
-      <a
-        class="plan-button"
-        href="https://wa.me/5515981689760?text=Olá!%20Tenho%20interesse%20no%20QR%20Fotos%20Completo."
-        target="_blank">
-        QUERO ESTE PLANO
-      </a>
-    </div>
+    transform:
+        translateY(-6px);
 
-  </div>
+    border-color:
+        rgba(212,175,55,.5);
 
-  <div class="custom-plan">
-    <strong>Precisa de algo personalizado?</strong>
-    <span>
-      Casamentos, empresas, formaturas, grandes eventos e muito mais.
-    </span>
+}
 
-    <a
-      href="https://wa.me/5515981689760?text=Olá!%20Gostaria%20de%20montar%20um%20pacote%20personalizado%20do%20QR%20Fotos."
-      target="_blank">
-      FALAR NO WHATSAPP →
-    </a>
-  </div>
-</section>
+.plan.featured {
+
+    border-color:
+        rgba(212,175,55,.7);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(212,175,55,.08),
+            rgba(255,255,255,.025)
+        );
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+
+}
+
+.popular {
+
+    position:
+        absolute;
+
+    top:
+        0;
+
+    left:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background:
+        var(--gold);
+
+    color:
+        #111;
+
+    padding:
+        7px 18px;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        2px;
+
+    font-weight:
+        800;
+
+    white-space:
+        nowrap;
+
+}
+
+.plan-name {
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        3px;
+
+    font-weight:
+        700;
+
+    color:
+        var(--gold);
+
+}
+
+.price {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        64px;
+
+    line-height:
+        1;
+
+    margin:
+        20px 0;
+
+}
+
+.price small {
+
+    font-family:
+        Montserrat,
+        sans-serif;
+
+    font-size:
+        17px;
+
+    vertical-align:
+        top;
+
+    position:
+        relative;
+
+    top:
+        9px;
+
+    margin-right:
+        3px;
+
+}
+
+.price sup {
+
+    font-size:
+        28px;
+
+    vertical-align:
+        top;
+
+    position:
+        relative;
+
+    top:
+        8px;
+
+}
+
+.plan-description {
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+
+    color:
+        #aaa59c;
+
+    min-height:
+        62px;
+
+    margin-bottom:
+        20px;
+
+}
+
+.plan ul {
+
+    list-style:
+        none;
+
+    padding:
+        0;
+
+    margin:
+        0 0 30px;
+
+}
+
+.plan li {
+
+    font-size:
+        12px;
+
+    padding:
+        9px 0;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.06);
+
+    color:
+        #d1ccc3;
+
+}
+
+.plan-button {
+
+    margin-top:
+        auto;
+
+    display:
+        block;
+
+    text-align:
+        center;
+
+    border:
+        1px solid
+        rgba(216,184,120,.75);
+
+    padding:
+        15px 10px;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        2px;
+
+    font-weight:
+        700;
+
+    color:
+        var(--gold);
+
+    transition:
+        .3s ease;
+
+}
+
+.plan-button:hover {
+
+    background:
+        var(--gold);
+
+    color:
+        #111;
+
+}
+
+.custom-plan {
+
+    max-width:
+        1180px;
+
+    margin:
+        35px auto 0;
+
+    padding:
+        25px 30px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.1);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+.custom-plan strong {
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
+    font-size:
+        23px;
+
+    font-weight:
+        500;
+
+}
+
+.custom-plan span {
+
+    font-size:
+        11px;
+
+    color:
+        #918c84;
+
+    flex:
+        1;
+
+}
+
+.custom-plan a {
+
+    color:
+        var(--gold);
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        2px;
+
+    font-weight:
+        700;
+
+    transition:
+        .25s;
+
+}
+
+.custom-plan a:hover {
+
+    color:
+        var(--gold-light);
+
+}
+
 
 /* =========================================================
    FAQ
@@ -1430,7 +1672,10 @@ summary {
 }
 
 summary::-webkit-details-marker {
-    display: none;
+
+    display:
+        none;
+
 }
 
 summary::after {
@@ -1755,17 +2000,45 @@ footer {
     }
 
     .demo-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
 
     .demo-copy {
-        text-align: center;
+        text-align:
+            center;
+    }
+
+    .demo-copy .section-label {
+        text-align:
+            center !important;
     }
 
     .demo-copy p {
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+        max-width:
+            600px;
+
+        margin-left:
+            auto;
+
+        margin-right:
+            auto;
+    }
+
+    .plans {
+        grid-template-columns:
+            1fr;
+
+        max-width:
+            500px;
+
+        margin:
+            auto;
+    }
+
+    .plan.featured {
+        order:
+            -1;
     }
 
 }
@@ -1779,17 +2052,24 @@ footer {
     }
 
     .nav {
-        height: 68px;
-        padding: 0 18px;
+        height:
+            68px;
+
+        padding:
+            0 18px;
     }
 
     .logo {
-        font-size: 29px;
+        font-size:
+            29px;
     }
 
     .nav-cta {
-        padding: 9px 13px;
-        font-size: 9px;
+        padding:
+            9px 13px;
+
+        font-size:
+            9px;
     }
 
     .hero {
@@ -1855,9 +2135,40 @@ footer {
             170px;
     }
 
-    .price-card {
+    .section-title {
+        font-size:
+            44px;
+    }
+
+    .plans {
+        grid-template-columns:
+            1fr;
+    }
+
+    .plan {
         padding:
-            35px 22px;
+            38px 22px 25px;
+    }
+
+    .price {
+        font-size:
+            58px;
+    }
+
+    .custom-plan {
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        padding:
+            25px 20px;
+    }
+
+    .custom-plan span {
+        line-height:
+            1.6;
     }
 
     .footer-inner {
@@ -1869,211 +2180,56 @@ footer {
     }
 
 }
-/* =========================
-   PLANOS
-========================= */
 
-.pricing {
-  padding: 110px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
 
-.section-title {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
-}
+/* =========================================================
+   MELHORIAS VISUAIS DOS PLANOS
+========================================================= */
 
-.section-title span {
-  font-size: 11px;
-  letter-spacing: 4px;
-  font-weight: 600;
-  opacity: .7;
-}
+.plan.featured .plan-button {
 
-.section-title h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 52px;
-  font-weight: 500;
-  line-height: 1;
-  margin: 18px 0;
-}
+    background:
+        var(--gold);
 
-.section-title p {
-  font-size: 14px;
-  line-height: 1.7;
-  opacity: .65;
-}
-
-.plans {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  align-items: stretch;
-}
-
-.plan {
-  position: relative;
-  border: 1px solid rgba(255,255,255,.12);
-  padding: 42px 30px 30px;
-  background: rgba(255,255,255,.025);
-  display: flex;
-  flex-direction: column;
-  transition: .3s ease;
-}
-
-.plan:hover {
-  transform: translateY(-6px);
-  border-color: rgba(212,175,55,.5);
-}
-
-.plan.featured {
-  border-color: rgba(212,175,55,.7);
-  background: linear-gradient(
-    145deg,
-    rgba(212,175,55,.08),
-    rgba(255,255,255,.025)
-  );
-}
-
-.popular {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #d4af37;
-  color: #111;
-  padding: 7px 18px;
-  font-size: 9px;
-  letter-spacing: 2px;
-  font-weight: 800;
-  white-space: nowrap;
-}
-
-.plan-name {
-  font-size: 11px;
-  letter-spacing: 3px;
-  font-weight: 700;
-  opacity: .75;
-}
-
-.price {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 64px;
-  line-height: 1;
-  margin: 20px 0;
-}
-
-.price small {
-  font-family: Montserrat, sans-serif;
-  font-size: 17px;
-  vertical-align: top;
-  position: relative;
-  top: 9px;
-  margin-right: 3px;
-}
-
-.price sup {
-  font-size: 28px;
-  vertical-align: top;
-  position: relative;
-  top: 8px;
-}
-
-.plan-description {
-  font-size: 12px;
-  line-height: 1.7;
-  opacity: .65;
-  min-height: 62px;
-  margin-bottom: 20px;
-}
-
-.plan ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 30px;
-}
-
-.plan li {
-  font-size: 12px;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  opacity: .85;
-}
-
-.plan-button {
-  margin-top: auto;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  border: 1px solid rgba(212,175,55,.7);
-  padding: 15px 10px;
-  font-size: 10px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  color: inherit;
-  transition: .3s ease;
-}
-
-.plan-button:hover {
-  background: #d4af37;
-  color: #111;
-}
-
-.custom-plan {
-  margin-top: 35px;
-  padding: 25px 30px;
-  border-top: 1px solid rgba(255,255,255,.1);
-  border-bottom: 1px solid rgba(255,255,255,.1);
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.custom-plan strong {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 23px;
-  font-weight: 500;
-}
-
-.custom-plan span {
-  font-size: 11px;
-  opacity: .55;
-  flex: 1;
-}
-
-.custom-plan a {
-  color: inherit;
-  text-decoration: none;
-  font-size: 10px;
-  letter-spacing: 2px;
-  font-weight: 700;
-}
-
-@media (max-width: 850px) {
-
-  .plans {
-    grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: auto;
-  }
-
-  .plan.featured {
-    order: -1;
-  }
-
-  .section-title h2 {
-    font-size: 42px;
-  }
-
-  .custom-plan {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    color:
+        #111;
 
 }
+
+.plan.featured .plan-button:hover {
+
+    background:
+        var(--gold-light);
+
+}
+
+.plan.featured .plan-name {
+
+    color:
+        var(--gold-light);
+
+}
+
+
+/* =========================================================
+   DESTAQUE DE PREÇO
+========================================================= */
+
+.plan:nth-child(1) .price {
+    color:
+        #f0ebe2;
+}
+
+.plan:nth-child(2) .price {
+    color:
+        var(--gold-light);
+}
+
+.plan:nth-child(3) .price {
+    color:
+        #f0ebe2;
+}
+
 </style>
 
 </head>
@@ -2555,8 +2711,10 @@ da empresa. O QR Fotos se adapta ao seu evento.
 
 <div class="demo-copy">
 
-<div class="section-label"
-style="text-align:left;">
+<div
+    class="section-label"
+    style="text-align:left;"
+>
 Experimente
 </div>
 
@@ -2638,7 +2796,7 @@ Sem cadastro.
 
 
 <!-- =====================================================
-     PREÇOS
+     PLANOS
 ===================================================== -->
 
 <section
@@ -2648,81 +2806,278 @@ Sem cadastro.
 
 <div class="section-inner">
 
+
 <div class="section-label">
-Seu evento merece isso
+ESCOLHA SEU PLANO
 </div>
 
 
 <h2 class="section-title">
-Uma experiência especial.
+
+Seu evento merece ser
+<br>
+lembrado para sempre.
+
 </h2>
 
 
 <p class="section-description">
 
-Cada evento recebe seu próprio espaço,
-com página personalizada e álbum exclusivo.
+Escolha o pacote ideal e transforme seus convidados
+em fotógrafos do seu evento.
 
 </p>
 
 
-<div class="price-card">
+<div class="plans">
 
-<div class="price-label">
-QR FOTOS
+
+<!-- =====================================================
+     ESSENCIAL
+===================================================== -->
+
+<div class="plan">
+
+<div class="plan-name">
+ESSENCIAL
 </div>
 
 
-<h2>
-Pacote personalizado
-</h2>
+<div class="price">
+
+<small>R$</small>49<sup>,90</sup>
+
+</div>
 
 
-<p>
+<p class="plan-description">
 
-O valor pode variar de acordo com o tipo
-de evento, duração e quantidade de materiais.
+Para quem quer registrar os melhores momentos
+de forma simples e prática.
 
 </p>
 
 
-<div class="features">
+<ul>
 
-<div class="feature">
-Página exclusiva do seu evento
-</div>
+<li>
+✓ Álbum digital do evento
+</li>
 
-<div class="feature">
-Álbum colaborativo
-</div>
+<li>
+✓ QR Code exclusivo
+</li>
 
-<div class="feature">
-QR Code personalizado
-</div>
+<li>
+✓ Upload pelos convidados
+</li>
 
-<div class="feature">
-Acesso pelo celular
-</div>
+<li>
+✓ Sem aplicativo
+</li>
 
-<div class="feature">
-Sem aplicativo para os convidados
-</div>
+<li>
+✓ Página personalizada
+</li>
 
-<div class="feature">
-Possibilidade de material impresso
-</div>
+<li>
+✓ Até 200 fotos
+</li>
 
-</div>
+</ul>
 
 
 <a
-    href="#contato"
-    class="btn-primary"
+    class="plan-button"
+    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Essencial."
+    target="_blank"
 >
-SOLICITAR ORÇAMENTO
+QUERO ESTE PLANO
 </a>
 
 </div>
+
+
+
+<!-- =====================================================
+     PREMIUM
+===================================================== -->
+
+<div class="plan featured">
+
+
+<div class="popular">
+MAIS VENDIDO
+</div>
+
+
+<div class="plan-name">
+PREMIUM
+</div>
+
+
+<div class="price">
+
+<small>R$</small>79<sup>,90</sup>
+
+</div>
+
+
+<p class="plan-description">
+
+A experiência completa para guardar
+cada momento do seu evento.
+
+</p>
+
+
+<ul>
+
+<li>
+✓ Tudo do plano Essencial
+</li>
+
+<li>
+✓ Até 500 fotos
+</li>
+
+<li>
+✓ Página personalizada
+</li>
+
+<li>
+✓ QR Code personalizado
+</li>
+
+<li>
+✓ Álbum atualizado em tempo real
+</li>
+
+<li>
+✓ Compartilhamento do álbum
+</li>
+
+<li>
+✓ Suporte durante o evento
+</li>
+
+</ul>
+
+
+<a
+    class="plan-button"
+    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Premium."
+    target="_blank"
+>
+QUERO ESTE PLANO
+</a>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMPLETO
+===================================================== -->
+
+<div class="plan">
+
+<div class="plan-name">
+COMPLETO
+</div>
+
+
+<div class="price">
+
+<small>R$</small>129<sup>,90</sup>
+
+</div>
+
+
+<p class="plan-description">
+
+Para quem quer uma experiência completa,
+do QR Code ao material físico.
+
+</p>
+
+
+<ul>
+
+<li>
+✓ Tudo do plano Premium
+</li>
+
+<li>
+✓ Fotos ilimitadas
+</li>
+
+<li>
+✓ QR Codes adicionais
+</li>
+
+<li>
+✓ Identidade visual personalizada
+</li>
+
+<li>
+✓ Material impresso com QR Code
+</li>
+
+<li>
+✓ Suporte personalizado
+</li>
+
+<li>
+✓ Álbum disponível após o evento
+</li>
+
+</ul>
+
+
+<a
+    class="plan-button"
+    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Tenho%20interesse%20no%20QR%20Fotos%20Completo."
+    target="_blank"
+>
+QUERO ESTE PLANO
+</a>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     PACOTE PERSONALIZADO
+===================================================== -->
+
+<div class="custom-plan">
+
+<strong>
+Precisa de algo personalizado?
+</strong>
+
+
+<span>
+
+Casamentos, empresas, formaturas,
+grandes eventos e muito mais.
+
+</span>
+
+
+<a
+    href="https://wa.me/5515981689760?text=Ol%C3%A1!%20Gostaria%20de%20montar%20um%20pacote%20personalizado%20do%20QR%20Fotos."
+    target="_blank"
+>
+FALAR NO WHATSAPP →
+</a>
+
+</div>
+
 
 </div>
 
@@ -2863,6 +3218,7 @@ Seu evento acontece uma vez.
 
 Quer oferecer o QR Fotos no seu casamento,
 aniversário, formatura ou evento?
+
 Fale conosco e solicite seu orçamento.
 
 </p>
