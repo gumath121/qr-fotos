@@ -48,7 +48,6 @@ h1 {
     font-weight: 500;
     text-align: center;
     margin: 0;
-    letter-spacing: -0.5px;
 }
 
 .subtitulo {
@@ -63,7 +62,7 @@ h1 {
     width: 55px;
     height: 1px;
     background: #c9a96e;
-    margin-bottom: 30px;
+    margin: 25px 0 0;
 }
 
 .camera-box {
@@ -73,6 +72,7 @@ h1 {
     border: 1px solid rgba(201,169,110,.35);
     background: #050505;
     box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    position: relative;
 }
 
 video,
@@ -88,6 +88,27 @@ video,
 canvas {
     display: none;
 }
+
+/* BOTÃO DE TROCAR CÂMERA */
+
+#trocar {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    width: auto;
+    margin: 0;
+    padding: 11px 15px;
+    border-radius: 50px;
+    background: rgba(0,0,0,.65);
+    color: white;
+    border: 1px solid rgba(255,255,255,.35);
+    backdrop-filter: blur(8px);
+    font-size: 12px;
+    z-index: 10;
+    display: none;
+}
+
+/* BOTÕES */
 
 button {
     width: 100%;
@@ -174,6 +195,10 @@ iframe {
 
         <img id="fotoTirada">
 
+        <button id="trocar">
+            ↻ &nbsp; Trocar câmera
+        </button>
+
     </div>
 
     <canvas id="canvas"></canvas>
@@ -203,6 +228,8 @@ iframe {
 </div>
 
 
+<!-- ENVIO PARA O GOOGLE APPS SCRIPT -->
+
 <form
     id="formulario"
     action="https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec"
@@ -222,8 +249,11 @@ iframe {
 
 let stream = null;
 
+let cameraAtual = "environment";
+
 const abrir = document.getElementById("abrir");
 const camera = document.getElementById("camera");
+const trocar = document.getElementById("trocar");
 const tirar = document.getElementById("tirar");
 const enviar = document.getElementById("enviar");
 const outra = document.getElementById("outra");
@@ -236,37 +266,92 @@ const campoFoto = document.getElementById("foto");
 const campoNome = document.getElementById("nomeArquivo");
 
 
-abrir.addEventListener("click", async () => {
+// FUNÇÃO PARA ABRIR A CÂMERA
+
+async function abrirCamera() {
 
     try {
 
+        // Encerra a câmera atual antes de trocar
+
+        if (stream) {
+
+            stream.getTracks().forEach(track => {
+                track.stop();
+            });
+
+            stream = null;
+        }
+
         stream = await navigator.mediaDevices.getUserMedia({
+
             video: {
-                facingMode: {
-                    ideal: "environment"
+                facingMode: cameraAtual,
+                width: {
+                    ideal: 1920
+                },
+                height: {
+                    ideal: 1080
                 }
             },
+
             audio: false
+
         });
 
         camera.srcObject = stream;
 
         camera.style.display = "block";
+
         abrir.style.display = "none";
+
         tirar.style.display = "block";
 
-        status.innerText = "Câmera ativada";
-
-    } catch (erro) {
+        trocar.style.display = "block";
 
         status.innerText =
-            "Não foi possível acessar a câmera.";
+            cameraAtual === "user"
+            ? "🤳 Câmera frontal"
+            : "📷 Câmera traseira";
+
+    }
+
+    catch (erro) {
 
         console.error(erro);
+
+        status.innerText =
+            "Não foi possível acessar esta câmera.";
+
     }
+
+}
+
+
+// BOTÃO ABRIR
+
+abrir.addEventListener("click", async () => {
+
+    await abrirCamera();
 
 });
 
+
+// TROCAR CÂMERA
+
+trocar.addEventListener("click", async () => {
+
+    cameraAtual =
+        cameraAtual === "environment"
+        ? "user"
+        : "environment";
+
+    await abrirCamera();
+
+});
+
+
+// TIRAR FOTO
 
 tirar.addEventListener("click", () => {
 
@@ -281,6 +366,7 @@ tirar.addEventListener("click", () => {
 
         largura = larguraMaxima;
         altura = altura * proporcao;
+
     }
 
     canvas.width = largura;
@@ -304,16 +390,24 @@ tirar.addEventListener("click", () => {
     fotoTirada.src = fotoBase64;
 
     fotoTirada.style.display = "block";
+
     camera.style.display = "none";
 
     tirar.style.display = "none";
+
+    trocar.style.display = "none";
+
     enviar.style.display = "block";
+
     outra.style.display = "block";
 
-    status.innerText = "Sua foto está pronta ♥";
+    status.innerText =
+        "Sua foto está pronta ♥";
 
 });
 
+
+// ENVIAR FOTO
 
 enviar.addEventListener("click", () => {
 
@@ -348,6 +442,8 @@ enviar.addEventListener("click", () => {
 });
 
 
+// TIRAR OUTRA
+
 outra.addEventListener("click", () => {
 
     fotoTirada.style.display = "none";
@@ -355,7 +451,10 @@ outra.addEventListener("click", () => {
     camera.style.display = "block";
 
     enviar.style.display = "none";
+
     outra.style.display = "none";
+
+    trocar.style.display = "block";
 
     tirar.style.display = "block";
 
