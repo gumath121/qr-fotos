@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Compartilhe esse momento</title>
+
 
 <style>
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
 
+
 * {
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
+
     min-height: 100vh;
 
     background:
@@ -31,21 +39,28 @@ body {
     font-family: 'Montserrat', sans-serif;
 
     display: flex;
+
     justify-content: center;
 }
+
 
 .container {
 
     width: 100%;
+
     max-width: 480px;
+
     min-height: 100vh;
 
     padding: 45px 24px 35px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 }
+
 
 .ornamento {
 
@@ -57,6 +72,7 @@ body {
 
     margin-bottom: 20px;
 }
+
 
 h1 {
 
@@ -73,6 +89,7 @@ h1 {
     margin: 0;
 }
 
+
 .subtitulo {
 
     text-align: center;
@@ -86,6 +103,7 @@ h1 {
     margin: 18px 10px 30px;
 }
 
+
 .linha {
 
     width: 55px;
@@ -96,6 +114,7 @@ h1 {
 
     margin: 25px 0 0;
 }
+
 
 .camera-box {
 
@@ -115,6 +134,7 @@ h1 {
     position: relative;
 }
 
+
 video,
 #fotoTirada {
 
@@ -123,10 +143,12 @@ video,
     display: block;
 }
 
+
 #fotoTirada {
 
     display: none;
 }
+
 
 canvas {
 
@@ -143,6 +165,7 @@ canvas {
     position: absolute;
 
     right: 14px;
+
     bottom: 14px;
 
     width: auto;
@@ -198,6 +221,7 @@ button {
     transition: .2s;
 }
 
+
 button:active {
 
     transform: scale(.98);
@@ -252,6 +276,20 @@ button:active {
 }
 
 
+/* VER ÁLBUM */
+
+#album {
+
+    background: transparent;
+
+    color: #c9a96e;
+
+    border: 1px solid rgba(201,169,110,.5);
+
+    display: none;
+}
+
+
 /* =========================
    STATUS
 ========================= */
@@ -289,6 +327,7 @@ button:active {
     color: #a99d8c;
 }
 
+
 iframe {
 
     display: none;
@@ -297,6 +336,7 @@ iframe {
 </style>
 
 </head>
+
 
 <body>
 
@@ -314,8 +354,11 @@ iframe {
     <!-- TÍTULO -->
 
     <h1>
+
         Compartilhe<br>
+
         esse momento
+
     </h1>
 
 
@@ -363,14 +406,12 @@ iframe {
     </div>
 
 
-    <!-- CANVAS INVISÍVEL -->
+    <!-- CANVAS -->
 
     <canvas id="canvas"></canvas>
 
 
-    <!-- =========================
-         BOTÃO ABRIR
-    ========================== -->
+    <!-- ABRIR CÂMERA -->
 
     <button id="abrir">
 
@@ -379,9 +420,7 @@ iframe {
     </button>
 
 
-    <!-- =========================
-         BOTÃO TIRAR FOTO
-    ========================== -->
+    <!-- TIRAR FOTO -->
 
     <button id="tirar">
 
@@ -390,9 +429,7 @@ iframe {
     </button>
 
 
-    <!-- =========================
-         BOTÃO COMPARTILHAR
-    ========================== -->
+    <!-- COMPARTILHAR FOTO -->
 
     <button id="enviar">
 
@@ -401,13 +438,20 @@ iframe {
     </button>
 
 
-    <!-- =========================
-         BOTÃO TIRAR OUTRA
-    ========================== -->
+    <!-- TIRAR OUTRA -->
 
     <button id="outra">
 
         ↻ &nbsp; TIRAR OUTRA
+
+    </button>
+
+
+    <!-- VER ÁLBUM -->
+
+    <button id="album">
+
+        ♥ &nbsp; VER ÁLBUM
 
     </button>
 
@@ -490,26 +534,38 @@ let cameraAtual = "environment";
 const abrir =
     document.getElementById("abrir");
 
+
 const camera =
     document.getElementById("camera");
+
 
 const trocar =
     document.getElementById("trocar");
 
+
 const tirar =
     document.getElementById("tirar");
+
 
 const enviar =
     document.getElementById("enviar");
 
+
 const outra =
     document.getElementById("outra");
+
+
+const album =
+    document.getElementById("album");
+
 
 const fotoTirada =
     document.getElementById("fotoTirada");
 
+
 const canvas =
     document.getElementById("canvas");
+
 
 const status =
     document.getElementById("status");
@@ -520,8 +576,10 @@ const status =
 const formulario =
     document.getElementById("formulario");
 
+
 const campoFoto =
     document.getElementById("foto");
+
 
 const campoNome =
     document.getElementById("nomeArquivo");
@@ -542,7 +600,6 @@ async function abrirCamera() {
 
         if (stream) {
 
-
             stream
                 .getTracks()
                 .forEach(track => {
@@ -550,7 +607,6 @@ async function abrirCamera() {
                     track.stop();
 
                 });
-
 
             stream = null;
 
@@ -583,7 +639,8 @@ async function abrirCamera() {
 
         /* MOSTRA STREAM */
 
-        camera.srcObject = stream;
+        camera.srcObject =
+            stream;
 
 
         camera.style.display =
@@ -623,7 +680,6 @@ async function abrirCamera() {
 
 
         status.innerText =
-
             "Não foi possível acessar esta câmera.";
 
 
@@ -724,6 +780,7 @@ tirar.addEventListener(
         canvas.width =
             largura;
 
+
         canvas.height =
             altura;
 
@@ -747,7 +804,7 @@ tirar.addEventListener(
         );
 
 
-        /* CONVERTE PARA JPEG */
+        /* JPEG */
 
         const fotoBase64 =
             canvas.toDataURL(
@@ -784,6 +841,12 @@ tirar.addEventListener(
 
         outra.style.display =
             "block";
+
+
+        /* GARANTE QUE O ÁLBUM FIQUE ESCONDIDO */
+
+        album.style.display =
+            "none";
 
 
         status.innerText =
@@ -890,7 +953,7 @@ enviar.addEventListener(
         formulario.submit();
 
 
-        /* APÓS ENVIO */
+        /* MOSTRA BOTÃO DO ÁLBUM */
 
         setTimeout(
             () => {
@@ -901,6 +964,10 @@ enviar.addEventListener(
 
 
                 outra.style.display =
+                    "block";
+
+
+                album.style.display =
                     "block";
 
 
@@ -953,6 +1020,10 @@ outra.addEventListener(
             "none";
 
 
+        album.style.display =
+            "none";
+
+
         trocar.style.display =
             "block";
 
@@ -971,7 +1042,26 @@ outra.addEventListener(
 );
 
 
+
+/* =====================================================
+   VER ÁLBUM
+===================================================== */
+
+album.addEventListener(
+    "click",
+    () => {
+
+
+        window.location.href =
+            "album.html";
+
+
+    }
+);
+
+
 </script>
 
 </body>
+
 </html>
