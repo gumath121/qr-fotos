@@ -158,7 +158,7 @@ h1 {
 
     gap: 12px;
 
-    margin-bottom: 25px;
+    margin-bottom: 18px;
 
 }
 
@@ -224,6 +224,79 @@ h1 {
 
 
 /* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.filtro {
+
+    border: 1px solid
+        rgba(201,169,110,.28);
+
+    background:
+        rgba(0,0,0,.22);
+
+    color: #a99d8d;
+
+    border-radius: 50px;
+
+    padding: 9px 16px;
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    letter-spacing: .3px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.filtro:hover {
+
+    border-color:
+        rgba(201,169,110,.55);
+
+    color: #c9a96e;
+
+}
+
+
+.filtro.ativo {
+
+    background:
+        rgba(201,169,110,.13);
+
+    border-color:
+        rgba(201,169,110,.65);
+
+    color: #c9a96e;
+
+}
+
+
+/* =====================================================
    GALERIA
 ===================================================== */
 
@@ -238,6 +311,10 @@ h1 {
 
 }
 
+
+/* =====================================================
+   CARD DE FOTO
+===================================================== */
 
 .foto {
 
@@ -282,6 +359,86 @@ h1 {
 .foto:hover img {
 
     transform: scale(1.04);
+
+}
+
+
+/* =====================================================
+   CARD DE VÍDEO
+===================================================== */
+
+.video-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 12px;
+
+    aspect-ratio: 1 / 1;
+
+    background: #0d0c0b;
+
+    border:
+        1px solid
+        rgba(201,169,110,.22);
+
+    animation:
+        aparecer .5s ease both;
+
+}
+
+
+.video-card video {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    background: #050505;
+
+}
+
+
+/* =====================================================
+   ETIQUETA RECADO
+===================================================== */
+
+.etiqueta-video {
+
+    position: absolute;
+
+    top: 9px;
+
+    left: 9px;
+
+    z-index: 5;
+
+    padding: 6px 9px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(10,8,6,.78);
+
+    border:
+        1px solid
+        rgba(201,169,110,.45);
+
+    color: #c9a96e;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: .5px;
+
+    backdrop-filter:
+        blur(8px);
 
 }
 
@@ -351,7 +508,7 @@ h1 {
 
 
 /* =====================================================
-   SEM FOTOS
+   SEM MÍDIA
 ===================================================== */
 
 .sem-fotos {
@@ -505,7 +662,7 @@ h1 {
 
     max-width: 100%;
 
-    max-height: 82vh;
+    max-height: 78vh;
 
     object-fit: contain;
 
@@ -548,11 +705,39 @@ h1 {
 
     cursor: pointer;
 
+    z-index: 10;
+
 }
 
 
 /* =====================================================
-   AÇÕES DA FOTO
+   VÍDEO NO LIGHTBOX
+===================================================== */
+
+.videoGrande {
+
+    display: none;
+
+    max-width: 95vw;
+
+    max-height: 78vh;
+
+    width: auto;
+
+    height: auto;
+
+    border-radius: 10px;
+
+    background: #000;
+
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.8);
+
+}
+
+
+/* =====================================================
+   AÇÕES DA MÍDIA
 ===================================================== */
 
 .acoes-foto {
@@ -570,6 +755,8 @@ h1 {
     justify-content: center;
 
     gap: 10px;
+
+    z-index: 20;
 
 }
 
@@ -627,7 +814,8 @@ h1 {
     }
 
 
-    .foto {
+    .foto,
+    .video-card {
 
         border-radius: 14px;
 
@@ -669,6 +857,23 @@ h1 {
 
         padding:
             8px 11px;
+
+    }
+
+
+    .filtros {
+
+        margin-bottom: 20px;
+
+    }
+
+
+    .filtro {
+
+        padding:
+            8px 13px;
+
+        font-size: 9px;
 
     }
 
@@ -736,7 +941,7 @@ h1 {
 
 
     <!-- =================================================
-         TOPO DA GALERIA
+         TOPO
     ================================================== -->
 
     <div class="topo">
@@ -746,13 +951,12 @@ h1 {
             class="contador"
             id="contador">
 
-            Carregando fotos...
+            Carregando memórias...
 
         </div>
 
 
         <div class="acoes-topo">
-
 
             <button
                 class="botao-topo"
@@ -762,8 +966,44 @@ h1 {
 
             </button>
 
-
         </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         FILTROS
+    ================================================== -->
+
+    <div class="filtros">
+
+
+        <button
+            class="filtro ativo"
+            data-filtro="todos">
+
+            ✨ TODOS
+
+        </button>
+
+
+        <button
+            class="filtro"
+            data-filtro="foto">
+
+            📷 FOTOS
+
+        </button>
+
+
+        <button
+            class="filtro"
+            data-filtro="video">
+
+            🎥 RECADOS
+
+        </button>
 
 
     </div>
@@ -843,6 +1083,16 @@ h1 {
         alt="Foto do evento">
 
 
+    <!-- VÍDEO -->
+
+    <video
+        id="videoGrande"
+        class="videoGrande"
+        controls
+        playsinline>
+    </video>
+
+
     <!-- AÇÕES -->
 
     <div class="acoes-foto">
@@ -882,7 +1132,7 @@ h1 {
 
 const API =
 
-"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sRZ8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 
 /* =====================================================
@@ -924,6 +1174,10 @@ const fotoGrande =
     document.getElementById("fotoGrande");
 
 
+const videoGrande =
+    document.getElementById("videoGrande");
+
+
 const fechar =
     document.getElementById("fechar");
 
@@ -940,13 +1194,23 @@ const voltar =
     document.getElementById("voltar");
 
 
+const filtros =
+    document.querySelectorAll(".filtro");
+
+
 /* =====================================================
    VARIÁVEIS
 ===================================================== */
 
 let fotos = [];
 
-let fotoAtual = null;
+let videos = [];
+
+let midias = [];
+
+let midiaAtual = null;
+
+let filtroAtual = "todos";
 
 let quantidadeAnterior = 0;
 
@@ -966,7 +1230,6 @@ voltar.href =
 
 function carregarEvento() {
 
-
     const callbackName =
         "evento_" +
         Date.now();
@@ -974,7 +1237,6 @@ function carregarEvento() {
 
     window[callbackName] =
         function(config) {
-
 
             delete window[callbackName];
 
@@ -993,8 +1255,6 @@ function carregarEvento() {
             }
 
 
-            /* TÍTULO */
-
             const titulo =
                 document.getElementById(
                     "tituloEvento"
@@ -1009,8 +1269,6 @@ function carregarEvento() {
             }
 
 
-            /* MENSAGEM */
-
             const mensagem =
                 document.getElementById(
                     "mensagemEvento"
@@ -1024,8 +1282,6 @@ function carregarEvento() {
 
             }
 
-
-            /* COR */
 
             if (config.cor) {
 
@@ -1071,11 +1327,10 @@ function carregarEvento() {
 
 
 /* =====================================================
-   CARREGAR FOTOS DO EVENTO
+   CARREGAR MÍDIAS DO EVENTO
 ===================================================== */
 
 function carregarFotos() {
-
 
     galeria.innerHTML = `
 
@@ -1091,34 +1346,19 @@ function carregarFotos() {
 
 
     const callbackName =
-        "receberFotos_" +
+        "receberMidias_" +
         Date.now();
 
 
     window[callbackName] =
         function(resposta) {
 
-
             delete window[callbackName];
-
-
-            /*
-             * O Apps Script retorna agora:
-             *
-             * {
-             *   sucesso: true,
-             *   evento: "...",
-             *   nome: "...",
-             *   fotos: [...],
-             *   total: 1
-             * }
-             */
 
 
             if (
                 !resposta ||
-                resposta.sucesso !== true ||
-                !Array.isArray(resposta.fotos)
+                resposta.sucesso !== true
             ) {
 
                 mostrarErro();
@@ -1129,41 +1369,94 @@ function carregarFotos() {
 
 
             /*
-             * Guarda somente o array de fotos.
+             * O backend agora retorna:
+             *
+             * fotos: [...]
+             * videos: [...]
+             * totalFotos: número
+             * totalVideos: número
+             * total: número total de mídias
+             */
+
+
+            fotos =
+                Array.isArray(
+                    resposta.fotos
+                )
+                ? resposta.fotos
+                : [];
+
+
+            videos =
+                Array.isArray(
+                    resposta.videos
+                )
+                ? resposta.videos
+                : [];
+
+
+            /*
+             * Garante o tipo das mídias.
              */
 
             fotos =
-                resposta.fotos;
+                fotos.map(
+                    function(item) {
+
+                        return {
+                            ...item,
+                            tipo: "foto"
+                        };
+
+                    }
+                );
+
+
+            videos =
+                videos.map(
+                    function(item) {
+
+                        return {
+                            ...item,
+                            tipo: "video"
+                        };
+
+                    }
+                );
 
 
             /*
-             * O servidor também informa
-             * a quantidade total.
+             * Junta fotos e vídeos.
              */
 
-            const total =
-                typeof resposta.total === "number"
-                    ? resposta.total
-                    : fotos.length;
+            midias =
+                [
+                    ...fotos,
+                    ...videos
+                ];
 
 
             /*
-             * Atualiza o contador
-             * imediatamente.
+             * Ordena tudo pelo momento
+             * de envio, do mais recente
+             * para o mais antigo.
              */
 
-            contador.innerText =
+            midias.sort(
+                function(a, b) {
 
-                total === 1
+                    return (
+                        Number(b.data || 0) -
+                        Number(a.data || 0)
+                    );
 
-                ? "1 foto compartilhada"
-
-                : total +
-                  " fotos compartilhadas";
+                }
+            );
 
 
-            renderizarFotos();
+            atualizarContador();
 
+            renderizarGaleria();
 
         };
 
@@ -1202,32 +1495,177 @@ function carregarFotos() {
 
 
 /* =====================================================
+   CONTADOR
+===================================================== */
+
+function atualizarContador() {
+
+    const totalFotos =
+        fotos.length;
+
+
+    const totalVideos =
+        videos.length;
+
+
+    if (
+        totalFotos === 0 &&
+        totalVideos === 0
+    ) {
+
+        contador.innerText =
+            "Nenhuma memória compartilhada";
+
+        return;
+
+    }
+
+
+    let texto = "";
+
+
+    if (totalFotos > 0) {
+
+        texto +=
+            "📷 " +
+            totalFotos +
+            (
+                totalFotos === 1
+                    ? " foto"
+                    : " fotos"
+            );
+
+    }
+
+
+    if (
+        totalFotos > 0 &&
+        totalVideos > 0
+    ) {
+
+        texto +=
+            "  •  ";
+
+    }
+
+
+    if (totalVideos > 0) {
+
+        texto +=
+            "🎥 " +
+            totalVideos +
+            (
+                totalVideos === 1
+                    ? " recado"
+                    : " recados"
+            );
+
+    }
+
+
+    contador.innerText =
+        texto;
+
+}
+
+
+/* =====================================================
+   FILTRAR MÍDIAS
+===================================================== */
+
+function obterMidiasFiltradas() {
+
+    if (
+        filtroAtual === "foto"
+    ) {
+
+        return fotos;
+
+    }
+
+
+    if (
+        filtroAtual === "video"
+    ) {
+
+        return videos;
+
+    }
+
+
+    return midias;
+
+}
+
+
+/* =====================================================
    RENDERIZAR GALERIA
 ===================================================== */
 
-function renderizarFotos() {
+function renderizarGaleria() {
+
+    const lista =
+        obterMidiasFiltradas();
 
 
-    /*
-     * Atualiza o contador com base
-     * no número real de fotos recebido.
-     */
-
-    contador.innerText =
-
-        fotos.length === 1
-
-        ? "1 foto compartilhada"
-
-        : fotos.length +
-          " fotos compartilhadas";
+    const novasMidias =
+        midias.length >
+        quantidadeAnterior;
 
 
-    /* SEM FOTOS */
+    quantidadeAnterior =
+        midias.length;
+
+
+    galeria.innerHTML = "";
+
+
+    /* =================================================
+       SEM MÍDIA
+    ================================================= */
 
     if (
-        fotos.length === 0
+        lista.length === 0
     ) {
+
+        let titulo =
+            "Ainda não temos fotos";
+
+
+        let texto =
+            "Seja o primeiro a registrar<br>" +
+            "um momento especial. ❤️";
+
+
+        if (
+            filtroAtual === "video"
+        ) {
+
+            titulo =
+                "Ainda não temos recados";
+
+
+            texto =
+                "Seja o primeiro a deixar<br>" +
+                "um recado em vídeo. 🎥";
+
+        }
+
+
+        if (
+            filtroAtual === "todos" &&
+            fotos.length === 0 &&
+            videos.length > 0
+        ) {
+
+            titulo =
+                "Ainda não temos fotos";
+
+
+            texto =
+                "Mas já temos recados em vídeo. 🎥";
+
+        }
 
 
         galeria.innerHTML = `
@@ -1235,19 +1673,14 @@ function renderizarFotos() {
             <div class="sem-fotos">
 
                 <strong>
-                    Ainda não temos fotos
+                    ${titulo}
                 </strong>
 
-                Seja o primeiro a registrar<br>
-                um momento especial. ❤️
+                ${texto}
 
             </div>
 
         `;
-
-
-        quantidadeAnterior =
-            0;
 
 
         return;
@@ -1255,111 +1688,273 @@ function renderizarFotos() {
     }
 
 
-    /* DETECTA NOVAS FOTOS */
+    /*
+     * Renderiza cada mídia.
+     */
 
-    const novasFotos =
-        fotos.length >
-        quantidadeAnterior;
+    lista.forEach(
+        function(midia, indice) {
 
+            if (
+                midia.tipo === "video"
+            ) {
 
-    quantidadeAnterior =
-        fotos.length;
-
-
-    galeria.innerHTML = "";
-
-
-    fotos.forEach(
-        (foto, indice) => {
-
-
-            const div =
-                document.createElement(
-                    "div"
+                criarCardVideo(
+                    midia,
+                    indice
                 );
 
+            }
 
-            div.className =
-                "foto";
+            else {
 
-
-            div.style.animationDelay =
-                (indice * 0.03) +
-                "s";
-
-
-            const img =
-                document.createElement(
-                    "img"
+                criarCardFoto(
+                    midia,
+                    indice
                 );
 
-
-            img.loading =
-                "lazy";
-
-
-            img.alt =
-                "Foto compartilhada";
-
-
-            img.src =
-
-                "https://drive.google.com/thumbnail?id=" +
-                encodeURIComponent(
-                    foto.id
-                ) +
-                "&sz=w1000";
-
-
-            img.onerror =
-                function() {
-
-                    this.style.opacity =
-                        "0.3";
-
-                };
-
-
-            div.appendChild(
-                img
-            );
-
-
-            div.addEventListener(
-                "click",
-                function() {
-
-                    abrirFoto(foto);
-
-                }
-            );
-
-
-            galeria.appendChild(
-                div
-            );
+            }
 
         }
     );
 
 
-    /* STATUS DE NOVAS FOTOS */
+    /*
+     * Pequeno feedback quando
+     * chegam novas mídias.
+     */
 
     if (
-        novasFotos &&
-        quantidadeAnterior > 0
+        novasMidias &&
+        midias.length > 0
     ) {
 
-        contador.innerText =
-
-            fotos.length === 1
-
-            ? "1 foto compartilhada ♥"
-
-            : fotos.length +
-              " fotos compartilhadas ♥";
+        atualizarContador();
 
     }
+
+}
+
+
+/* =====================================================
+   CRIAR CARD DE FOTO
+===================================================== */
+
+function criarCardFoto(
+    foto,
+    indice
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "foto";
+
+
+    div.style.animationDelay =
+        (indice * 0.03) +
+        "s";
+
+
+    const img =
+        document.createElement(
+            "img"
+        );
+
+
+    img.loading =
+        "lazy";
+
+
+    img.alt =
+        "Foto compartilhada";
+
+
+    img.src =
+
+        "https://drive.google.com/thumbnail?id=" +
+        encodeURIComponent(
+            foto.id
+        ) +
+        "&sz=w1000";
+
+
+    img.onerror =
+        function() {
+
+            this.style.opacity =
+                "0.3";
+
+        };
+
+
+    div.appendChild(
+        img
+    );
+
+
+    div.addEventListener(
+        "click",
+        function() {
+
+            abrirMidia(foto);
+
+        }
+    );
+
+
+    galeria.appendChild(
+        div
+    );
+
+}
+
+
+/* =====================================================
+   CRIAR CARD DE VÍDEO
+===================================================== */
+
+function criarCardVideo(
+    video,
+    indice
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "video-card";
+
+
+    div.style.animationDelay =
+        (indice * 0.03) +
+        "s";
+
+
+    /*
+     * Etiqueta RECADO
+     */
+
+    const etiqueta =
+        document.createElement(
+            "div"
+        );
+
+
+    etiqueta.className =
+        "etiqueta-video";
+
+
+    etiqueta.innerHTML =
+        "🎥 RECADO";
+
+
+    div.appendChild(
+        etiqueta
+    );
+
+
+    /*
+     * Elemento de vídeo.
+     */
+
+    const player =
+        document.createElement(
+            "video"
+        );
+
+
+    player.controls =
+        true;
+
+
+    player.playsInline =
+        true;
+
+
+    player.preload =
+        "metadata";
+
+
+    /*
+     * Thumbnail do Drive.
+     *
+     * Se o navegador não conseguir
+     * utilizar como poster, o vídeo
+     * continuará funcionando normalmente.
+     */
+
+    player.poster =
+
+        "https://drive.google.com/thumbnail?id=" +
+        encodeURIComponent(
+            video.id
+        ) +
+        "&sz=w1000";
+
+
+    player.src =
+
+        "https://drive.google.com/uc?export=download&id=" +
+        encodeURIComponent(
+            video.id
+        );
+
+
+    /*
+     * Impede que um clique nos controles
+     * abra o lightbox.
+     */
+
+    player.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    div.appendChild(
+        player
+    );
+
+
+    /*
+     * Clique fora dos controles:
+     * abre o vídeo maior.
+     */
+
+    div.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === player
+            ) {
+
+                return;
+
+            }
+
+
+            abrirMidia(video);
+
+        }
+    );
+
+
+    galeria.appendChild(
+        div
+    );
 
 }
 
@@ -1370,9 +1965,8 @@ function renderizarFotos() {
 
 function mostrarErro() {
 
-
     contador.innerText =
-        "Não foi possível carregar as fotos";
+        "Não foi possível carregar as memórias";
 
 
     galeria.innerHTML = `
@@ -1384,7 +1978,7 @@ function mostrarErro() {
             </strong>
 
             Não conseguimos carregar<br>
-            as fotos agora.
+            as memórias agora.
 
             <br><br>
 
@@ -1398,23 +1992,13 @@ function mostrarErro() {
 
 
 /* =====================================================
-   ABRIR FOTO
+   ABRIR MÍDIA
 ===================================================== */
 
-function abrirFoto(foto) {
+function abrirMidia(midia) {
 
-
-    fotoAtual =
-        foto;
-
-
-    fotoGrande.src =
-
-        "https://drive.google.com/thumbnail?id=" +
-        encodeURIComponent(
-            foto.id
-        ) +
-        "&sz=w2000";
+    midiaAtual =
+        midia;
 
 
     lightbox.classList.add(
@@ -1425,19 +2009,120 @@ function abrirFoto(foto) {
     document.body.style.overflow =
         "hidden";
 
+
+    /*
+     * FOTO
+     */
+
+    if (
+        midia.tipo === "foto"
+    ) {
+
+        videoGrande.pause();
+
+        videoGrande.removeAttribute(
+            "src"
+        );
+
+        videoGrande.style.display =
+            "none";
+
+
+        fotoGrande.style.display =
+            "block";
+
+
+        fotoGrande.src =
+
+            "https://drive.google.com/thumbnail?id=" +
+            encodeURIComponent(
+                midia.id
+            ) +
+            "&sz=w2000";
+
+
+        return;
+
+    }
+
+
+    /*
+     * VÍDEO
+     */
+
+    fotoGrande.style.display =
+        "none";
+
+
+    fotoGrande.removeAttribute(
+        "src"
+    );
+
+
+    videoGrande.style.display =
+        "block";
+
+
+    videoGrande.src =
+
+        "https://drive.google.com/uc?export=download&id=" +
+        encodeURIComponent(
+            midia.id
+        );
+
+
+    videoGrande.load();
+
+
+    /*
+     * Tenta iniciar.
+     *
+     * Alguns navegadores podem
+     * bloquear autoplay, então
+     * o usuário ainda terá os controles.
+     */
+
+    videoGrande.play()
+        .catch(
+            function() {}
+        );
+
 }
 
 
 /* =====================================================
-   FECHAR FOTO
+   FECHAR LIGHTBOX
 ===================================================== */
 
 function fecharFoto() {
 
-
     lightbox.classList.remove(
         "ativo"
     );
+
+
+    videoGrande.pause();
+
+    videoGrande.removeAttribute(
+        "src"
+    );
+
+
+    fotoGrande.removeAttribute(
+        "src"
+    );
+
+
+    fotoGrande.style.display =
+        "block";
+
+
+    videoGrande.style.display =
+        "none";
+
+
+    midiaAtual =
+        null;
 
 
     document.body.style.overflow =
@@ -1453,13 +2138,12 @@ fechar.addEventListener(
 
 
 /* =====================================================
-   CLICAR FORA DA FOTO
+   CLICAR FORA
 ===================================================== */
 
 lightbox.addEventListener(
     "click",
     function(event) {
-
 
         if (
             event.target ===
@@ -1475,13 +2159,12 @@ lightbox.addEventListener(
 
 
 /* =====================================================
-   ESC DO TECLADO
+   ESC
 ===================================================== */
 
 document.addEventListener(
     "keydown",
     function(event) {
-
 
         if (
             event.key === "Escape"
@@ -1496,15 +2179,14 @@ document.addEventListener(
 
 
 /* =====================================================
-   BAIXAR FOTO
+   BAIXAR MÍDIA
 ===================================================== */
 
 baixar.addEventListener(
     "click",
-    async function() {
+    function() {
 
-
-        if (!fotoAtual)
+        if (!midiaAtual)
             return;
 
 
@@ -1512,7 +2194,7 @@ baixar.addEventListener(
 
             "https://drive.google.com/uc?export=download&id=" +
             encodeURIComponent(
-                fotoAtual.id
+                midiaAtual.id
             );
 
 
@@ -1541,56 +2223,59 @@ baixar.addEventListener(
 
 
 /* =====================================================
-   COMPARTILHAR FOTO
+   COMPARTILHAR MÍDIA
 ===================================================== */
 
 compartilhar.addEventListener(
     "click",
     async function() {
 
-
-        if (!fotoAtual)
+        if (!midiaAtual)
             return;
 
 
         const url =
 
-            "https://drive.google.com/thumbnail?id=" +
+            "https://drive.google.com/uc?export=view&id=" +
             encodeURIComponent(
-                fotoAtual.id
-            ) +
-            "&sz=w2000";
+                midiaAtual.id
+            );
 
 
-        /* CELULAR COM WEB SHARE */
+        /*
+         * CELULAR / WEB SHARE
+         */
 
         if (
             navigator.share
         ) {
 
-
             try {
-
 
                 await navigator.share({
 
                     title:
-                        "Uma memória especial ❤️",
+                        midiaAtual.tipo === "video"
+                            ? "Um recado especial ❤️"
+                            : "Uma memória especial ❤️",
 
                     text:
-                        "Confira essa foto!",
+                        midiaAtual.tipo === "video"
+                            ? "Confira esse recado!"
+                            : "Confira essa foto!",
 
                     url:
                         url
 
                 });
 
-
             }
 
             catch (erro) {
 
-                /* usuário cancelou */
+                /*
+                 * Usuário cancelou.
+                 */
 
             }
 
@@ -1600,10 +2285,11 @@ compartilhar.addEventListener(
         }
 
 
-        /* COMPUTADOR / NAVEGADOR SEM SHARE */
+        /*
+         * COMPUTADOR
+         */
 
         try {
-
 
             await navigator.clipboard.writeText(
                 url
@@ -1628,19 +2314,64 @@ compartilhar.addEventListener(
                 2000
             );
 
-
         }
 
         catch (erro) {
-
 
             window.open(
                 url,
                 "_blank"
             );
 
-
         }
+
+    }
+);
+
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+filtros.forEach(
+    function(botao) {
+
+        botao.addEventListener(
+            "click",
+            function() {
+
+                /*
+                 * Remove ativo dos outros.
+                 */
+
+                filtros.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "ativo"
+                        );
+
+                    }
+                );
+
+
+                /*
+                 * Ativa o escolhido.
+                 */
+
+                botao.classList.add(
+                    "ativo"
+                );
+
+
+                filtroAtual =
+                    botao.dataset.filtro;
+
+
+                renderizarGaleria();
+
+            }
+        );
 
     }
 );
