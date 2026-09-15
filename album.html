@@ -5,25 +5,33 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<title>Álbum de Fotos</title>
+<title>Nossas memórias</title>
 
 
 <style>
 
-@import url(
-'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap'
-);
+/* =====================================================
+   FONTES
+===================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap');
+
+
+/* =====================================================
+   RESET
+===================================================== */
 
 * {
     box-sizing: border-box;
 }
 
+
+/* =====================================================
+   BODY
+===================================================== */
 
 body {
 
@@ -33,10 +41,10 @@ body {
 
     background:
         radial-gradient(
-            circle at 50% 10%,
+            circle at 50% 0%,
             #3a3024 0%,
             #17130f 35%,
-            #090807 75%
+            #080706 75%
         );
 
     color: #f5eee3;
@@ -44,19 +52,37 @@ body {
     font-family:
         'Montserrat',
         sans-serif;
+
 }
 
 
-/* =========================
-   CABEÇALHO
-========================= */
+/* =====================================================
+   CONTAINER
+===================================================== */
 
-.header {
+.container {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 45px 20px 60px;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+header {
 
     text-align: center;
 
-    padding:
-        50px 25px 35px;
+    margin-bottom: 35px;
+
 }
 
 
@@ -68,23 +94,25 @@ body {
 
     letter-spacing: 8px;
 
-    margin-bottom: 18px;
+    margin-bottom: 15px;
+
 }
 
 
 h1 {
 
-    margin: 0;
-
     font-family:
         'Cormorant Garamond',
         serif;
 
-    font-size: 46px;
+    font-size: 48px;
 
     line-height: 1;
 
     font-weight: 500;
+
+    margin: 0;
+
 }
 
 
@@ -96,8 +124,8 @@ h1 {
 
     background: #c9a96e;
 
-    margin:
-        24px auto 20px;
+    margin: 22px auto;
+
 }
 
 
@@ -105,47 +133,101 @@ h1 {
 
     color: #cfc5b6;
 
-    font-size: 12px;
+    font-size: 13px;
 
     line-height: 1.7;
 
-    margin: 0;
+    margin: 0 auto;
+
+    max-width: 500px;
+
 }
 
 
-/* =========================
-   CONTADOR
-========================= */
+/* =====================================================
+   BARRA SUPERIOR
+===================================================== */
+
+.topo {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+}
+
 
 .contador {
 
-    text-align: center;
+    color: #cfc5b6;
 
-    color: #a99d8c;
+    font-size: 12px;
 
-    font-size: 11px;
-
-    letter-spacing: 1px;
-
-    margin:
-        0 auto 25px;
 }
 
 
-/* =========================
+.acoes-topo {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+
+.botao-topo {
+
+    border: 1px solid
+        rgba(201,169,110,.45);
+
+    background:
+        rgba(0,0,0,.25);
+
+    color: #c9a96e;
+
+    border-radius: 50px;
+
+    padding: 9px 14px;
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: .2s;
+
+}
+
+
+.botao-topo:hover {
+
+    background:
+        rgba(201,169,110,.12);
+
+}
+
+
+.botao-topo:active {
+
+    transform: scale(.96);
+
+}
+
+
+/* =====================================================
    GALERIA
-========================= */
+===================================================== */
 
 .galeria {
-
-    width: 100%;
-
-    max-width: 1000px;
-
-    margin: auto;
-
-    padding:
-        0 14px 40px;
 
     display: grid;
 
@@ -153,6 +235,7 @@ h1 {
         repeat(2, 1fr);
 
     gap: 8px;
+
 }
 
 
@@ -162,21 +245,21 @@ h1 {
 
     overflow: hidden;
 
-    border-radius: 10px;
-
-    background: #15120f;
+    border-radius: 12px;
 
     aspect-ratio: 1 / 1;
+
+    background: #111;
 
     cursor: pointer;
 
     border:
         1px solid
-        rgba(201,169,110,.20);
+        rgba(201,169,110,.18);
 
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.25);
+    animation:
+        aparecer .5s ease both;
+
 }
 
 
@@ -186,58 +269,208 @@ h1 {
 
     height: 100%;
 
-    object-fit: cover;
-
     display: block;
 
+    object-fit: cover;
+
     transition:
-        transform .4s ease;
+        transform .5s ease;
+
 }
 
 
 .foto:hover img {
 
-    transform:
-        scale(1.05);
+    transform: scale(1.04);
+
 }
 
 
-/* =========================
+/* =====================================================
+   ANIMAÇÃO
+===================================================== */
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
    CARREGANDO
-========================= */
+===================================================== */
 
 .carregando {
 
+    grid-column:
+        1 / -1;
+
     text-align: center;
 
-    padding: 45px 20px;
+    padding: 60px 20px;
 
     color: #cfc5b6;
 
-    font-size: 12px;
+    font-size: 13px;
+
 }
 
 
-.rodape {
+.carregando span {
 
-    text-align: center;
-
-    padding:
-        15px 20px 40px;
-
-    color: #8f8578;
+    display: block;
 
     font-family:
         'Cormorant Garamond',
         serif;
 
-    font-size: 18px;
+    color: #c9a96e;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+
 }
 
 
-/* =========================
-   VISUALIZADOR
-========================= */
+/* =====================================================
+   SEM FOTOS
+===================================================== */
+
+.sem-fotos {
+
+    grid-column:
+        1 / -1;
+
+    text-align: center;
+
+    padding: 70px 20px;
+
+    color: #cfc5b6;
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+}
+
+
+.sem-fotos strong {
+
+    display: block;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    color: #c9a96e;
+
+    font-size: 28px;
+
+    font-weight: 500;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* =====================================================
+   BOTÃO VOLTAR
+===================================================== */
+
+.voltar {
+
+    display: block;
+
+    width: 100%;
+
+    max-width: 400px;
+
+    margin: 40px auto 0;
+
+    padding: 16px 20px;
+
+    border-radius: 50px;
+
+    border:
+        1px solid
+        rgba(201,169,110,.5);
+
+    background: transparent;
+
+    color: #c9a96e;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+
+    transition: .2s;
+
+}
+
+
+.voltar:hover {
+
+    background:
+        rgba(201,169,110,.1);
+
+}
+
+
+.voltar:active {
+
+    transform: scale(.98);
+
+}
+
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+
+.rodape {
+
+    text-align: center;
+
+    margin-top: 30px;
+
+    color: #81776b;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 17px;
+
+}
+
+
+/* =====================================================
+   LIGHTBOX
+===================================================== */
 
 .lightbox {
 
@@ -248,21 +481,23 @@ h1 {
     background:
         rgba(0,0,0,.94);
 
+    z-index: 1000;
+
     display: none;
 
     align-items: center;
 
     justify-content: center;
 
-    z-index: 999;
-
     padding: 20px;
+
 }
 
 
-.lightbox.aberto {
+.lightbox.ativo {
 
     display: flex;
+
 }
 
 
@@ -270,13 +505,21 @@ h1 {
 
     max-width: 100%;
 
-    max-height: 85vh;
+    max-height: 82vh;
 
     object-fit: contain;
 
     border-radius: 8px;
+
+    box-shadow:
+        0 20px 80px rgba(0,0,0,.7);
+
 }
 
+
+/* =====================================================
+   BOTÃO FECHAR
+===================================================== */
 
 .fechar {
 
@@ -284,7 +527,7 @@ h1 {
 
     top: 18px;
 
-    right: 20px;
+    right: 18px;
 
     width: 45px;
 
@@ -294,7 +537,7 @@ h1 {
 
     border:
         1px solid
-        rgba(255,255,255,.3);
+        rgba(255,255,255,.25);
 
     background:
         rgba(0,0,0,.5);
@@ -304,12 +547,73 @@ h1 {
     font-size: 22px;
 
     cursor: pointer;
+
 }
 
 
-/* =========================
+/* =====================================================
+   AÇÕES DA FOTO
+===================================================== */
+
+.acoes-foto {
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    bottom: 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+}
+
+
+.acao-foto {
+
+    border: 1px solid
+        rgba(201,169,110,.5);
+
+    background:
+        rgba(15,12,9,.9);
+
+    color: #c9a96e;
+
+    border-radius: 50px;
+
+    padding: 12px 18px;
+
+    font-family:
+        'Montserrat',
+        sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    backdrop-filter:
+        blur(10px);
+
+}
+
+
+.acao-foto:active {
+
+    transform: scale(.96);
+
+}
+
+
+/* =====================================================
    DESKTOP
-========================= */
+===================================================== */
 
 @media (min-width: 700px) {
 
@@ -318,7 +622,68 @@ h1 {
         grid-template-columns:
             repeat(4, 1fr);
 
-        gap: 12px;
+        gap: 10px;
+
+    }
+
+
+    .foto {
+
+        border-radius: 14px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+    .container {
+
+        padding:
+            35px 12px 45px;
+
+    }
+
+
+    h1 {
+
+        font-size: 42px;
+
+    }
+
+
+    .topo {
+
+        padding:
+            0 3px;
+
+    }
+
+
+    .botao-topo {
+
+        padding:
+            8px 11px;
+
+    }
+
+
+    .acoes-foto {
+
+        bottom: 15px;
+
+    }
+
+
+    .acao-foto {
+
+        padding:
+            11px 14px;
 
     }
 
@@ -332,99 +697,174 @@ h1 {
 <body>
 
 
-<!-- =========================
-     CABEÇALHO
-========================= -->
+<div class="container">
 
-<header class="header">
 
-    <div class="ornamento">
-        ✦
+    <!-- =================================================
+         CABEÇALHO
+    ================================================== -->
+
+    <header>
+
+        <div class="ornamento">
+
+            ✦
+
+        </div>
+
+
+        <h1>
+
+            Nossas memórias
+
+        </h1>
+
+
+        <div class="linha"></div>
+
+
+        <p class="subtitulo">
+
+            Momentos especiais registrados por quem
+            fez parte desse dia. ❤️
+
+        </p>
+
+    </header>
+
+
+    <!-- =================================================
+         TOPO DA GALERIA
+    ================================================== -->
+
+    <div class="topo">
+
+
+        <div
+            class="contador"
+            id="contador">
+
+            Carregando fotos...
+
+        </div>
+
+
+        <div class="acoes-topo">
+
+
+            <button
+                class="botao-topo"
+                id="atualizar">
+
+                ↻ Atualizar
+
+            </button>
+
+
+        </div>
+
+
     </div>
 
 
-    <h1>
-        Nossas memórias
-    </h1>
+    <!-- =================================================
+         GALERIA
+    ================================================== -->
+
+    <div
+        class="galeria"
+        id="galeria">
 
 
-    <div class="linha"></div>
+        <div class="carregando">
 
+            <span>✦</span>
 
-    <p class="subtitulo">
+            Carregando nossas memórias...
 
-        Momentos especiais registrados<br>
-        por quem fez parte desse dia. ❤️
+        </div>
 
-    </p>
-
-</header>
-
-
-
-<!-- CONTADOR -->
-
-<div
-    class="contador"
-    id="contador"
->
-
-    Carregando fotos...
-
-</div>
-
-
-
-<!-- =========================
-     GALERIA
-========================= -->
-
-<div
-    class="galeria"
-    id="galeria"
->
-
-    <div class="carregando">
-
-        ✦<br><br>
-
-        Carregando as memórias...
 
     </div>
 
+
+    <!-- =================================================
+         VOLTAR
+    ================================================== -->
+
+    <a
+        href="index.html"
+        class="voltar">
+
+        📷 &nbsp; VOLTAR PARA TIRAR FOTOS
+
+    </a>
+
+
+    <div class="rodape">
+
+        Feito para guardar momentos.
+
+    </div>
+
+
 </div>
 
 
 
-<div class="rodape">
-
-    Feito para guardar momentos.
-
-</div>
-
-
-
-<!-- =========================
+<!-- =====================================================
      LIGHTBOX
-========================= -->
+===================================================== -->
 
 <div
     class="lightbox"
-    id="lightbox"
->
+    id="lightbox">
+
+
+    <!-- FECHAR -->
 
     <button
         class="fechar"
-        onclick="fecharFoto()"
-    >
+        id="fechar">
+
         ×
+
     </button>
 
+
+    <!-- FOTO -->
 
     <img
         id="fotoGrande"
         src=""
-    >
+        alt="Foto do evento">
+
+
+    <!-- AÇÕES -->
+
+    <div class="acoes-foto">
+
+
+        <button
+            class="acao-foto"
+            id="baixar">
+
+            ↓ &nbsp; BAIXAR
+
+        </button>
+
+
+        <button
+            class="acao-foto"
+            id="compartilhar">
+
+            ↗ &nbsp; COMPARTILHAR
+
+        </button>
+
+
+    </div>
+
 
 </div>
 
@@ -434,63 +874,145 @@ h1 {
 
 
 /* =====================================================
-   URL DO GOOGLE APPS SCRIPT
+   CONFIGURAÇÃO
 ===================================================== */
 
 const API =
 
-    "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
-
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 
 /* =====================================================
-   RECEBE FOTOS
+   ELEMENTOS
 ===================================================== */
 
-function receberFotos(fotos) {
+const galeria =
+    document.getElementById("galeria");
 
 
-    const galeria =
-        document.getElementById(
-            "galeria"
-        );
+const contador =
+    document.getElementById("contador");
 
 
-    const contador =
-        document.getElementById(
-            "contador"
-        );
+const atualizar =
+    document.getElementById("atualizar");
 
 
-    galeria.innerHTML = "";
+const lightbox =
+    document.getElementById("lightbox");
 
 
-    if (
-        !fotos ||
-        fotos.length === 0
-    ) {
+const fotoGrande =
+    document.getElementById("fotoGrande");
 
 
-        contador.innerText =
-            "Nenhuma foto ainda";
+const fechar =
+    document.getElementById("fechar");
 
 
-        galeria.innerHTML = `
+const baixar =
+    document.getElementById("baixar");
 
-            <div class="carregando">
 
-                ✦<br><br>
+const compartilhar =
+    document.getElementById("compartilhar");
 
-                As primeiras memórias
-                ainda estão por vir. ❤️
 
-            </div>
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
 
-        `;
+let fotos = [];
 
-        return;
+let fotoAtual = null;
 
-    }
+let quantidadeAnterior = 0;
+
+
+/* =====================================================
+   CARREGAR FOTOS
+===================================================== */
+
+function carregarFotos() {
+
+
+    galeria.innerHTML = `
+
+        <div class="carregando">
+
+            <span>✦</span>
+
+            Carregando nossas memórias...
+
+        </div>
+
+    `;
+
+
+    const callbackName =
+        "receberFotos_" +
+        Date.now();
+
+
+    window[callbackName] =
+        function(lista) {
+
+
+            delete window[callbackName];
+
+
+            if (
+                !Array.isArray(lista)
+            ) {
+
+                mostrarErro();
+
+                return;
+
+            }
+
+
+            fotos = lista;
+
+
+            renderizarFotos();
+
+
+        };
+
+
+    const script =
+        document.createElement("script");
+
+
+    script.src =
+        API +
+        "?callback=" +
+        callbackName +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            delete window[callbackName];
+
+            mostrarErro();
+
+        };
+
+
+    document.body.appendChild(script);
+
+}
+
+
+/* =====================================================
+   RENDERIZAR GALERIA
+===================================================== */
+
+function renderizarFotos() {
 
 
     contador.innerText =
@@ -503,94 +1025,197 @@ function receberFotos(fotos) {
           " fotos compartilhadas";
 
 
+    /* SEM FOTOS */
+
+    if (
+        fotos.length === 0
+    ) {
+
+
+        galeria.innerHTML = `
+
+            <div class="sem-fotos">
+
+                <strong>
+                    Ainda não temos fotos
+                </strong>
+
+                Seja o primeiro a registrar<br>
+                um momento especial. ❤️
+
+            </div>
+
+        `;
+
+
+        quantidadeAnterior =
+            0;
+
+
+        return;
+
+    }
+
+
+    /* DETECTA NOVAS FOTOS */
+
+    const novasFotos =
+        fotos.length >
+        quantidadeAnterior;
+
+
+    quantidadeAnterior =
+        fotos.length;
+
+
+    galeria.innerHTML = "";
+
 
     fotos.forEach(
-        foto => {
+        (foto, indice) => {
 
 
-            const item =
-                document.createElement(
-                    "div"
-                );
+            const div =
+                document.createElement("div");
 
 
-            item.className =
+            div.className =
                 "foto";
 
 
-            const imagem =
-                document.createElement(
-                    "img"
-                );
+            div.style.animationDelay =
+                (indice * 0.03) +
+                "s";
 
 
-            /*
-               Thumbnail do Google Drive
-            */
-
-            imagem.src =
-
-                "https://drive.google.com/thumbnail?id=" +
-                foto.id +
-                "&sz=w1000";
+            const img =
+                document.createElement("img");
 
 
-            imagem.loading =
+            img.loading =
                 "lazy";
 
 
-            imagem.onclick =
-                () => abrirFoto(
-                    imagem.src
-                );
+            img.alt =
+                "Foto compartilhada";
 
 
-            item.appendChild(
-                imagem
+            img.src =
+
+                "https://drive.google.com/thumbnail?id=" +
+                encodeURIComponent(foto.id) +
+                "&sz=w1000";
+
+
+            img.onerror =
+                function() {
+
+                    this.style.opacity =
+                        "0.3";
+
+                };
+
+
+            div.appendChild(img);
+
+
+            div.addEventListener(
+                "click",
+                function() {
+
+                    abrirFoto(foto);
+
+                }
             );
 
 
-            galeria.appendChild(
-                item
-            );
-
+            galeria.appendChild(div);
 
         }
     );
 
+
+    /* STATUS DE NOVAS FOTOS */
+
+    if (
+        novasFotos &&
+        quantidadeAnterior > 0
+    ) {
+
+        contador.innerText =
+
+            fotos.length === 1
+
+            ? "1 foto compartilhada ♥"
+
+            : fotos.length +
+              " fotos compartilhadas ♥";
+
+    }
+
 }
 
+
+/* =====================================================
+   ERRO
+===================================================== */
+
+function mostrarErro() {
+
+
+    contador.innerText =
+        "Não foi possível carregar as fotos";
+
+
+    galeria.innerHTML = `
+
+        <div class="sem-fotos">
+
+            <strong>
+                Ops...
+            </strong>
+
+            Não conseguimos carregar<br>
+            as fotos agora.
+
+            <br><br>
+
+            Tente atualizar a página.
+
+        </div>
+
+    `;
+
+}
 
 
 /* =====================================================
    ABRIR FOTO
 ===================================================== */
 
-function abrirFoto(url) {
+function abrirFoto(foto) {
 
 
-    const lightbox =
-        document.getElementById(
-            "lightbox"
-        );
-
-
-    const fotoGrande =
-        document.getElementById(
-            "fotoGrande"
-        );
+    fotoAtual =
+        foto;
 
 
     fotoGrande.src =
-        url;
+
+        "https://drive.google.com/thumbnail?id=" +
+        encodeURIComponent(foto.id) +
+        "&sz=w2000";
 
 
     lightbox.classList.add(
-        "aberto"
+        "ativo"
     );
 
-}
 
+    document.body.style.overflow =
+        "hidden";
+
+}
 
 
 /* =====================================================
@@ -600,64 +1225,258 @@ function abrirFoto(url) {
 function fecharFoto() {
 
 
-    document
-        .getElementById(
-            "lightbox"
-        )
-        .classList.remove(
-            "aberto"
-        );
+    lightbox.classList.remove(
+        "ativo"
+    );
+
+
+    document.body.style.overflow =
+        "";
 
 }
 
 
+fechar.addEventListener(
+    "click",
+    fecharFoto
+);
+
 
 /* =====================================================
-   FECHAR CLICANDO FORA
+   CLICAR FORA DA FOTO
 ===================================================== */
 
-document
-    .getElementById("lightbox")
-    .addEventListener(
-        "click",
-        function(e) {
+lightbox.addEventListener(
+    "click",
+    function(event) {
 
-            if (
-                e.target === this
-            ) {
 
-                fecharFoto();
+        if (
+            event.target ===
+            lightbox
+        ) {
+
+            fecharFoto();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ESC DO TECLADO
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            fecharFoto();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   BAIXAR FOTO
+===================================================== */
+
+baixar.addEventListener(
+    "click",
+    async function() {
+
+
+        if (!fotoAtual)
+            return;
+
+
+        const url =
+
+            "https://drive.google.com/uc?export=download&id=" +
+            encodeURIComponent(
+                fotoAtual.id
+            );
+
+
+        const link =
+            document.createElement("a");
+
+
+        link.href =
+            url;
+
+
+        link.target =
+            "_blank";
+
+
+        link.rel =
+            "noopener";
+
+
+        link.click();
+
+    }
+);
+
+
+/* =====================================================
+   COMPARTILHAR FOTO
+===================================================== */
+
+compartilhar.addEventListener(
+    "click",
+    async function() {
+
+
+        if (!fotoAtual)
+            return;
+
+
+        const url =
+
+            "https://drive.google.com/thumbnail?id=" +
+            encodeURIComponent(
+                fotoAtual.id
+            ) +
+            "&sz=w2000";
+
+
+        /* CELULAR COM WEB SHARE */
+
+        if (
+            navigator.share
+        ) {
+
+
+            try {
+
+
+                await navigator.share({
+
+                    title:
+                        "Uma memória especial ❤️",
+
+                    text:
+                        "Confira essa foto!",
+
+                    url:
+                        url
+
+                });
+
 
             }
 
-        }
-    );
+            catch (erro) {
 
+                /* usuário cancelou */
+
+            }
+
+
+            return;
+
+        }
+
+
+        /* COMPUTADOR / NAVEGADOR SEM SHARE */
+
+        try {
+
+
+            await navigator.clipboard.writeText(
+                url
+            );
+
+
+            const textoOriginal =
+                compartilhar.innerHTML;
+
+
+            compartilhar.innerHTML =
+                "✓ &nbsp; LINK COPIADO";
+
+
+            setTimeout(
+                function() {
+
+                    compartilhar.innerHTML =
+                        textoOriginal;
+
+                },
+                2000
+            );
+
+
+        }
+
+        catch (erro) {
+
+
+            window.open(
+                url,
+                "_blank"
+            );
+
+
+        }
+
+    }
+);
 
 
 /* =====================================================
-   CARREGA O ÁLBUM
+   BOTÃO ATUALIZAR
 ===================================================== */
 
-const script =
-    document.createElement(
-        "script"
-    );
+atualizar.addEventListener(
+    "click",
+    function() {
+
+        carregarFotos();
+
+    }
+);
 
 
-script.src =
-    API +
-    "?callback=receberFotos&t=" +
-    Date.now();
+/* =====================================================
+   ATUALIZAÇÃO AUTOMÁTICA
+===================================================== */
+
+/*
+
+   A cada 10 segundos o álbum consulta
+   novamente o Google Drive.
+
+*/
+
+setInterval(
+    function() {
+
+        carregarFotos();
+
+    },
+    10000
+);
 
 
-document
-    .body
-    .appendChild(script);
+/* =====================================================
+   PRIMEIRO CARREGAMENTO
+===================================================== */
+
+carregarFotos();
 
 
 </script>
-
 
 </body>
 
