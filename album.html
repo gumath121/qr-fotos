@@ -1130,9 +1130,18 @@ h1 {
    CONFIGURAÇÃO
 ===================================================== */
 
-const API =
+/*
+ * URL CORRETA DO GOOGLE APPS SCRIPT
+ *
+ * IMPORTANTE:
+ * ...p5glsh8hWzKE...
+ *
+ * O "h" e o "z" minúsculo fazem parte
+ * da URL correta.
+ */
 
-"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+const API =
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 
 /* =====================================================
@@ -1468,9 +1477,9 @@ function carregarFotos() {
 
 
     /*
-     * CORREÇÃO:
-     * informa explicitamente ao Apps Script
-     * que esta requisição é para listar o álbum.
+     * Informa explicitamente ao Apps Script
+     * que esta requisição é para listar o álbum
+     * DO EVENTO ATUAL.
      */
 
     script.src =
@@ -1845,10 +1854,6 @@ function criarCardVideo(
         "s";
 
 
-    /*
-     * Etiqueta RECADO
-     */
-
     const etiqueta =
         document.createElement(
             "div"
@@ -1868,10 +1873,6 @@ function criarCardVideo(
     );
 
 
-    /*
-     * Elemento de vídeo.
-     */
-
     const player =
         document.createElement(
             "video"
@@ -1890,10 +1891,6 @@ function criarCardVideo(
         "metadata";
 
 
-    /*
-     * Thumbnail do Drive.
-     */
-
     player.poster =
 
         "https://drive.google.com/thumbnail?id=" +
@@ -1911,11 +1908,6 @@ function criarCardVideo(
         );
 
 
-    /*
-     * Impede que um clique nos controles
-     * abra o lightbox.
-     */
-
     player.addEventListener(
         "click",
         function(event) {
@@ -1930,11 +1922,6 @@ function criarCardVideo(
         player
     );
 
-
-    /*
-     * Clique fora dos controles:
-     * abre o vídeo maior.
-     */
 
     div.addEventListener(
         "click",
@@ -2013,10 +2000,6 @@ function abrirMidia(midia) {
         "hidden";
 
 
-    /*
-     * FOTO
-     */
-
     if (
         midia.tipo === "foto"
     ) {
@@ -2048,10 +2031,6 @@ function abrirMidia(midia) {
 
     }
 
-
-    /*
-     * VÍDEO
-     */
 
     fotoGrande.style.display =
         "none";
@@ -2237,10 +2216,6 @@ compartilhar.addEventListener(
             );
 
 
-        /*
-         * CELULAR / WEB SHARE
-         */
-
         if (
             navigator.share
         ) {
@@ -2268,9 +2243,7 @@ compartilhar.addEventListener(
 
             catch (erro) {
 
-                /*
-                 * Usuário cancelou.
-                 */
+                /* Usuário cancelou. */
 
             }
 
@@ -2279,10 +2252,6 @@ compartilhar.addEventListener(
 
         }
 
-
-        /*
-         * COMPUTADOR
-         */
 
         try {
 
@@ -2335,10 +2304,6 @@ filtros.forEach(
             "click",
             function() {
 
-                /*
-                 * Remove ativo dos outros.
-                 */
-
                 filtros.forEach(
                     function(item) {
 
@@ -2349,10 +2314,6 @@ filtros.forEach(
                     }
                 );
 
-
-                /*
-                 * Ativa o escolhido.
-                 */
 
                 botao.classList.add(
                     "ativo"
