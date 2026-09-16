@@ -1,6 +1,6 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
@@ -89,15 +89,17 @@ body{
 
 
 /* =========================================================
-   CAPTURA
+   FOTO / VÍDEO
 ========================================================= */
 
 .modo{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:8px;
+
   margin-top:18px;
   padding:5px;
+
   background:#0d0d0d;
   border-radius:13px;
 }
@@ -105,11 +107,16 @@ body{
 .modo button{
   border:0;
   border-radius:9px;
+
   padding:11px;
+
   background:transparent;
+
   color:#888;
+
   font-size:14px;
   font-weight:bold;
+
   cursor:pointer;
 }
 
@@ -119,36 +126,119 @@ body{
 }
 
 
+/* =========================================================
+   ÁREA DA CÂMERA
+========================================================= */
+
 .camera{
   width:100%;
   aspect-ratio:4/3;
+
   background:#050505;
+
   border-radius:15px;
+
   overflow:hidden;
+
   margin:15px 0;
+
+  position:relative;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
 }
 
-video#camera{
+
+/* CÂMERA AO VIVO */
+
+#camera{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
+  display:block;
+
+  background:#050505;
 }
 
-.preview{
+
+/* PREVIEW DA FOTO */
+
+#previewFoto{
+  position:absolute;
+
+  inset:0;
+
   width:100%;
   height:100%;
+
   object-fit:cover;
-  border-radius:15px;
+
   display:none;
+
+  background:#050505;
 }
+
+
+/* PREVIEW DO VÍDEO */
 
 #previewVideo{
   position:absolute;
+
   inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:none;
+
+  background:#050505;
+}
+
+
+/* =========================================================
+   INVERTER CÂMERA
+========================================================= */
+
+#inverterCamera{
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  width:44px;
+  height:44px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(255,255,255,.25);
+
+  background:rgba(0,0,0,.65);
+
+  color:#fff;
+
+  font-size:21px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  z-index:10;
+
+  padding:0;
+
+  backdrop-filter:blur(5px);
+}
+
+#inverterCamera:active{
+  transform:scale(.94);
 }
 
 
@@ -158,12 +248,14 @@ video#camera{
 
 .indicador-gravacao{
   position:absolute;
+
   top:12px;
   left:12px;
 
   display:none;
 
   align-items:center;
+
   gap:7px;
 
   background:rgba(0,0,0,.75);
@@ -174,7 +266,7 @@ video#camera{
 
   font-size:12px;
 
-  z-index:5;
+  z-index:10;
 }
 
 .ponto{
@@ -209,7 +301,9 @@ video#camera{
   position:absolute;
 
   top:12px;
-  right:12px;
+  left:50%;
+
+  transform:translateX(-50%);
 
   display:none;
 
@@ -221,11 +315,45 @@ video#camera{
 
   font-weight:bold;
 
-  padding:7px 10px;
+  padding:7px 11px;
 
   border-radius:20px;
 
-  z-index:5;
+  z-index:10;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR / REFAZER
+========================================================= */
+
+#refazer{
+  position:absolute;
+
+  bottom:12px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:rgba(0,0,0,.78);
+
+  color:#fff;
+
+  border:1px solid rgba(255,255,255,.25);
+
+  border-radius:20px;
+
+  padding:9px 15px;
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  display:none;
+
+  cursor:pointer;
+
+  z-index:10;
 }
 
 
@@ -235,24 +363,38 @@ video#camera{
 
 .buttons{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:10px;
+
   margin-top:12px;
 }
 
 button,
 .btn{
   border:0;
+
   border-radius:12px;
+
   padding:14px 12px;
+
   font-size:14px;
+
   font-weight:bold;
+
   cursor:pointer;
+
   text-align:center;
+
   text-decoration:none;
+
   display:flex;
+
   justify-content:center;
+
   align-items:center;
+
   gap:7px;
 }
 
@@ -263,7 +405,9 @@ button,
 
 .secondary{
   background:#242424;
+
   color:#fff;
+
   border:1px solid #333;
 }
 
@@ -278,42 +422,89 @@ input[type=file]{
 
 
 /* =========================================================
+   BOTÕES DE CONFIRMAÇÃO
+========================================================= */
+
+.confirmacao{
+  display:none;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:10px;
+
+  margin-top:12px;
+}
+
+.confirmacao button{
+  width:100%;
+}
+
+.enviar{
+  background:#d4af67;
+  color:#111;
+}
+
+.refazer{
+  background:#242424;
+  color:#fff;
+
+  border:1px solid #333;
+}
+
+
+/* =========================================================
    STATUS
 ========================================================= */
 
 .status{
   text-align:center;
+
   font-size:13px;
+
   color:#aaa;
+
   min-height:20px;
+
   margin-top:14px;
 }
 
 
 /* =========================================================
-   ALBUM
+   ÁLBUM
 ========================================================= */
 
 .album{
   width:100%;
+
   background:#d4af67;
+
   color:#111;
+
   padding:15px;
+
   border-radius:12px;
+
   text-decoration:none;
+
   font-weight:bold;
+
   display:block;
+
   text-align:center;
 }
 
-.hidden{
-  display:none !important;
-}
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 .footer{
   text-align:center;
+
   color:#555;
+
   font-size:11px;
+
   margin-top:25px;
 }
 
@@ -349,219 +540,271 @@ input[type=file]{
 <div class="container">
 
 
-  <!-- =====================================================
-       CABEÇALHO
-  ====================================================== -->
+<!-- =======================================================
+     CABEÇALHO
+======================================================== -->
 
-  <div class="header">
+<div class="header">
 
-    <div class="logo">
-      QR <span>FOTOS</span>
-    </div>
+  <div class="logo">
+    QR <span>FOTOS</span>
+  </div>
 
-    <div class="subtitle">
-      Compartilhe os melhores momentos
-    </div>
+  <div class="subtitle">
+    Compartilhe os melhores momentos
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     EVENTO
+======================================================== -->
+
+<div class="evento">
+
+  <h1 id="nomeEvento">
+    Carregando...
+  </h1>
+
+  <p id="mensagemEvento">
+    Aguarde...
+  </p>
+
+</div>
+
+
+<!-- =======================================================
+     CAPTURA
+======================================================== -->
+
+<div class="card">
+
+  <h2>
+    📸 Compartilhe seu momento
+  </h2>
+
+  <p>
+    Tire uma foto ou grave um recado em vídeo.
+  </p>
+
+
+  <!-- FOTO / VÍDEO -->
+
+  <div class="modo">
+
+    <button
+      id="modoFoto"
+      class="ativo"
+      type="button"
+    >
+      📸 Foto
+    </button>
+
+    <button
+      id="modoVideo"
+      type="button"
+    >
+      🎥 Vídeo
+    </button>
 
   </div>
 
 
   <!-- =====================================================
-       EVENTO
+       ÁREA ÚNICA
   ====================================================== -->
 
-  <div class="evento">
-
-    <h1 id="nomeEvento">
-      Carregando...
-    </h1>
-
-    <p id="mensagemEvento">
-      Aguarde...
-    </p>
-
-  </div>
+  <div class="camera">
 
 
-  <!-- =====================================================
-       CAPTURA ÚNICA
-  ====================================================== -->
+    <!-- CÂMERA -->
 
-  <div class="card">
-
-    <h2>
-      📸 Compartilhe seu momento
-    </h2>
-
-    <p>
-      Tire uma foto ou grave um recado em vídeo.
-    </p>
+    <video
+      id="camera"
+      autoplay
+      playsinline
+      muted
+    ></video>
 
 
-    <!-- SELETOR FOTO / VIDEO -->
+    <!-- FOTO -->
 
-    <div class="modo">
-
-      <button
-        id="modoFoto"
-        class="ativo"
-        type="button"
-      >
-        📸 Foto
-      </button>
-
-      <button
-        id="modoVideo"
-        type="button"
-      >
-        🎥 Vídeo
-      </button>
-
-    </div>
-
-
-    <!-- CÂMERA ÚNICA -->
-
-    <div class="camera">
-
-
-      <!-- CÂMERA AO VIVO -->
-
-      <video
-        id="camera"
-        autoplay
-        playsinline
-        muted
-      ></video>
-
-
-      <!-- PREVIEW FOTO -->
-
-      <img
-        id="previewFoto"
-        class="preview"
-        alt="Foto tirada"
-      >
-
-
-      <!-- PREVIEW VÍDEO -->
-
-      <video
-        id="previewVideo"
-        class="preview"
-        controls
-        playsinline
-      ></video>
-
-
-      <!-- INDICADOR -->
-
-      <div
-        id="indicadorGravacao"
-        class="indicador-gravacao"
-      >
-
-        <span class="ponto"></span>
-
-        GRAVANDO
-
-      </div>
-
-
-      <!-- TIMER -->
-
-      <div
-        id="timer"
-        class="timer"
-      >
-        00:00
-      </div>
-
-
-    </div>
-
-
-    <!-- BOTÕES PRINCIPAIS -->
-
-    <div class="buttons">
-
-
-      <button
-        id="acaoPrincipal"
-        class="primary"
-        type="button"
-      >
-        📸 Tirar foto
-      </button>
-
-
-      <label
-        id="botaoGaleria"
-        for="galeria"
-        class="btn secondary"
-      >
-        🖼️ Galeria
-      </label>
-
-
-    </div>
-
-
-    <!-- GALERIA -->
-
-    <input
-      type="file"
-      id="galeria"
-      accept="image/*"
+    <img
+      id="previewFoto"
+      alt="Prévia da foto"
     >
 
 
-    <!-- STATUS -->
+    <!-- VÍDEO -->
+
+    <video
+      id="previewVideo"
+      controls
+      playsinline
+    ></video>
+
+
+    <!-- INVERTER -->
+
+    <button
+      id="inverterCamera"
+      type="button"
+      title="Inverter câmera"
+      aria-label="Inverter câmera"
+    >
+      🔄
+    </button>
+
+
+    <!-- GRAVANDO -->
 
     <div
-      class="status"
-      id="status"
-    ></div>
-
-
-  </div>
-
-
-  <!-- =====================================================
-       ÁLBUM
-  ====================================================== -->
-
-  <div class="card">
-
-    <h2>
-      ✨ Veja o álbum
-    </h2>
-
-    <p>
-      Todas as fotos e recados enviados pelos convidados
-      ficam disponíveis no álbum do evento.
-    </p>
-
-    <br>
-
-    <a
-      id="abrirAlbum"
-      class="album"
-      href="#"
+      id="indicadorGravacao"
+      class="indicador-gravacao"
     >
-      📷 Abrir álbum
-    </a>
+
+      <span class="ponto"></span>
+
+      GRAVANDO
+
+    </div>
+
+
+    <!-- TIMER -->
+
+    <div
+      id="timer"
+      class="timer"
+    >
+      00:00
+    </div>
+
+
+    <!-- REFAZER -->
+
+    <button
+      id="refazer"
+      type="button"
+    >
+      🔄 Refazer
+    </button>
+
 
   </div>
 
 
   <!-- =====================================================
-       RODAPÉ
+       BOTÕES DA CÂMERA
   ====================================================== -->
 
-  <div class="footer">
-    QR Fotos • Álbum colaborativo do evento
+  <div
+    id="botoesCaptura"
+    class="buttons"
+  >
+
+    <button
+      id="acaoPrincipal"
+      class="primary"
+      type="button"
+    >
+      📸 Tirar foto
+    </button>
+
+
+    <label
+      id="botaoGaleria"
+      for="galeria"
+      class="btn secondary"
+    >
+      🖼️ Galeria
+    </label>
+
   </div>
+
+
+  <!-- GALERIA -->
+
+  <input
+    type="file"
+    id="galeria"
+    accept="image/*"
+  >
+
+
+  <!-- =====================================================
+       CONFIRMAÇÃO
+  ====================================================== -->
+
+  <div
+    id="confirmacao"
+    class="confirmacao"
+  >
+
+    <button
+      id="enviar"
+      class="enviar"
+      type="button"
+    >
+      ✅ Enviar
+    </button>
+
+
+    <button
+      id="refazerConfirmacao"
+      class="refazer"
+      type="button"
+    >
+      🔄 Refazer
+    </button>
+
+  </div>
+
+
+  <!-- STATUS -->
+
+  <div
+    id="status"
+    class="status"
+  ></div>
+
+
+</div>
+
+
+<!-- =======================================================
+     ÁLBUM
+======================================================== -->
+
+<div class="card">
+
+  <h2>
+    ✨ Veja o álbum
+  </h2>
+
+  <p>
+    Todas as fotos e recados enviados pelos convidados
+    ficam disponíveis no álbum do evento.
+  </p>
+
+  <br>
+
+  <a
+    id="abrirAlbum"
+    class="album"
+    href="#"
+  >
+    📷 Abrir álbum
+  </a>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+  QR Fotos • Álbum colaborativo do evento
+</div>
 
 
 </div>
@@ -653,14 +896,44 @@ document.getElementById(
   "galeria"
 );
 
-const timer =
+const inverterCamera =
 document.getElementById(
-  "timer"
+  "inverterCamera"
 );
 
 const indicadorGravacao =
 document.getElementById(
   "indicadorGravacao"
+);
+
+const timer =
+document.getElementById(
+  "timer"
+);
+
+const refazer =
+document.getElementById(
+  "refazer"
+);
+
+const confirmacao =
+document.getElementById(
+  "confirmacao"
+);
+
+const enviar =
+document.getElementById(
+  "enviar"
+);
+
+const refazerConfirmacao =
+document.getElementById(
+  "refazerConfirmacao"
+);
+
+const botoesCaptura =
+document.getElementById(
+  "botoesCaptura"
 );
 
 
@@ -670,6 +943,9 @@ document.getElementById(
 
 let modoAtual =
 "foto";
+
+let cameraAtual =
+"environment";
 
 let streamCamera =
 null;
@@ -689,9 +965,15 @@ null;
 let segundos =
 0;
 
+let arquivoFotoPendente =
+null;
+
+let arquivoVideoPendente =
+null;
+
 
 /* =========================================================
-   CONFIGURAÇÃO DO EVENTO
+   CARREGAR EVENTO
 ========================================================= */
 
 function carregarEvento(){
@@ -718,6 +1000,7 @@ function carregarEvento(){
             "Não foi possível carregar este evento.";
 
           return;
+
         }
 
 
@@ -791,6 +1074,46 @@ abrirAlbum.href =
 
 
 /* =========================================================
+   PARAR STREAMS
+========================================================= */
+
+function pararStreams(){
+
+  if(streamCamera){
+
+    streamCamera
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    streamCamera =
+      null;
+
+  }
+
+
+  if(streamVideo){
+
+    streamVideo
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    streamVideo =
+      null;
+
+  }
+
+
+  camera.srcObject =
+    null;
+
+}
+
+
+/* =========================================================
    INICIAR CÂMERA
 ========================================================= */
 
@@ -798,23 +1121,17 @@ async function iniciarCamera(){
 
   try{
 
-    if(streamCamera){
-
-      streamCamera
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
-
-    }
+    pararStreams();
 
 
     streamCamera =
       await navigator.mediaDevices.getUserMedia({
 
         video:{
-          facingMode:
-            "environment"
+          facingMode:{
+            ideal:
+              cameraAtual
+          }
         },
 
         audio:false
@@ -829,46 +1146,107 @@ async function iniciarCamera(){
     camera.style.display =
       "block";
 
+
     previewFoto.style.display =
       "none";
+
 
     previewVideo.style.display =
       "none";
 
 
+    inverterCamera.style.display =
+      "flex";
+
+
+    refazer.style.display =
+      "none";
+
+
+    confirmacao.style.display =
+      "none";
+
+
+    botoesCaptura.style.display =
+      "grid";
+
+
+    status.textContent =
+      "";
+
+
   }catch(erro){
 
     console.error(
-      "Câmera não disponível:",
+      "Erro ao iniciar câmera:",
       erro
     );
 
 
     status.textContent =
-      "Câmera não disponível. Você ainda pode escolher uma foto da galeria.";
+      "❌ Não foi possível acessar a câmera. Verifique a permissão do navegador.";
 
   }
 
 }
 
 
-iniciarCamera();
+/* =========================================================
+   INVERTER CÂMERA
+========================================================= */
+
+inverterCamera.addEventListener(
+  "click",
+  async function(){
+
+    if(
+      mediaRecorder &&
+      mediaRecorder.state ===
+      "recording"
+    ){
+
+      return;
+
+    }
+
+
+    if(
+      cameraAtual ===
+      "environment"
+    ){
+
+      cameraAtual =
+        "user";
+
+    }else{
+
+      cameraAtual =
+        "environment";
+
+    }
+
+
+    await iniciarCamera();
+
+  }
+);
 
 
 /* =========================================================
-   TROCAR MODO
+   MODO FOTO
 ========================================================= */
 
 modoFoto.addEventListener(
   "click",
-  function(){
+  async function(){
 
     if(
       mediaRecorder &&
-      mediaRecorder.state === "recording"
+      mediaRecorder.state ===
+      "recording"
     ){
 
-      pararGravacao();
+      return;
 
     }
 
@@ -903,35 +1281,38 @@ modoFoto.addEventListener(
       "image/*";
 
 
-    camera.style.display =
-      "block";
+    arquivoFotoPendente =
+      null;
 
 
-    previewFoto.style.display =
-      "none";
+    arquivoVideoPendente =
+      null;
 
 
-    previewVideo.style.display =
-      "none";
-
-
-    indicadorGravacao.style.display =
-      "none";
-
-
-    timer.style.display =
-      "none";
-
-
-    iniciarCamera();
+    await iniciarCamera();
 
   }
 );
 
 
+/* =========================================================
+   MODO VÍDEO
+========================================================= */
+
 modoVideo.addEventListener(
   "click",
-  function(){
+  async function(){
+
+    if(
+      mediaRecorder &&
+      mediaRecorder.state ===
+      "recording"
+    ){
+
+      return;
+
+    }
+
 
     modoAtual =
       "video";
@@ -950,6 +1331,11 @@ modoVideo.addEventListener(
       "🎥 Gravar recado";
 
 
+    acaoPrincipal.classList.remove(
+      "recording"
+    );
+
+
     botaoGaleria.style.display =
       "none";
 
@@ -958,26 +1344,22 @@ modoVideo.addEventListener(
       "";
 
 
-    camera.style.display =
-      "block";
+    arquivoFotoPendente =
+      null;
 
 
-    previewFoto.style.display =
-      "none";
+    arquivoVideoPendente =
+      null;
 
 
-    previewVideo.style.display =
-      "none";
-
-
-    iniciarCamera();
+    await iniciarCamera();
 
   }
 );
 
 
 /* =========================================================
-   FOTO
+   BOTÃO PRINCIPAL
 ========================================================= */
 
 acaoPrincipal.addEventListener(
@@ -1021,11 +1403,12 @@ function tirarFoto(){
 
   if(
     !streamCamera ||
-    !camera.videoWidth
+    !camera.videoWidth ||
+    !camera.videoHeight
   ){
 
     status.textContent =
-      "Câmera ainda não está disponível.";
+      "❌ Câmera ainda não está disponível.";
 
     return;
 
@@ -1072,6 +1455,15 @@ function tirarFoto(){
     );
 
 
+  /*
+   * Guarda a foto.
+   * NÃO ENVIA ainda.
+   */
+
+  arquivoFotoPendente =
+    imagem;
+
+
   previewFoto.src =
     imagem;
 
@@ -1084,13 +1476,46 @@ function tirarFoto(){
     "block";
 
 
+  previewVideo.style.display =
+    "none";
+
+
+  inverterCamera.style.display =
+    "none";
+
+
+  refazer.style.display =
+    "block";
+
+
+  botoesCaptura.style.display =
+    "none";
+
+
+  confirmacao.style.display =
+    "grid";
+
+
+  enviar.textContent =
+    "✅ Enviar foto";
+
+
   status.textContent =
-    "Enviando foto...";
+    "Confira sua foto antes de enviar.";
 
+  
+  if(streamCamera){
 
-  enviarFoto(
-    imagem
-  );
+    streamCamera
+      .getTracks()
+      .forEach(
+        track => track.stop()
+      );
+
+    streamCamera =
+      null;
+
+  }
 
 }
 
@@ -1123,6 +1548,15 @@ galeria.addEventListener(
           leitor.result;
 
 
+        /*
+         * Guarda a foto.
+         * NÃO ENVIA ainda.
+         */
+
+        arquivoFotoPendente =
+          imagem;
+
+
         previewFoto.src =
           imagem;
 
@@ -1135,9 +1569,46 @@ galeria.addEventListener(
           "block";
 
 
-        enviarFoto(
-          imagem
-        );
+        previewVideo.style.display =
+          "none";
+
+
+        inverterCamera.style.display =
+          "none";
+
+
+        refazer.style.display =
+          "block";
+
+
+        botoesCaptura.style.display =
+          "none";
+
+
+        confirmacao.style.display =
+          "grid";
+
+
+        enviar.textContent =
+          "✅ Enviar foto";
+
+
+        status.textContent =
+          "Confira sua foto antes de enviar.";
+
+
+        if(streamCamera){
+
+          streamCamera
+            .getTracks()
+            .forEach(
+              track => track.stop()
+            );
+
+          streamCamera =
+            null;
+
+        }
 
       };
 
@@ -1145,6 +1616,77 @@ galeria.addEventListener(
     leitor.readAsDataURL(
       arquivo
     );
+
+  }
+);
+
+
+/* =========================================================
+   CONFIRMAR ENVIO DA FOTO
+========================================================= */
+
+enviar.addEventListener(
+  "click",
+  async function(){
+
+    if(
+      modoAtual ===
+      "foto"
+    ){
+
+      if(
+        !arquivoFotoPendente
+      ){
+
+        return;
+
+      }
+
+
+      enviar.disabled =
+        true;
+
+
+      enviar.textContent =
+        "⏳ Enviando...";
+
+
+      await enviarFoto(
+        arquivoFotoPendente
+      );
+
+
+      enviar.disabled =
+        false;
+
+    }else{
+
+      if(
+        !arquivoVideoPendente
+      ){
+
+        return;
+
+      }
+
+
+      enviar.disabled =
+        true;
+
+
+      enviar.textContent =
+        "⏳ Enviando...";
+
+
+      await enviarVideo(
+        arquivoVideoPendente
+      );
+
+
+      enviar.disabled =
+        false;
+
+    }
 
   }
 );
@@ -1240,6 +1782,26 @@ async function enviarFoto(
     }
 
 
+    /*
+     * Depois de enviar,
+     * limpa o estado pendente.
+     */
+
+    arquivoFotoPendente =
+      null;
+
+
+    confirmacao.style.display =
+      "none";
+
+
+    refazer.style.display =
+      "none";
+
+
+    return true;
+
+
   }catch(erro){
 
     console.error(
@@ -1250,6 +1812,8 @@ async function enviarFoto(
 
     status.textContent =
       "❌ Não foi possível enviar a foto.";
+
+    return false;
 
   }
 
@@ -1263,11 +1827,6 @@ async function enviarFoto(
 async function iniciarGravacao(){
 
   try{
-
-    /*
-     * Para a câmera de foto antes
-     * de abrir a câmera com microfone.
-     */
 
     if(streamCamera){
 
@@ -1287,8 +1846,10 @@ async function iniciarGravacao(){
       await navigator.mediaDevices.getUserMedia({
 
         video:{
-          facingMode:
-            "user"
+          facingMode:{
+            ideal:
+              cameraAtual
+          }
         },
 
         audio:true
@@ -1304,7 +1865,19 @@ async function iniciarGravacao(){
       "block";
 
 
+    previewFoto.style.display =
+      "none";
+
+
     previewVideo.style.display =
+      "none";
+
+
+    inverterCamera.style.display =
+      "flex";
+
+
+    refazer.style.display =
       "none";
 
 
@@ -1397,6 +1970,15 @@ async function iniciarGravacao(){
           );
 
 
+        /*
+         * Guarda o vídeo.
+         * NÃO ENVIA ainda.
+         */
+
+        arquivoVideoPendente =
+          blob;
+
+
         const url =
           URL.createObjectURL(
             blob
@@ -1411,13 +1993,36 @@ async function iniciarGravacao(){
           "none";
 
 
+        previewFoto.style.display =
+          "none";
+
+
         previewVideo.style.display =
           "block";
 
 
-        enviarVideo(
-          blob
-        );
+        inverterCamera.style.display =
+          "none";
+
+
+        refazer.style.display =
+          "block";
+
+
+        botoesCaptura.style.display =
+          "none";
+
+
+        confirmacao.style.display =
+          "grid";
+
+
+        enviar.textContent =
+          "✅ Enviar vídeo";
+
+
+        status.textContent =
+          "Confira seu vídeo antes de enviar.";
 
 
         if(streamVideo){
@@ -1483,7 +2088,7 @@ async function iniciarGravacao(){
 
 
     status.textContent =
-      "❌ Não foi possível acessar câmera e microfone.";
+      "❌ Não foi possível acessar câmera e microfone. Verifique as permissões.";
 
   }
 
@@ -1573,6 +2178,175 @@ function atualizarTimer(){
   segundos++;
 
 }
+
+
+/* =========================================================
+   REFAZER
+========================================================= */
+
+function refazerCaptura(){
+
+  /*
+   * Limpa foto pendente.
+   */
+
+  arquivoFotoPendente =
+    null;
+
+
+  /*
+   * Limpa vídeo pendente.
+   */
+
+  arquivoVideoPendente =
+    null;
+
+
+  /*
+   * Para qualquer vídeo.
+   */
+
+  if(
+    mediaRecorder &&
+    mediaRecorder.state ===
+    "recording"
+  ){
+
+    mediaRecorder.stop();
+
+  }
+
+
+  mediaRecorder =
+    null;
+
+
+  clearInterval(
+    intervaloTimer
+  );
+
+
+  indicadorGravacao.style.display =
+    "none";
+
+
+  timer.style.display =
+    "none";
+
+
+  /*
+   * Limpa preview da foto.
+   */
+
+  previewFoto.src =
+    "";
+
+
+  /*
+   * Limpa preview do vídeo.
+   */
+
+  previewVideo.pause();
+
+  previewVideo.removeAttribute(
+    "src"
+  );
+
+  previewVideo.load();
+
+
+  previewFoto.style.display =
+    "none";
+
+
+  previewVideo.style.display =
+    "none";
+
+
+  /*
+   * Mostra câmera.
+   */
+
+  camera.style.display =
+    "block";
+
+
+  inverterCamera.style.display =
+    "flex";
+
+
+  refazer.style.display =
+    "none";
+
+
+  confirmacao.style.display =
+    "none";
+
+
+  botoesCaptura.style.display =
+    "grid";
+
+
+  acaoPrincipal.classList.remove(
+    "recording"
+  );
+
+
+  if(
+    modoAtual ===
+    "foto"
+  ){
+
+    acaoPrincipal.textContent =
+      "📸 Tirar foto";
+
+  }else{
+
+    acaoPrincipal.textContent =
+      "🎥 Gravar recado";
+
+  }
+
+
+  galeria.value =
+    "";
+
+
+  status.textContent =
+    "";
+
+
+  iniciarCamera();
+
+}
+
+
+/* =========================================================
+   BOTÃO REFAZER
+========================================================= */
+
+refazer.addEventListener(
+  "click",
+  function(){
+
+    refazerCaptura();
+
+  }
+);
+
+
+/* =========================================================
+   BOTÃO REFAZER DA CONFIRMAÇÃO
+========================================================= */
+
+refazerConfirmacao.addEventListener(
+  "click",
+  function(){
+
+    refazerCaptura();
+
+  }
+);
 
 
 /* =========================================================
@@ -1718,6 +2492,21 @@ async function enviarVideo(
     }
 
 
+    arquivoVideoPendente =
+      null;
+
+
+    confirmacao.style.display =
+      "none";
+
+
+    refazer.style.display =
+      "none";
+
+
+    return true;
+
+
   }catch(erro){
 
     console.error(
@@ -1728,6 +2517,8 @@ async function enviarVideo(
 
     status.textContent =
       "❌ Não foi possível enviar o vídeo.";
+
+    return false;
 
   }
 
@@ -1740,9 +2531,11 @@ async function enviarVideo(
 
 carregarEvento();
 
+iniciarCamera();
+
 
 </script>
 
 </body>
+
 </html>
-```
