@@ -1731,8 +1731,15 @@ async function enviarFoto(imagem){
   status.textContent =
     "Enviando foto...";
 
-
   try{
+
+    console.log("=================================");
+    console.log("INICIANDO ENVIO DA FOTO");
+    console.log("Evento:", evento);
+    console.log("Tamanho da imagem:", imagem.length);
+    console.log("API:", API);
+    console.log("=================================");
+
 
     const dados =
       new URLSearchParams();
@@ -1756,14 +1763,25 @@ async function enviarFoto(imagem){
     );
 
 
+    console.log(
+      "Enviando para o Google Apps Script..."
+    );
+
+
     const resposta =
       await fetch(
         API,
         {
-          method:"POST",
-          body:dados
+          method: "POST",
+          body: dados
         }
       );
+
+
+    console.log(
+      "HTTP Status:",
+      resposta.status
+    );
 
 
     const texto =
@@ -1771,12 +1789,12 @@ async function enviarFoto(imagem){
 
 
     console.log(
-      "Resposta foto:",
+      "Resposta do Apps Script:",
       texto
     );
 
 
-    let resultado = null;
+    let resultado;
 
 
     try{
@@ -1784,61 +1802,150 @@ async function enviarFoto(imagem){
       resultado =
         JSON.parse(texto);
 
-    }catch(e){
+    }catch(erroJSON){
 
-      resultado = null;
+      console.error(
+        "Resposta não é JSON válido:",
+        erroJSON
+      );
+
+      console.error(
+        "Resposta recebida:",
+        texto
+      );
+
+      throw new Error(
+        "O servidor não retornou uma resposta válida."
+      );
 
     }
 
 
+    console.log(
+      "Resultado interpretado:",
+      resultado
+    );
+
+
+    /*
+      IMPORTANTE:
+      Só consideramos sucesso se o Apps Script
+      realmente retornar sucesso: true.
+    */
+
     if(
       resultado &&
-      resultado.sucesso
+      resultado.sucesso === true
     ){
+
+      console.log(
+        "✅ FOTO SALVA NO GOOGLE DRIVE"
+      );
+
+      console.log(
+        "ID do arquivo:",
+        resultado.id
+      );
+
+      console.log(
+        "Nome:",
+        resultado.nome
+      );
+
+      console.log(
+        "Total de fotos:",
+        resultado.totalFotos
+      );
+
 
       status.textContent =
         "✅ Foto enviada com sucesso!";
 
-    }else{
 
-      status.textContent =
-        "✅ Foto enviada!";
+      arquivoFotoPendente =
+        null;
+
+
+      confirmacao.style.display =
+        "none";
+
+
+      botoesCaptura.style.display =
+        "grid";
+
+
+      inverterCamera.style.display =
+        "flex";
+
+
+      await iniciarCamera();
+
+
+      return true;
 
     }
 
 
-    arquivoFotoPendente =
-      null;
+    /*
+      SE CHEGOU AQUI, O BACKEND INFORMOU ERRO.
+    */
+
+    console.error(
+      "❌ O GOOGLE APPS SCRIPT RECUSOU O ENVIO"
+    );
 
 
-    confirmacao.style.display =
-      "none";
+    console.error(
+      "Erro retornado:",
+      resultado
+    );
 
 
-    botoesCaptura.style.display =
-      "grid";
+    const mensagemErro =
+      resultado &&
+      (
+        resultado.erro ||
+        resultado.mensagem
+      )
+        ? (
+            resultado.erro ||
+            resultado.mensagem
+          )
+        : "Erro desconhecido no servidor.";
 
 
-    inverterCamera.style.display =
-      "flex";
+    status.textContent =
+      "❌ " + mensagemErro;
 
 
-    await iniciarCamera();
-
-
-    return true;
+    return false;
 
 
   }catch(erro){
 
     console.error(
-      "Erro ao enviar foto:",
+      "================================="
+    );
+
+    console.error(
+      "❌ ERRO AO ENVIAR FOTO"
+    );
+
+    console.error(
       erro
+    );
+
+    console.error(
+      "================================="
     );
 
 
     status.textContent =
-      "❌ Não foi possível enviar a foto.";
+      "❌ Erro ao enviar: " +
+      (
+        erro.message ||
+        "erro desconhecido"
+      );
 
 
     return false;
@@ -1846,8 +1953,6 @@ async function enviarFoto(imagem){
   }
 
 }
-
-
 /* =========================================================
    INICIAR GRAVAÇÃO
 ========================================================= */
