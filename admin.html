@@ -290,6 +290,8 @@ button {
     border-radius: 15px;
 
     padding: 20px;
+
+    overflow: hidden;
 }
 
 .event-name {
@@ -324,7 +326,106 @@ button {
 }
 
 
-/* CONTADOR DE MÍDIAS */
+/* PREVIEW DA ÚLTIMA FOTO */
+
+.event-preview {
+
+    margin-top: 16px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: #080808;
+
+    border: 1px solid #302b21;
+
+    position: relative;
+}
+
+.event-preview-title {
+
+    padding: 9px 12px;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    background: #121212;
+
+    border-bottom: 1px solid #272727;
+}
+
+.event-preview-image {
+
+    width: 100%;
+
+    height: 210px;
+
+    display: block;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+    transition: transform .3s ease;
+
+}
+
+.event-preview-image:hover {
+
+    transform: scale(1.025);
+
+}
+
+.event-preview-empty {
+
+    height: 130px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    color: #666;
+
+    font-size: 13px;
+
+}
+
+.event-preview-empty-icon {
+
+    font-size: 30px;
+
+}
+
+.event-preview-loading {
+
+    height: 130px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #666;
+
+    font-size: 13px;
+
+}
+
+
+/* CONTADOR */
 
 .event-media-count {
 
@@ -334,7 +435,7 @@ button {
 
     gap: 12px;
 
-    margin-top: 15px;
+    margin-top: 12px;
 
     padding: 10px 12px;
 
@@ -364,7 +465,6 @@ button {
     color: #777;
 
     font-size: 12px;
-
 }
 
 .event-url {
@@ -551,6 +651,12 @@ button {
     .card {
 
         padding: 18px;
+    }
+
+    .event-preview-image {
+
+        height: 220px;
+
     }
 
     .event-media-count {
@@ -1015,11 +1121,15 @@ function renderizarEventos() {
                     );
 
 
+                const idSeguro =
+                    escaparID(id);
+
+
                 return `
 
                     <div
                         class="event-card"
-                        id="event-card-${escaparID(id)}"
+                        id="event-card-${idSeguro}"
                     >
 
                         <div class="event-name">
@@ -1035,11 +1145,29 @@ function renderizarEventos() {
                         </div>
 
 
+                        <!-- ÚLTIMA FOTO -->
+
+                        <div
+                            class="event-preview"
+                            id="event-preview-${idSeguro}"
+                        >
+
+                            <div class="event-preview-title">
+                                Última foto enviada
+                            </div>
+
+                            <div class="event-preview-loading">
+                                Carregando...
+                            </div>
+
+                        </div>
+
+
                         <!-- CONTADOR -->
 
                         <div
                             class="event-media-count"
-                            id="media-count-${escaparID(id)}"
+                            id="media-count-${idSeguro}"
                         >
 
                             <span class="media-loading">
@@ -1107,14 +1235,14 @@ function renderizarEventos() {
 
 
     /*
-     * Depois que os cards foram criados,
-     * buscamos as contagens.
+     * Busca a contagem e a última foto
+     * de cada evento.
      */
 
     lista.forEach(
         function(id) {
 
-            carregarContagemMidias(id);
+            carregarDadosMidias(id);
 
         }
     );
@@ -1123,27 +1251,43 @@ function renderizarEventos() {
 
 
 /*************************************************
- * CARREGAR CONTAGEM DE FOTOS/VÍDEOS
+ * CARREGAR DADOS DAS MÍDIAS
  *
- * Usa o mesmo endpoint do álbum.
+ * Busca fotos e vídeos do evento.
  *************************************************/
 
-function carregarContagemMidias(id) {
+function carregarDadosMidias(id) {
 
-    const elemento =
+    const idSeguro =
+        escaparID(id);
+
+
+    const contador =
         document.getElementById(
             "media-count-" +
-            escaparID(id)
+            idSeguro
         );
 
 
-    if (!elemento) {
+    const preview =
+        document.getElementById(
+            "event-preview-" +
+            idSeguro
+        );
+
+
+    if (
+        !contador ||
+        !preview
+    ) {
+
         return;
+
     }
 
 
     const callback =
-        "contagem_" +
+        "midias_" +
         Date.now() +
         "_" +
         Math.floor(
@@ -1173,11 +1317,32 @@ function carregarContagemMidias(id) {
                 finalizado = true;
 
 
-                elemento.innerHTML = `
+                contador.innerHTML = `
 
                     <span class="media-loading">
                         ⚠️ Não foi possível carregar
                     </span>
+
+                `;
+
+
+                preview.innerHTML = `
+
+                    <div class="event-preview-title">
+                        Última foto enviada
+                    </div>
+
+                    <div class="event-preview-empty">
+
+                        <div class="event-preview-empty-icon">
+                            ⚠️
+                        </div>
+
+                        <div>
+                            Não foi possível carregar
+                        </div>
+
+                    </div>
 
                 `;
 
@@ -1224,37 +1389,53 @@ function carregarContagemMidias(id) {
                 }
 
 
-                const fotos =
-                    Number(
-                        resposta.totalFotos ||
-                        (
-                            Array.isArray(
-                                resposta.fotos
-                            )
-                                ? resposta.fotos.length
-                                : 0
-                        )
-                    );
+                /*
+                 * FOTOS
+                 */
 
+                const fotos =
+                    Array.isArray(
+                        resposta.fotos
+                    )
+                        ? resposta.fotos
+                        : [];
+
+
+                /*
+                 * VÍDEOS
+                 */
 
                 const videos =
+                    Array.isArray(
+                        resposta.videos
+                    )
+                        ? resposta.videos
+                        : [];
+
+
+                /*
+                 * CONTAGEM
+                 */
+
+                const fotosTotal =
                     Number(
-                        resposta.totalVideos ||
-                        (
-                            Array.isArray(
-                                resposta.videos
-                            )
-                                ? resposta.videos.length
-                                : 0
-                        )
+                        resposta.totalFotos ??
+                        fotos.length
                     );
 
 
-                elemento.innerHTML = `
+                const videosTotal =
+                    Number(
+                        resposta.totalVideos ??
+                        videos.length
+                    );
+
+
+                contador.innerHTML = `
 
                     <span class="media-count-item">
-                        📸 ${fotos}
-                        ${fotos === 1 ? "foto" : "fotos"}
+                        📸 ${fotosTotal}
+                        ${fotosTotal === 1 ? "foto" : "fotos"}
                     </span>
 
                     <span class="media-count-separator">
@@ -1262,20 +1443,152 @@ function carregarContagemMidias(id) {
                     </span>
 
                     <span class="media-count-item">
-                        🎥 ${videos}
-                        ${videos === 1 ? "vídeo" : "vídeos"}
+                        🎥 ${videosTotal}
+                        ${videosTotal === 1 ? "vídeo" : "vídeos"}
                     </span>
 
                 `;
 
 
+                /*
+                 * SE NÃO TEM FOTO
+                 */
+
+                if (!fotos.length) {
+
+                    preview.innerHTML = `
+
+                        <div class="event-preview-title">
+                            Última foto enviada
+                        </div>
+
+                        <div class="event-preview-empty">
+
+                            <div class="event-preview-empty-icon">
+                                📷
+                            </div>
+
+                            <div>
+                                Nenhuma foto enviada ainda
+                            </div>
+
+                        </div>
+
+                    `;
+
+                } else {
+
+                    /*
+                     * Encontrar a foto mais recente.
+                     */
+
+                    const fotosOrdenadas =
+                        fotos
+                            .slice()
+                            .sort(
+                                function(a, b) {
+
+                                    const dataA =
+                                        obterDataMidia(
+                                            a
+                                        );
+
+                                    const dataB =
+                                        obterDataMidia(
+                                            b
+                                        );
+
+                                    return (
+                                        dataB -
+                                        dataA
+                                    );
+
+                                }
+                            );
+
+
+                    const ultimaFoto =
+                        fotosOrdenadas[0];
+
+
+                    /*
+                     * URL da imagem.
+                     */
+
+                    const urlFoto =
+                        ultimaFoto.url ||
+                        (
+                            "https://drive.google.com/thumbnail?id=" +
+                            encodeURIComponent(
+                                ultimaFoto.id
+                            ) +
+                            "&sz=w1000"
+                        );
+
+
+                    preview.innerHTML = `
+
+                        <div class="event-preview-title">
+                            Última foto enviada
+                        </div>
+
+                        <img
+                            class="event-preview-image"
+                            src="${escapar(urlFoto)}"
+                            alt="Última foto enviada"
+                            loading="lazy"
+                            onclick="abrirFoto('${escaparJS(urlFoto)}')"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        >
+
+                        <div
+                            class="event-preview-empty"
+                            style="display:none;"
+                        >
+
+                            <div class="event-preview-empty-icon">
+                                🖼️
+                            </div>
+
+                            <div>
+                                Não foi possível carregar a foto
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
             } catch (erro) {
 
-                elemento.innerHTML = `
+                contador.innerHTML = `
 
                     <span class="media-loading">
                         ⚠️ Não foi possível carregar
                     </span>
+
+                `;
+
+
+                preview.innerHTML = `
+
+                    <div class="event-preview-title">
+                        Última foto enviada
+                    </div>
+
+                    <div class="event-preview-empty">
+
+                        <div class="event-preview-empty-icon">
+                            ⚠️
+                        </div>
+
+                        <div>
+                            Não foi possível carregar
+                        </div>
+
+                    </div>
 
                 `;
 
@@ -1319,11 +1632,32 @@ function carregarContagemMidias(id) {
             );
 
 
-            elemento.innerHTML = `
+            contador.innerHTML = `
 
                 <span class="media-loading">
                     ⚠️ Não foi possível carregar
                 </span>
+
+            `;
+
+
+            preview.innerHTML = `
+
+                <div class="event-preview-title">
+                    Última foto enviada
+                </div>
+
+                <div class="event-preview-empty">
+
+                    <div class="event-preview-empty-icon">
+                        ⚠️
+                    </div>
+
+                    <div>
+                        Não foi possível carregar
+                    </div>
+
+                </div>
 
             `;
 
@@ -1346,7 +1680,73 @@ function carregarContagemMidias(id) {
 
 
 /*************************************************
- * ESCAPAR ID PARA HTML
+ * DATA DA MÍDIA
+ *************************************************/
+
+function obterDataMidia(
+    midia
+) {
+
+    if (!midia) {
+        return 0;
+    }
+
+
+    /*
+     * Tenta vários campos possíveis
+     * enviados pelo backend.
+     */
+
+    const valor =
+        midia.data ||
+        midia.dataUpload ||
+        midia.criadoEm ||
+        midia.createdTime ||
+        midia.timestamp ||
+        "";
+
+
+    if (!valor) {
+        return 0;
+    }
+
+
+    const data =
+        new Date(valor);
+
+
+    const tempo =
+        data.getTime();
+
+
+    return isNaN(tempo)
+        ? 0
+        : tempo;
+
+}
+
+
+/*************************************************
+ * ABRIR FOTO
+ *************************************************/
+
+function abrirFoto(url) {
+
+    if (!url) {
+        return;
+    }
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/*************************************************
+ * ESCAPAR ID
  *************************************************/
 
 function escaparID(texto) {
@@ -1446,7 +1846,6 @@ function salvarEvento() {
 
 /*************************************************
  * ENVIAR EVENTO
- * GET + JSONP
  *************************************************/
 
 function enviarEvento(
@@ -1561,7 +1960,7 @@ function enviarEvento(
 
 
 /*************************************************
- * EDITAR EVENTO
+ * EDITAR
  *************************************************/
 
 function editarEvento(id) {
@@ -1616,7 +2015,7 @@ function editarEvento(id) {
 
 
 /*************************************************
- * EXCLUIR EVENTO
+ * EXCLUIR
  *************************************************/
 
 function excluirEvento(id) {
