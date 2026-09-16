@@ -4,18 +4,33 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
 <meta name="theme-color" content="#0b0b0b">
 
 <title>QR Fotos</title>
 
+
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
+
+
+/* =========================================================
+   BODY
+========================================================= */
 
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -24,12 +39,22 @@ body{
   min-height:100vh;
 }
 
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
 .container{
   width:100%;
   max-width:600px;
   margin:auto;
   padding:25px 18px 40px;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 .header{
   text-align:center;
@@ -52,6 +77,11 @@ body{
   font-size:14px;
 }
 
+
+/* =========================================================
+   EVENTO
+========================================================= */
+
 .evento{
   text-align:center;
   margin-bottom:25px;
@@ -66,6 +96,11 @@ body{
   color:#aaa;
   font-size:14px;
 }
+
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .card{
   background:#151515;
@@ -89,7 +124,7 @@ body{
 
 
 /* =========================================================
-   FOTO / VÍDEO
+   SELETOR FOTO / VÍDEO
 ========================================================= */
 
 .modo{
@@ -108,7 +143,7 @@ body{
   border:0;
   border-radius:9px;
 
-  padding:11px;
+  padding:12px;
 
   background:transparent;
 
@@ -127,12 +162,13 @@ body{
 
 
 /* =========================================================
-   ÁREA DA CÂMERA
+   ÁREA ÚNICA DA CÂMERA
 ========================================================= */
 
 .camera{
   width:100%;
-  aspect-ratio:4/3;
+
+  aspect-ratio:4 / 3;
 
   background:#050505;
 
@@ -145,12 +181,16 @@ body{
   position:relative;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 }
 
 
-/* CÂMERA AO VIVO */
+/* =========================================================
+   CÂMERA AO VIVO
+========================================================= */
 
 #camera{
   width:100%;
@@ -164,7 +204,20 @@ body{
 }
 
 
-/* PREVIEW DA FOTO */
+/*
+   Quando estiver usando a câmera frontal,
+   a imagem ao vivo fica espelhada,
+   como em uma câmera de celular.
+*/
+
+#camera.selfie{
+  transform:scaleX(-1);
+}
+
+
+/* =========================================================
+   PRÉVIA DA FOTO
+========================================================= */
 
 #previewFoto{
   position:absolute;
@@ -182,7 +235,9 @@ body{
 }
 
 
-/* PREVIEW DO VÍDEO */
+/* =========================================================
+   PRÉVIA DO VÍDEO GRAVADO
+========================================================= */
 
 #previewVideo{
   position:absolute;
@@ -200,29 +255,29 @@ body{
 }
 
 
-```css
 /* =========================================================
-   INVERTER CÂMERA
+   BOTÃO INVERTER CÂMERA
 ========================================================= */
 
 #inverterCamera{
+
   position:absolute;
 
   top:12px;
   right:12px;
 
-  width:44px;
-  height:44px;
+  width:46px;
+  height:46px;
 
   border-radius:50%;
 
-  border:1px solid rgba(255,255,255,.25);
+  border:1px solid rgba(255,255,255,.30);
 
-  background:rgba(0,0,0,.65);
+  background:rgba(0,0,0,.68);
 
   color:#fff;
 
-  font-size:21px;
+  font-size:22px;
 
   display:flex;
 
@@ -231,31 +286,43 @@ body{
 
   cursor:pointer;
 
-  z-index:20;
+  z-index:30;
 
   padding:0;
 
-  backdrop-filter:blur(5px);
-  -webkit-backdrop-filter:blur(5px);
+  line-height:1;
+
+  backdrop-filter:blur(6px);
+
+  -webkit-backdrop-filter:blur(6px);
+
+  box-shadow:
+    0 3px 10px rgba(0,0,0,.35);
 
   opacity:1;
+
   visibility:visible;
 }
 
-#inverterCamera:active{
-  transform:scale(.94);
+#inverterCamera:hover{
+  background:rgba(0,0,0,.82);
 }
-```
+
+#inverterCamera:active{
+  transform:scale(.92);
+}
+
 
 /* =========================================================
    INDICADOR DE GRAVAÇÃO
 ========================================================= */
 
 .indicador-gravacao{
+
   position:absolute;
 
-  top:12px;
-  left:12px;
+  top:14px;
+  left:14px;
 
   display:none;
 
@@ -263,24 +330,31 @@ body{
 
   gap:7px;
 
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.72);
 
-  padding:7px 10px;
+  padding:7px 11px;
 
   border-radius:20px;
 
   font-size:12px;
 
-  z-index:10;
+  font-weight:bold;
+
+  z-index:25;
+
+  color:#fff;
 }
 
 .ponto{
+
   width:8px;
   height:8px;
 
   background:#ff3333;
 
   border-radius:50%;
+
+  flex-shrink:0;
 
   animation:pulsar 1s infinite;
 }
@@ -303,20 +377,21 @@ body{
 ========================================================= */
 
 .timer{
+
   position:absolute;
 
-  top:12px;
+  top:14px;
   left:50%;
 
   transform:translateX(-50%);
 
   display:none;
 
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.72);
 
   color:#d4af67;
 
-  font-size:16px;
+  font-size:15px;
 
   font-weight:bold;
 
@@ -324,46 +399,12 @@ body{
 
   border-radius:20px;
 
-  z-index:10;
+  z-index:25;
 }
 
 
 /* =========================================================
-   BOTÃO VOLTAR / REFAZER
-========================================================= */
-
-#refazer{
-  position:absolute;
-
-  bottom:12px;
-  left:50%;
-
-  transform:translateX(-50%);
-
-  background:rgba(0,0,0,.78);
-
-  color:#fff;
-
-  border:1px solid rgba(255,255,255,.25);
-
-  border-radius:20px;
-
-  padding:9px 15px;
-
-  font-size:12px;
-
-  font-weight:bold;
-
-  display:none;
-
-  cursor:pointer;
-
-  z-index:10;
-}
-
-
-/* =========================================================
-   BOTÕES
+   BOTÕES PRINCIPAIS
 ========================================================= */
 
 .buttons{
@@ -427,10 +468,11 @@ input[type=file]{
 
 
 /* =========================================================
-   BOTÕES DE CONFIRMAÇÃO
+   CONFIRMAÇÃO
 ========================================================= */
 
 .confirmacao{
+
   display:none;
 
   grid-template-columns:1fr 1fr;
@@ -462,6 +504,7 @@ input[type=file]{
 ========================================================= */
 
 .status{
+
   text-align:center;
 
   font-size:13px;
@@ -479,6 +522,7 @@ input[type=file]{
 ========================================================= */
 
 .album{
+
   width:100%;
 
   background:#d4af67;
@@ -504,6 +548,7 @@ input[type=file]{
 ========================================================= */
 
 .footer{
+
   text-align:center;
 
   color:#555;
@@ -530,6 +575,17 @@ input[type=file]{
 
   .evento h1{
     font-size:23px;
+  }
+
+  .camera{
+    aspect-ratio:3 / 4;
+  }
+
+  #inverterCamera{
+    width:44px;
+    height:44px;
+    top:10px;
+    right:10px;
   }
 
 }
@@ -585,6 +641,7 @@ input[type=file]{
 
 <div class="card">
 
+
   <h2>
     📸 Compartilhe seu momento
   </h2>
@@ -617,13 +674,13 @@ input[type=file]{
 
 
   <!-- =====================================================
-       ÁREA ÚNICA
+       ÁREA ÚNICA DA CÂMERA
   ====================================================== -->
 
   <div class="camera">
 
 
-    <!-- CÂMERA -->
+    <!-- CÂMERA AO VIVO -->
 
     <video
       id="camera"
@@ -633,7 +690,7 @@ input[type=file]{
     ></video>
 
 
-    <!-- FOTO -->
+    <!-- PRÉVIA FOTO -->
 
     <img
       id="previewFoto"
@@ -641,16 +698,17 @@ input[type=file]{
     >
 
 
-    <!-- VÍDEO -->
+    <!-- PRÉVIA VÍDEO -->
 
     <video
       id="previewVideo"
       controls
       playsinline
+      preload="metadata"
     ></video>
 
 
-    <!-- INVERTER -->
+    <!-- BOTÃO INVERTER -->
 
     <button
       id="inverterCamera"
@@ -662,7 +720,7 @@ input[type=file]{
     </button>
 
 
-    <!-- GRAVANDO -->
+    <!-- INDICADOR GRAVAÇÃO -->
 
     <div
       id="indicadorGravacao"
@@ -684,16 +742,6 @@ input[type=file]{
     >
       00:00
     </div>
-
-
-    <!-- REFAZER -->
-
-    <button
-      id="refazer"
-      type="button"
-    >
-      🔄 Refazer
-    </button>
 
 
   </div>
@@ -817,13 +865,12 @@ input[type=file]{
 
 <script>
 
-
 /* =========================================================
    CONFIGURAÇÃO
 ========================================================= */
 
 const API =
-"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWZKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 
 const params =
@@ -833,8 +880,7 @@ new URLSearchParams(
 
 
 const evento =
-params.get("evento") ||
-"teste";
+params.get("evento") || "teste";
 
 
 /* =========================================================
@@ -842,139 +888,88 @@ params.get("evento") ||
 ========================================================= */
 
 const nomeEvento =
-document.getElementById(
-  "nomeEvento"
-);
+document.getElementById("nomeEvento");
 
 const mensagemEvento =
-document.getElementById(
-  "mensagemEvento"
-);
+document.getElementById("mensagemEvento");
 
 const abrirAlbum =
-document.getElementById(
-  "abrirAlbum"
-);
+document.getElementById("abrirAlbum");
 
 const status =
-document.getElementById(
-  "status"
-);
+document.getElementById("status");
 
 const camera =
-document.getElementById(
-  "camera"
-);
+document.getElementById("camera");
 
 const previewFoto =
-document.getElementById(
-  "previewFoto"
-);
+document.getElementById("previewFoto");
 
 const previewVideo =
-document.getElementById(
-  "previewVideo"
-);
+document.getElementById("previewVideo");
 
 const modoFoto =
-document.getElementById(
-  "modoFoto"
-);
+document.getElementById("modoFoto");
 
 const modoVideo =
-document.getElementById(
-  "modoVideo"
-);
+document.getElementById("modoVideo");
 
 const acaoPrincipal =
-document.getElementById(
-  "acaoPrincipal"
-);
+document.getElementById("acaoPrincipal");
 
 const botaoGaleria =
-document.getElementById(
-  "botaoGaleria"
-);
+document.getElementById("botaoGaleria");
 
 const galeria =
-document.getElementById(
-  "galeria"
-);
+document.getElementById("galeria");
 
 const inverterCamera =
-document.getElementById(
-  "inverterCamera"
-);
+document.getElementById("inverterCamera");
 
 const indicadorGravacao =
-document.getElementById(
-  "indicadorGravacao"
-);
+document.getElementById("indicadorGravacao");
 
 const timer =
-document.getElementById(
-  "timer"
-);
-
-const refazer =
-document.getElementById(
-  "refazer"
-);
+document.getElementById("timer");
 
 const confirmacao =
-document.getElementById(
-  "confirmacao"
-);
+document.getElementById("confirmacao");
 
 const enviar =
-document.getElementById(
-  "enviar"
-);
+document.getElementById("enviar");
 
 const refazerConfirmacao =
-document.getElementById(
-  "refazerConfirmacao"
-);
+document.getElementById("refazerConfirmacao");
 
 const botoesCaptura =
-document.getElementById(
-  "botoesCaptura"
-);
+document.getElementById("botoesCaptura");
 
 
 /* =========================================================
    ESTADO
 ========================================================= */
 
-let modoAtual =
-"foto";
+let modoAtual = "foto";
 
-let cameraAtual =
-"environment";
+let cameraAtual = "environment";
 
-let streamCamera =
-null;
+let streamCamera = null;
 
-let mediaRecorder =
-null;
+let mediaRecorder = null;
 
-let partesVideo =
-[];
+let partesVideo = [];
 
-let streamVideo =
-null;
+let streamVideo = null;
 
-let intervaloTimer =
-null;
+let intervaloTimer = null;
 
-let segundos =
-0;
+let segundos = 0;
 
-let arquivoFotoPendente =
-null;
+let arquivoFotoPendente = null;
 
-let arquivoVideoPendente =
-null;
+let arquivoVideoPendente = null;
+
+let urlVideoAtual = null;
 
 
 /* =========================================================
@@ -984,8 +979,7 @@ null;
 function carregarEvento(){
 
   const callback =
-    "callbackEvento_" +
-    Date.now();
+    "callbackEvento_" + Date.now();
 
 
   window[callback] =
@@ -1005,13 +999,11 @@ function carregarEvento(){
             "Não foi possível carregar este evento.";
 
           return;
-
         }
 
 
         nomeEvento.textContent =
-          resposta.nome ||
-          "Evento";
+          resposta.nome || "Evento";
 
 
         mensagemEvento.textContent =
@@ -1022,8 +1014,15 @@ function carregarEvento(){
       }catch(erro){
 
         console.error(
+          "Erro ao carregar evento:",
           erro
         );
+
+        nomeEvento.textContent =
+          "QR Fotos";
+
+        mensagemEvento.textContent =
+          "Evento carregado.";
 
       }
 
@@ -1034,9 +1033,7 @@ function carregarEvento(){
 
 
   const script =
-    document.createElement(
-      "script"
-    );
+    document.createElement("script");
 
 
   script.src =
@@ -1062,9 +1059,7 @@ function carregarEvento(){
     };
 
 
-  document.body.appendChild(
-    script
-  );
+  document.body.appendChild(script);
 
 }
 
@@ -1079,41 +1074,56 @@ abrirAlbum.href =
 
 
 /* =========================================================
-   PARAR STREAMS
+   PARAR STREAM
 ========================================================= */
 
-function pararStreams(){
+function pararStream(stream){
+
+  if(!stream){
+    return;
+  }
+
+  stream
+    .getTracks()
+    .forEach(
+      track => track.stop()
+    );
+
+}
+
+
+/* =========================================================
+   PARAR CÂMERA
+========================================================= */
+
+function pararCamera(){
 
   if(streamCamera){
 
-    streamCamera
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    pararStream(streamCamera);
 
-    streamCamera =
-      null;
+    streamCamera = null;
 
   }
 
+  camera.srcObject = null;
+
+}
+
+
+/* =========================================================
+   PARAR VÍDEO
+========================================================= */
+
+function pararVideoStream(){
 
   if(streamVideo){
 
-    streamVideo
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
+    pararStream(streamVideo);
 
-    streamVideo =
-      null;
+    streamVideo = null;
 
   }
-
-
-  camera.srcObject =
-    null;
 
 }
 
@@ -1126,16 +1136,28 @@ async function iniciarCamera(){
 
   try{
 
-    pararStreams();
+    pararCamera();
 
+
+    /*
+      A câmera frontal usa "user".
+      A câmera traseira usa "environment".
+    */
 
     streamCamera =
       await navigator.mediaDevices.getUserMedia({
 
         video:{
           facingMode:{
-            ideal:
-              cameraAtual
+            ideal:cameraAtual
+          },
+
+          width:{
+            ideal:1280
+          },
+
+          height:{
+            ideal:720
           }
         },
 
@@ -1164,20 +1186,22 @@ async function iniciarCamera(){
       "flex";
 
 
-    refazer.style.display =
-      "none";
+    /*
+      Espelha somente a câmera frontal.
+    */
+
+    if(cameraAtual === "user"){
+
+      camera.classList.add("selfie");
+
+    }else{
+
+      camera.classList.remove("selfie");
+
+    }
 
 
-    confirmacao.style.display =
-      "none";
-
-
-    botoesCaptura.style.display =
-      "grid";
-
-
-    status.textContent =
-      "";
+    status.textContent = "";
 
 
   }catch(erro){
@@ -1186,6 +1210,14 @@ async function iniciarCamera(){
       "Erro ao iniciar câmera:",
       erro
     );
+
+
+    camera.style.display =
+      "none";
+
+
+    inverterCamera.style.display =
+      "flex";
 
 
     status.textContent =
@@ -1204,10 +1236,14 @@ inverterCamera.addEventListener(
   "click",
   async function(){
 
+    /*
+      Não permite trocar a câmera
+      enquanto estiver gravando.
+    */
+
     if(
       mediaRecorder &&
-      mediaRecorder.state ===
-      "recording"
+      mediaRecorder.state === "recording"
     ){
 
       return;
@@ -1215,18 +1251,13 @@ inverterCamera.addEventListener(
     }
 
 
-    if(
-      cameraAtual ===
-      "environment"
-    ){
+    if(cameraAtual === "environment"){
 
-      cameraAtual =
-        "user";
+      cameraAtual = "user";
 
     }else{
 
-      cameraAtual =
-        "environment";
+      cameraAtual = "environment";
 
     }
 
@@ -1247,8 +1278,7 @@ modoFoto.addEventListener(
 
     if(
       mediaRecorder &&
-      mediaRecorder.state ===
-      "recording"
+      mediaRecorder.state === "recording"
     ){
 
       return;
@@ -1256,17 +1286,12 @@ modoFoto.addEventListener(
     }
 
 
-    modoAtual =
-      "foto";
+    modoAtual = "foto";
 
 
-    modoFoto.classList.add(
-      "ativo"
-    );
+    modoFoto.classList.add("ativo");
 
-    modoVideo.classList.remove(
-      "ativo"
-    );
+    modoVideo.classList.remove("ativo");
 
 
     acaoPrincipal.textContent =
@@ -1289,9 +1314,26 @@ modoFoto.addEventListener(
     arquivoFotoPendente =
       null;
 
-
     arquivoVideoPendente =
       null;
+
+
+    limparPreviews();
+
+
+    confirmacao.style.display =
+      "none";
+
+
+    botoesCaptura.style.display =
+      "grid";
+
+
+    indicadorGravacao.style.display =
+      "none";
+
+    timer.style.display =
+      "none";
 
 
     await iniciarCamera();
@@ -1310,8 +1352,7 @@ modoVideo.addEventListener(
 
     if(
       mediaRecorder &&
-      mediaRecorder.state ===
-      "recording"
+      mediaRecorder.state === "recording"
     ){
 
       return;
@@ -1319,17 +1360,12 @@ modoVideo.addEventListener(
     }
 
 
-    modoAtual =
-      "video";
+    modoAtual = "video";
 
 
-    modoVideo.classList.add(
-      "ativo"
-    );
+    modoVideo.classList.add("ativo");
 
-    modoFoto.classList.remove(
-      "ativo"
-    );
+    modoFoto.classList.remove("ativo");
 
 
     acaoPrincipal.textContent =
@@ -1345,16 +1381,25 @@ modoVideo.addEventListener(
       "none";
 
 
-    galeria.value =
-      "";
+    galeria.value = "";
 
 
     arquivoFotoPendente =
       null;
 
-
     arquivoVideoPendente =
       null;
+
+
+    limparPreviews();
+
+
+    confirmacao.style.display =
+      "none";
+
+
+    botoesCaptura.style.display =
+      "grid";
 
 
     await iniciarCamera();
@@ -1371,28 +1416,25 @@ acaoPrincipal.addEventListener(
   "click",
   function(){
 
-    if(
-      modoAtual ===
-      "foto"
-    ){
+    if(modoAtual === "foto"){
 
       tirarFoto();
 
+      return;
+
+    }
+
+
+    if(
+      mediaRecorder &&
+      mediaRecorder.state === "recording"
+    ){
+
+      pararGravacao();
+
     }else{
 
-      if(
-        mediaRecorder &&
-        mediaRecorder.state ===
-        "recording"
-      ){
-
-        pararGravacao();
-
-      }else{
-
-        iniciarGravacao();
-
-      }
+      iniciarGravacao();
 
     }
 
@@ -1421,9 +1463,7 @@ function tirarFoto(){
 
 
   const canvas =
-    document.createElement(
-      "canvas"
-    );
+    document.createElement("canvas");
 
 
   canvas.width =
@@ -1435,35 +1475,44 @@ function tirarFoto(){
 
 
   const ctx =
-    canvas.getContext(
-      "2d"
+    canvas.getContext("2d");
+
+
+  /*
+    Se for selfie, fazemos a foto
+    com o mesmo espelhamento da câmera.
+  */
+
+  if(cameraAtual === "user"){
+
+    ctx.translate(
+      canvas.width,
+      0
     );
+
+    ctx.scale(
+      -1,
+      1
+    );
+
+  }
 
 
   ctx.drawImage(
-
     camera,
-
     0,
     0,
-
     canvas.width,
     canvas.height
-
   );
 
 
   const imagem =
     canvas.toDataURL(
       "image/jpeg",
-      0.85
+      0.88
     );
 
-
-  /*
-   * Guarda a foto.
-   * NÃO ENVIA ainda.
-   */
 
   arquivoFotoPendente =
     imagem;
@@ -1471,6 +1520,9 @@ function tirarFoto(){
 
   previewFoto.src =
     imagem;
+
+
+  pararCamera();
 
 
   camera.style.display =
@@ -1489,10 +1541,6 @@ function tirarFoto(){
     "none";
 
 
-  refazer.style.display =
-    "block";
-
-
   botoesCaptura.style.display =
     "none";
 
@@ -1501,26 +1549,16 @@ function tirarFoto(){
     "grid";
 
 
+  enviar.disabled =
+    false;
+
+
   enviar.textContent =
     "✅ Enviar foto";
 
 
   status.textContent =
     "Confira sua foto antes de enviar.";
-
-  
-  if(streamCamera){
-
-    streamCamera
-      .getTracks()
-      .forEach(
-        track => track.stop()
-      );
-
-    streamCamera =
-      null;
-
-  }
 
 }
 
@@ -1549,21 +1587,15 @@ galeria.addEventListener(
     leitor.onload =
       function(){
 
-        const imagem =
+        arquivoFotoPendente =
           leitor.result;
 
 
-        /*
-         * Guarda a foto.
-         * NÃO ENVIA ainda.
-         */
-
-        arquivoFotoPendente =
-          imagem;
-
-
         previewFoto.src =
-          imagem;
+          leitor.result;
+
+
+        pararCamera();
 
 
         camera.style.display =
@@ -1582,10 +1614,6 @@ galeria.addEventListener(
           "none";
 
 
-        refazer.style.display =
-          "block";
-
-
         botoesCaptura.style.display =
           "none";
 
@@ -1594,26 +1622,16 @@ galeria.addEventListener(
           "grid";
 
 
+        enviar.disabled =
+          false;
+
+
         enviar.textContent =
           "✅ Enviar foto";
 
 
         status.textContent =
           "Confira sua foto antes de enviar.";
-
-
-        if(streamCamera){
-
-          streamCamera
-            .getTracks()
-            .forEach(
-              track => track.stop()
-            );
-
-          streamCamera =
-            null;
-
-        }
 
       };
 
@@ -1627,24 +1645,17 @@ galeria.addEventListener(
 
 
 /* =========================================================
-   CONFIRMAR ENVIO DA FOTO
+   CONFIRMAR ENVIO
 ========================================================= */
 
 enviar.addEventListener(
   "click",
   async function(){
 
-    if(
-      modoAtual ===
-      "foto"
-    ){
+    if(modoAtual === "foto"){
 
-      if(
-        !arquivoFotoPendente
-      ){
-
+      if(!arquivoFotoPendente){
         return;
-
       }
 
 
@@ -1656,40 +1667,54 @@ enviar.addEventListener(
         "⏳ Enviando...";
 
 
-      await enviarFoto(
-        arquivoFotoPendente
-      );
+      const sucesso =
+        await enviarFoto(
+          arquivoFotoPendente
+        );
 
 
-      enviar.disabled =
-        false;
+      if(!sucesso){
 
-    }else{
+        enviar.disabled =
+          false;
 
-      if(
-        !arquivoVideoPendente
-      ){
-
-        return;
+        enviar.textContent =
+          "✅ Enviar foto";
 
       }
 
 
-      enviar.disabled =
-        true;
+      return;
+
+    }
 
 
-      enviar.textContent =
-        "⏳ Enviando...";
+    if(!arquivoVideoPendente){
+      return;
+    }
 
 
+    enviar.disabled =
+      true;
+
+
+    enviar.textContent =
+      "⏳ Enviando...";
+
+
+    const sucesso =
       await enviarVideo(
         arquivoVideoPendente
       );
 
 
+    if(!sucesso){
+
       enviar.disabled =
         false;
+
+      enviar.textContent =
+        "✅ Enviar vídeo";
 
     }
 
@@ -1701,9 +1726,7 @@ enviar.addEventListener(
    ENVIAR FOTO
 ========================================================= */
 
-async function enviarFoto(
-  imagem
-){
+async function enviarFoto(imagem){
 
   status.textContent =
     "Enviando foto...";
@@ -1753,20 +1776,17 @@ async function enviarFoto(
     );
 
 
-    let resultado;
+    let resultado = null;
 
 
     try{
 
       resultado =
-        JSON.parse(
-          texto
-        );
+        JSON.parse(texto);
 
     }catch(e){
 
-      resultado =
-        null;
+      resultado = null;
 
     }
 
@@ -1787,11 +1807,6 @@ async function enviarFoto(
     }
 
 
-    /*
-     * Depois de enviar,
-     * limpa o estado pendente.
-     */
-
     arquivoFotoPendente =
       null;
 
@@ -1800,8 +1815,15 @@ async function enviarFoto(
       "none";
 
 
-    refazer.style.display =
-      "none";
+    botoesCaptura.style.display =
+      "grid";
+
+
+    inverterCamera.style.display =
+      "flex";
+
+
+    await iniciarCamera();
 
 
     return true;
@@ -1818,6 +1840,7 @@ async function enviarFoto(
     status.textContent =
       "❌ Não foi possível enviar a foto.";
 
+
     return false;
 
   }
@@ -1833,27 +1856,34 @@ async function iniciarGravacao(){
 
   try{
 
-    if(streamCamera){
+    /*
+      Garante que não existe outra câmera aberta.
+    */
 
-      streamCamera
-        .getTracks()
-        .forEach(
-          track => track.stop()
-        );
+    pararCamera();
 
-      streamCamera =
-        null;
 
-    }
+    partesVideo = [];
 
+
+    /*
+      Câmera + microfone.
+    */
 
     streamVideo =
       await navigator.mediaDevices.getUserMedia({
 
         video:{
           facingMode:{
-            ideal:
-              cameraAtual
+            ideal:cameraAtual
+          },
+
+          width:{
+            ideal:1280
+          },
+
+          height:{
+            ideal:720
           }
         },
 
@@ -1882,16 +1912,27 @@ async function iniciarGravacao(){
       "flex";
 
 
-    refazer.style.display =
-      "none";
+    /*
+      Espelha câmera frontal.
+    */
+
+    if(cameraAtual === "user"){
+
+      camera.classList.add("selfie");
+
+    }else{
+
+      camera.classList.remove("selfie");
+
+    }
 
 
-    partesVideo =
-      [];
+    /*
+      Escolhe o formato suportado
+      pelo navegador.
+    */
 
-
-    let mimeType =
-      "";
+    let mimeType = "";
 
 
     if(
@@ -1914,6 +1955,15 @@ async function iniciarGravacao(){
 
     }else if(
       MediaRecorder.isTypeSupported(
+        "video/webm;codecs=vp8,opus"
+      )
+    ){
+
+      mimeType =
+        "video/webm;codecs=vp8,opus";
+
+    }else if(
+      MediaRecorder.isTypeSupported(
         "video/webm"
       )
     ){
@@ -1926,19 +1976,20 @@ async function iniciarGravacao(){
 
     mediaRecorder =
       mimeType
-
         ? new MediaRecorder(
             streamVideo,
             {
-              mimeType:
-                mimeType
+              mimeType:mimeType
             }
           )
-
         : new MediaRecorder(
             streamVideo
           );
 
+
+    /*
+      Recebe os pedaços do vídeo.
+    */
 
     mediaRecorder.ondataavailable =
       function(e){
@@ -1957,6 +2008,10 @@ async function iniciarGravacao(){
       };
 
 
+    /*
+      Quando parar.
+    */
+
     mediaRecorder.onstop =
       function(){
 
@@ -1969,30 +2024,42 @@ async function iniciarGravacao(){
           new Blob(
             partesVideo,
             {
-              type:
-                tipo
+              type:tipo
             }
           );
 
-
-        /*
-         * Guarda o vídeo.
-         * NÃO ENVIA ainda.
-         */
 
         arquivoVideoPendente =
           blob;
 
 
-        const url =
+        /*
+          Libera URL anterior.
+        */
+
+        if(urlVideoAtual){
+
+          URL.revokeObjectURL(
+            urlVideoAtual
+          );
+
+        }
+
+
+        urlVideoAtual =
           URL.createObjectURL(
             blob
           );
 
 
         previewVideo.src =
-          url;
+          urlVideoAtual;
 
+
+        /*
+          Agora sim escondemos
+          a câmera ao vivo.
+        */
 
         camera.style.display =
           "none";
@@ -2010,16 +2077,16 @@ async function iniciarGravacao(){
           "none";
 
 
-        refazer.style.display =
-          "block";
-
-
         botoesCaptura.style.display =
           "none";
 
 
         confirmacao.style.display =
           "grid";
+
+
+        enviar.disabled =
+          false;
 
 
         enviar.textContent =
@@ -2030,21 +2097,18 @@ async function iniciarGravacao(){
           "Confira seu vídeo antes de enviar.";
 
 
-        if(streamVideo){
+        pararVideoStream();
 
-          streamVideo
-            .getTracks()
-            .forEach(
-              track => track.stop()
-            );
 
-          streamVideo =
-            null;
-
-        }
+        mediaRecorder =
+          null;
 
       };
 
+
+    /*
+      Começa gravação.
+    */
 
     mediaRecorder.start();
 
@@ -2066,11 +2130,15 @@ async function iniciarGravacao(){
       "block";
 
 
-    segundos =
-      0;
+    segundos = 0;
 
 
     atualizarTimer();
+
+
+    clearInterval(
+      intervaloTimer
+    );
 
 
     intervaloTimer =
@@ -2092,6 +2160,13 @@ async function iniciarGravacao(){
     );
 
 
+    pararVideoStream();
+
+
+    mediaRecorder =
+      null;
+
+
     status.textContent =
       "❌ Não foi possível acessar câmera e microfone. Verifique as permissões.";
 
@@ -2108,8 +2183,7 @@ function pararGravacao(){
 
   if(
     mediaRecorder &&
-    mediaRecorder.state ===
-    "recording"
+    mediaRecorder.state === "recording"
   ){
 
     mediaRecorder.stop();
@@ -2158,26 +2232,9 @@ function atualizarTimer(){
 
 
   timer.textContent =
-
-    String(
-      minutos
-    ).padStart(
-      2,
-      "0"
-    )
-
-    +
-
-    ":"
-
-    +
-
-    String(
-      seg
-    ).padStart(
-      2,
-      "0"
-    );
+    String(minutos).padStart(2,"0") +
+    ":" +
+    String(seg).padStart(2,"0");
 
 
   segundos++;
@@ -2186,35 +2243,76 @@ function atualizarTimer(){
 
 
 /* =========================================================
-   REFAZER
+   LIMPAR PREVIEWS
+========================================================= */
+
+function limparPreviews(){
+
+  previewFoto.src =
+    "";
+
+
+  previewVideo.pause();
+
+
+  previewVideo.removeAttribute(
+    "src"
+  );
+
+
+  previewVideo.load();
+
+
+  if(urlVideoAtual){
+
+    URL.revokeObjectURL(
+      urlVideoAtual
+    );
+
+    urlVideoAtual =
+      null;
+
+  }
+
+
+  previewFoto.style.display =
+    "none";
+
+
+  previewVideo.style.display =
+    "none";
+
+
+  camera.style.display =
+    "block";
+
+}
+
+
+/* =========================================================
+   REFAZER CAPTURA
 ========================================================= */
 
 function refazerCaptura(){
 
   /*
-   * Limpa foto pendente.
-   */
+    Limpa arquivos pendentes.
+  */
 
   arquivoFotoPendente =
     null;
-
-
-  /*
-   * Limpa vídeo pendente.
-   */
 
   arquivoVideoPendente =
     null;
 
 
   /*
-   * Para qualquer vídeo.
-   */
+    Para gravação se necessário.
+  */
 
   if(
     mediaRecorder &&
-    mediaRecorder.state ===
-    "recording"
+    mediaRecorder.state === "recording"
   ){
 
     mediaRecorder.stop();
@@ -2224,6 +2322,11 @@ function refazerCaptura(){
 
   mediaRecorder =
     null;
+
+
+  pararVideoStream();
+
+  pararCamera();
 
 
   clearInterval(
@@ -2239,68 +2342,12 @@ function refazerCaptura(){
     "none";
 
 
-  /*
-   * Limpa preview da foto.
-   */
-
-  previewFoto.src =
-    "";
-
-
-  /*
-   * Limpa preview do vídeo.
-   */
-
-  previewVideo.pause();
-
-  previewVideo.removeAttribute(
-    "src"
-  );
-
-  previewVideo.load();
-
-
-  previewFoto.style.display =
-    "none";
-
-
-  previewVideo.style.display =
-    "none";
-
-
-  /*
-   * Mostra câmera.
-   */
-
-  camera.style.display =
-    "block";
-
-
-  inverterCamera.style.display =
-    "flex";
-
-
-  refazer.style.display =
-    "none";
-
-
-  confirmacao.style.display =
-    "none";
-
-
-  botoesCaptura.style.display =
-    "grid";
-
-
   acaoPrincipal.classList.remove(
     "recording"
   );
 
 
-  if(
-    modoAtual ===
-    "foto"
-  ){
+  if(modoAtual === "foto"){
 
     acaoPrincipal.textContent =
       "📸 Tirar foto";
@@ -2311,6 +2358,25 @@ function refazerCaptura(){
       "🎥 Gravar recado";
 
   }
+
+
+  limparPreviews();
+
+
+  inverterCamera.style.display =
+    "flex";
+
+
+  confirmacao.style.display =
+    "none";
+
+
+  botoesCaptura.style.display =
+    "grid";
+
+
+  enviar.disabled =
+    false;
 
 
   galeria.value =
@@ -2327,21 +2393,7 @@ function refazerCaptura(){
 
 
 /* =========================================================
-   BOTÃO REFAZER
-========================================================= */
-
-refazer.addEventListener(
-  "click",
-  function(){
-
-    refazerCaptura();
-
-  }
-);
-
-
-/* =========================================================
-   BOTÃO REFAZER DA CONFIRMAÇÃO
+   REFAZER PELO BOTÃO
 ========================================================= */
 
 refazerConfirmacao.addEventListener(
@@ -2358,9 +2410,7 @@ refazerConfirmacao.addEventListener(
    BLOB → BASE64
 ========================================================= */
 
-function blobParaBase64(
-  blob
-){
+function blobParaBase64(blob){
 
   return new Promise(
     function(resolve,reject){
@@ -2397,9 +2447,7 @@ function blobParaBase64(
    ENVIAR VÍDEO
 ========================================================= */
 
-async function enviarVideo(
-  blob
-){
+async function enviarVideo(blob){
 
   status.textContent =
     "Enviando vídeo...";
@@ -2463,20 +2511,17 @@ async function enviarVideo(
     );
 
 
-    let resultado;
+    let resultado = null;
 
 
     try{
 
       resultado =
-        JSON.parse(
-          texto
-        );
+        JSON.parse(texto);
 
     }catch(e){
 
-      resultado =
-        null;
+      resultado = null;
 
     }
 
@@ -2505,8 +2550,15 @@ async function enviarVideo(
       "none";
 
 
-    refazer.style.display =
-      "none";
+    botoesCaptura.style.display =
+      "grid";
+
+
+    inverterCamera.style.display =
+      "flex";
+
+
+    await iniciarCamera();
 
 
     return true;
@@ -2523,6 +2575,7 @@ async function enviarVideo(
     status.textContent =
       "❌ Não foi possível enviar o vídeo.";
 
+
     return false;
 
   }
@@ -2531,15 +2584,40 @@ async function enviarVideo(
 
 
 /* =========================================================
-   INICIALIZAR
+   LIMPEZA AO SAIR
+========================================================= */
+
+window.addEventListener(
+  "beforeunload",
+  function(){
+
+    pararCamera();
+
+    pararVideoStream();
+
+
+    if(urlVideoAtual){
+
+      URL.revokeObjectURL(
+        urlVideoAtual
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
 ========================================================= */
 
 carregarEvento();
 
 iniciarCamera();
 
-
 </script>
+
 
 </body>
 
