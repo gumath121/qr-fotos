@@ -204,6 +204,11 @@ body{
    INVERTER CÂMERA
 ========================================================= */
 
+```css
+/* =========================================================
+   INVERTER CÂMERA
+========================================================= */
+
 #inverterCamera{
   position:absolute;
 
@@ -215,32 +220,49 @@ body{
 
   border-radius:50%;
 
-  border:1px solid rgba(255,255,255,.25);
+  border:1px solid rgba(255,255,255,.45);
 
-  background:rgba(0,0,0,.65);
+  background:rgba(0,0,0,.78);
 
-  color:#fff;
+  color:#ffffff !important;
 
-  font-size:21px;
+  font-size:22px;
+  line-height:1;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
   cursor:pointer;
 
-  z-index:10;
+  z-index:9999;
 
   padding:0;
+  margin:0;
 
-  backdrop-filter:blur(5px);
+  opacity:1 !important;
+  visibility:visible !important;
+
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+
+  box-shadow:
+    0 3px 12px rgba(0,0,0,.45);
+
+  transition:
+    transform .15s ease,
+    background .15s ease;
+}
+
+#inverterCamera:hover{
+  background:rgba(0,0,0,.9);
+  transform:scale(1.05);
 }
 
 #inverterCamera:active{
   transform:scale(.94);
 }
-
+```
 
 /* =========================================================
    INDICADOR DE GRAVAÇÃO
