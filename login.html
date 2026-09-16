@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -54,6 +55,7 @@
       justify-content: center;
 
       font-size: 34px;
+
       box-shadow:
         0 10px 35px rgba(212, 175, 55, 0.20);
     }
@@ -79,6 +81,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 22px;
       padding: 32px;
+
       box-shadow:
         0 25px 70px rgba(0, 0, 0, 0.45);
     }
@@ -140,7 +143,9 @@
 
     .input-wrapper input:focus {
       border-color: #d4af37;
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.10);
+
+      box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.10);
     }
 
     .botao {
@@ -170,6 +175,7 @@
 
     .botao:hover {
       transform: translateY(-1px);
+
       box-shadow:
         0 13px 30px rgba(212, 175, 55, 0.22);
     }
@@ -195,15 +201,25 @@
 
     .mensagem.erro {
       display: block;
-      background: rgba(220, 60, 60, 0.10);
-      border: 1px solid rgba(220, 60, 60, 0.25);
+
+      background:
+        rgba(220, 60, 60, 0.10);
+
+      border:
+        1px solid rgba(220, 60, 60, 0.25);
+
       color: #ff9292;
     }
 
     .mensagem.sucesso {
       display: block;
-      background: rgba(60, 190, 110, 0.10);
-      border: 1px solid rgba(60, 190, 110, 0.25);
+
+      background:
+        rgba(60, 190, 110, 0.10);
+
+      border:
+        1px solid rgba(60, 190, 110, 0.25);
+
       color: #80e0a3;
     }
 
@@ -219,6 +235,7 @@
     }
 
     @media (max-width: 480px) {
+
       .card {
         padding: 25px 20px;
       }
@@ -232,211 +249,454 @@
         height: 64px;
         font-size: 30px;
       }
+
     }
   </style>
+
 </head>
 
 <body>
 
   <div class="container">
 
-    <div class="logo-area">
+```
+<div class="logo-area">
 
-      <div class="logo-icon">
-        📸
-      </div>
+  <div class="logo-icon">
+    📸
+  </div>
 
-      <div class="logo">
-        QR <span>Fotos</span>
-      </div>
+  <div class="logo">
+    QR <span>Fotos</span>
+  </div>
 
-      <div class="subtitle">
-        Suas memórias em um só lugar
-      </div>
+  <div class="subtitle">
+    Suas memórias em um só lugar
+  </div>
 
-    </div>
-
-
-    <div class="card">
-
-      <h1>Bem-vindo de volta</h1>
-
-      <div class="card-description">
-        Entre na sua conta para gerenciar seus eventos,
-        fotos e álbuns.
-      </div>
+</div>
 
 
-      <form id="formLogin">
+<div class="card">
 
-        <div class="campo">
+  <h1>
+    Bem-vindo de volta
+  </h1>
 
-          <label for="usuario">
-            Usuário
-          </label>
-
-          <div class="input-wrapper">
-
-            <span class="icone">👤</span>
-
-            <input
-              type="text"
-              id="usuario"
-              name="usuario"
-              placeholder="Digite seu usuário"
-              autocomplete="username"
-              required
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="campo">
-
-          <label for="senha">
-            Senha
-          </label>
-
-          <div class="input-wrapper">
-
-            <span class="icone">🔒</span>
-
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              placeholder="Digite sua senha"
-              autocomplete="current-password"
-              required
-            >
-
-          </div>
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="botao"
-          id="botaoEntrar"
-        >
-          Entrar
-        </button>
-
-      </form>
-
-
-      <div
-        id="mensagem"
-        class="mensagem"
-      ></div>
-
-    </div>
-
-
-    <div class="rodape">
-      QR Fotos · <strong>Eventos inesquecíveis</strong>
-    </div>
-
+  <div class="card-description">
+    Entre na sua conta para gerenciar seus eventos,
+    fotos e álbuns.
   </div>
 
 
+  <form id="formLogin">
+
+    <div class="campo">
+
+      <label for="usuario">
+        Usuário
+      </label>
+
+      <div class="input-wrapper">
+
+        <span class="icone">
+          👤
+        </span>
+
+        <input
+          type="text"
+          id="usuario"
+          name="usuario"
+          placeholder="Digite seu usuário"
+          autocomplete="username"
+          required
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="campo">
+
+      <label for="senha">
+        Senha
+      </label>
+
+      <div class="input-wrapper">
+
+        <span class="icone">
+          🔒
+        </span>
+
+        <input
+          type="password"
+          id="senha"
+          name="senha"
+          placeholder="Digite sua senha"
+          autocomplete="current-password"
+          required
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="submit"
+      class="botao"
+      id="botaoEntrar"
+    >
+      Entrar
+    </button>
+
+  </form>
+
+
+  <div
+    id="mensagem"
+    class="mensagem"
+  ></div>
+
+</div>
+
+
+<div class="rodape">
+  QR Fotos · <strong>Eventos inesquecíveis</strong>
+</div>
+```
+
+  </div>
+
   <script>
 
-    /*
-      ==========================================
-      QR FOTOS — LOGIN
-      ==========================================
+    /* =================================================
+       CONFIGURAÇÕES
+    ================================================= */
 
-      Esta etapa é apenas a interface.
+    const API =
+      "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
-      A autenticação real será conectada
-      posteriormente ao Google Apps Script.
+    const PAGINA_PAINEIL =
+      "admin.html";
 
-      NÃO coloque usuários ou senhas reais
-      diretamente neste arquivo.
-    */
-
+    /* =================================================
+       ELEMENTOS
+    ================================================= */
 
     const formLogin =
-      document.getElementById("formLogin");
+      document.getElementById(
+        "formLogin"
+      );
 
     const botaoEntrar =
-      document.getElementById("botaoEntrar");
+      document.getElementById(
+        "botaoEntrar"
+      );
 
     const mensagem =
-      document.getElementById("mensagem");
+      document.getElementById(
+        "mensagem"
+      );
 
+    /* =================================================
+       LOGIN
+    ================================================= */
 
-    formLogin.addEventListener("submit", function(event) {
+    formLogin.addEventListener(
+      "submit",
+      function(event) {
 
-      event.preventDefault();
+        event.preventDefault();
 
+        const usuario =
+          document
+            .getElementById("usuario")
+            .value
+            .trim();
 
-      const usuario =
-        document.getElementById("usuario").value.trim();
+        const senha =
+          document
+            .getElementById("senha")
+            .value;
 
-      const senha =
-        document.getElementById("senha").value;
+        if (
+          !usuario ||
+          !senha
+        ) {
 
+          mostrarMensagem(
+            "Preencha o usuário e a senha.",
+            "erro"
+          );
 
-      if (!usuario || !senha) {
+          return;
+
+        }
+
+        botaoEntrar.disabled =
+          true;
+
+        botaoEntrar.textContent =
+          "Entrando...";
 
         mostrarMensagem(
-          "Preencha o usuário e a senha.",
-          "erro"
+          "",
+          ""
+        );
+
+        const callback =
+          "loginCallback_" +
+          Date.now();
+
+        window[callback] =
+          function(resposta) {
+
+            try {
+
+              processarLogin(
+                resposta
+              );
+
+            } catch (erro) {
+
+              finalizarErro(
+                "Erro ao processar a resposta do servidor."
+              );
+
+            }
+
+          };
+
+        const script =
+          document.createElement(
+            "script"
+          );
+
+        const parametros =
+          new URLSearchParams({
+
+            acao: "login",
+
+            usuario: usuario,
+
+            senha: senha,
+
+            callback: callback
+
+          });
+
+        script.src =
+          API +
+          "?" +
+          parametros.toString();
+
+        script.onerror =
+          function() {
+
+            finalizarErro(
+              "Não foi possível conectar ao servidor."
+            );
+
+          };
+
+        document.body.appendChild(
+          script
+        );
+
+        /*
+         * Limpa o script depois
+         * que ele for carregado.
+         */
+
+        script.onload =
+          function() {
+
+            setTimeout(
+              function() {
+
+                if (
+                  document.body.contains(
+                    script
+                  )
+                ) {
+
+                  script.remove();
+
+                }
+
+                try {
+
+                  delete window[callback];
+
+                } catch (erro) {}
+
+              },
+              100
+            );
+
+          };
+
+      }
+    );
+
+    /* =================================================
+       PROCESSAR LOGIN
+    ================================================= */
+
+    function processarLogin(
+      resposta
+    ) {
+
+      if (
+        !resposta ||
+        resposta.sucesso !== true
+      ) {
+
+        finalizarErro(
+          resposta &&
+          resposta.mensagem
+            ? resposta.mensagem
+            : "Usuário ou senha inválidos."
         );
 
         return;
+
       }
 
+      if (
+        !resposta.token
+      ) {
 
-      /*
-        POR ENQUANTO:
-
-        Não fazemos a autenticação aqui.
-
-        Na próxima etapa vamos enviar
-        esses dados para o Google Apps Script
-        e validar a conta no servidor.
-      */
-
-      botaoEntrar.disabled = true;
-
-      botaoEntrar.textContent =
-        "Entrando...";
-
-
-      setTimeout(function() {
-
-        botaoEntrar.disabled = false;
-
-        botaoEntrar.textContent =
-          "Entrar";
-
-        mostrarMensagem(
-          "A autenticação será conectada ao servidor na próxima etapa.",
-          "sucesso"
+        finalizarErro(
+          "O servidor não retornou uma sessão válida."
         );
 
-      }, 700);
+        return;
 
-    });
+      }
 
+      /*
+       * Salva a sessão no navegador.
+       */
 
-    function mostrarMensagem(texto, tipo) {
+      localStorage.setItem(
+        "qrFotosToken",
+        resposta.token
+      );
 
-      mensagem.textContent = texto;
+      if (
+        resposta.cliente
+      ) {
 
-      mensagem.className =
-        "mensagem " + tipo;
+        localStorage.setItem(
+          "qrFotosCliente",
+          JSON.stringify(
+            resposta.cliente
+          )
+        );
+
+      }
+
+      mostrarMensagem(
+        "Login realizado! Entrando no painel...",
+        "sucesso"
+      );
+
+      botaoEntrar.textContent =
+        "Acessando...";
+
+      /*
+       * Pequeno atraso apenas
+       * para mostrar a mensagem.
+       */
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            PAGINA_PAINEIL;
+
+        },
+        500
+      );
 
     }
+
+    /* =================================================
+       ERRO
+    ================================================= */
+
+    function finalizarErro(
+      texto
+    ) {
+
+      botaoEntrar.disabled =
+        false;
+
+      botaoEntrar.textContent =
+        "Entrar";
+
+      mostrarMensagem(
+        texto,
+        "erro"
+      );
+
+    }
+
+    /* =================================================
+       MENSAGEM
+    ================================================= */
+
+    function mostrarMensagem(
+      texto,
+      tipo
+    ) {
+
+      if (!texto) {
+
+        mensagem.textContent =
+          "";
+
+        mensagem.className =
+          "mensagem";
+
+        return;
+
+      }
+
+      mensagem.textContent =
+        texto;
+
+      mensagem.className =
+        "mensagem " +
+        tipo;
+
+    }
+
+    /* =================================================
+       ENTER
+    ================================================= */
+
+    document
+      .getElementById("senha")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (
+            event.key === "Enter"
+          ) {
+
+            formLogin.requestSubmit();
+
+          }
+
+        }
+      );
 
   </script>
 
 </body>
 </html>
-```
