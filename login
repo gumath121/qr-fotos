@@ -1,0 +1,443 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login — QR Fotos</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(212, 175, 55, 0.08), transparent 35%),
+        #0b0b0d;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 18px;
+      border-radius: 20px;
+
+      background: linear-gradient(
+        135deg,
+        #d4af37,
+        #f3d477
+      );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 34px;
+      box-shadow:
+        0 10px 35px rgba(212, 175, 55, 0.20);
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #d4af37;
+    }
+
+    .subtitle {
+      color: #9b9b9f;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .card {
+      background: rgba(22, 22, 25, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 32px;
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45);
+    }
+
+    .card h1 {
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .card-description {
+      color: #929297;
+      font-size: 14px;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .campo {
+      margin-bottom: 18px;
+    }
+
+    .campo label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #d8d8da;
+      margin-bottom: 8px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper .icone {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #77777c;
+      font-size: 17px;
+      pointer-events: none;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      height: 50px;
+      border-radius: 12px;
+      border: 1px solid #303035;
+      background: #111113;
+      color: #fff;
+      padding: 0 15px 0 45px;
+      outline: none;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+
+    .input-wrapper input::placeholder {
+      color: #5f5f64;
+    }
+
+    .input-wrapper input:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.10);
+    }
+
+    .botao {
+      width: 100%;
+      height: 52px;
+      margin-top: 8px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: linear-gradient(
+        135deg,
+        #c69b28,
+        #e4c45d
+      );
+
+      color: #17130a;
+      font-size: 15px;
+      font-weight: 800;
+
+      cursor: pointer;
+      transition: 0.2s;
+
+      box-shadow:
+        0 10px 25px rgba(212, 175, 55, 0.16);
+    }
+
+    .botao:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 13px 30px rgba(212, 175, 55, 0.22);
+    }
+
+    .botao:active {
+      transform: translateY(0);
+    }
+
+    .botao:disabled {
+      opacity: 0.65;
+      cursor: wait;
+      transform: none;
+    }
+
+    .mensagem {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: rgba(220, 60, 60, 0.10);
+      border: 1px solid rgba(220, 60, 60, 0.25);
+      color: #ff9292;
+    }
+
+    .mensagem.sucesso {
+      display: block;
+      background: rgba(60, 190, 110, 0.10);
+      border: 1px solid rgba(60, 190, 110, 0.25);
+      color: #80e0a3;
+    }
+
+    .rodape {
+      text-align: center;
+      margin-top: 22px;
+      color: #626267;
+      font-size: 12px;
+    }
+
+    .rodape strong {
+      color: #8a8a8f;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 25px 20px;
+      }
+
+      .logo {
+        font-size: 28px;
+      }
+
+      .logo-icon {
+        width: 64px;
+        height: 64px;
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo-area">
+
+      <div class="logo-icon">
+        📸
+      </div>
+
+      <div class="logo">
+        QR <span>Fotos</span>
+      </div>
+
+      <div class="subtitle">
+        Suas memórias em um só lugar
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h1>Bem-vindo de volta</h1>
+
+      <div class="card-description">
+        Entre na sua conta para gerenciar seus eventos,
+        fotos e álbuns.
+      </div>
+
+
+      <form id="formLogin">
+
+        <div class="campo">
+
+          <label for="usuario">
+            Usuário
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="icone">👤</span>
+
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              placeholder="Digite seu usuário"
+              autocomplete="username"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="campo">
+
+          <label for="senha">
+            Senha
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="icone">🔒</span>
+
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              autocomplete="current-password"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="botao"
+          id="botaoEntrar"
+        >
+          Entrar
+        </button>
+
+      </form>
+
+
+      <div
+        id="mensagem"
+        class="mensagem"
+      ></div>
+
+    </div>
+
+
+    <div class="rodape">
+      QR Fotos · <strong>Eventos inesquecíveis</strong>
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /*
+      ==========================================
+      QR FOTOS — LOGIN
+      ==========================================
+
+      Esta etapa é apenas a interface.
+
+      A autenticação real será conectada
+      posteriormente ao Google Apps Script.
+
+      NÃO coloque usuários ou senhas reais
+      diretamente neste arquivo.
+    */
+
+
+    const formLogin =
+      document.getElementById("formLogin");
+
+    const botaoEntrar =
+      document.getElementById("botaoEntrar");
+
+    const mensagem =
+      document.getElementById("mensagem");
+
+
+    formLogin.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      const usuario =
+        document.getElementById("usuario").value.trim();
+
+      const senha =
+        document.getElementById("senha").value;
+
+
+      if (!usuario || !senha) {
+
+        mostrarMensagem(
+          "Preencha o usuário e a senha.",
+          "erro"
+        );
+
+        return;
+      }
+
+
+      /*
+        POR ENQUANTO:
+
+        Não fazemos a autenticação aqui.
+
+        Na próxima etapa vamos enviar
+        esses dados para o Google Apps Script
+        e validar a conta no servidor.
+      */
+
+      botaoEntrar.disabled = true;
+
+      botaoEntrar.textContent =
+        "Entrando...";
+
+
+      setTimeout(function() {
+
+        botaoEntrar.disabled = false;
+
+        botaoEntrar.textContent =
+          "Entrar";
+
+        mostrarMensagem(
+          "A autenticação será conectada ao servidor na próxima etapa.",
+          "sucesso"
+        );
+
+      }, 700);
+
+    });
+
+
+    function mostrarMensagem(texto, tipo) {
+
+      mensagem.textContent = texto;
+
+      mensagem.className =
+        "mensagem " + tipo;
+
+    }
+
+  </script>
+
+</body>
+</html>
+```
