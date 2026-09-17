@@ -1094,11 +1094,6 @@ function verificarSessao() {
                 }
 
 
-                /*
-                 * Só carrega os eventos
-                 * depois da validação.
-                 */
-
                 carregarEventos();
 
 
@@ -1287,6 +1282,22 @@ function fazerLogout() {
 
 function carregarEventos() {
 
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
     const callback =
         "adminEventos_" +
         Date.now();
@@ -1309,17 +1320,14 @@ function carregarEventos() {
                 ) {
 
                     throw new Error(
-                        "Não foi possível carregar os eventos."
+                        resposta &&
+                        resposta.erro
+                            ? resposta.erro
+                            : "Não foi possível carregar os eventos."
                     );
 
                 }
 
-
-                /*
-                 * O backend envia um array.
-                 * Mantemos compatibilidade com
-                 * a estrutura antiga.
-                 */
 
                 if (
                     Array.isArray(
@@ -1380,6 +1388,8 @@ function carregarEventos() {
     script.src =
         API +
         "?acao=listarEventos" +
+        "&token=" +
+        encodeURIComponent(token) +
         "&callback=" +
         callback +
         "&t=" +
@@ -2174,6 +2184,22 @@ function enviarEvento(
     evento
 ) {
 
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
     mostrarStatus(
         "Salvando evento..."
     );
@@ -2244,6 +2270,8 @@ function enviarEvento(
     script.src =
         API +
         "?acao=salvarEvento" +
+        "&token=" +
+        encodeURIComponent(token) +
         "&id=" +
         encodeURIComponent(id) +
         "&nome=" +
@@ -2341,6 +2369,22 @@ function editarEvento(id) {
 
 function excluirEvento(id) {
 
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
     const evento =
         eventos[id];
 
@@ -2434,6 +2478,8 @@ function excluirEvento(id) {
     script.src =
         API +
         "?acao=excluirEvento" +
+        "&token=" +
+        encodeURIComponent(token) +
         "&id=" +
         encodeURIComponent(id) +
         "&callback=" +
