@@ -1275,7 +1275,1132 @@ function fazerLogout() {
 
 }
 
+/*************************************************
+ * CLIENTES — MASTER
+ *************************************************/
 
+let clientes = [];
+
+
+/*************************************************
+ * VERIFICAR SE É MASTER
+ *************************************************/
+
+function usuarioEhMaster() {
+
+    try {
+
+        const dados =
+            localStorage.getItem(
+                "qrFotosCliente"
+            );
+
+
+        if (!dados) {
+            return false;
+        }
+
+
+        const cliente =
+            JSON.parse(
+                dados
+            );
+
+
+        return (
+            cliente &&
+            cliente.tipo === "master"
+        );
+
+    } catch (erro) {
+
+        return false;
+
+    }
+
+}
+
+
+/*************************************************
+ * CARREGAR CLIENTES
+ *************************************************/
+
+function carregarClientes() {
+
+    if (!usuarioEhMaster()) {
+
+        return;
+
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        return;
+
+    }
+
+
+    const section =
+        document.getElementById(
+            "clientesSection"
+        );
+
+
+    if (section) {
+
+        section.style.display =
+            "block";
+
+    }
+
+
+    const callback =
+        "listarClientes_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível carregar os clientes."
+                    );
+
+                }
+
+
+                clientes =
+                    Array.isArray(
+                        resposta.clientes
+                    )
+                        ? resposta.clientes
+                        : [];
+
+
+                renderizarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=listarClientes" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao carregar os clientes.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * RENDERIZAR CLIENTES
+ *************************************************/
+
+function renderizarClientes() {
+
+    const container =
+        document.getElementById(
+            "clientes"
+        );
+
+
+    const contador =
+        document.getElementById(
+            "contadorClientes"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    if (contador) {
+
+        contador.textContent =
+            clientes.length +
+            (
+                clientes.length === 1
+                    ? " cliente"
+                    : " clientes"
+            );
+
+    }
+
+
+    if (!clientes.length) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    👤
+                </div>
+
+                <div>
+                    Nenhum cliente cadastrado.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        clientes.map(
+            function(cliente) {
+
+                const id =
+                    cliente.id || "";
+
+
+                const nome =
+                    cliente.nome ||
+                    "Cliente";
+
+
+                const usuario =
+                    cliente.usuario ||
+                    "";
+
+
+                const ativo =
+                    cliente.ativo === true;
+
+
+                const quantidadeEventos =
+                    Number(
+                        cliente.quantidadeEventos || 0
+                    );
+
+
+                const statusTexto =
+                    ativo
+                        ? "Ativo"
+                        : "Inativo";
+
+
+                const botaoStatus =
+                    ativo
+                        ? "Desativar"
+                        : "Ativar";
+
+
+                const classeStatus =
+                    ativo
+                        ? "ativo"
+                        : "inativo";
+
+
+                /*
+                 * O Master aparece na lista,
+                 * mas não recebe ações.
+                 */
+                const ehMaster =
+                    cliente.tipo === "master";
+
+
+                return `
+
+                    <div class="cliente-card">
+
+                        <div class="cliente-nome">
+                            ${escapar(nome)}
+                        </div>
+
+
+                        <div class="cliente-usuario">
+                            @${escapar(usuario)}
+                        </div>
+
+
+                        <div class="cliente-info">
+
+                            <span
+                                class="cliente-badge ${classeStatus}"
+                            >
+                                ${statusTexto}
+                            </span>
+
+
+                            <span
+                                class="cliente-badge"
+                            >
+                                📸 ${quantidadeEventos}
+                                ${
+                                    quantidadeEventos === 1
+                                        ? "evento"
+                                        : "eventos"
+                                }
+                            </span>
+
+
+                            ${
+                                ehMaster
+                                    ? `
+                                        <span
+                                            class="cliente-badge"
+                                        >
+                                            👑 Master
+                                        </span>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+
+                        ${
+                            !ehMaster
+                                ? `
+
+                                    <div class="cliente-actions">
+
+                                        <button
+                                            class="${
+                                                ativo
+                                                    ? "btn-secondary"
+                                                    : "btn-primary"
+                                            }"
+                                            onclick="alterarStatusCliente(
+                                                '${escaparJS(id)}',
+                                                ${!ativo}
+                                            )"
+                                        >
+                                            ${
+                                                ativo
+                                                    ? "Desativar"
+                                                    : "Ativar"
+                                            }
+                                        </button>
+
+
+                                        <button
+                                            class="btn-danger"
+                                            onclick="excluirCliente(
+                                                '${escaparJS(id)}'
+                                            )"
+                                        >
+                                            Excluir
+                                        </button>
+
+                                    </div>
+
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/*************************************************
+ * CRIAR CLIENTE
+ *************************************************/
+
+function criarCliente() {
+
+    if (!usuarioEhMaster()) {
+
+        mostrarStatus(
+            "Apenas o administrador pode criar clientes.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const nome =
+        document.getElementById(
+            "nomeCliente"
+        ).value.trim();
+
+
+    const usuario =
+        document.getElementById(
+            "usuarioCliente"
+        ).value.trim()
+        .toLowerCase();
+
+
+    const senha =
+        document.getElementById(
+            "senhaCliente"
+        ).value;
+
+
+    if (!nome) {
+
+        mostrarStatus(
+            "Digite o nome do cliente.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!usuario) {
+
+        mostrarStatus(
+            "Digite o usuário do cliente.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !/^[a-z0-9._-]+$/i.test(
+            usuario
+        )
+    ) {
+
+        mostrarStatus(
+            "O usuário deve conter apenas letras, números, ponto, hífen ou underline.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (senha.length < 6) {
+
+        mostrarStatus(
+            "A senha deve ter pelo menos 6 caracteres.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        "Criando cliente..."
+    );
+
+
+    const callback =
+        "criarCliente_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível criar o cliente."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    "Cliente criado com sucesso!"
+                );
+
+
+                limparFormularioCliente();
+
+
+                carregarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=criarCliente" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&nome=" +
+        encodeURIComponent(nome) +
+        "&usuario=" +
+        encodeURIComponent(usuario) +
+        "&senha=" +
+        encodeURIComponent(senha) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * ATIVAR / DESATIVAR CLIENTE
+ *************************************************/
+
+function alterarStatusCliente(
+    id,
+    ativo
+) {
+
+    if (!usuarioEhMaster()) {
+
+        return;
+
+    }
+
+
+    const acaoTexto =
+        ativo
+            ? "ativar"
+            : "desativar";
+
+
+    const confirmar =
+        confirm(
+            "Deseja " +
+            acaoTexto +
+            " este cliente?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        ativo
+            ? "Ativando cliente..."
+            : "Desativando cliente..."
+    );
+
+
+    const callback =
+        "statusCliente_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível alterar o cliente."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    resposta.mensagem ||
+                    (
+                        ativo
+                            ? "Cliente ativado."
+                            : "Cliente desativado."
+                    )
+                );
+
+
+                carregarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=alterarStatusCliente" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&ativo=" +
+        encodeURIComponent(
+            ativo
+                ? "true"
+                : "false"
+        ) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * EXCLUIR CLIENTE
+ *************************************************/
+
+function excluirCliente(id) {
+
+    if (!usuarioEhMaster()) {
+
+        return;
+
+    }
+
+
+    const cliente =
+        clientes.find(
+            function(item) {
+
+                return (
+                    String(item.id) ===
+                    String(id)
+                );
+
+            }
+        );
+
+
+    if (!cliente) {
+        return;
+    }
+
+
+    const quantidadeEventos =
+        Number(
+            cliente.quantidadeEventos || 0
+        );
+
+
+    if (quantidadeEventos > 0) {
+
+        alert(
+            "Este cliente possui " +
+            quantidadeEventos +
+            (
+                quantidadeEventos === 1
+                    ? " evento."
+                    : " eventos."
+            ) +
+            "\n\n" +
+            "Por segurança, ele não pode ser excluído." +
+            "\n\n" +
+            "Você pode desativá-lo."
+        );
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+
+            "Excluir o cliente \"" +
+            cliente.nome +
+            "\"?\n\n" +
+            "Essa ação não poderá ser desfeita."
+
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        "Excluindo cliente..."
+    );
+
+
+    const callback =
+        "excluirCliente_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível excluir o cliente."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    resposta.mensagem ||
+                    "Cliente excluído com sucesso!"
+                );
+
+
+                carregarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=excluirCliente" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * LIMPAR FORMULÁRIO DE CLIENTE
+ *************************************************/
+
+function limparFormularioCliente() {
+
+    const nome =
+        document.getElementById(
+            "nomeCliente"
+        );
+
+
+    const usuario =
+        document.getElementById(
+            "usuarioCliente"
+        );
+
+
+    const senha =
+        document.getElementById(
+            "senhaCliente"
+        );
+
+
+    if (nome) {
+        nome.value = "";
+    }
+
+
+    if (usuario) {
+        usuario.value = "";
+    }
+
+
+    if (senha) {
+        senha.value = "";
+    }
+
+}
 /*************************************************
  * CARREGAR EVENTOS
  *************************************************/
