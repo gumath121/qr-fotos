@@ -114,7 +114,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
     width: 100%;
     background: #101010;
     border: 1px solid #403824;
@@ -126,13 +127,23 @@ textarea {
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
     border-color: #d6b36a;
 }
 
 textarea {
     min-height: 90px;
     resize: vertical;
+}
+
+select {
+    cursor: pointer;
+}
+
+select option {
+    background: #101010;
+    color: white;
 }
 
 /* BOTÕES */
@@ -691,6 +702,32 @@ button {
 
     <div class="form-grid">
 
+
+        <!-- NOVO: CLIENTE RESPONSÁVEL -->
+
+        <div
+            class="form-group full"
+            id="clienteEventoGroup"
+            style="display:none;"
+        >
+
+            <label>
+                Cliente responsável pelo evento
+            </label>
+
+            <select
+                id="clienteEvento"
+            >
+
+                <option value="">
+                    Evento do administrador
+                </option>
+
+            </select>
+
+        </div>
+
+
         <div class="form-group">
 
             <label>
@@ -847,7 +884,8 @@ button {
  * CONFIGURAÇÕES
  *************************************************/
 
-const API = "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+const API =
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8WzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 const SITE =
 "https://gumath121.github.io/qr-fotos/";
@@ -926,6 +964,92 @@ function usuarioEhMaster() {
         return false;
 
     }
+
+}
+
+
+/*************************************************
+ * PREPARAR SELEÇÃO DE CLIENTE
+ *************************************************/
+
+function prepararSelecaoClienteEvento() {
+
+    const grupo =
+        document.getElementById(
+            "clienteEventoGroup"
+        );
+
+    const select =
+        document.getElementById(
+            "clienteEvento"
+        );
+
+    if (!grupo || !select) {
+        return;
+    }
+
+
+    if (!usuarioEhMaster()) {
+
+        grupo.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    grupo.style.display =
+        "block";
+
+
+    select.innerHTML = `
+        <option value="">
+            Evento do administrador
+        </option>
+    `;
+
+
+    clientes.forEach(
+        function(cliente) {
+
+            if (
+                cliente.tipo === "master" ||
+                cliente.ativo !== true
+            ) {
+                return;
+            }
+
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                cliente.id;
+
+
+            option.textContent =
+                (
+                    cliente.nome ||
+                    "Cliente"
+                ) +
+                " (@" +
+                (
+                    cliente.usuario ||
+                    ""
+                ) +
+                ")";
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
 
 }
 
@@ -1066,10 +1190,6 @@ function verificarSessao() {
                 }
 
 
-                /*
-                 * SE FOR MASTER:
-                 * mostra e carrega Clientes.
-                 */
                 if (
                     resposta.cliente &&
                     resposta.cliente.tipo === "master"
@@ -1091,6 +1211,8 @@ function verificarSessao() {
 
                 }
 
+
+                prepararSelecaoClienteEvento();
 
                 carregarEventos();
 
@@ -1292,6 +1414,8 @@ function carregarClientes() {
 
 
                 renderizarClientes();
+
+                prepararSelecaoClienteEvento();
 
 
             } catch (erro) {
@@ -1926,6 +2050,7 @@ function alterarStatusCliente(
 
             delete window[callback];
 
+
             if (script) {
                 script.remove();
             }
@@ -2121,6 +2246,7 @@ function excluirCliente(id) {
 
 
             delete window[callback];
+
 
             if (script) {
                 script.remove();
@@ -2930,6 +3056,33 @@ function salvarEvento() {
         ).value.trim();
 
 
+    let clienteId =
+        "";
+
+
+    /*
+     * SOMENTE O MASTER PODE
+     * ESCOLHER O CLIENTE.
+     */
+
+    if (usuarioEhMaster()) {
+
+        const select =
+            document.getElementById(
+                "clienteEvento"
+            );
+
+
+        if (select) {
+
+            clienteId =
+                select.value.trim();
+
+        }
+
+    }
+
+
     if (!nome) {
 
         mostrarStatus(
@@ -2973,10 +3126,15 @@ function salvarEvento() {
     enviarEvento(
         id,
         {
-            nome: nome,
+            nome:
+                nome,
+
             mensagem:
                 mensagem ||
-                "Compartilhe suas fotos e recados!"
+                "Compartilhe suas fotos e recados!",
+
+            clienteId:
+                clienteId
         }
     );
 
@@ -3059,6 +3217,13 @@ function enviarEvento(
                 carregarEventos();
 
 
+                if (usuarioEhMaster()) {
+
+                    carregarClientes();
+
+                }
+
+
             } catch (erro) {
 
                 mostrarStatus(
@@ -3089,10 +3254,20 @@ function enviarEvento(
         encodeURIComponent(evento.nome) +
         "&mensagem=" +
         encodeURIComponent(evento.mensagem) +
+        "&clienteId=" +
+        encodeURIComponent(
+            evento.clienteId || ""
+        ) +
         "&callback=" +
         callback +
         "&t=" +
         Date.now();
+
+
+    console.log(
+        "Salvando evento:",
+        script.src
+    );
 
 
     script.onerror =
@@ -3158,6 +3333,53 @@ function editarEvento(id) {
         "idEvento"
     ).readOnly =
         true;
+
+
+    /*
+     * SE FOR MASTER:
+     * seleciona automaticamente
+     * o cliente atual do evento.
+     */
+
+    if (usuarioEhMaster()) {
+
+        const grupo =
+            document.getElementById(
+                "clienteEventoGroup"
+            );
+
+        const select =
+            document.getElementById(
+                "clienteEvento"
+            );
+
+
+        if (grupo) {
+
+            grupo.style.display =
+                "block";
+
+        }
+
+
+        if (select) {
+
+            prepararSelecaoClienteEvento();
+
+
+            setTimeout(
+                function() {
+
+                    select.value =
+                        evento.clienteId || "";
+
+                },
+                100
+            );
+
+        }
+
+    }
 
 
     window.scrollTo({
@@ -3266,6 +3488,13 @@ function excluirEvento(id) {
                 carregarEventos();
 
 
+                if (usuarioEhMaster()) {
+
+                    carregarClientes();
+
+                }
+
+
             } catch (erro) {
 
                 mostrarStatus(
@@ -3348,6 +3577,29 @@ function limparFormulario() {
     document.getElementById(
         "idEvento"
     ).readOnly = false;
+
+
+    /*
+     * VOLTA PARA:
+     * Evento do administrador
+     */
+
+    if (usuarioEhMaster()) {
+
+        const select =
+            document.getElementById(
+                "clienteEvento"
+            );
+
+
+        if (select) {
+
+            select.value =
+                "";
+
+        }
+
+    }
 
 }
 
