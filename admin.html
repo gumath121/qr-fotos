@@ -247,4 +247,3921 @@ button {
 
 .btn-danger {
 
-    background: #5
+    background: #551f1f;
+
+    color: #ffb1b1;
+
+    border: 1px solid #793030;
+}
+
+.btn-copy {
+
+    background: #252525;
+
+    color: #d6b36a;
+
+    border: 1px solid #4a402d;
+}
+
+
+/* =====================================================
+   CLIENTES
+===================================================== */
+
+.clientes-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.cliente-card {
+
+    background: #111;
+
+    border: 1px solid #353535;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    overflow: hidden;
+}
+
+.cliente-nome {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #f5f0e6;
+
+    margin-bottom: 6px;
+}
+
+.cliente-usuario {
+
+    color: #d6b36a;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+
+.cliente-info {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+}
+
+.cliente-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    background: #27231c;
+
+    color: #bbb;
+
+    border: 1px solid #4a402d;
+
+    font-size: 12px;
+}
+
+.cliente-badge.ativo {
+
+    background: #18351f;
+
+    color: #9be3a8;
+
+    border-color: #285b34;
+}
+
+.cliente-badge.inativo {
+
+    background: #3a1818;
+
+    color: #ffaaaa;
+
+    border-color: #652b2b;
+}
+
+.cliente-actions {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.cliente-actions button {
+
+    padding: 9px 12px;
+
+    font-size: 12px;
+}
+
+
+/* EVENTOS */
+
+.events-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.events-count {
+
+    background: #27231c;
+
+    color: #d6b36a;
+
+    border: 1px solid #4a402d;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+}
+
+.events-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px;
+}
+
+.event-card {
+
+    background: #111;
+
+    border: 1px solid #353535;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    overflow: hidden;
+}
+
+.event-name {
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    color: #f5f0e6;
+
+    margin-bottom: 8px;
+}
+
+.event-id {
+
+    color: #d6b36a;
+
+    font-size: 13px;
+
+    margin-bottom: 14px;
+}
+
+.event-message {
+
+    color: #999;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    min-height: 42px;
+}
+
+
+/* PREVIEW DA ÚLTIMA FOTO */
+
+.event-preview {
+
+    margin-top: 16px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: #080808;
+
+    border: 1px solid #302b21;
+
+    position: relative;
+}
+
+.event-preview-title {
+
+    padding: 9px 12px;
+
+    color: #aaa;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    background: #121212;
+
+    border-bottom: 1px solid #272727;
+}
+
+.event-preview-image {
+
+    width: 100%;
+
+    height: 210px;
+
+    display: block;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+    transition: transform .3s ease;
+
+}
+
+.event-preview-image:hover {
+
+    transform: scale(1.025);
+
+}
+
+.event-preview-empty {
+
+    height: 130px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    color: #666;
+
+    font-size: 13px;
+
+}
+
+.event-preview-empty-icon {
+
+    font-size: 30px;
+
+}
+
+.event-preview-loading {
+
+    height: 130px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #666;
+
+    font-size: 13px;
+
+}
+
+
+/* CONTADOR DE MÍDIA */
+
+.event-media-count {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 12px;
+
+    padding: 10px 12px;
+
+    background: #181818;
+
+    border: 1px solid #302b21;
+
+    border-radius: 9px;
+
+    color: #bbb;
+
+    font-size: 13px;
+}
+
+.media-count-item {
+
+    white-space: nowrap;
+}
+
+.media-count-separator {
+
+    color: #555;
+}
+
+.media-loading {
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.event-url {
+
+    margin-top: 12px;
+
+    padding: 10px;
+
+    background: #080808;
+
+    border-radius: 8px;
+
+    color: #777;
+
+    font-size: 11px;
+
+    word-break: break-all;
+}
+
+.event-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.event-buttons button {
+
+    padding: 9px 12px;
+
+    font-size: 12px;
+}
+
+
+/* STATUS */
+
+.status {
+
+    display: none;
+
+    margin-bottom: 20px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+}
+
+.status.success {
+
+    display: block;
+
+    background: #18351f;
+
+    color: #9be3a8;
+
+    border: 1px solid #285b34;
+}
+
+.status.error {
+
+    display: block;
+
+    background: #3a1818;
+
+    color: #ffaaaa;
+
+    border: 1px solid #652b2b;
+}
+
+
+/* EMPTY */
+
+.empty {
+
+    text-align: center;
+
+    padding: 45px 20px;
+
+    color: #777;
+}
+
+.empty-icon {
+
+    font-size: 40px;
+
+    margin-bottom: 12px;
+}
+
+
+/* QR */
+
+.qr-section {
+
+    display: none;
+}
+
+.qr-box {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.qr-box img {
+
+    width: 220px;
+
+    height: 220px;
+
+    background: white;
+
+    padding: 10px;
+
+    border-radius: 12px;
+}
+
+.qr-link {
+
+    color: #aaa;
+
+    text-align: center;
+
+    word-break: break-all;
+
+    font-size: 12px;
+}
+
+
+/* MOBILE */
+
+@media(max-width: 750px) {
+
+    .container {
+
+        padding:
+            22px
+            14px
+            45px;
+    }
+
+    .logo {
+
+        font-size: 31px;
+
+        letter-spacing: 4px;
+    }
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .form-group.full {
+
+        grid-column: auto;
+    }
+
+    .events-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .clientes-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .events-header {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+    .card {
+
+        padding: 18px;
+    }
+
+    .event-preview-image {
+
+        height: 220px;
+
+    }
+
+    .event-media-count {
+
+        flex-wrap: wrap;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="logo">
+        QR FOTOS
+    </div>
+
+    <div class="subtitle">
+        PAINEL DE ADMINISTRAÇÃO
+    </div>
+
+    <div
+        id="usuarioLogado"
+        class="usuario-logado"
+    >
+        Verificando sessão...
+    </div>
+
+    <button
+        onclick="fazerLogout()"
+        class="btn-secondary btn-sair"
+    >
+        🚪 Sair
+    </button>
+
+</header>
+
+
+<!-- STATUS -->
+
+<div
+    id="status"
+    class="status"
+></div>
+
+
+<!-- =================================================
+     CLIENTES — SOMENTE MASTER
+================================================== -->
+
+<section
+    id="clientesSection"
+    class="card"
+    style="display:none;"
+>
+
+    <div class="events-header">
+
+        <div
+            class="card-title"
+            style="margin:0;"
+        >
+            👥 Clientes
+        </div>
+
+        <div
+            id="contadorClientes"
+            class="events-count"
+        >
+            Carregando...
+        </div>
+
+    </div>
+
+
+    <!-- FORMULÁRIO CLIENTE -->
+
+    <div
+        style="
+            background:#111;
+            border:1px solid #353535;
+            border-radius:15px;
+            padding:20px;
+            margin-bottom:20px;
+        "
+    >
+
+        <div
+            style="
+                color:#d6b36a;
+                font-size:16px;
+                font-weight:bold;
+                margin-bottom:15px;
+            "
+        >
+            + Criar novo cliente
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    Nome do cliente
+                </label>
+
+                <input
+                    id="nomeCliente"
+                    type="text"
+                    placeholder="Ex.: João da Silva"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Usuário
+                </label>
+
+                <input
+                    id="usuarioCliente"
+                    type="text"
+                    placeholder="Ex.: joao"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Senha
+                </label>
+
+                <input
+                    id="senhaCliente"
+                    type="password"
+                    placeholder="Mínimo 6 caracteres"
+                >
+
+            </div>
+
+
+        </div>
+
+
+        <div class="buttons">
+
+            <button
+                class="btn-primary"
+                onclick="criarCliente()"
+            >
+                + Criar cliente
+            </button>
+
+            <button
+                class="btn-secondary"
+                onclick="limparFormularioCliente()"
+            >
+                Limpar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- LISTA DE CLIENTES -->
+
+    <div
+        id="clientes"
+        class="clientes-grid"
+    ></div>
+
+</section>
+
+
+<!-- =================================================
+     NOVO EVENTO
+================================================== -->
+
+<section class="card">
+
+    <div class="card-title">
+        Criar novo evento
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <div class="form-group">
+
+            <label>
+                Nome do evento
+            </label>
+
+            <input
+                id="nomeEvento"
+                type="text"
+                placeholder="Ex.: Casamento Gu & Lê"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                ID do evento
+            </label>
+
+            <input
+                id="idEvento"
+                type="text"
+                placeholder="Ex.: casamentodosonho"
+            >
+
+        </div>
+
+
+        <div class="form-group full">
+
+            <label>
+                Mensagem do evento
+            </label>
+
+            <textarea
+                id="mensagemEvento"
+                placeholder="Ex.: Compartilhe suas fotos e recados!"
+            ></textarea>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="buttons">
+
+
+        <button
+            class="btn-primary"
+            onclick="salvarEvento()"
+        >
+            + Criar evento
+        </button>
+
+
+        <button
+            class="btn-secondary"
+            onclick="limparFormulario()"
+        >
+            Limpar
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =================================================
+     EVENTOS
+================================================== -->
+
+<section class="card">
+
+
+    <div class="events-header">
+
+
+        <div
+            class="card-title"
+            style="margin:0;"
+        >
+            Meus eventos
+        </div>
+
+
+        <div
+            id="contadorEventos"
+            class="events-count"
+        >
+            Carregando...
+        </div>
+
+
+    </div>
+
+
+    <div
+        id="eventos"
+        class="events-grid"
+    ></div>
+
+
+</section>
+
+
+<!-- =================================================
+     QR CODE
+================================================== -->
+
+<section
+    id="qrSection"
+    class="card qr-section"
+>
+
+
+    <div class="card-title">
+        QR Code do evento
+    </div>
+
+
+    <div class="qr-box">
+
+
+        <img
+            id="qrImagem"
+            src=""
+            alt="QR Code"
+        >
+
+
+        <div
+            id="qrLink"
+            class="qr-link"
+        ></div>
+
+
+        <div class="buttons">
+
+
+            <button
+                class="btn-primary"
+                onclick="abrirQR()"
+            >
+                Abrir QR Code
+            </button>
+
+
+            <button
+                class="btn-copy"
+                onclick="copiarLinkQR()"
+            >
+                Copiar link
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+```
+
+</div>
+
+<script>
+
+
+/*************************************************
+ * CONFIGURAÇÕES
+ *************************************************/
+
+const API =
+"https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng8/exec";
+
+
+const SITE =
+"https://gumath121.github.io/qr-fotos/";
+
+
+let eventos = {};
+
+let eventoQRAtual = "";
+
+let clientes = [];
+
+
+/*************************************************
+ * STATUS
+ *************************************************/
+
+function mostrarStatus(
+    mensagem,
+    tipo = "success"
+) {
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    status.className =
+        "status " + tipo;
+
+
+    status.textContent =
+        mensagem;
+
+}
+
+
+/*************************************************
+ * GERAR ID
+ *************************************************/
+
+function gerarId(texto) {
+
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .replace(
+            /[^a-z0-9]+/g,
+            "-"
+        )
+        .replace(
+            /^-+|-+$/g,
+            ""
+        );
+
+}
+
+
+/*************************************************
+ * VERIFICAR SESSÃO
+ *************************************************/
+
+function verificarSessao() {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const callback =
+        "validarSessao_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado = false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true ||
+                    resposta.autenticado !== true
+                ) {
+
+                    localStorage.removeItem(
+                        "qrFotosToken"
+                    );
+
+                    localStorage.removeItem(
+                        "qrFotosCliente"
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                if (resposta.cliente) {
+
+                    localStorage.setItem(
+                        "qrFotosCliente",
+                        JSON.stringify(
+                            resposta.cliente
+                        )
+                    );
+
+
+                    const usuario =
+                        document.getElementById(
+                            "usuarioLogado"
+                        );
+
+
+                    if (usuario) {
+
+                        usuario.textContent =
+                            "Olá, " +
+                            (
+                                resposta.cliente.nome ||
+                                resposta.cliente.usuario ||
+                                "usuário"
+                            ) +
+                            " • " +
+                            (
+                                resposta.cliente.tipo === "master"
+                                    ? "Administrador"
+                                    : "Cliente"
+                            );
+
+                    }
+
+
+                    /*
+                     * SOMENTE MASTER
+                     *
+                     * Mostra a área de clientes
+                     * e carrega a lista.
+                     */
+
+                    if (
+                        resposta.cliente.tipo ===
+                        "master"
+                    ) {
+
+                        const section =
+                            document.getElementById(
+                                "clientesSection"
+                            );
+
+                        if (section) {
+
+                            section.style.display =
+                                "block";
+
+                        }
+
+                        carregarClientes();
+
+                    }
+
+                }
+
+
+                carregarEventos();
+
+
+            } catch (erro) {
+
+                localStorage.removeItem(
+                    "qrFotosToken"
+                );
+
+                localStorage.removeItem(
+                    "qrFotosCliente"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=validarSessao" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+
+            mostrarStatus(
+                "Não foi possível verificar sua sessão.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * LOGOUT
+ *************************************************/
+
+function fazerLogout() {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        localStorage.removeItem(
+            "qrFotosCliente"
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const callback =
+        "logout_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado = false;
+
+
+    window[callback] =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+
+            localStorage.removeItem(
+                "qrFotosToken"
+            );
+
+            localStorage.removeItem(
+                "qrFotosCliente"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=logout" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            localStorage.removeItem(
+                "qrFotosToken"
+            );
+
+            localStorage.removeItem(
+                "qrFotosCliente"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * VERIFICAR SE É MASTER
+ *************************************************/
+
+function usuarioEhMaster() {
+
+    try {
+
+        const dados =
+            localStorage.getItem(
+                "qrFotosCliente"
+            );
+
+
+        if (!dados) {
+            return false;
+        }
+
+
+        const cliente =
+            JSON.parse(
+                dados
+            );
+
+
+        return (
+            cliente &&
+            cliente.tipo === "master"
+        );
+
+    } catch (erro) {
+
+        return false;
+
+    }
+
+}
+
+
+/*************************************************
+ * CARREGAR CLIENTES
+ *************************************************/
+
+function carregarClientes() {
+
+    if (!usuarioEhMaster()) {
+
+        return;
+
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        return;
+
+    }
+
+
+    const section =
+        document.getElementById(
+            "clientesSection"
+        );
+
+
+    if (section) {
+
+        section.style.display =
+            "block";
+
+    }
+
+
+    const callback =
+        "listarClientes_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível carregar os clientes."
+                    );
+
+                }
+
+
+                clientes =
+                    Array.isArray(
+                        resposta.clientes
+                    )
+                        ? resposta.clientes
+                        : [];
+
+
+                renderizarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=listarClientes" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao carregar os clientes.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * RENDERIZAR CLIENTES
+ *************************************************/
+
+function renderizarClientes() {
+
+    const container =
+        document.getElementById(
+            "clientes"
+        );
+
+
+    const contador =
+        document.getElementById(
+            "contadorClientes"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    if (contador) {
+
+        contador.textContent =
+            clientes.length +
+            (
+                clientes.length === 1
+                    ? " cliente"
+                    : " clientes"
+            );
+
+    }
+
+
+    if (!clientes.length) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    👤
+                </div>
+
+                <div>
+                    Nenhum cliente cadastrado.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        clientes.map(
+            function(cliente) {
+
+                const id =
+                    cliente.id || "";
+
+
+                const nome =
+                    cliente.nome ||
+                    "Cliente";
+
+
+                const usuario =
+                    cliente.usuario ||
+                    "";
+
+
+                const ativo =
+                    cliente.ativo === true;
+
+
+                const quantidadeEventos =
+                    Number(
+                        cliente.quantidadeEventos || 0
+                    );
+
+
+                const statusTexto =
+                    ativo
+                        ? "Ativo"
+                        : "Inativo";
+
+
+                const classeStatus =
+                    ativo
+                        ? "ativo"
+                        : "inativo";
+
+
+                const ehMaster =
+                    cliente.tipo === "master";
+
+
+                return `
+
+                    <div class="cliente-card">
+
+                        <div class="cliente-nome">
+                            ${escapar(nome)}
+                        </div>
+
+
+                        <div class="cliente-usuario">
+                            @${escapar(usuario)}
+                        </div>
+
+
+                        <div class="cliente-info">
+
+                            <span
+                                class="cliente-badge ${classeStatus}"
+                            >
+                                ${statusTexto}
+                            </span>
+
+
+                            <span
+                                class="cliente-badge"
+                            >
+                                📸 ${quantidadeEventos}
+                                ${
+                                    quantidadeEventos === 1
+                                        ? "evento"
+                                        : "eventos"
+                                }
+                            </span>
+
+
+                            ${
+                                ehMaster
+                                    ? `
+                                        <span
+                                            class="cliente-badge"
+                                        >
+                                            👑 Master
+                                        </span>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
+
+
+                        ${
+                            !ehMaster
+                                ? `
+
+                                    <div class="cliente-actions">
+
+                                        <button
+                                            class="${
+                                                ativo
+                                                    ? "btn-secondary"
+                                                    : "btn-primary"
+                                            }"
+                                            onclick="alterarStatusCliente(
+                                                '${escaparJS(id)}',
+                                                ${!ativo}
+                                            )"
+                                        >
+                                            ${
+                                                ativo
+                                                    ? "Desativar"
+                                                    : "Ativar"
+                                            }
+                                        </button>
+
+
+                                        <button
+                                            class="btn-danger"
+                                            onclick="excluirCliente(
+                                                '${escaparJS(id)}'
+                                            )"
+                                        >
+                                            Excluir
+                                        </button>
+
+                                    </div>
+
+                                `
+                                : ""
+                        }
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/*************************************************
+ * CRIAR CLIENTE
+ *************************************************/
+
+function criarCliente() {
+
+    if (!usuarioEhMaster()) {
+
+        mostrarStatus(
+            "Apenas o administrador pode criar clientes.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const nome =
+        document.getElementById(
+            "nomeCliente"
+        ).value.trim();
+
+
+    const usuario =
+        document.getElementById(
+            "usuarioCliente"
+        ).value.trim()
+        .toLowerCase();
+
+
+    const senha =
+        document.getElementById(
+            "senhaCliente"
+        ).value;
+
+
+    if (!nome) {
+
+        mostrarStatus(
+            "Digite o nome do cliente.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!usuario) {
+
+        mostrarStatus(
+            "Digite o usuário do cliente.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !/^[a-z0-9._-]+$/i.test(
+            usuario
+        )
+    ) {
+
+        mostrarStatus(
+            "O usuário deve conter apenas letras, números, ponto, hífen ou underline.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (senha.length < 6) {
+
+        mostrarStatus(
+            "A senha deve ter pelo menos 6 caracteres.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        "Criando cliente..."
+    );
+
+
+    const callback =
+        "criarCliente_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível criar o cliente."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    "Cliente criado com sucesso!"
+                );
+
+
+                limparFormularioCliente();
+
+
+                carregarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=criarCliente" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&nome=" +
+        encodeURIComponent(nome) +
+        "&usuario=" +
+        encodeURIComponent(usuario) +
+        "&senha=" +
+        encodeURIComponent(senha) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * ATIVAR / DESATIVAR CLIENTE
+ *************************************************/
+
+function alterarStatusCliente(
+    id,
+    ativo
+) {
+
+    if (!usuarioEhMaster()) {
+
+        return;
+
+    }
+
+
+    const acaoTexto =
+        ativo
+            ? "ativar"
+            : "desativar";
+
+
+    const confirmar =
+        confirm(
+            "Deseja " +
+            acaoTexto +
+            " este cliente?"
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        ativo
+            ? "Ativando cliente..."
+            : "Desativando cliente..."
+    );
+
+
+    const callback =
+        "statusCliente_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível alterar o cliente."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    resposta.mensagem ||
+                    (
+                        ativo
+                            ? "Cliente ativado."
+                            : "Cliente desativado."
+                    )
+                );
+
+
+                carregarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=alterarStatusCliente" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&ativo=" +
+        encodeURIComponent(
+            ativo
+                ? "true"
+                : "false"
+        ) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * EXCLUIR CLIENTE
+ *************************************************/
+
+function excluirCliente(id) {
+
+    if (!usuarioEhMaster()) {
+
+        return;
+
+    }
+
+
+    const cliente =
+        clientes.find(
+            function(item) {
+
+                return (
+                    String(item.id) ===
+                    String(id)
+                );
+
+            }
+        );
+
+
+    if (!cliente) {
+        return;
+    }
+
+
+    const quantidadeEventos =
+        Number(
+            cliente.quantidadeEventos || 0
+        );
+
+
+    if (quantidadeEventos > 0) {
+
+        alert(
+            "Este cliente possui " +
+            quantidadeEventos +
+            (
+                quantidadeEventos === 1
+                    ? " evento."
+                    : " eventos."
+            ) +
+            "\n\n" +
+            "Por segurança, ele não pode ser excluído." +
+            "\n\n" +
+            "Você pode desativá-lo."
+        );
+
+        return;
+
+    }
+
+
+    const confirmar =
+        confirm(
+
+            "Excluir o cliente \"" +
+            cliente.nome +
+            "\"?\n\n" +
+            "Essa ação não poderá ser desfeita."
+
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        "Excluindo cliente..."
+    );
+
+
+    const callback =
+        "excluirCliente_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        (
+                            resposta.mensagem ||
+                            resposta.erro
+                        )
+                            ? (
+                                resposta.mensagem ||
+                                resposta.erro
+                            )
+                            : "Não foi possível excluir o cliente."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    resposta.mensagem ||
+                    "Cliente excluído com sucesso!"
+                );
+
+
+                carregarClientes();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=excluirCliente" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado =
+                true;
+
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * LIMPAR FORMULÁRIO DE CLIENTE
+ *************************************************/
+
+function limparFormularioCliente() {
+
+    const nome =
+        document.getElementById(
+            "nomeCliente"
+        );
+
+
+    const usuario =
+        document.getElementById(
+            "usuarioCliente"
+        );
+
+
+    const senha =
+        document.getElementById(
+            "senhaCliente"
+        );
+
+
+    if (nome) {
+        nome.value = "";
+    }
+
+
+    if (usuario) {
+        usuario.value = "";
+    }
+
+
+    if (senha) {
+        senha.value = "";
+    }
+
+}
+
+
+/*************************************************
+ * CARREGAR EVENTOS
+ *************************************************/
+
+function carregarEventos() {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const callback =
+        "adminEventos_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    window[callback] =
+        function(resposta) {
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        resposta.erro
+                            ? resposta.erro
+                            : "Não foi possível carregar os eventos."
+                    );
+
+                }
+
+
+                if (
+                    Array.isArray(
+                        resposta.eventos
+                    )
+                ) {
+
+                    eventos = {};
+
+                    resposta.eventos.forEach(
+                        function(evento) {
+
+                            if (
+                                evento &&
+                                evento.id
+                            ) {
+
+                                eventos[
+                                    evento.id
+                                ] = evento;
+
+                            }
+
+                        }
+                    );
+
+                } else {
+
+                    eventos =
+                        resposta.eventos || {};
+
+                }
+
+
+                renderizarEventos();
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=listarEventos" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            script.remove();
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * RENDERIZAR EVENTOS
+ *************************************************/
+
+function renderizarEventos() {
+
+    const container =
+        document.getElementById(
+            "eventos"
+        );
+
+
+    const lista =
+        Object.keys(eventos);
+
+
+    document.getElementById(
+        "contadorEventos"
+    ).textContent =
+        lista.length +
+        (
+            lista.length === 1
+                ? " evento"
+                : " eventos"
+        );
+
+
+    if (!lista.length) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📸
+                </div>
+
+                <div>
+                    Nenhum evento cadastrado.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        lista.map(
+            function(id) {
+
+                const evento =
+                    eventos[id];
+
+
+                const nome =
+                    evento.nome ||
+                    "Evento";
+
+
+                const mensagem =
+                    evento.mensagem ||
+                    "";
+
+
+                const link =
+                    SITE +
+                    "index.html?evento=" +
+                    encodeURIComponent(
+                        id
+                    );
+
+
+                const idSeguro =
+                    escaparID(id);
+
+
+                return `
+
+                    <div
+                        class="event-card"
+                        id="event-card-${idSeguro}"
+                    >
+
+                        <div class="event-name">
+                            ${escapar(nome)}
+                        </div>
+
+                        <div class="event-id">
+                            ID: ${escapar(id)}
+                        </div>
+
+                        <div class="event-message">
+                            ${escapar(mensagem)}
+                        </div>
+
+
+                        <div
+                            class="event-preview"
+                            id="event-preview-${idSeguro}"
+                        >
+
+                            <div class="event-preview-title">
+                                Última foto enviada
+                            </div>
+
+                            <div class="event-preview-loading">
+                                Carregando...
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="event-media-count"
+                            id="media-count-${idSeguro}"
+                        >
+
+                            <span class="media-loading">
+                                Carregando fotos...
+                            </span>
+
+                        </div>
+
+
+                        <div class="event-url">
+                            ${escapar(link)}
+                        </div>
+
+
+                        <div class="event-buttons">
+
+                            <button
+                                class="btn-primary"
+                                onclick="abrirEvento('${escaparJS(id)}')"
+                            >
+                                Abrir evento
+                            </button>
+
+
+                            <button
+                                class="btn-copy"
+                                onclick="copiarTexto('${escaparJS(link)}')"
+                            >
+                                Copiar link
+                            </button>
+
+
+                            <button
+                                class="btn-copy"
+                                onclick="mostrarQR('${escaparJS(id)}')"
+                            >
+                                QR Code
+                            </button>
+
+
+                            <button
+                                class="btn-secondary"
+                                onclick="editarEvento('${escaparJS(id)}')"
+                            >
+                                Editar
+                            </button>
+
+
+                            <button
+                                class="btn-danger"
+                                onclick="excluirEvento('${escaparJS(id)}')"
+                            >
+                                Excluir
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+
+    lista.forEach(
+        function(id) {
+
+            carregarDadosMidias(id);
+
+        }
+    );
+
+}
+
+
+/*************************************************
+ * CARREGAR DADOS DAS MÍDIAS
+ *************************************************/
+
+function carregarDadosMidias(id) {
+
+    const idSeguro =
+        escaparID(id);
+
+
+    const contador =
+        document.getElementById(
+            "media-count-" +
+            idSeguro
+        );
+
+
+    const preview =
+        document.getElementById(
+            "event-preview-" +
+            idSeguro
+        );
+
+
+    if (
+        !contador ||
+        !preview
+    ) {
+
+        return;
+
+    }
+
+
+    const callback =
+        "midias_" +
+        Date.now() +
+        "_" +
+        Math.floor(
+            Math.random() * 10000
+        );
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado =
+        false;
+
+
+    const timeout =
+        setTimeout(
+            function() {
+
+                if (finalizado) {
+                    return;
+                }
+
+
+                finalizado = true;
+
+
+                contador.innerHTML = `
+
+                    <span class="media-loading">
+                        ⚠️ Não foi possível carregar
+                    </span>
+
+                `;
+
+
+                preview.innerHTML = `
+
+                    <div class="event-preview-title">
+                        Última foto enviada
+                    </div>
+
+                    <div class="event-preview-empty">
+
+                        <div class="event-preview-empty-icon">
+                            ⚠️
+                        </div>
+
+                        <div>
+                            Não foi possível carregar
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                delete window[callback];
+
+
+                if (script) {
+                    script.remove();
+                }
+
+            },
+            15000
+        );
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado = true;
+
+
+            clearTimeout(
+                timeout
+            );
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        "Erro ao consultar álbum."
+                    );
+
+                }
+
+
+                const fotos =
+                    Array.isArray(
+                        resposta.fotos
+                    )
+                        ? resposta.fotos
+                        : [];
+
+
+                const videos =
+                    Array.isArray(
+                        resposta.videos
+                    )
+                        ? resposta.videos
+                        : [];
+
+
+                const fotosTotal =
+                    Number(
+                        resposta.totalFotos ??
+                        fotos.length
+                    );
+
+
+                const videosTotal =
+                    Number(
+                        resposta.totalVideos ??
+                        videos.length
+                    );
+
+
+                contador.innerHTML = `
+
+                    <span class="media-count-item">
+                        📸 ${fotosTotal}
+                        ${fotosTotal === 1 ? "foto" : "fotos"}
+                    </span>
+
+                    <span class="media-count-separator">
+                        •
+                    </span>
+
+                    <span class="media-count-item">
+                        🎥 ${videosTotal}
+                        ${videosTotal === 1 ? "vídeo" : "vídeos"}
+                    </span>
+
+                `;
+
+
+                if (!fotos.length) {
+
+                    preview.innerHTML = `
+
+                        <div class="event-preview-title">
+                            Última foto enviada
+                        </div>
+
+                        <div class="event-preview-empty">
+
+                            <div class="event-preview-empty-icon">
+                                📷
+                            </div>
+
+                            <div>
+                                Nenhuma foto enviada ainda
+                            </div>
+
+                        </div>
+
+                    `;
+
+                } else {
+
+                    const fotosOrdenadas =
+                        fotos
+                            .slice()
+                            .sort(
+                                function(a, b) {
+
+                                    const dataA =
+                                        obterDataMidia(a);
+
+                                    const dataB =
+                                        obterDataMidia(b);
+
+                                    return (
+                                        dataB -
+                                        dataA
+                                    );
+
+                                }
+                            );
+
+
+                    const ultimaFoto =
+                        fotosOrdenadas[0];
+
+
+                    const urlFoto =
+                        ultimaFoto.url ||
+                        (
+                            "https://drive.google.com/thumbnail?id=" +
+                            encodeURIComponent(
+                                ultimaFoto.id
+                            ) +
+                            "&sz=w1000"
+                        );
+
+
+                    preview.innerHTML = `
+
+                        <div class="event-preview-title">
+                            Última foto enviada
+                        </div>
+
+                        <img
+                            class="event-preview-image"
+                            src="${escapar(urlFoto)}"
+                            alt="Última foto enviada"
+                            loading="lazy"
+                            onclick="abrirFoto('${escaparJS(urlFoto)}')"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        >
+
+                        <div
+                            class="event-preview-empty"
+                            style="display:none;"
+                        >
+
+                            <div class="event-preview-empty-icon">
+                                🖼️
+                            </div>
+
+                            <div>
+                                Não foi possível carregar a foto
+                            </div>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+            } catch (erro) {
+
+                contador.innerHTML = `
+
+                    <span class="media-loading">
+                        ⚠️ Não foi possível carregar
+                    </span>
+
+                `;
+
+
+                preview.innerHTML = `
+
+                    <div class="event-preview-title">
+                        Última foto enviada
+                    </div>
+
+                    <div class="event-preview-empty">
+
+                        <div class="event-preview-empty-icon">
+                            ⚠️
+                        </div>
+
+                        <div>
+                            Não foi possível carregar
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?evento=" +
+        encodeURIComponent(id) +
+        "&album=true" +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+
+            finalizado = true;
+
+
+            clearTimeout(
+                timeout
+            );
+
+
+            contador.innerHTML = `
+
+                <span class="media-loading">
+                    ⚠️ Não foi possível carregar
+                </span>
+
+            `;
+
+
+            preview.innerHTML = `
+
+                <div class="event-preview-title">
+                    Última foto enviada
+                </div>
+
+                <div class="event-preview-empty">
+
+                    <div class="event-preview-empty-icon">
+                        ⚠️
+                    </div>
+
+                    <div>
+                        Não foi possível carregar
+                    </div>
+
+                </div>
+
+            `;
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * DATA DA MÍDIA
+ *************************************************/
+
+function obterDataMidia(
+    midia
+) {
+
+    if (!midia) {
+        return 0;
+    }
+
+
+    const valor =
+        midia.data ||
+        midia.dataUpload ||
+        midia.criadoEm ||
+        midia.createdTime ||
+        midia.timestamp ||
+        "";
+
+
+    if (!valor) {
+        return 0;
+    }
+
+
+    const data =
+        new Date(valor);
+
+
+    const tempo =
+        data.getTime();
+
+
+    return isNaN(tempo)
+        ? 0
+        : tempo;
+
+}
+
+
+/*************************************************
+ * ABRIR FOTO
+ *************************************************/
+
+function abrirFoto(url) {
+
+    if (!url) {
+        return;
+    }
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/*************************************************
+ * ESCAPAR ID
+ *************************************************/
+
+function escaparID(texto) {
+
+    return String(texto)
+        .replace(
+            /[^a-zA-Z0-9_-]/g,
+            "_"
+        );
+
+}
+
+
+/*************************************************
+ * CRIAR / EDITAR EVENTO
+ *************************************************/
+
+function salvarEvento() {
+
+    const nome =
+        document.getElementById(
+            "nomeEvento"
+        ).value.trim();
+
+
+    const id =
+        document.getElementById(
+            "idEvento"
+        ).value.trim();
+
+
+    const mensagem =
+        document.getElementById(
+            "mensagemEvento"
+        ).value.trim();
+
+
+    if (!nome) {
+
+        mostrarStatus(
+            "Digite o nome do evento.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if (!id) {
+
+        mostrarStatus(
+            "Digite o ID do evento.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const idLimpo =
+        gerarId(id);
+
+
+    if (idLimpo !== id) {
+
+        mostrarStatus(
+            "O ID deve usar apenas letras, números e hífen. Ex.: casamento-gustavo",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const evento = {
+
+        nome:
+            nome,
+
+        mensagem:
+            mensagem ||
+            "Compartilhe suas fotos e recados!"
+
+    };
+
+
+    enviarEvento(
+        id,
+        evento
+    );
+
+}
+
+
+/*************************************************
+ * ENVIAR EVENTO
+ *************************************************/
+
+function enviarEvento(
+    id,
+    evento
+) {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    mostrarStatus(
+        "Salvando evento..."
+    );
+
+
+    const callback =
+        "salvarEvento_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    window[callback] =
+        function(resposta) {
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        resposta.erro
+                            ? resposta.erro
+                            : "Erro ao salvar evento."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    "Evento salvo com sucesso!"
+                );
+
+
+                limparFormulario();
+
+
+                carregarEventos();
+
+                if (usuarioEhMaster()) {
+                    carregarClientes();
+                }
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=salvarEvento" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&nome=" +
+        encodeURIComponent(evento.nome) +
+        "&mensagem=" +
+        encodeURIComponent(evento.mensagem) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            script.remove();
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * EDITAR EVENTO
+ *************************************************/
+
+function editarEvento(id) {
+
+    const evento =
+        eventos[id];
+
+
+    if (!evento) {
+        return;
+    }
+
+
+    document.getElementById(
+        "nomeEvento"
+    ).value =
+        evento.nome || "";
+
+
+    document.getElementById(
+        "idEvento"
+    ).value =
+        id;
+
+
+    document.getElementById(
+        "mensagemEvento"
+    ).value =
+        evento.mensagem || "";
+
+
+    document.getElementById(
+        "idEvento"
+    ).readOnly =
+        true;
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+
+    mostrarStatus(
+        "Editando o evento. Salve para confirmar."
+    );
+
+}
+
+
+/*************************************************
+ * EXCLUIR EVENTO
+ *************************************************/
+
+function excluirEvento(id) {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const evento =
+        eventos[id];
+
+
+    if (!evento) {
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+
+            "Excluir o evento \"" +
+            evento.nome +
+            "\"?\n\n" +
+
+            "Os arquivos do Google Drive NÃO serão apagados."
+
+        );
+
+
+    if (!confirmar) {
+        return;
+    }
+
+
+    mostrarStatus(
+        "Excluindo evento..."
+    );
+
+
+    const callback =
+        "excluirEvento_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    window[callback] =
+        function(resposta) {
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true
+                ) {
+
+                    throw new Error(
+                        resposta &&
+                        resposta.erro
+                            ? resposta.erro
+                            : "Erro ao excluir evento."
+                    );
+
+                }
+
+
+                mostrarStatus(
+                    "Evento excluído."
+                );
+
+
+                carregarEventos();
+
+                if (usuarioEhMaster()) {
+                    carregarClientes();
+                }
+
+
+            } catch (erro) {
+
+                mostrarStatus(
+                    erro.message,
+                    "error"
+                );
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=excluirEvento" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&id=" +
+        encodeURIComponent(id) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            mostrarStatus(
+                "Erro ao conectar com o servidor.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            script.remove();
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * LIMPAR EVENTO
+ *************************************************/
+
+function limparFormulario() {
+
+    document.getElementById(
+        "nomeEvento"
+    ).value = "";
+
+
+    document.getElementById(
+        "idEvento"
+    ).value = "";
+
+
+    document.getElementById(
+        "mensagemEvento"
+    ).value = "";
+
+
+    document.getElementById(
+        "idEvento"
+    ).readOnly = false;
+
+}
+
+
+/*************************************************
+ * ABRIR EVENTO
+ *************************************************/
+
+function abrirEvento(id) {
+
+    window.open(
+
+        SITE +
+        "index.html?evento=" +
+        encodeURIComponent(id),
+
+        "_blank"
+
+    );
+
+}
+
+
+/*************************************************
+ * QR CODE
+ *************************************************/
+
+function mostrarQR(id) {
+
+    const link =
+        SITE +
+        "index.html?evento=" +
+        encodeURIComponent(id);
+
+
+    eventoQRAtual =
+        link;
+
+
+    document.getElementById(
+        "qrImagem"
+    ).src =
+
+        "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" +
+
+        encodeURIComponent(
+            link
+        );
+
+
+    document.getElementById(
+        "qrLink"
+    ).textContent =
+        link;
+
+
+    document.getElementById(
+        "qrSection"
+    ).style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "qrSection"
+        )
+        .scrollIntoView({
+
+            behavior:
+                "smooth"
+
+        });
+
+}
+
+
+function abrirQR() {
+
+    if (!eventoQRAtual) {
+        return;
+    }
+
+
+    window.open(
+
+        "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=" +
+
+        encodeURIComponent(
+            eventoQRAtual
+        ),
+
+        "_blank"
+
+    );
+
+}
+
+
+function copiarLinkQR() {
+
+    copiarTexto(
+        eventoQRAtual
+    );
+
+}
+
+
+/*************************************************
+ * COPIAR
+ *************************************************/
+
+function copiarTexto(texto) {
+
+    if (
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ) {
+
+        navigator.clipboard
+            .writeText(texto)
+            .then(
+                function() {
+
+                    mostrarStatus(
+                        "Link copiado!"
+                    );
+
+                }
+            )
+            .catch(
+                function() {
+
+                    prompt(
+                        "Copie o link:",
+                        texto
+                    );
+
+                }
+            );
+
+        return;
+
+    }
+
+
+    prompt(
+        "Copie o link:",
+        texto
+    );
+
+}
+
+
+/*************************************************
+ * ESCAPAR HTML
+ *************************************************/
+
+function escapar(texto) {
+
+    return String(texto)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/*************************************************
+ * ESCAPAR JAVASCRIPT
+ *************************************************/
+
+function escaparJS(texto) {
+
+    return String(texto)
+
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+
+        .replace(
+            /'/g,
+            "\\'"
+        );
+
+}
+
+
+/*************************************************
+ * INICIAR
+ *************************************************/
+
+verificarSessao();
+
+
+</script>
+
+</body>
+</html>
