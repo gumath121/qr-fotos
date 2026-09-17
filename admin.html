@@ -71,6 +71,28 @@ body {
     letter-spacing: 2px;
 }
 
+.usuario-logado {
+    margin-top: 15px;
+
+    color: #aaa;
+
+    font-size: 13px;
+}
+
+.btn-sair {
+    margin-top: 12px;
+
+    padding: 9px 16px;
+
+    font-size: 12px;
+
+    background: #292929;
+
+    color: #ddd;
+
+    border: 1px solid #444;
+}
+
 
 /* CARDS */
 
@@ -690,6 +712,20 @@ button {
             PAINEL DE ADMINISTRAÇÃO
         </div>
 
+        <div
+            id="usuarioLogado"
+            class="usuario-logado"
+        >
+            Verificando sessão...
+        </div>
+
+        <button
+            onclick="fazerLogout()"
+            class="btn-secondary btn-sair"
+        >
+            🚪 Sair
+        </button>
+
     </header>
 
 
@@ -952,6 +988,300 @@ function gerarId(texto) {
 
 
 /*************************************************
+ * VALIDAR SESSÃO
+ *************************************************/
+
+function verificarSessao() {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const callback =
+        "validarSessao_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado = false;
+
+
+    window[callback] =
+        function(resposta) {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+
+            try {
+
+                if (
+                    !resposta ||
+                    resposta.sucesso !== true ||
+                    resposta.autenticado !== true
+                ) {
+
+                    localStorage.removeItem(
+                        "qrFotosToken"
+                    );
+
+                    localStorage.removeItem(
+                        "qrFotosCliente"
+                    );
+
+                    window.location.href =
+                        "login.html";
+
+                    return;
+
+                }
+
+
+                if (resposta.cliente) {
+
+                    localStorage.setItem(
+                        "qrFotosCliente",
+                        JSON.stringify(
+                            resposta.cliente
+                        )
+                    );
+
+
+                    const usuario =
+                        document.getElementById(
+                            "usuarioLogado"
+                        );
+
+
+                    if (usuario) {
+
+                        usuario.textContent =
+                            "Olá, " +
+                            (
+                                resposta.cliente.nome ||
+                                resposta.cliente.usuario ||
+                                "usuário"
+                            ) +
+                            " • " +
+                            (
+                                resposta.cliente.tipo === "master"
+                                    ? "Administrador"
+                                    : "Cliente"
+                            );
+
+                    }
+
+                }
+
+
+                /*
+                 * Só carrega os eventos
+                 * depois da validação.
+                 */
+
+                carregarEventos();
+
+
+            } catch (erro) {
+
+                localStorage.removeItem(
+                    "qrFotosToken"
+                );
+
+                localStorage.removeItem(
+                    "qrFotosCliente"
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=validarSessao" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+
+            mostrarStatus(
+                "Não foi possível verificar sua sessão.",
+                "error"
+            );
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
+ * LOGOUT
+ *************************************************/
+
+function fazerLogout() {
+
+    const token =
+        localStorage.getItem(
+            "qrFotosToken"
+        );
+
+
+    if (!token) {
+
+        localStorage.removeItem(
+            "qrFotosCliente"
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    const callback =
+        "logout_" +
+        Date.now();
+
+
+    let script =
+        document.createElement(
+            "script"
+        );
+
+
+    let finalizado = false;
+
+
+    window[callback] =
+        function() {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+
+            localStorage.removeItem(
+                "qrFotosToken"
+            );
+
+            localStorage.removeItem(
+                "qrFotosCliente"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
+            delete window[callback];
+
+
+            if (script) {
+                script.remove();
+            }
+
+        };
+
+
+    script.src =
+        API +
+        "?acao=logout" +
+        "&token=" +
+        encodeURIComponent(token) +
+        "&callback=" +
+        callback +
+        "&t=" +
+        Date.now();
+
+
+    script.onerror =
+        function() {
+
+            localStorage.removeItem(
+                "qrFotosToken"
+            );
+
+            localStorage.removeItem(
+                "qrFotosCliente"
+            );
+
+
+            window.location.href =
+                "login.html";
+
+        };
+
+
+    document.body.appendChild(
+        script
+    );
+
+}
+
+
+/*************************************************
  * CARREGAR EVENTOS
  *************************************************/
 
@@ -985,8 +1315,43 @@ function carregarEventos() {
                 }
 
 
-                eventos =
-                    resposta.eventos || {};
+                /*
+                 * O backend envia um array.
+                 * Mantemos compatibilidade com
+                 * a estrutura antiga.
+                 */
+
+                if (
+                    Array.isArray(
+                        resposta.eventos
+                    )
+                ) {
+
+                    eventos = {};
+
+                    resposta.eventos.forEach(
+                        function(evento) {
+
+                            if (
+                                evento &&
+                                evento.id
+                            ) {
+
+                                eventos[
+                                    evento.id
+                                ] = evento;
+
+                            }
+
+                        }
+                    );
+
+                } else {
+
+                    eventos =
+                        resposta.eventos || {};
+
+                }
 
 
                 renderizarEventos();
@@ -1145,8 +1510,6 @@ function renderizarEventos() {
                         </div>
 
 
-                        <!-- ÚLTIMA FOTO -->
-
                         <div
                             class="event-preview"
                             id="event-preview-${idSeguro}"
@@ -1162,8 +1525,6 @@ function renderizarEventos() {
 
                         </div>
 
-
-                        <!-- CONTADOR -->
 
                         <div
                             class="event-media-count"
@@ -1234,11 +1595,6 @@ function renderizarEventos() {
         .join("");
 
 
-    /*
-     * Busca a contagem e a última foto
-     * de cada evento.
-     */
-
     lista.forEach(
         function(id) {
 
@@ -1252,8 +1608,6 @@ function renderizarEventos() {
 
 /*************************************************
  * CARREGAR DADOS DAS MÍDIAS
- *
- * Busca fotos e vídeos do evento.
  *************************************************/
 
 function carregarDadosMidias(id) {
@@ -1389,10 +1743,6 @@ function carregarDadosMidias(id) {
                 }
 
 
-                /*
-                 * FOTOS
-                 */
-
                 const fotos =
                     Array.isArray(
                         resposta.fotos
@@ -1401,10 +1751,6 @@ function carregarDadosMidias(id) {
                         : [];
 
 
-                /*
-                 * VÍDEOS
-                 */
-
                 const videos =
                     Array.isArray(
                         resposta.videos
@@ -1412,10 +1758,6 @@ function carregarDadosMidias(id) {
                         ? resposta.videos
                         : [];
 
-
-                /*
-                 * CONTAGEM
-                 */
 
                 const fotosTotal =
                     Number(
@@ -1450,10 +1792,6 @@ function carregarDadosMidias(id) {
                 `;
 
 
-                /*
-                 * SE NÃO TEM FOTO
-                 */
-
                 if (!fotos.length) {
 
                     preview.innerHTML = `
@@ -1478,10 +1816,6 @@ function carregarDadosMidias(id) {
 
                 } else {
 
-                    /*
-                     * Encontrar a foto mais recente.
-                     */
-
                     const fotosOrdenadas =
                         fotos
                             .slice()
@@ -1489,14 +1823,10 @@ function carregarDadosMidias(id) {
                                 function(a, b) {
 
                                     const dataA =
-                                        obterDataMidia(
-                                            a
-                                        );
+                                        obterDataMidia(a);
 
                                     const dataB =
-                                        obterDataMidia(
-                                            b
-                                        );
+                                        obterDataMidia(b);
 
                                     return (
                                         dataB -
@@ -1510,10 +1840,6 @@ function carregarDadosMidias(id) {
                     const ultimaFoto =
                         fotosOrdenadas[0];
 
-
-                    /*
-                     * URL da imagem.
-                     */
 
                     const urlFoto =
                         ultimaFoto.url ||
@@ -1691,11 +2017,6 @@ function obterDataMidia(
         return 0;
     }
 
-
-    /*
-     * Tenta vários campos possíveis
-     * enviados pelo backend.
-     */
 
     const valor =
         midia.data ||
@@ -2383,7 +2704,7 @@ function escaparJS(texto) {
  * INICIAR
  *************************************************/
 
-carregarEventos();
+verificarSessao();
 
 
 </script>
