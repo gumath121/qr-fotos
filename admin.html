@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
-
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>QR Fotos — Administração</title>
 
@@ -23,7 +19,6 @@ content="width=device-width, initial-scale=1.0"
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-
     background:
         radial-gradient(
             circle at top,
@@ -31,21 +26,16 @@ body {
             #111 45%,
             #080808 100%
         );
-
     color: #f5f0e6;
-
     min-height: 100vh;
 }
 
 .container {
     width: 100%;
     max-width: 1150px;
-
     margin: auto;
-
     padding: 30px 20px 60px;
 }
-
 
 /* HEADER */
 
@@ -57,87 +47,60 @@ body {
 .logo {
     font-size: 42px;
     font-weight: 800;
-
     letter-spacing: 6px;
-
     color: #d6b36a;
 }
 
 .subtitle {
     margin-top: 8px;
-
     color: #aaa;
-
     font-size: 14px;
-
     letter-spacing: 2px;
 }
 
 .usuario-logado {
     margin-top: 15px;
-
     color: #aaa;
-
     font-size: 13px;
 }
 
 .btn-sair {
     margin-top: 12px;
-
     padding: 9px 16px;
-
     font-size: 12px;
-
     background: #292929;
-
     color: #ddd;
-
     border: 1px solid #444;
 }
-
 
 /* CARDS */
 
 .card {
     background: rgba(22,22,22,.92);
-
     border: 1px solid #3b3324;
-
     border-radius: 18px;
-
     padding: 25px;
-
     margin-bottom: 25px;
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.35);
+    box-shadow: 0 15px 45px rgba(0,0,0,.35);
 }
 
 .card-title {
     font-size: 20px;
-
     margin-bottom: 20px;
-
     color: #d6b36a;
 }
-
 
 /* FORM */
 
 .form-grid {
     display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
+    grid-template-columns: 1fr 1fr;
     gap: 15px;
 }
 
 .form-group {
     display: flex;
-
     flex-direction: column;
-
     gap: 7px;
 }
 
@@ -147,664 +110,423 @@ body {
 
 label {
     font-size: 13px;
-
     color: #aaa;
 }
 
 input,
 textarea {
-
     width: 100%;
-
     background: #101010;
-
     border: 1px solid #403824;
-
     border-radius: 10px;
-
     color: white;
-
     padding: 13px;
-
     font-size: 15px;
-
     outline: none;
 }
 
 input:focus,
 textarea:focus {
-
     border-color: #d6b36a;
-
 }
 
 textarea {
-
     min-height: 90px;
-
     resize: vertical;
-
 }
-
 
 /* BOTÕES */
 
 .buttons {
-
     display: flex;
-
     gap: 12px;
-
     margin-top: 20px;
-
     flex-wrap: wrap;
 }
 
 button {
-
     border: none;
-
     border-radius: 10px;
-
     padding: 13px 20px;
-
     font-weight: bold;
-
     cursor: pointer;
-
     transition: .2s;
 }
 
 .btn-primary {
-
     background:
         linear-gradient(
             135deg,
             #d6b36a,
             #a67c2f
         );
-
     color: #111;
 }
 
 .btn-primary:hover {
-
-    transform:
-        translateY(-1px);
-
-    filter:
-        brightness(1.1);
+    transform: translateY(-1px);
+    filter: brightness(1.1);
 }
 
 .btn-secondary {
-
     background: #292929;
-
     color: #ddd;
-
     border: 1px solid #444;
 }
 
 .btn-danger {
-
     background: #551f1f;
-
     color: #ffb1b1;
-
     border: 1px solid #793030;
 }
 
 .btn-copy {
-
     background: #252525;
-
     color: #d6b36a;
-
     border: 1px solid #4a402d;
 }
-
-
-/* =====================================================
-   CLIENTES
-===================================================== */
-
-.clientes-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 18px;
-}
-
-.cliente-card {
-
-    background: #111;
-
-    border: 1px solid #353535;
-
-    border-radius: 15px;
-
-    padding: 20px;
-
-    overflow: hidden;
-}
-
-.cliente-nome {
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    color: #f5f0e6;
-
-    margin-bottom: 6px;
-}
-
-.cliente-usuario {
-
-    color: #d6b36a;
-
-    font-size: 13px;
-
-    margin-bottom: 15px;
-}
-
-.cliente-info {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-bottom: 15px;
-}
-
-.cliente-badge {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    padding: 6px 10px;
-
-    border-radius: 20px;
-
-    background: #27231c;
-
-    color: #bbb;
-
-    border: 1px solid #4a402d;
-
-    font-size: 12px;
-}
-
-.cliente-badge.ativo {
-
-    background: #18351f;
-
-    color: #9be3a8;
-
-    border-color: #285b34;
-}
-
-.cliente-badge.inativo {
-
-    background: #3a1818;
-
-    color: #ffaaaa;
-
-    border-color: #652b2b;
-}
-
-.cliente-actions {
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-}
-
-.cliente-actions button {
-
-    padding: 9px 12px;
-
-    font-size: 12px;
-}
-
 
 /* EVENTOS */
 
 .events-header {
-
     display: flex;
-
-    justify-content:
-        space-between;
-
+    justify-content: space-between;
     align-items: center;
-
     gap: 15px;
-
     margin-bottom: 20px;
 }
 
 .events-count {
-
     background: #27231c;
-
     color: #d6b36a;
-
     border: 1px solid #4a402d;
-
     padding: 7px 12px;
-
     border-radius: 20px;
-
     font-size: 13px;
 }
 
 .events-grid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
+    grid-template-columns: repeat(2, 1fr);
     gap: 18px;
 }
 
 .event-card {
-
     background: #111;
-
     border: 1px solid #353535;
-
     border-radius: 15px;
-
     padding: 20px;
-
     overflow: hidden;
 }
 
 .event-name {
-
     font-size: 21px;
-
     font-weight: bold;
-
     color: #f5f0e6;
-
     margin-bottom: 8px;
 }
 
 .event-id {
-
     color: #d6b36a;
-
     font-size: 13px;
-
     margin-bottom: 14px;
 }
 
 .event-message {
-
     color: #999;
-
     font-size: 14px;
-
     line-height: 1.5;
-
     min-height: 42px;
 }
 
-
-/* PREVIEW DA ÚLTIMA FOTO */
+/* PREVIEW */
 
 .event-preview {
-
     margin-top: 16px;
-
     border-radius: 12px;
-
     overflow: hidden;
-
     background: #080808;
-
     border: 1px solid #302b21;
-
     position: relative;
 }
 
 .event-preview-title {
-
     padding: 9px 12px;
-
     color: #aaa;
-
     font-size: 11px;
-
     text-transform: uppercase;
-
     letter-spacing: 1px;
-
     background: #121212;
-
     border-bottom: 1px solid #272727;
 }
 
 .event-preview-image {
-
     width: 100%;
-
     height: 210px;
-
     display: block;
-
     object-fit: cover;
-
     cursor: pointer;
-
     transition: transform .3s ease;
-
 }
 
 .event-preview-image:hover {
-
     transform: scale(1.025);
-
 }
 
 .event-preview-empty {
-
     height: 130px;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 7px;
-
     color: #666;
-
     font-size: 13px;
-
 }
 
 .event-preview-empty-icon {
-
     font-size: 30px;
-
 }
 
 .event-preview-loading {
-
     height: 130px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     color: #666;
-
     font-size: 13px;
-
 }
-
 
 /* CONTADOR DE MÍDIA */
 
 .event-media-count {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
     margin-top: 12px;
-
     padding: 10px 12px;
-
     background: #181818;
-
     border: 1px solid #302b21;
-
     border-radius: 9px;
-
     color: #bbb;
-
     font-size: 13px;
 }
 
 .media-count-item {
-
     white-space: nowrap;
 }
 
 .media-count-separator {
-
     color: #555;
 }
 
 .media-loading {
-
     color: #777;
-
     font-size: 12px;
 }
 
 .event-url {
-
     margin-top: 12px;
-
     padding: 10px;
-
     background: #080808;
-
     border-radius: 8px;
-
     color: #777;
-
     font-size: 11px;
-
     word-break: break-all;
 }
 
 .event-buttons {
-
     display: flex;
-
     flex-wrap: wrap;
-
     gap: 8px;
-
     margin-top: 15px;
 }
 
 .event-buttons button {
-
     padding: 9px 12px;
-
     font-size: 12px;
 }
 
+/* CLIENTES */
+
+.clientes-section {
+    display: none;
+}
+
+.clientes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.cliente-card {
+    background: #111;
+    border: 1px solid #353535;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.cliente-nome {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f5f0e6;
+    margin-bottom: 6px;
+}
+
+.cliente-usuario {
+    color: #d6b36a;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.cliente-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.cliente-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 20px;
+    background: #252525;
+    border: 1px solid #444;
+    color: #bbb;
+    font-size: 12px;
+}
+
+.cliente-badge.ativo {
+    background: #18351f;
+    border-color: #285b34;
+    color: #9be3a8;
+}
+
+.cliente-badge.inativo {
+    background: #3a1818;
+    border-color: #652b2b;
+    color: #ffaaaa;
+}
+
+.cliente-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cliente-actions button {
+    padding: 9px 12px;
+    font-size: 12px;
+}
 
 /* STATUS */
 
 .status {
-
     display: none;
-
     margin-bottom: 20px;
-
     padding: 14px;
-
     border-radius: 10px;
-
     font-size: 14px;
 }
 
 .status.success {
-
     display: block;
-
     background: #18351f;
-
     color: #9be3a8;
-
     border: 1px solid #285b34;
 }
 
 .status.error {
-
     display: block;
-
     background: #3a1818;
-
     color: #ffaaaa;
-
     border: 1px solid #652b2b;
 }
-
 
 /* EMPTY */
 
 .empty {
-
     text-align: center;
-
     padding: 45px 20px;
-
     color: #777;
+    grid-column: 1 / -1;
 }
 
 .empty-icon {
-
     font-size: 40px;
-
     margin-bottom: 12px;
 }
-
 
 /* QR */
 
 .qr-section {
-
     display: none;
 }
 
 .qr-box {
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     gap: 15px;
 }
 
 .qr-box img {
-
     width: 220px;
-
     height: 220px;
-
     background: white;
-
     padding: 10px;
-
     border-radius: 12px;
 }
 
 .qr-link {
-
     color: #aaa;
-
     text-align: center;
-
     word-break: break-all;
-
     font-size: 12px;
 }
-
 
 /* MOBILE */
 
 @media(max-width: 750px) {
 
     .container {
-
-        padding:
-            22px
-            14px
-            45px;
+        padding: 22px 14px 45px;
     }
 
     .logo {
-
         font-size: 31px;
-
         letter-spacing: 4px;
     }
 
     .form-grid {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .form-group.full {
-
         grid-column: auto;
     }
 
-    .events-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
+    .events-grid,
     .clientes-grid {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .events-header {
-
-        align-items:
-            flex-start;
-
-        flex-direction:
-            column;
+        align-items: flex-start;
+        flex-direction: column;
     }
 
     .card {
-
         padding: 18px;
     }
 
     .event-preview-image {
-
         height: 220px;
-
     }
 
     .event-media-count {
-
         flex-wrap: wrap;
-
     }
 
 }
@@ -816,9 +538,6 @@ button {
 <body>
 
 <div class="container">
-
-```
-<!-- HEADER -->
 
 <header class="header">
 
@@ -847,22 +566,19 @@ button {
 </header>
 
 
-<!-- STATUS -->
-
 <div
     id="status"
     class="status"
 ></div>
 
 
-<!-- =================================================
+<!-- =========================================
      CLIENTES — SOMENTE MASTER
-================================================== -->
+========================================= -->
 
 <section
     id="clientesSection"
-    class="card"
-    style="display:none;"
+    class="card clientes-section"
 >
 
     <div class="events-header">
@@ -884,115 +600,88 @@ button {
     </div>
 
 
-    <!-- FORMULÁRIO CLIENTE -->
+    <div class="form-grid">
 
-    <div
-        style="
-            background:#111;
-            border:1px solid #353535;
-            border-radius:15px;
-            padding:20px;
-            margin-bottom:20px;
-        "
-    >
+        <div class="form-group">
 
-        <div
-            style="
-                color:#d6b36a;
-                font-size:16px;
-                font-weight:bold;
-                margin-bottom:15px;
-            "
-        >
-            + Criar novo cliente
-        </div>
+            <label>
+                Nome do cliente
+            </label>
 
-
-        <div class="form-grid">
-
-
-            <div class="form-group">
-
-                <label>
-                    Nome do cliente
-                </label>
-
-                <input
-                    id="nomeCliente"
-                    type="text"
-                    placeholder="Ex.: João da Silva"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Usuário
-                </label>
-
-                <input
-                    id="usuarioCliente"
-                    type="text"
-                    placeholder="Ex.: joao"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Senha
-                </label>
-
-                <input
-                    id="senhaCliente"
-                    type="password"
-                    placeholder="Mínimo 6 caracteres"
-                >
-
-            </div>
-
+            <input
+                id="nomeCliente"
+                type="text"
+                placeholder="Ex.: João da Silva"
+            >
 
         </div>
 
 
-        <div class="buttons">
+        <div class="form-group">
 
-            <button
-                class="btn-primary"
-                onclick="criarCliente()"
-            >
-                + Criar cliente
-            </button>
+            <label>
+                Usuário
+            </label>
 
-            <button
-                class="btn-secondary"
-                onclick="limparFormularioCliente()"
+            <input
+                id="usuarioCliente"
+                type="text"
+                placeholder="Ex.: joao"
+                autocomplete="off"
             >
-                Limpar
-            </button>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Senha
+            </label>
+
+            <input
+                id="senhaCliente"
+                type="password"
+                placeholder="Mínimo 6 caracteres"
+                autocomplete="new-password"
+            >
 
         </div>
 
     </div>
 
 
-    <!-- LISTA DE CLIENTES -->
+    <div class="buttons">
+
+        <button
+            class="btn-primary"
+            onclick="criarCliente()"
+        >
+            + Criar cliente
+        </button>
+
+        <button
+            class="btn-secondary"
+            onclick="limparFormularioCliente()"
+        >
+            Limpar
+        </button>
+
+    </div>
+
 
     <div
         id="clientes"
         class="clientes-grid"
+        style="margin-top:25px;"
     ></div>
 
 </section>
 
 
-<!-- =================================================
+<!-- =========================================
      NOVO EVENTO
-================================================== -->
+========================================= -->
 
 <section class="card">
 
@@ -1000,9 +689,7 @@ button {
         Criar novo evento
     </div>
 
-
     <div class="form-grid">
-
 
         <div class="form-group">
 
@@ -1047,12 +734,10 @@ button {
 
         </div>
 
-
     </div>
 
 
     <div class="buttons">
-
 
         <button
             class="btn-primary"
@@ -1061,7 +746,6 @@ button {
             + Criar evento
         </button>
 
-
         <button
             class="btn-secondary"
             onclick="limparFormulario()"
@@ -1069,22 +753,18 @@ button {
             Limpar
         </button>
 
-
     </div>
-
 
 </section>
 
 
-<!-- =================================================
+<!-- =========================================
      EVENTOS
-================================================== -->
+========================================= -->
 
 <section class="card">
 
-
     <div class="events-header">
-
 
         <div
             class="card-title"
@@ -1093,7 +773,6 @@ button {
             Meus eventos
         </div>
 
-
         <div
             id="contadorEventos"
             class="events-count"
@@ -1101,36 +780,30 @@ button {
             Carregando...
         </div>
 
-
     </div>
-
 
     <div
         id="eventos"
         class="events-grid"
     ></div>
 
-
 </section>
 
 
-<!-- =================================================
+<!-- =========================================
      QR CODE
-================================================== -->
+========================================= -->
 
 <section
     id="qrSection"
     class="card qr-section"
 >
 
-
     <div class="card-title">
         QR Code do evento
     </div>
 
-
     <div class="qr-box">
-
 
         <img
             id="qrImagem"
@@ -1138,15 +811,12 @@ button {
             alt="QR Code"
         >
 
-
         <div
             id="qrLink"
             class="qr-link"
         ></div>
 
-
         <div class="buttons">
-
 
             <button
                 class="btn-primary"
@@ -1155,7 +825,6 @@ button {
                 Abrir QR Code
             </button>
 
-
             <button
                 class="btn-copy"
                 onclick="copiarLinkQR()"
@@ -1163,20 +832,16 @@ button {
                 Copiar link
             </button>
 
-
         </div>
-
 
     </div>
 
-
 </section>
-```
 
 </div>
 
-<script>
 
+<script>
 
 /*************************************************
  * CONFIGURAÇÕES
@@ -1185,16 +850,14 @@ button {
 const API =
 "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng8/exec";
 
-
 const SITE =
 "https://gumath121.github.io/qr-fotos/";
 
-
 let eventos = {};
 
-let eventoQRAtual = "";
-
 let clientes = [];
+
+let eventoQRAtual = "";
 
 
 /*************************************************
@@ -1207,14 +870,10 @@ function mostrarStatus(
 ) {
 
     const status =
-        document.getElementById(
-            "status"
-        );
-
+        document.getElementById("status");
 
     status.className =
         "status " + tipo;
-
 
     status.textContent =
         mensagem;
@@ -1231,24 +890,49 @@ function gerarId(texto) {
     return texto
         .toLowerCase()
         .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
-        .replace(
-            /[^a-z0-9]+/g,
-            "-"
-        )
-        .replace(
-            /^-+|-+$/g,
-            ""
-        );
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
 }
 
 
 /*************************************************
- * VERIFICAR SESSÃO
+ * VERIFICAR SE É MASTER
+ *************************************************/
+
+function usuarioEhMaster() {
+
+    try {
+
+        const dados =
+            localStorage.getItem(
+                "qrFotosCliente"
+            );
+
+        if (!dados) {
+            return false;
+        }
+
+        const cliente =
+            JSON.parse(dados);
+
+        return (
+            cliente &&
+            cliente.tipo === "master"
+        );
+
+    } catch (erro) {
+
+        return false;
+
+    }
+
+}
+
+
+/*************************************************
+ * VALIDAR SESSÃO
  *************************************************/
 
 function verificarSessao() {
@@ -1257,7 +941,6 @@ function verificarSessao() {
         localStorage.getItem(
             "qrFotosToken"
         );
-
 
     if (!token) {
 
@@ -1275,12 +958,34 @@ function verificarSessao() {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
-    let finalizado = false;
+    let finalizado =
+        false;
+
+
+    const timeout =
+        setTimeout(function() {
+
+            if (finalizado) {
+                return;
+            }
+
+            finalizado = true;
+
+            mostrarStatus(
+                "A verificação demorou demais. Recarregue a página.",
+                "error"
+            );
+
+            delete window[callback];
+
+            if (script) {
+                script.remove();
+            }
+
+        }, 15000);
 
 
     window[callback] =
@@ -1292,8 +997,16 @@ function verificarSessao() {
 
             finalizado = true;
 
+            clearTimeout(timeout);
+
 
             try {
+
+                console.log(
+                    "Resposta validarSessao:",
+                    resposta
+                );
+
 
                 if (
                     !resposta ||
@@ -1351,34 +1064,31 @@ function verificarSessao() {
 
                     }
 
+                }
 
-                    /*
-                     * SOMENTE MASTER
-                     *
-                     * Mostra a área de clientes
-                     * e carrega a lista.
-                     */
 
-                    if (
-                        resposta.cliente.tipo ===
-                        "master"
-                    ) {
+                /*
+                 * SE FOR MASTER:
+                 * mostra e carrega Clientes.
+                 */
+                if (
+                    resposta.cliente &&
+                    resposta.cliente.tipo === "master"
+                ) {
 
-                        const section =
-                            document.getElementById(
-                                "clientesSection"
-                            );
+                    const section =
+                        document.getElementById(
+                            "clientesSection"
+                        );
 
-                        if (section) {
+                    if (section) {
 
-                            section.style.display =
-                                "block";
-
-                        }
-
-                        carregarClientes();
+                        section.style.display =
+                            "block";
 
                     }
+
+                    carregarClientes();
 
                 }
 
@@ -1388,22 +1098,20 @@ function verificarSessao() {
 
             } catch (erro) {
 
-                localStorage.removeItem(
-                    "qrFotosToken"
+                console.error(
+                    "Erro ao processar sessão:",
+                    erro
                 );
 
-                localStorage.removeItem(
-                    "qrFotosCliente"
+                mostrarStatus(
+                    "Erro ao processar sua sessão.",
+                    "error"
                 );
-
-                window.location.href =
-                    "login.html";
 
             }
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -1423,6 +1131,12 @@ function verificarSessao() {
         Date.now();
 
 
+    console.log(
+        "Validando sessão em:",
+        script.src
+    );
+
+
     script.onerror =
         function() {
 
@@ -1432,15 +1146,19 @@ function verificarSessao() {
 
             finalizado = true;
 
+            clearTimeout(timeout);
+
+            console.error(
+                "Falha ao carregar:",
+                script.src
+            );
 
             mostrarStatus(
-                "Não foi possível verificar sua sessão.",
+                "Não foi possível verificar sua sessão. Recarregue a página.",
                 "error"
             );
 
-
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -1467,12 +1185,16 @@ function fazerLogout() {
             "qrFotosToken"
         );
 
+    localStorage.removeItem(
+        "qrFotosToken"
+    );
+
+    localStorage.removeItem(
+        "qrFotosCliente"
+    );
+
 
     if (!token) {
-
-        localStorage.removeItem(
-            "qrFotosCliente"
-        );
 
         window.location.href =
             "login.html";
@@ -1482,138 +1204,20 @@ function fazerLogout() {
     }
 
 
-    const callback =
-        "logout_" +
-        Date.now();
-
-
-    let script =
-        document.createElement(
-            "script"
-        );
-
-
-    let finalizado = false;
-
-
-    window[callback] =
-        function() {
-
-            if (finalizado) {
-                return;
-            }
-
-            finalizado = true;
-
-
-            localStorage.removeItem(
-                "qrFotosToken"
-            );
-
-            localStorage.removeItem(
-                "qrFotosCliente"
-            );
-
-
-            window.location.href =
-                "login.html";
-
-
-            delete window[callback];
-
-
-            if (script) {
-                script.remove();
-            }
-
-        };
-
-
-    script.src =
-        API +
-        "?acao=logout" +
-        "&token=" +
-        encodeURIComponent(token) +
-        "&callback=" +
-        callback +
-        "&t=" +
-        Date.now();
-
-
-    script.onerror =
-        function() {
-
-            localStorage.removeItem(
-                "qrFotosToken"
-            );
-
-            localStorage.removeItem(
-                "qrFotosCliente"
-            );
-
-
-            window.location.href =
-                "login.html";
-
-        };
-
-
-    document.body.appendChild(
-        script
-    );
+    window.location.href =
+        "login.html";
 
 }
 
 
 /*************************************************
- * VERIFICAR SE É MASTER
- *************************************************/
-
-function usuarioEhMaster() {
-
-    try {
-
-        const dados =
-            localStorage.getItem(
-                "qrFotosCliente"
-            );
-
-
-        if (!dados) {
-            return false;
-        }
-
-
-        const cliente =
-            JSON.parse(
-                dados
-            );
-
-
-        return (
-            cliente &&
-            cliente.tipo === "master"
-        );
-
-    } catch (erro) {
-
-        return false;
-
-    }
-
-}
-
-
-/*************************************************
- * CARREGAR CLIENTES
+ * CLIENTES
  *************************************************/
 
 function carregarClientes() {
 
     if (!usuarioEhMaster()) {
-
         return;
-
     }
 
 
@@ -1624,23 +1228,7 @@ function carregarClientes() {
 
 
     if (!token) {
-
         return;
-
-    }
-
-
-    const section =
-        document.getElementById(
-            "clientesSection"
-        );
-
-
-    if (section) {
-
-        section.style.display =
-            "block";
-
     }
 
 
@@ -1650,9 +1238,7 @@ function carregarClientes() {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     let finalizado =
@@ -1666,12 +1252,16 @@ function carregarClientes() {
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             try {
+
+                console.log(
+                    "Resposta listarClientes:",
+                    resposta
+                );
+
 
                 if (
                     !resposta ||
@@ -1707,6 +1297,10 @@ function carregarClientes() {
 
             } catch (erro) {
 
+                console.error(
+                    erro
+                );
+
                 mostrarStatus(
                     erro.message,
                     "error"
@@ -1716,7 +1310,6 @@ function carregarClientes() {
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -1743,9 +1336,7 @@ function carregarClientes() {
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             mostrarStatus(
@@ -1831,146 +1422,131 @@ function renderizarClientes() {
 
 
     container.innerHTML =
-        clientes.map(
-            function(cliente) {
+        clientes.map(function(cliente) {
 
-                const id =
-                    cliente.id || "";
+            const id =
+                cliente.id || "";
 
+            const nome =
+                cliente.nome ||
+                "Cliente";
 
-                const nome =
-                    cliente.nome ||
-                    "Cliente";
+            const usuario =
+                cliente.usuario ||
+                "";
 
+            const ativo =
+                cliente.ativo === true;
 
-                const usuario =
-                    cliente.usuario ||
-                    "";
+            const quantidadeEventos =
+                Number(
+                    cliente.quantidadeEventos || 0
+                );
 
-
-                const ativo =
-                    cliente.ativo === true;
-
-
-                const quantidadeEventos =
-                    Number(
-                        cliente.quantidadeEventos || 0
-                    );
+            const ehMaster =
+                cliente.tipo === "master";
 
 
-                const statusTexto =
-                    ativo
-                        ? "Ativo"
-                        : "Inativo";
+            return `
+
+                <div class="cliente-card">
+
+                    <div class="cliente-nome">
+                        ${escapar(nome)}
+                    </div>
+
+                    <div class="cliente-usuario">
+                        @${escapar(usuario)}
+                    </div>
 
 
-                const classeStatus =
-                    ativo
-                        ? "ativo"
-                        : "inativo";
+                    <div class="cliente-info">
 
-
-                const ehMaster =
-                    cliente.tipo === "master";
-
-
-                return `
-
-                    <div class="cliente-card">
-
-                        <div class="cliente-nome">
-                            ${escapar(nome)}
-                        </div>
-
-
-                        <div class="cliente-usuario">
-                            @${escapar(usuario)}
-                        </div>
-
-
-                        <div class="cliente-info">
-
-                            <span
-                                class="cliente-badge ${classeStatus}"
-                            >
-                                ${statusTexto}
-                            </span>
-
-
-                            <span
-                                class="cliente-badge"
-                            >
-                                📸 ${quantidadeEventos}
-                                ${
-                                    quantidadeEventos === 1
-                                        ? "evento"
-                                        : "eventos"
-                                }
-                            </span>
-
-
+                        <span
+                            class="cliente-badge ${
+                                ativo
+                                    ? "ativo"
+                                    : "inativo"
+                            }"
+                        >
                             ${
-                                ehMaster
-                                    ? `
-                                        <span
-                                            class="cliente-badge"
-                                        >
-                                            👑 Master
-                                        </span>
-                                    `
-                                    : ""
+                                ativo
+                                    ? "● Ativo"
+                                    : "● Inativo"
                             }
+                        </span>
 
-                        </div>
+
+                        <span
+                            class="cliente-badge"
+                        >
+                            📸 ${quantidadeEventos}
+                            ${
+                                quantidadeEventos === 1
+                                    ? "evento"
+                                    : "eventos"
+                            }
+                        </span>
 
 
                         ${
-                            !ehMaster
+                            ehMaster
                                 ? `
-
-                                    <div class="cliente-actions">
-
-                                        <button
-                                            class="${
-                                                ativo
-                                                    ? "btn-secondary"
-                                                    : "btn-primary"
-                                            }"
-                                            onclick="alterarStatusCliente(
-                                                '${escaparJS(id)}',
-                                                ${!ativo}
-                                            )"
-                                        >
-                                            ${
-                                                ativo
-                                                    ? "Desativar"
-                                                    : "Ativar"
-                                            }
-                                        </button>
-
-
-                                        <button
-                                            class="btn-danger"
-                                            onclick="excluirCliente(
-                                                '${escaparJS(id)}'
-                                            )"
-                                        >
-                                            Excluir
-                                        </button>
-
-                                    </div>
-
+                                    <span class="cliente-badge">
+                                        👑 Master
+                                    </span>
                                 `
                                 : ""
                         }
 
                     </div>
 
-                `;
 
-            }
-        )
-        .join("");
+                    ${
+                        !ehMaster
+                            ? `
+
+                                <div class="cliente-actions">
+
+                                    <button
+                                        class="${
+                                            ativo
+                                                ? "btn-secondary"
+                                                : "btn-primary"
+                                        }"
+                                        onclick="alterarStatusCliente(
+                                            '${escaparJS(id)}',
+                                            ${!ativo}
+                                        )"
+                                    >
+                                        ${
+                                            ativo
+                                                ? "Desativar"
+                                                : "Ativar"
+                                        }
+                                    </button>
+
+
+                                    <button
+                                        class="btn-danger"
+                                        onclick="excluirCliente(
+                                            '${escaparJS(id)}'
+                                        )"
+                                    >
+                                        Excluir
+                                    </button>
+
+                                </div>
+
+                            `
+                            : ""
+                    }
+
+                </div>
+
+            `;
+
+        }).join("");
 
 }
 
@@ -1997,16 +1573,6 @@ function criarCliente() {
         localStorage.getItem(
             "qrFotosToken"
         );
-
-
-    if (!token) {
-
-        window.location.href =
-            "login.html";
-
-        return;
-
-    }
 
 
     const nome =
@@ -2091,9 +1657,7 @@ function criarCliente() {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     let finalizado =
@@ -2107,9 +1671,7 @@ function criarCliente() {
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             try {
@@ -2158,7 +1720,6 @@ function criarCliente() {
 
             delete window[callback];
 
-
             if (script) {
                 script.remove();
             }
@@ -2190,9 +1751,7 @@ function criarCliente() {
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             mostrarStatus(
@@ -2202,7 +1761,6 @@ function criarCliente() {
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -2228,23 +1786,15 @@ function alterarStatusCliente(
 ) {
 
     if (!usuarioEhMaster()) {
-
         return;
-
     }
-
-
-    const acaoTexto =
-        ativo
-            ? "ativar"
-            : "desativar";
 
 
     const confirmar =
         confirm(
-            "Deseja " +
-            acaoTexto +
-            " este cliente?"
+            ativo
+                ? "Deseja ativar este cliente?"
+                : "Deseja desativar este cliente?"
         );
 
 
@@ -2257,16 +1807,6 @@ function alterarStatusCliente(
         localStorage.getItem(
             "qrFotosToken"
         );
-
-
-    if (!token) {
-
-        window.location.href =
-            "login.html";
-
-        return;
-
-    }
 
 
     mostrarStatus(
@@ -2282,9 +1822,7 @@ function alterarStatusCliente(
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     let finalizado =
@@ -2298,9 +1836,7 @@ function alterarStatusCliente(
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             try {
@@ -2328,11 +1864,7 @@ function alterarStatusCliente(
 
                 mostrarStatus(
                     resposta.mensagem ||
-                    (
-                        ativo
-                            ? "Cliente ativado."
-                            : "Cliente desativado."
-                    )
+                    "Cliente atualizado."
                 );
 
 
@@ -2351,7 +1883,6 @@ function alterarStatusCliente(
 
             delete window[callback];
 
-
             if (script) {
                 script.remove();
             }
@@ -2367,7 +1898,7 @@ function alterarStatusCliente(
         "&id=" +
         encodeURIComponent(id) +
         "&ativo=" +
-        encodeURIComponent(
+        (
             ativo
                 ? "true"
                 : "false"
@@ -2385,9 +1916,7 @@ function alterarStatusCliente(
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             mostrarStatus(
@@ -2397,7 +1926,6 @@ function alterarStatusCliente(
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -2420,23 +1948,19 @@ function alterarStatusCliente(
 function excluirCliente(id) {
 
     if (!usuarioEhMaster()) {
-
         return;
-
     }
 
 
     const cliente =
-        clientes.find(
-            function(item) {
+        clientes.find(function(item) {
 
-                return (
-                    String(item.id) ===
-                    String(id)
-                );
+            return (
+                String(item.id) ===
+                String(id)
+            );
 
-            }
-        );
+        });
 
 
     if (!cliente) {
@@ -2461,8 +1985,7 @@ function excluirCliente(id) {
                     : " eventos."
             ) +
             "\n\n" +
-            "Por segurança, ele não pode ser excluído." +
-            "\n\n" +
+            "Por segurança, ele não pode ser excluído.\n\n" +
             "Você pode desativá-lo."
         );
 
@@ -2473,12 +1996,10 @@ function excluirCliente(id) {
 
     const confirmar =
         confirm(
-
             "Excluir o cliente \"" +
             cliente.nome +
             "\"?\n\n" +
             "Essa ação não poderá ser desfeita."
-
         );
 
 
@@ -2493,16 +2014,6 @@ function excluirCliente(id) {
         );
 
 
-    if (!token) {
-
-        window.location.href =
-            "login.html";
-
-        return;
-
-    }
-
-
     mostrarStatus(
         "Excluindo cliente..."
     );
@@ -2514,9 +2025,7 @@ function excluirCliente(id) {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     let finalizado =
@@ -2530,9 +2039,7 @@ function excluirCliente(id) {
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             try {
@@ -2559,7 +2066,6 @@ function excluirCliente(id) {
 
 
                 mostrarStatus(
-                    resposta.mensagem ||
                     "Cliente excluído com sucesso!"
                 );
 
@@ -2578,7 +2084,6 @@ function excluirCliente(id) {
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -2607,9 +2112,7 @@ function excluirCliente(id) {
                 return;
             }
 
-
-            finalizado =
-                true;
+            finalizado = true;
 
 
             mostrarStatus(
@@ -2619,7 +2122,6 @@ function excluirCliente(id) {
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -2636,42 +2138,22 @@ function excluirCliente(id) {
 
 
 /*************************************************
- * LIMPAR FORMULÁRIO DE CLIENTE
+ * LIMPAR CLIENTE
  *************************************************/
 
 function limparFormularioCliente() {
 
-    const nome =
-        document.getElementById(
-            "nomeCliente"
-        );
+    document.getElementById(
+        "nomeCliente"
+    ).value = "";
 
+    document.getElementById(
+        "usuarioCliente"
+    ).value = "";
 
-    const usuario =
-        document.getElementById(
-            "usuarioCliente"
-        );
-
-
-    const senha =
-        document.getElementById(
-            "senhaCliente"
-        );
-
-
-    if (nome) {
-        nome.value = "";
-    }
-
-
-    if (usuario) {
-        usuario.value = "";
-    }
-
-
-    if (senha) {
-        senha.value = "";
-    }
+    document.getElementById(
+        "senhaCliente"
+    ).value = "";
 
 }
 
@@ -2704,9 +2186,7 @@ function carregarEventos() {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     window[callback] =
@@ -2721,12 +2201,21 @@ function carregarEventos() {
 
                     throw new Error(
                         resposta &&
-                        resposta.erro
-                            ? resposta.erro
+                        (
+                            resposta.erro ||
+                            resposta.mensagem
+                        )
+                            ? (
+                                resposta.erro ||
+                                resposta.mensagem
+                            )
                             : "Não foi possível carregar os eventos."
                     );
 
                 }
+
+
+                eventos = {};
 
 
                 if (
@@ -2734,8 +2223,6 @@ function carregarEventos() {
                         resposta.eventos
                     )
                 ) {
-
-                    eventos = {};
 
                     resposta.eventos.forEach(
                         function(evento) {
@@ -2777,7 +2264,6 @@ function carregarEventos() {
 
             delete window[callback];
 
-
             if (script) {
                 script.remove();
             }
@@ -2804,11 +2290,11 @@ function carregarEventos() {
                 "error"
             );
 
-
             delete window[callback];
 
-
-            script.remove();
+            if (script) {
+                script.remove();
+            }
 
         };
 
@@ -2832,13 +2318,17 @@ function renderizarEventos() {
         );
 
 
+    const contador =
+        document.getElementById(
+            "contadorEventos"
+        );
+
+
     const lista =
         Object.keys(eventos);
 
 
-    document.getElementById(
-        "contadorEventos"
-    ).textContent =
+    contador.textContent =
         lista.length +
         (
             lista.length === 1
@@ -2871,153 +2361,146 @@ function renderizarEventos() {
 
 
     container.innerHTML =
-        lista.map(
-            function(id) {
+        lista.map(function(id) {
 
-                const evento =
-                    eventos[id];
-
-
-                const nome =
-                    evento.nome ||
-                    "Evento";
+            const evento =
+                eventos[id];
 
 
-                const mensagem =
-                    evento.mensagem ||
-                    "";
+            const nome =
+                evento.nome ||
+                "Evento";
 
 
-                const link =
-                    SITE +
-                    "index.html?evento=" +
-                    encodeURIComponent(
-                        id
-                    );
+            const mensagem =
+                evento.mensagem ||
+                "";
 
 
-                const idSeguro =
-                    escaparID(id);
+            const link =
+                SITE +
+                "index.html?evento=" +
+                encodeURIComponent(id);
 
 
-                return `
+            const idSeguro =
+                escaparID(id);
+
+
+            return `
+
+                <div
+                    class="event-card"
+                    id="event-card-${idSeguro}"
+                >
+
+                    <div class="event-name">
+                        ${escapar(nome)}
+                    </div>
+
+                    <div class="event-id">
+                        ID: ${escapar(id)}
+                    </div>
+
+                    <div class="event-message">
+                        ${escapar(mensagem)}
+                    </div>
+
 
                     <div
-                        class="event-card"
-                        id="event-card-${idSeguro}"
+                        class="event-preview"
+                        id="event-preview-${idSeguro}"
                     >
 
-                        <div class="event-name">
-                            ${escapar(nome)}
+                        <div class="event-preview-title">
+                            Última foto enviada
                         </div>
 
-                        <div class="event-id">
-                            ID: ${escapar(id)}
-                        </div>
-
-                        <div class="event-message">
-                            ${escapar(mensagem)}
-                        </div>
-
-
-                        <div
-                            class="event-preview"
-                            id="event-preview-${idSeguro}"
-                        >
-
-                            <div class="event-preview-title">
-                                Última foto enviada
-                            </div>
-
-                            <div class="event-preview-loading">
-                                Carregando...
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            class="event-media-count"
-                            id="media-count-${idSeguro}"
-                        >
-
-                            <span class="media-loading">
-                                Carregando fotos...
-                            </span>
-
-                        </div>
-
-
-                        <div class="event-url">
-                            ${escapar(link)}
-                        </div>
-
-
-                        <div class="event-buttons">
-
-                            <button
-                                class="btn-primary"
-                                onclick="abrirEvento('${escaparJS(id)}')"
-                            >
-                                Abrir evento
-                            </button>
-
-
-                            <button
-                                class="btn-copy"
-                                onclick="copiarTexto('${escaparJS(link)}')"
-                            >
-                                Copiar link
-                            </button>
-
-
-                            <button
-                                class="btn-copy"
-                                onclick="mostrarQR('${escaparJS(id)}')"
-                            >
-                                QR Code
-                            </button>
-
-
-                            <button
-                                class="btn-secondary"
-                                onclick="editarEvento('${escaparJS(id)}')"
-                            >
-                                Editar
-                            </button>
-
-
-                            <button
-                                class="btn-danger"
-                                onclick="excluirEvento('${escaparJS(id)}')"
-                            >
-                                Excluir
-                            </button>
-
+                        <div class="event-preview-loading">
+                            Carregando...
                         </div>
 
                     </div>
 
-                `;
 
-            }
-        )
-        .join("");
+                    <div
+                        class="event-media-count"
+                        id="media-count-${idSeguro}"
+                    >
+
+                        <span class="media-loading">
+                            Carregando fotos...
+                        </span>
+
+                    </div>
 
 
-    lista.forEach(
-        function(id) {
+                    <div class="event-url">
+                        ${escapar(link)}
+                    </div>
 
-            carregarDadosMidias(id);
 
-        }
-    );
+                    <div class="event-buttons">
+
+                        <button
+                            class="btn-primary"
+                            onclick="abrirEvento('${escaparJS(id)}')"
+                        >
+                            Abrir evento
+                        </button>
+
+
+                        <button
+                            class="btn-copy"
+                            onclick="copiarTexto('${escaparJS(link)}')"
+                        >
+                            Copiar link
+                        </button>
+
+
+                        <button
+                            class="btn-copy"
+                            onclick="mostrarQR('${escaparJS(id)}')"
+                        >
+                            QR Code
+                        </button>
+
+
+                        <button
+                            class="btn-secondary"
+                            onclick="editarEvento('${escaparJS(id)}')"
+                        >
+                            Editar
+                        </button>
+
+
+                        <button
+                            class="btn-danger"
+                            onclick="excluirEvento('${escaparJS(id)}')"
+                        >
+                            Excluir
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    lista.forEach(function(id) {
+
+        carregarDadosMidias(id);
+
+    });
 
 }
 
 
 /*************************************************
- * CARREGAR DADOS DAS MÍDIAS
+ * CARREGAR MÍDIAS
  *************************************************/
 
 function carregarDadosMidias(id) {
@@ -3040,13 +2523,8 @@ function carregarDadosMidias(id) {
         );
 
 
-    if (
-        !contador ||
-        !preview
-    ) {
-
+    if (!contador || !preview) {
         return;
-
     }
 
 
@@ -3060,9 +2538,7 @@ function carregarDadosMidias(id) {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     let finalizado =
@@ -3070,57 +2546,46 @@ function carregarDadosMidias(id) {
 
 
     const timeout =
-        setTimeout(
-            function() {
+        setTimeout(function() {
 
-                if (finalizado) {
-                    return;
-                }
+            if (finalizado) {
+                return;
+            }
 
-
-                finalizado = true;
+            finalizado = true;
 
 
-                contador.innerHTML = `
-
-                    <span class="media-loading">
-                        ⚠️ Não foi possível carregar
-                    </span>
-
-                `;
+            contador.innerHTML = `
+                <span class="media-loading">
+                    ⚠️ Não foi possível carregar
+                </span>
+            `;
 
 
-                preview.innerHTML = `
+            preview.innerHTML = `
+                <div class="event-preview-title">
+                    Última foto enviada
+                </div>
 
-                    <div class="event-preview-title">
-                        Última foto enviada
+                <div class="event-preview-empty">
+                    <div class="event-preview-empty-icon">
+                        ⚠️
                     </div>
 
-                    <div class="event-preview-empty">
-
-                        <div class="event-preview-empty-icon">
-                            ⚠️
-                        </div>
-
-                        <div>
-                            Não foi possível carregar
-                        </div>
-
+                    <div>
+                        Não foi possível carregar
                     </div>
-
-                `;
-
-
-                delete window[callback];
+                </div>
+            `;
 
 
-                if (script) {
-                    script.remove();
-                }
+            delete window[callback];
 
-            },
-            15000
-        );
+            if (script) {
+                script.remove();
+            }
+
+        }, 15000);
 
 
     window[callback] =
@@ -3187,7 +2652,11 @@ function carregarDadosMidias(id) {
 
                     <span class="media-count-item">
                         📸 ${fotosTotal}
-                        ${fotosTotal === 1 ? "foto" : "fotos"}
+                        ${
+                            fotosTotal === 1
+                                ? "foto"
+                                : "fotos"
+                        }
                     </span>
 
                     <span class="media-count-separator">
@@ -3196,7 +2665,11 @@ function carregarDadosMidias(id) {
 
                     <span class="media-count-item">
                         🎥 ${videosTotal}
-                        ${videosTotal === 1 ? "vídeo" : "vídeos"}
+                        ${
+                            videosTotal === 1
+                                ? "vídeo"
+                                : "vídeos"
+                        }
                     </span>
 
                 `;
@@ -3227,24 +2700,16 @@ function carregarDadosMidias(id) {
                 } else {
 
                     const fotosOrdenadas =
-                        fotos
-                            .slice()
-                            .sort(
-                                function(a, b) {
+                        fotos.slice().sort(
+                            function(a, b) {
 
-                                    const dataA =
-                                        obterDataMidia(a);
+                                return (
+                                    obterDataMidia(b) -
+                                    obterDataMidia(a)
+                                );
 
-                                    const dataB =
-                                        obterDataMidia(b);
-
-                                    return (
-                                        dataB -
-                                        dataA
-                                    );
-
-                                }
-                            );
+                            }
+                        );
 
 
                     const ultimaFoto =
@@ -3300,39 +2765,15 @@ function carregarDadosMidias(id) {
             } catch (erro) {
 
                 contador.innerHTML = `
-
                     <span class="media-loading">
                         ⚠️ Não foi possível carregar
                     </span>
-
-                `;
-
-
-                preview.innerHTML = `
-
-                    <div class="event-preview-title">
-                        Última foto enviada
-                    </div>
-
-                    <div class="event-preview-empty">
-
-                        <div class="event-preview-empty-icon">
-                            ⚠️
-                        </div>
-
-                        <div>
-                            Não foi possível carregar
-                        </div>
-
-                    </div>
-
                 `;
 
             }
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -3369,32 +2810,9 @@ function carregarDadosMidias(id) {
 
 
             contador.innerHTML = `
-
                 <span class="media-loading">
                     ⚠️ Não foi possível carregar
                 </span>
-
-            `;
-
-
-            preview.innerHTML = `
-
-                <div class="event-preview-title">
-                    Última foto enviada
-                </div>
-
-                <div class="event-preview-empty">
-
-                    <div class="event-preview-empty-icon">
-                        ⚠️
-                    </div>
-
-                    <div>
-                        Não foi possível carregar
-                    </div>
-
-                </div>
-
             `;
 
 
@@ -3416,12 +2834,10 @@ function carregarDadosMidias(id) {
 
 
 /*************************************************
- * DATA DA MÍDIA
+ * DATA
  *************************************************/
 
-function obterDataMidia(
-    midia
-) {
+function obterDataMidia(midia) {
 
     if (!midia) {
         return 0;
@@ -3492,7 +2908,7 @@ function escaparID(texto) {
 
 
 /*************************************************
- * CRIAR / EDITAR EVENTO
+ * SALVAR EVENTO
  *************************************************/
 
 function salvarEvento() {
@@ -3546,7 +2962,7 @@ function salvarEvento() {
     if (idLimpo !== id) {
 
         mostrarStatus(
-            "O ID deve usar apenas letras, números e hífen. Ex.: casamento-gustavo",
+            "O ID deve usar apenas letras, números e hífen.",
             "error"
         );
 
@@ -3555,21 +2971,14 @@ function salvarEvento() {
     }
 
 
-    const evento = {
-
-        nome:
-            nome,
-
-        mensagem:
-            mensagem ||
-            "Compartilhe suas fotos e recados!"
-
-    };
-
-
     enviarEvento(
         id,
-        evento
+        {
+            nome: nome,
+            mensagem:
+                mensagem ||
+                "Compartilhe suas fotos e recados!"
+        }
     );
 
 }
@@ -3611,9 +3020,7 @@ function enviarEvento(
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     window[callback] =
@@ -3628,8 +3035,14 @@ function enviarEvento(
 
                     throw new Error(
                         resposta &&
-                        resposta.erro
-                            ? resposta.erro
+                        (
+                            resposta.erro ||
+                            resposta.mensagem
+                        )
+                            ? (
+                                resposta.erro ||
+                                resposta.mensagem
+                            )
                             : "Erro ao salvar evento."
                     );
 
@@ -3646,10 +3059,6 @@ function enviarEvento(
 
                 carregarEventos();
 
-                if (usuarioEhMaster()) {
-                    carregarClientes();
-                }
-
 
             } catch (erro) {
 
@@ -3662,7 +3071,6 @@ function enviarEvento(
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -3700,7 +3108,9 @@ function enviarEvento(
             delete window[callback];
 
 
-            script.remove();
+            if (script) {
+                script.remove();
+            }
 
         };
 
@@ -3752,11 +3162,8 @@ function editarEvento(id) {
 
 
     window.scrollTo({
-
         top: 0,
-
         behavior: "smooth"
-
     });
 
 
@@ -3800,13 +3207,10 @@ function excluirEvento(id) {
 
     const confirmar =
         confirm(
-
             "Excluir o evento \"" +
             evento.nome +
             "\"?\n\n" +
-
             "Os arquivos do Google Drive NÃO serão apagados."
-
         );
 
 
@@ -3826,9 +3230,7 @@ function excluirEvento(id) {
 
 
     let script =
-        document.createElement(
-            "script"
-        );
+        document.createElement("script");
 
 
     window[callback] =
@@ -3843,8 +3245,14 @@ function excluirEvento(id) {
 
                     throw new Error(
                         resposta &&
-                        resposta.erro
-                            ? resposta.erro
+                        (
+                            resposta.erro ||
+                            resposta.mensagem
+                        )
+                            ? (
+                                resposta.erro ||
+                                resposta.mensagem
+                            )
                             : "Erro ao excluir evento."
                     );
 
@@ -3858,10 +3266,6 @@ function excluirEvento(id) {
 
                 carregarEventos();
 
-                if (usuarioEhMaster()) {
-                    carregarClientes();
-                }
-
 
             } catch (erro) {
 
@@ -3874,7 +3278,6 @@ function excluirEvento(id) {
 
 
             delete window[callback];
-
 
             if (script) {
                 script.remove();
@@ -3908,7 +3311,9 @@ function excluirEvento(id) {
             delete window[callback];
 
 
-            script.remove();
+            if (script) {
+                script.remove();
+            }
 
         };
 
@@ -3955,13 +3360,10 @@ function limparFormulario() {
 function abrirEvento(id) {
 
     window.open(
-
         SITE +
         "index.html?evento=" +
         encodeURIComponent(id),
-
         "_blank"
-
     );
 
 }
@@ -3986,12 +3388,8 @@ function mostrarQR(id) {
     document.getElementById(
         "qrImagem"
     ).src =
-
         "https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=" +
-
-        encodeURIComponent(
-            link
-        );
+        encodeURIComponent(link);
 
 
     document.getElementById(
@@ -4007,14 +3405,9 @@ function mostrarQR(id) {
 
 
     document
-        .getElementById(
-            "qrSection"
-        )
+        .getElementById("qrSection")
         .scrollIntoView({
-
-            behavior:
-                "smooth"
-
+            behavior: "smooth"
         });
 
 }
@@ -4028,15 +3421,9 @@ function abrirQR() {
 
 
     window.open(
-
         "https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=" +
-
-        encodeURIComponent(
-            eventoQRAtual
-        ),
-
+        encodeURIComponent(eventoQRAtual),
         "_blank"
-
     );
 
 }
@@ -4064,25 +3451,21 @@ function copiarTexto(texto) {
 
         navigator.clipboard
             .writeText(texto)
-            .then(
-                function() {
+            .then(function() {
 
-                    mostrarStatus(
-                        "Link copiado!"
-                    );
+                mostrarStatus(
+                    "Link copiado!"
+                );
 
-                }
-            )
-            .catch(
-                function() {
+            })
+            .catch(function() {
 
-                    prompt(
-                        "Copie o link:",
-                        texto
-                    );
+                prompt(
+                    "Copie o link:",
+                    texto
+                );
 
-                }
-            );
+            });
 
         return;
 
@@ -4104,31 +3487,11 @@ function copiarTexto(texto) {
 function escapar(texto) {
 
     return String(texto)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
@@ -4140,16 +3503,8 @@ function escapar(texto) {
 function escaparJS(texto) {
 
     return String(texto)
-
-        .replace(
-            /\\/g,
-            "\\\\"
-        )
-
-        .replace(
-            /'/g,
-            "\\'"
-        );
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
 
 }
 
@@ -4159,7 +3514,6 @@ function escaparJS(texto) {
  *************************************************/
 
 verificarSessao();
-
 
 </script>
 
