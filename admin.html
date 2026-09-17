@@ -146,6 +146,10 @@ select option {
     color: white;
 }
 
+select option:disabled {
+    color: #777;
+}
+
 /* BOTÕES */
 
 .buttons {
@@ -248,6 +252,16 @@ button {
     font-size: 14px;
     line-height: 1.5;
     min-height: 42px;
+}
+
+.event-owner {
+    margin-top: 12px;
+    padding: 9px 10px;
+    background: #181818;
+    border: 1px solid #302b21;
+    border-radius: 8px;
+    color: #aaa;
+    font-size: 12px;
 }
 
 /* PREVIEW */
@@ -703,7 +717,7 @@ button {
     <div class="form-grid">
 
 
-        <!-- NOVO: CLIENTE RESPONSÁVEL -->
+        <!-- CLIENTE RESPONSÁVEL -->
 
         <div
             class="form-group full"
@@ -720,7 +734,7 @@ button {
             >
 
                 <option value="">
-                    Evento do administrador
+                    👑 Administrador (Master)
                 </option>
 
             </select>
@@ -884,7 +898,7 @@ button {
  * CONFIGURAÇÕES
  *************************************************/
 
-const API = "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8WzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
+const API = "https://script.google.com/macros/s/AKfycbw0Fygjoy58sKA7sZr8tb-pVqp5glsh8hWzKEdENtTv-s8xsWIaedO416HP4t-Lng-8/exec";
 
 const SITE =
 "https://gumath121.github.io/qr-fotos/";
@@ -894,6 +908,13 @@ let eventos = {};
 let clientes = [];
 
 let eventoQRAtual = "";
+
+/*
+ * IMPORTANTE:
+ * Essa variável é definida diretamente
+ * pela resposta da sessão do servidor.
+ */
+let clienteLogadoEhMaster = false;
 
 
 /*************************************************
@@ -939,6 +960,18 @@ function gerarId(texto) {
 
 function usuarioEhMaster() {
 
+    /*
+     * Primeiro usa a informação confirmada
+     * pelo servidor.
+     */
+    if (clienteLogadoEhMaster === true) {
+        return true;
+    }
+
+
+    /*
+     * Fallback usando localStorage.
+     */
     try {
 
         const dados =
@@ -988,6 +1021,10 @@ function prepararSelecaoClienteEvento() {
     }
 
 
+    /*
+     * SOMENTE MASTER VÊ O CAMPO
+     */
+
     if (!usuarioEhMaster()) {
 
         grupo.style.display =
@@ -998,13 +1035,29 @@ function prepararSelecaoClienteEvento() {
     }
 
 
-    grupo.style.display =
-        "block";
+    /*
+     * MOSTRA O CAMPO
+     */
 
+    grupo.style.display =
+        "flex";
+
+
+    /*
+     * Guarda a seleção atual.
+     */
+
+    const valorAtual =
+        select.value;
+
+
+    /*
+     * Recria as opções.
+     */
 
     select.innerHTML = `
         <option value="">
-            Evento do administrador
+            👑 Administrador (Master)
         </option>
     `;
 
@@ -1012,10 +1065,24 @@ function prepararSelecaoClienteEvento() {
     clientes.forEach(
         function(cliente) {
 
+            if (!cliente) {
+                return;
+            }
+
+
+            /*
+             * Não mostra o próprio Master
+             * na lista.
+             */
+
             if (
-                cliente.tipo === "master" ||
-                cliente.ativo !== true
+                cliente.tipo === "master"
             ) {
+                return;
+            }
+
+
+            if (!cliente.id) {
                 return;
             }
 
@@ -1027,20 +1094,43 @@ function prepararSelecaoClienteEvento() {
 
 
             option.value =
-                cliente.id;
+                String(cliente.id);
 
 
             option.textContent =
                 (
                     cliente.nome ||
-                    "Cliente"
-                ) +
-                " (@" +
-                (
                     cliente.usuario ||
-                    ""
-                ) +
-                ")";
+                    "Cliente"
+                );
+
+
+            if (cliente.usuario) {
+
+                option.textContent +=
+                    " (@" +
+                    cliente.usuario +
+                    ")";
+
+            }
+
+
+            /*
+             * Cliente inativo não pode
+             * receber novos eventos.
+             */
+
+            if (
+                cliente.ativo !== true
+            ) {
+
+                option.disabled =
+                    true;
+
+                option.textContent +=
+                    " — INATIVO";
+
+            }
 
 
             select.appendChild(
@@ -1049,6 +1139,37 @@ function prepararSelecaoClienteEvento() {
 
         }
     );
+
+
+    /*
+     * Tenta manter a seleção anterior.
+     */
+
+    if (valorAtual) {
+
+        const existe =
+            Array.from(
+                select.options
+            ).some(
+                function(option) {
+
+                    return (
+                        option.value ===
+                        valorAtual
+                    );
+
+                }
+            );
+
+
+        if (existe) {
+
+            select.value =
+                valorAtual;
+
+        }
+
+    }
 
 }
 
@@ -1152,6 +1273,11 @@ function verificarSessao() {
                 }
 
 
+                /*
+                 * GUARDA O CLIENTE RETORNADO
+                 * PELO SERVIDOR.
+                 */
+
                 if (resposta.cliente) {
 
                     localStorage.setItem(
@@ -1160,6 +1286,16 @@ function verificarSessao() {
                             resposta.cliente
                         )
                     );
+
+
+                    /*
+                     * DEFINIÇÃO PRINCIPAL:
+                     * quem decide se é Master
+                     * é a resposta da API.
+                     */
+
+                    clienteLogadoEhMaster =
+                        resposta.cliente.tipo === "master";
 
 
                     const usuario =
@@ -1179,7 +1315,7 @@ function verificarSessao() {
                             ) +
                             " • " +
                             (
-                                resposta.cliente.tipo === "master"
+                                clienteLogadoEhMaster
                                     ? "Administrador"
                                     : "Cliente"
                             );
@@ -1189,10 +1325,12 @@ function verificarSessao() {
                 }
 
 
-                if (
-                    resposta.cliente &&
-                    resposta.cliente.tipo === "master"
-                ) {
+                /*
+                 * MOSTRA ÁREA DE CLIENTES
+                 * SOMENTE PARA MASTER.
+                 */
+
+                if (clienteLogadoEhMaster) {
 
                     const section =
                         document.getElementById(
@@ -1211,7 +1349,16 @@ function verificarSessao() {
                 }
 
 
+                /*
+                 * Prepara o seletor.
+                 */
+
                 prepararSelecaoClienteEvento();
+
+
+                /*
+                 * Carrega os eventos do usuário.
+                 */
 
                 carregarEventos();
 
@@ -1314,6 +1461,10 @@ function fazerLogout() {
     );
 
 
+    clienteLogadoEhMaster =
+        false;
+
+
     if (!token) {
 
         window.location.href =
@@ -1412,7 +1563,18 @@ function carregarClientes() {
                         : [];
 
 
+                /*
+                 * Atualiza a lista visual
+                 */
+
                 renderizarClientes();
+
+
+                /*
+                 * MUITO IMPORTANTE:
+                 * Atualiza também o seletor
+                 * de cliente do evento.
+                 */
 
                 prepararSelecaoClienteEvento();
 
@@ -2431,6 +2593,61 @@ function carregarEventos() {
 
 
 /*************************************************
+ * NOME DO RESPONSÁVEL PELO EVENTO
+ *************************************************/
+
+function obterNomeClienteEvento(evento) {
+
+    if (!evento) {
+        return "Administrador";
+    }
+
+
+    const clienteId =
+        String(
+            evento.clienteId ||
+            "master"
+        );
+
+
+    if (
+        clienteId === "master" ||
+        clienteId === ""
+    ) {
+
+        return "Administrador";
+
+    }
+
+
+    const cliente =
+        clientes.find(function(item) {
+
+            return (
+                String(item.id || "") ===
+                clienteId
+            );
+
+        });
+
+
+    if (cliente) {
+
+        return (
+            cliente.nome ||
+            cliente.usuario ||
+            "Cliente"
+        );
+
+    }
+
+
+    return "Cliente não encontrado";
+
+}
+
+
+/*************************************************
  * RENDERIZAR EVENTOS
  *************************************************/
 
@@ -2511,6 +2728,26 @@ function renderizarEventos() {
                 escaparID(id);
 
 
+            /*
+             * Responsável só é mostrado
+             * para o Master.
+             */
+
+            const responsavelHTML =
+                usuarioEhMaster()
+                    ? `
+                        <div class="event-owner">
+                            👤 Responsável:
+                            <strong>
+                                ${escapar(
+                                    obterNomeClienteEvento(evento)
+                                )}
+                            </strong>
+                        </div>
+                    `
+                    : "";
+
+
             return `
 
                 <div
@@ -2529,6 +2766,8 @@ function renderizarEventos() {
                     <div class="event-message">
                         ${escapar(mensagem)}
                     </div>
+
+                    ${responsavelHTML}
 
 
                     <div
@@ -3064,7 +3303,7 @@ function salvarEvento() {
      * ESCOLHER O CLIENTE.
      */
 
-    if (usuarioEhMaster()) {
+    if (clienteLogadoEhMaster) {
 
         const select =
             document.getElementById(
@@ -3242,6 +3481,11 @@ function enviarEvento(
         };
 
 
+    /*
+     * ENVIA O CLIENTE RESPONSÁVEL
+     * PARA O GOOGLE APPS SCRIPT.
+     */
+
     script.src =
         API +
         "?acao=salvarEvento" +
@@ -3336,11 +3580,11 @@ function editarEvento(id) {
 
     /*
      * SE FOR MASTER:
-     * seleciona automaticamente
+     * mostra o seletor e seleciona
      * o cliente atual do evento.
      */
 
-    if (usuarioEhMaster()) {
+    if (clienteLogadoEhMaster) {
 
         const grupo =
             document.getElementById(
@@ -3356,7 +3600,7 @@ function editarEvento(id) {
         if (grupo) {
 
             grupo.style.display =
-                "block";
+                "flex";
 
         }
 
@@ -3365,6 +3609,11 @@ function editarEvento(id) {
 
             prepararSelecaoClienteEvento();
 
+
+            /*
+             * Pequeno atraso para garantir
+             * que as opções estejam carregadas.
+             */
 
             setTimeout(
                 function() {
@@ -3579,11 +3828,11 @@ function limparFormulario() {
 
 
     /*
-     * VOLTA PARA:
-     * Evento do administrador
+     * MASTER:
+     * volta para Administrador.
      */
 
-    if (usuarioEhMaster()) {
+    if (clienteLogadoEhMaster) {
 
         const select =
             document.getElementById(
